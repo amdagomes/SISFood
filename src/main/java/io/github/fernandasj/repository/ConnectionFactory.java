@@ -9,10 +9,11 @@ import java.sql.SQLException;
  * @author fernanda
  */
 public class ConnectionFactory {
-    public static Connection getConnection() throws SQLException {
-        String url = "jdbc:postgresql://127.0.0.1:5432/SisFood";
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
+         Class.forName("org.postgresql.Driver");
+        String url = "jdbc:postgresql://localhost/Sisfood";
         String user = "postgres";
-        String password = "123";
+        String password = "14011997";
         return DriverManager.getConnection(url, user, password);
     }
 }

@@ -1,14 +1,14 @@
 CREATE TABLE usuario(
-    idUsuario int,
+    idUsuario serial,
     tipoUsuario varchar(20) NOT NULL,
     nome varchar(200) NOT NULL,
-    fotoPerfil varchar(200) NOT NULL,
+    fotoPerfil bytea,
     telefone varchar(15),
     sexo varchar(15),
     email varchar(200) NOT NULL,
     profissao varchar(100),
     dataNascimento DATE,
-    categoriaEstabelecimento varchar(100),
+    cartegoriaEstabelecimento varchar(100),
     nota numeric(1,1),
     descricao varchar(300),
     rua varchar(200) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE usuario(
 );
 
 CREATE TABLE horaFuncionamento(
-    idFuncionamento int,
+    idFuncionamento serial,
     idUsuario int NOT NULL,
     dia varchar(30) NOT NULL,
     horaAbre DATE NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE horaFuncionamento(
 );
 
 CREATE TABLE Comida(
-    idComida int,
+    idComida serial,
     descricao varchar(300) NOT NULL,
     nota numeric(1,1),
     preco float NOT NULL,
@@ -45,17 +45,17 @@ CREATE TABLE Comida(
 
 
 CREATE TABLE Chekin(
-    idChekin int,
+    idChekin serial,
     horario TIMESTAMP,
     consumidor int NOT NULL,
     estabelecimento int NOT NULL,
     PRIMARY KEY(idChekin),
     FOREIGN KEY(consumidor) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(estabelecimento) REFERENCES Usuario(idUsuario)
-);
+
 
 CREATE TABLE AvaliarEstabelecimento(
-    idAvaliacao int,
+    idAvaliacao serial,
     consumidor int NOT NULL,
     estabelecimento int NOT NULL,
     nota numeric(1,1) NOT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE AvaliarEstabelecimento(
 );
 
 CREATE TABLE AvaliarComida(
-    idAvaliacao int,
+    idAvaliacao serial,
     consumidor int NOT NULL,
     estabelecimento int NOT NULL,
     nota numeric(1,1) NOT NULL,
@@ -79,7 +79,7 @@ CREATE TABLE AvaliarComida(
 );
 
 CREATE TABLE RecomendarComida(
-    idRecomendacao int,
+    idRecomendacao serial,
     comida int NOT NULL,
     remetente int NOT NULL,
     destinatario int NOT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE RecomendarComida(
 );
 
 CREATE TABLE Mensagem(
-    idMensagem int,
+    idMensagem serial,
     remetente int NOT NULL,
     destinatario int NOT NULL,
     mensagem varchar(500) NOT NULL,
@@ -102,7 +102,7 @@ CREATE TABLE Mensagem(
 );
 
 CREATE TABLE SolicitaAmizade(
-    idSolicitacao int,
+    idSolicitacao serial,
     remetente int NOT NULL,
     destinatario int NOT NULL,
     horario TIMESTAMP,
