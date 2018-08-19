@@ -26,7 +26,7 @@
                     <div class="image logo">
                         <img src="img/logo.png">
                     </div>
-                    <form method="post">
+                    <form method="post" action="front" >
                         <div class="field">
                             <div class="control has-icons-left has-icons-right">
                                 <input class="input" type="email" placeholder="Email" required>
@@ -45,6 +45,7 @@
                         </div>
                         <div class="field">
                             <p class="control">
+                                <input type="hidden" name="command" value="Login">
                                 <input class="button is-success is-fullwidth is-rounded" type="submit" value="Login">
                             </p>
                         </div>
