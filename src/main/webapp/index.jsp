@@ -1,9 +1,3 @@
-<%-- 
-    Document   : index
-    Created on : 15/08/2018, 19:26:44
-    Author     : Amanda
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -19,14 +13,14 @@
     </head>
     <body>
         <section class="container is-fullhd h100 background">
-            
+
             <div class="columns is-centered is-vertical-center box-login">
-                
+
                 <div class="column is-7-mobile is-4-tablet is-3-desktop box ">
                     <div class="image logo">
                         <img src="img/logo.png">
                     </div>
-                    <form method="post" action="front" >
+                    <form method="post" action="FrontController" >
                         <div class="field">
                             <div class="control has-icons-left has-icons-right">
                                 <input class="input" type="email" placeholder="Email" required>
@@ -45,16 +39,27 @@
                         </div>
                         <div class="field">
                             <p class="control">
-                                <input type="hidden" name="command" value="Login">
+                                <input type="hidden" name="identificador" value="Login">
                                 <input class="button is-success is-fullwidth is-rounded" type="submit" value="Login">
                             </p>
                         </div>
                     </form>	
                     <div class="footer-form">
-                        <p>Ainda não faz parte do SisFood?<a href="#"> Criar Conta</a></p>
+                        <p>Ainda não faz parte do SisFood?<a href="cadastro.html"> Criar Conta</a></p>
                     </div>
                 </div>
             </div> 
         </section> 
+        <script>
+            var erro = "${param.erro}";
+
+            if (erro === 1) {
+                swal("Erro!", "Usuário não encontrado!", "error");
+            }
+            var mensagem = "${param.mensagem}";
+            if (mensagem === "1") {
+                swal("OK!", "A conta foi excluida.", "success");
+            }
+        </script>
     </body>
 </html>

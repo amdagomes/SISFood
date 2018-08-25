@@ -21,7 +21,7 @@ and open the template in the editor.
     background-size: cover;
     background-position: center;
     margin: 0;
-   padding: 0;
+    padding: 0;
 }
 .box-login{
    height: 100%;
@@ -30,11 +30,24 @@ and open the template in the editor.
    margin: 0;
    padding: 0;
 }
+.box-login label, .box-login h5{
+  text-align: left;
+  font-weight: 400;
+}
+.box-login h5{
+  font-size: 1.15rem;
+  margin-bottom: 1rem !important;
+  border-bottom: 1px solid #4a4a4a;
+}
+.box-login .label:not(:last-child){
+  margin-bottom: .1rem;
+}
 .box-login div.box{
     padding: 2.5rem 1.5rem;
 }
 .logo{
     width: 80%;
+    max-width: 150px;
     margin-bottom: 1rem;
     display: inline-block;
 }
@@ -43,5 +56,16 @@ and open the template in the editor.
 }
 .footer-form{
     font-size: 12px;
+}
+
+@media screen and (max-width: 770px){
+  .h100{
+      height: auto;
+      overflow: inherit;
+  }
+  .box-login{
+      padding: 1rem 0;
+      height: 100%;
+  }
 }
 
