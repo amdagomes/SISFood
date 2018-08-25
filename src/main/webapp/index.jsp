@@ -51,7 +51,7 @@
                         </div>
                     </form>	
                     <div class="footer-form">
-                        <p>Ainda não faz parte do SisFood?<a href="#"> Criar Conta</a></p>
+                        <p>Ainda não faz parte do SisFood?<a href="cadastro.jsp"> Criar Conta</a></p>
                     </div>
                 </div>
             </div> 

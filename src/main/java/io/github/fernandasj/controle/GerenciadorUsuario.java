@@ -19,13 +19,11 @@ public class GerenciadorUsuario {
         return userDao.autenticar(email, senha);
     }
 
-    public boolean adiciona(String tipoUsuario, String email, String senha, String nome, String telefone, String sexo, String profissao,
-            LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua,
-            String estado, String cidade, String cep, String username) throws Exception {
-
-        Usuario usuario = new Usuario(tipoUsuario, email, senha, nome, telefone, sexo,
-                profissao, dataNascimento, CartegoriaEstabelecimento, nota, descricao, rua, estado, cidade, cep, username);
+    public boolean Adiciona(String nome,String username,String email,String senha, LocalDate dataNascimento,
+            String rua,String numeroCasa,String cidade,String cep,String estado) throws Exception{
+        Usuario usuario = new Usuario (nome,username,email,senha,dataNascimento,rua,numeroCasa,cidade,cep,estado);
         return userDao.salvar(usuario);
+        
     }
     
     

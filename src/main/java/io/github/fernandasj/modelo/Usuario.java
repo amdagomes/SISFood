@@ -28,13 +28,14 @@ public class Usuario implements Serializable {
     private float nota;
     private String descricao;
     private String rua;
+    private String numeroCasa;
     private String estado;
     private String cidade;
     private String cep;
     private String username;
 
     public Usuario(String tipoUsuario,String email, String senha, String nome, byte[] fotoPerfil, String telefone, String sexo, String profissao,
-            LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua,
+            LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua,String numeroCasa,
             String estado, String cidade, String cep, String username) {
         this.id = id;
         this.email = email;
@@ -48,6 +49,7 @@ public class Usuario implements Serializable {
         this.nota = nota;
         this.descricao = descricao;
         this.rua = rua;
+        this.numeroCasa=numeroCasa;
         this.estado = estado;
         this.cidade = cidade;
         this.cep = cep;
@@ -58,7 +60,7 @@ public class Usuario implements Serializable {
        
     }
 
-    public Usuario(int id, String tipoUsuario, String email, String senha, String nome, byte[] fotoPerfil, InputStream foto, String telefone, String sexo, String profissao, LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua, String estado, String cidade, String cep, String username) {
+    public Usuario(int id, String tipoUsuario, String email, String senha, String nome, byte[] fotoPerfil, InputStream foto, String telefone, String sexo, String profissao, LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua,String numeroCasa, String estado, String cidade, String cep, String username) {
         this.id = id;
         this.tipoUsuario = tipoUsuario;
         this.email = email;
@@ -103,8 +105,20 @@ public class Usuario implements Serializable {
 
     public Usuario(String tipoUsuario, String email , String senha, String  nome, String telefone, String sexo,String profissao, Date dataNascimento,
             String CartegoriaEstabelecimento, float nota, String descricao,
-            String rua, String estado, String cidade, String cep, String username) {
+            String rua,String numeroCasa, String estado, String cidade, String cep, String username) {
         
+    }
+
+    public Usuario(String nome, String username, String email, String senha, LocalDate dataNascimento, String rua, String numeroCasa, String cidade, String cep, String estado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getNumeroCasa() {
+        return numeroCasa;
+    }
+
+    public void setNumeroCasa(String numeroCasa) {
+        this.numeroCasa = numeroCasa;
     }
 
    
@@ -262,24 +276,27 @@ public class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + this.id;
-        hash = 41 * hash + Objects.hashCode(this.email);
-        hash = 41 * hash + Objects.hashCode(this.senha);
-        hash = 41 * hash + Objects.hashCode(this.nome);
-        hash = 41 * hash + Arrays.hashCode(this.fotoPerfil);
-        hash = 41 * hash + Objects.hashCode(this.telefone);
-        hash = 41 * hash + Objects.hashCode(this.sexo);
-        hash = 41 * hash + Objects.hashCode(this.profissao);
-        hash = 41 * hash + Objects.hashCode(this.dataNascimento);
-        hash = 41 * hash + Objects.hashCode(this.CartegoriaEstabelecimento);
-        hash = 41 * hash + Float.floatToIntBits(this.nota);
-        hash = 41 * hash + Objects.hashCode(this.descricao);
-        hash = 41 * hash + Objects.hashCode(this.rua);
-        hash = 41 * hash + Objects.hashCode(this.estado);
-        hash = 41 * hash + Objects.hashCode(this.cidade);
-        hash = 41 * hash + Objects.hashCode(this.cep);
-        hash = 41 * hash + Objects.hashCode(this.username);
+        int hash = 3;
+        hash = 67 * hash + this.id;
+        hash = 67 * hash + Objects.hashCode(this.tipoUsuario);
+        hash = 67 * hash + Objects.hashCode(this.email);
+        hash = 67 * hash + Objects.hashCode(this.senha);
+        hash = 67 * hash + Objects.hashCode(this.nome);
+        hash = 67 * hash + Arrays.hashCode(this.fotoPerfil);
+        hash = 67 * hash + Objects.hashCode(this.foto);
+        hash = 67 * hash + Objects.hashCode(this.telefone);
+        hash = 67 * hash + Objects.hashCode(this.sexo);
+        hash = 67 * hash + Objects.hashCode(this.profissao);
+        hash = 67 * hash + Objects.hashCode(this.dataNascimento);
+        hash = 67 * hash + Objects.hashCode(this.CartegoriaEstabelecimento);
+        hash = 67 * hash + Float.floatToIntBits(this.nota);
+        hash = 67 * hash + Objects.hashCode(this.descricao);
+        hash = 67 * hash + Objects.hashCode(this.rua);
+        hash = 67 * hash + Objects.hashCode(this.numeroCasa);
+        hash = 67 * hash + Objects.hashCode(this.estado);
+        hash = 67 * hash + Objects.hashCode(this.cidade);
+        hash = 67 * hash + Objects.hashCode(this.cep);
+        hash = 67 * hash + Objects.hashCode(this.username);
         return hash;
     }
 
@@ -299,6 +316,9 @@ public class Usuario implements Serializable {
             return false;
         }
         if (Float.floatToIntBits(this.nota) != Float.floatToIntBits(other.nota)) {
+            return false;
+        }
+        if (!Objects.equals(this.tipoUsuario, other.tipoUsuario)) {
             return false;
         }
         if (!Objects.equals(this.email, other.email)) {
@@ -328,6 +348,9 @@ public class Usuario implements Serializable {
         if (!Objects.equals(this.rua, other.rua)) {
             return false;
         }
+        if (!Objects.equals(this.numeroCasa, other.numeroCasa)) {
+            return false;
+        }
         if (!Objects.equals(this.estado, other.estado)) {
             return false;
         }
@@ -343,6 +366,9 @@ public class Usuario implements Serializable {
         if (!Arrays.equals(this.fotoPerfil, other.fotoPerfil)) {
             return false;
         }
+        if (!Objects.equals(this.foto, other.foto)) {
+            return false;
+        }
         if (!Objects.equals(this.dataNascimento, other.dataNascimento)) {
             return false;
         }
@@ -351,11 +377,15 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", email=" + email + ", senha=" + senha + ", nome=" + nome
-                + ", fotoPerfil=" + fotoPerfil + ", telefone=" + telefone + ", sexo=" + sexo
-                + ", profissao=" + profissao + ", dataNascimento=" + dataNascimento + ", CartegoriaEstabelecimento=" + CartegoriaEstabelecimento
-                + ", nota=" + nota + ", descricao=" + descricao + ", rua=" + rua + ", estado=" + estado + ", cidade=" + cidade + ", cep=" + cep
-                + ", username=" + username + '}';
+        return "Usuario{" + "id=" + id + ", tipoUsuario=" + tipoUsuario + ", email=" + email + ", senha=" 
+                + senha + ", nome=" + nome + ", fotoPerfil=" + fotoPerfil + ", foto=" + foto + ", telefone=" 
+                + telefone + ", sexo=" + sexo + ", profissao=" + profissao + ", dataNascimento=" + dataNascimento +
+                ", CartegoriaEstabelecimento=" + CartegoriaEstabelecimento + ", nota=" + nota + ", descricao=" + descricao 
+                + ", rua=" + rua + ", numeroCasa=" + numeroCasa + ", estado=" + estado + ", cidade=" + cidade + ", cep="
+                + cep + ", username=" + username + '}';
     }
 
+    
+
+   
 }

@@ -1,6 +1,7 @@
 package io.github.fernandasj.dao;
 
 
+import io.github.fernandasj.dao.Dao;
 import io.github.fernandasj.modelo.Usuario;
 import io.github.fernandasj.repository.ConnectionFactory;
 
@@ -21,28 +22,29 @@ public class UsuarioDao implements Dao<Usuario> {
     public boolean salvar(Usuario obj) throws SQLException, Exception {
         con = ConnectionFactory.getConnection();
         String sql = "INSERT INTO USUARIO(tipoUsuario,nome,telefone,sexo,email,profissao,dataNascimento,cartegoriaEstabelecimento,nota,descricao,"
-                + "rua,estado,cidade,cep,username,senha)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                + "rua,numero,estado,cidade,cep,username,senha)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
-        PreparedStatement stmt = con.prepareStatement(sql);
-
-        stmt.setString(1, obj.getTipoUsuario());
-        stmt.setString(2, obj.getNome());
-        stmt.setString(3, obj.getTelefone());
-        stmt.setString(4, obj.getSexo());
-        stmt.setString(5, obj.getEmail());
-        stmt.setString(6, obj.getProfissao());
-        stmt.setDate(7, Date.valueOf(obj.getDataNascimento()));
-        stmt.setString(8, obj.getCartegoriaEstabelecimento());
-        stmt.setFloat(9, obj.getNota());
-        stmt.setString(10, obj.getDescricao());
-        stmt.setString(11, obj.getRua());
-        stmt.setString(12, obj.getEstado());
-        stmt.setString(13, obj.getCidade());
-        stmt.setString(14, obj.getCep());
-        stmt.setString(15, obj.getUsername());
-        stmt.setString(16, obj.getSenha());
-        stmt.execute();
-        stmt.close();
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, obj.getTipoUsuario());
+            stmt.setString(2, obj.getNome());
+            stmt.setString(3, obj.getTelefone());
+            stmt.setString(4, obj.getSexo());
+            stmt.setString(5, obj.getEmail());
+            stmt.setString(6, obj.getProfissao());
+            stmt.setDate(7, Date.valueOf(obj.getDataNascimento()));
+            stmt.setString(8, obj.getCartegoriaEstabelecimento());
+            stmt.setFloat(9, obj.getNota());
+            stmt.setString(10, obj.getDescricao());
+            stmt.setString(11, obj.getRua());
+            stmt.setString(12,obj.getNumeroCasa());
+            stmt.setString(13, obj.getEstado());
+            stmt.setString(14, obj.getCidade());
+            stmt.setString(15, obj.getCep());
+            stmt.setString(16, obj.getUsername());
+            stmt.setString(17, obj.getSenha());
+            stmt.execute();
+            stmt.close();
+        }
         con.close();
 
         return true;
@@ -66,7 +68,7 @@ public class UsuarioDao implements Dao<Usuario> {
         if (resultado.next()) {
             Usuario u = new Usuario(resultado.getString("tipoUsuario"), resultado.getString("email"),
                     resultado.getString("senha"), resultado.getString("nome"), resultado.getString("telefone"), resultado.getString("sexo"),
-                    resultado.getString("profissao"), resultado.getDate("dataNascimento"), resultado.getString("cartegoriaEstabelecimento"),
+                    resultado.getString("profissao"), resultado.getDate("dataNascimento").toLocalDate(), resultado.getString("cartegoriaEstabelecimento"),
                     resultado.getFloat("nota"), resultado.getString("descricao"), resultado.getString("rua"),
                     resultado.getString("estado"), resultado.getString("cidade"), resultado.getString("cep"), resultado.getString("username"));
             resultado.close();
