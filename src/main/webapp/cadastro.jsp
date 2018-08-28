@@ -110,7 +110,7 @@
                                     <h5 class="subtitle">Conta</h5>
                                     <label class="label is-left">Email</label>
                                     <div class="control has-icons-left has-icons-right">
-                                        <input class="input is-small" type="email" placeholder="Ex.: user@user.com" required>
+                                        <input class="input is-small" type="email" placeholder="Ex.: user@user.com"  name="email" required>
                                         <span class="icon is-small is-left">
                                             <i class="fas fa-user"></i>
                                         </span>
@@ -136,7 +136,7 @@
                                     </p>
                                 </div>
                                 <div class="footer-form">
-                                    <p>Já possui uma conta?<a href="index.html"> Fazer login</a></p>
+                                    <p>Já possui uma conta?<a href="index.jsp"> Fazer login</a></p>
                                 </div>
                             </div>
                         </div>

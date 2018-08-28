@@ -32,8 +32,10 @@ public class Login implements Command {
                     atual = g.buscaUsuario(request.getParameter("email"));
                     session.setAttribute("usuario", atual);
                     
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("front?command=Inicio&email=" + atual.getEmail());
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp" );
                     dispatcher.forward(request, response);
+                    response.sendRedirect("home.jsp");
+                    
                 }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

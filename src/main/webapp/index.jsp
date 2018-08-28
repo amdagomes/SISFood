@@ -26,10 +26,10 @@
                     <div class="image logo">
                         <img src="img/logo.png">
                     </div>
-                    <form method="post" action="front" >
+                    <form method="post" action="front?action=Login" >
                         <div class="field">
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="email" placeholder="Email" required>
+                                <input class="input" type="email" placeholder="Email" name="email" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-user"></i>
                                 </span>
@@ -37,7 +37,7 @@
                         </div>
                         <div class="field">
                             <p class="control has-icons-left">
-                                <input class="input" type="password" placeholder="Password" required>
+                                <input class="input" type="password" placeholder="Password" name="senha" required>
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-lock"></i>
                                 </span>
@@ -45,7 +45,7 @@
                         </div>
                         <div class="field">
                             <p class="control">
-                                <input type="hidden" name="command" value="Login">
+                                <input type="hidden" name="action" value="Login">
                                 <input class="button is-success is-fullwidth is-rounded" type="submit" value="Login">
                             </p>
                         </div>

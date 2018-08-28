@@ -13,7 +13,7 @@ public class ConnectionFactory {
          Class.forName("org.postgresql.Driver");
         String url = "jdbc:postgresql://localhost/Sisfood";
         String user = "postgres";
-        String password = "123";
+        String password = "14011997";
         return DriverManager.getConnection(url, user, password);
     }
 }

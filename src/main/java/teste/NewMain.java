@@ -23,11 +23,11 @@ public class NewMain {
         Usuario usuario = new Usuario();
         UsuarioDao dao = new UsuarioDao();
         usuario.setNome("teste");
-        usuario.setEmail("testess@gmail.com");
+        usuario.setEmail("testes@gmail.com");
         usuario.setDataNascimento(LocalDate.now());
         usuario.setProfissao("estudante");
         usuario.setCidade("cz");
-        usuario.setUsername("testess");
+        usuario.setUsername("testes");
         usuario.setRua("rua");
         usuario.setDescricao("descricao");
         usuario.setSexo("feminino");
@@ -38,9 +38,10 @@ public class NewMain {
         usuario.setCep("00000000");
         usuario.setCartegoriaEstabelecimento("teste");
         usuario.setNota((float) 0.9);
-        dao.salvar(usuario);
+        //dao.salvar(usuario);
+        
 
-        System.out.println("gravado");
+        //System.out.println(dao.autenticar("testess@gmail.com", "123"));
 
     }
 

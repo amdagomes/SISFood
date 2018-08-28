@@ -103,16 +103,25 @@ public class Usuario implements Serializable {
         this.username = username;
     }
 
-    public Usuario(String tipoUsuario, String email , String senha, String  nome, String telefone, String sexo,String profissao, Date dataNascimento,
-            String CartegoriaEstabelecimento, float nota, String descricao,
-            String rua,String numeroCasa, String estado, String cidade, String cep, String username) {
-        
-    }
+    
 
     public Usuario(String nome, String username, String email, String senha, LocalDate dataNascimento, String rua, String numeroCasa, String cidade, String cep, String estado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       this.nome= nome;
+       this.username = username;
+       this.email=email;
+       this.senha=senha;
+       this.dataNascimento= dataNascimento;
+       this.rua= rua;
+       this.numeroCasa= numeroCasa;
+       this.cidade=cidade;
+       this.cep=cep;
+       this.estado= estado;
     }
 
+    public Usuario(String email,String senha){
+        this.email=email;
+        this.senha=senha;
+    }
     public String getNumeroCasa() {
         return numeroCasa;
     }
@@ -120,16 +129,7 @@ public class Usuario implements Serializable {
     public void setNumeroCasa(String numeroCasa) {
         this.numeroCasa = numeroCasa;
     }
-
-   
-
-    
-    
-
-    
- 
-
-    public int getId() {
+public int getId() {
         return id;
     }
 

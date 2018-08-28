@@ -45,10 +45,9 @@ public class FrontServlet extends HttpServlet {
         try {
             request.setCharacterEncoding("UTF-8");
             
-            
-            
+           
             Command command = (Command) Class.forName("io.github.fernandasj.command."
-                    + request.getParameter("command")).newInstance();
+                    + request.getParameter("action")).newInstance();
 
             command.execute(request, response);
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {

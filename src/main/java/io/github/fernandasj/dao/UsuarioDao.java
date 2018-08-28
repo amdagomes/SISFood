@@ -22,7 +22,7 @@ public class UsuarioDao implements Dao<Usuario> {
     public boolean salvar(Usuario obj) throws SQLException, Exception {
         con = ConnectionFactory.getConnection();
         String sql = "INSERT INTO USUARIO(tipoUsuario,nome,telefone,sexo,email,profissao,dataNascimento,cartegoriaEstabelecimento,nota,descricao,"
-                + "rua,numero,estado,cidade,cep,username,senha)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                + "rua,numeroCasa,estado,cidade,cep,username,senha)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, obj.getTipoUsuario());
@@ -116,7 +116,7 @@ public class UsuarioDao implements Dao<Usuario> {
         String sql = "SELECT * FROM USUARIO WHERE email = ? AND senha = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, email);
-        stmt.setString(2, sql);
+        stmt.setString(2, senha);
         if (stmt.executeQuery().next()) {
             stmt.close();
             con.close();
