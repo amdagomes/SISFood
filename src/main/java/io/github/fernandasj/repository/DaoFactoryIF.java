@@ -5,7 +5,7 @@
  */
 package io.github.fernandasj.repository;
 
-import io.github.fernandasj.modelo.Consumidor;
+import io.github.fernandasj.modelo.Usuario;
 import java.sql.SQLException;
 
 /**
@@ -13,5 +13,5 @@ import java.sql.SQLException;
  * @author Amanda
  */
 public interface DaoFactoryIF {
-     public Consumidor criaConsumidorDao()  throws SQLException, ClassNotFoundException;
+     public Usuario criaConsumidorDao()  throws SQLException, ClassNotFoundException;
 }

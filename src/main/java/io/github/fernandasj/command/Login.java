@@ -1,7 +1,7 @@
 package io.github.fernandasj.command;
 
-import io.github.fernandasj.controle.GerenciadorConsumidor;
-import io.github.fernandasj.modelo.Consumidor;
+import io.github.fernandasj.controle.GerenciadorUsuario;
+import io.github.fernandasj.modelo.Usuario;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -20,19 +20,25 @@ public class Login implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        GerenciadorConsumidor g = new GerenciadorConsumidor();
+        GerenciadorUsuario g = new GerenciadorUsuario();
         HttpSession session = request.getSession();
-        Consumidor c = (Consumidor) session.getAttribute("usuario");
+        Usuario u = (Usuario) session.getAttribute("usuario");
 
         try {
-            if (g.autenticar(request.getParameter("email"), request.getParameter("senha"))) {
-
-                Consumidor atual;
-                atual = g.buscaConsumidor(request.getParameter("email"));
-                session.setAttribute("usuario", atual);
-
-                RequestDispatcher dispatcher = request.getRequestDispatcher("front?command=Inicio&email=" + atual.getEmail());
-                dispatcher.forward(request, response);
+            try {
+                if (g.autenticar(request.getParameter("email"), request.getParameter("senha"))) {
+                    
+                    Usuario atual;
+                    atual = g.buscaUsuario(request.getParameter("email"));
+                    session.setAttribute("usuario", atual);
+                    
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp" );
+                    dispatcher.forward(request, response);
+                    response.sendRedirect("home.jsp");
+                    
+                }
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }
         } catch (SQLException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

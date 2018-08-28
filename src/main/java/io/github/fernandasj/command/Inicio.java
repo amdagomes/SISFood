@@ -21,6 +21,7 @@ public class Inicio implements Command {
             //HttpSession session = request.getSession();
             RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
             dispatcher.forward(request, response);
+            response.sendRedirect("home.jsp");
         } catch (IOException ex) {
             Logger.getLogger(Inicio.class.getName()).log(Level.SEVERE, null, ex);
         }

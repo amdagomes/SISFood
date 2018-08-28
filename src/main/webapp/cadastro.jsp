@@ -20,7 +20,7 @@
                     <div class="image logo">
                         <img src="img/logo.png">
                     </div>
-                    <form method="post" action="FrontController" >
+                    <form method="post" action="front?action=CadastroUsuario" >
                         <div class="columns">
                             <div class="column">
                                 <div class="field">
@@ -110,16 +110,20 @@
                                     <h5 class="subtitle">Conta</h5>
                                     <label class="label is-left">Email</label>
                                     <div class="control has-icons-left has-icons-right">
-                                        <input class="input is-small" type="email" placeholder="Ex.: user@user.com" required>
+                                        <input class="input is-small" type="email" placeholder="Ex.: user@user.com"  name="email" required>
                                         <span class="icon is-small is-left">
                                             <i class="fas fa-user"></i>
                                         </span>
                                     </div>
+                                    <br>
+                                    <div>
+                                         <label class="label is-left">Nome de usuario</label>
+                                      <input class="input is-small" type="text" name="username"placeholder="username" required>
                                 </div>
                                 <div class="field">
                                     <label class="label">Senha</label>
                                     <p class="control has-icons-left">
-                                        <input class="input is-small" type="password" required>
+                                        <input class="input is-small" type="password" name ="senha" required>
                                         <span class="icon is-small is-left">
                                             <i class="fas fa-lock"></i>
                                         </span>
@@ -132,7 +136,7 @@
                                     </p>
                                 </div>
                                 <div class="footer-form">
-                                    <p>Já possui uma conta?<a href="index.html"> Fazer login</a></p>
+                                    <p>Já possui uma conta?<a href="index.jsp"> Fazer login</a></p>
                                 </div>
                             </div>
                         </div>
