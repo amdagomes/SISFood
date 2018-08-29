@@ -11,9 +11,9 @@ import java.sql.SQLException;
 public class ConnectionFactory {
     public static Connection getConnection() throws SQLException, ClassNotFoundException {
          Class.forName("org.postgresql.Driver");
-        String url = "jdbc:postgresql://localhost/Sisfood";
+        String url = "jdbc:postgresql://localhost/SisFood";
         String user = "postgres";
-        String password = "14011997";
+        String password = "123";
         return DriverManager.getConnection(url, user, password);
     }
 }

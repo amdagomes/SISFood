@@ -38,13 +38,12 @@ public class CadastroUsuario implements Command {
 
         GerenciadorUsuario gerenciador = new GerenciadorUsuario();
        try {
-            boolean cadastrar = gerenciador.Adiciona(nome, username, email, senha, LocalDate.parse(dataNascimento), rua, numeroCasa, cidade, cep, estado);
-             if(cadastrar){
-                 response.sendRedirect("index.jsp");
-             }
-             else{
-                 response.sendRedirect("home.jsp");
-             }
+            if(gerenciador.buscaUsuario(email) != null){
+                 response.sendRedirect("cadastro.jsp?erroCadastroUsuario=2");
+            } else{
+                gerenciador.Adiciona(nome, username, email, senha, LocalDate.parse(dataNascimento), rua, numeroCasa, cidade, cep, estado);
+                response.sendRedirect("index.jsp");
+            }
         } catch (Exception ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -13,7 +13,7 @@
     </head>
     <body>
         <section class="hero is-fullhd h100 background">
-            
+
             <div class="columns is-centered is-vertical-center box-login ">
 
                 <div class="column is-7-mobile is-4-tablet is-5-desktop box ">
@@ -56,14 +56,14 @@
                                         <input class="input is-small" type="text" name="cidade" required>
                                     </div>
                                 </div>
-                                 <div class="field">
+                                <div class="field">
                                     <div class="columns">
                                         <div class="column is-narrow">
                                             <label class="label is-left">Estado</label>
                                             <div class="control">
                                                 <div class="select is-small">
-                                                  <select name="estado">
-                                                    <option value="AC">AC</option>
+                                                    <select name="estado">
+                                                        <option value="AC">AC</option>
                                                         <option value="AL">AL</option>
                                                         <option value="AP">AP</option>
                                                         <option value="AM">AM</option>
@@ -91,7 +91,7 @@
                                                         <option value="SE">SE</option>
                                                         <option value="TO">TO</option>
                                                         <option value="ES">ES</option>
-                                                  </select>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -117,32 +117,41 @@
                                     </div>
                                     <br>
                                     <div>
-                                         <label class="label is-left">Nome de usuario</label>
-                                      <input class="input is-small" type="text" name="username"placeholder="username" required>
-                                </div>
-                                <div class="field">
-                                    <label class="label">Senha</label>
-                                    <p class="control has-icons-left">
-                                        <input class="input is-small" type="password" name ="senha" required>
-                                        <span class="icon is-small is-left">
-                                            <i class="fas fa-lock"></i>
-                                        </span>
-                                    </p>
-                                </div>
-                                <div class="field">
-                                    <p class="control">
-                                        <input type="hidden" name="identificador" value="Login">
-                                        <input class="button is-success is-fullwidth is-rounded" type="submit" value="Cadastrar">
-                                    </p>
-                                </div>
-                                <div class="footer-form">
-                                    <p>Já possui uma conta?<a href="index.jsp"> Fazer login</a></p>
+                                        <label class="label is-left">Nome de usuario</label>
+                                        <input class="input is-small" type="text" name="username"placeholder="username" required>
+                                    </div>
+                                    <div class="field">
+                                        <label class="label">Senha</label>
+                                        <p class="control has-icons-left">
+                                            <input class="input is-small" type="password" name ="senha" required>
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-lock"></i>
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div class="field">
+                                        <p class="control">
+                                            <input type="hidden" name="identificador" value="Login">
+                                            <input class="button is-success is-fullwidth is-rounded" type="submit" value="Cadastrar">
+                                        </p>
+                                    </div>
+                                    <div class="footer-form">
+                                        <p>Já possui uma conta?<a href="index.jsp"> Fazer login</a></p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                     </form>  
                 </div>
             </div> 
         </section> 
+        <script>
+            var erro = "${param.erroCadastroUsuario}";
+            if (erro == "1") {
+                swal("Erro!!", "Preencha todos os campos", "error");
+            }
+            if (erro == "2") {
+                swal("Erro!!", "Este email já está sendo utilizado", "error");
+            }
+        </script>
     </body>
 </html>
