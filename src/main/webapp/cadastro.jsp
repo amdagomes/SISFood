@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,12 +17,35 @@
 
             <div class="columns is-centered is-vertical-center box-login ">
 
-                <div class="column is-7-mobile is-4-tablet is-5-desktop box ">
+                <div class="column is-7-mobile is-6-tablet is-8-desktop box ">
                     <div class="image logo">
                         <img src="img/logo.png">
                     </div>
                     <form method="post" action="front?action=CadastroUsuario" >
                         <div class="columns">
+                            <div class="column is-3 is-vertical-center">
+                                <div class="field fotoperfil is-centered">
+                                    <figure class="image ">
+                                        <img id="fotoperfil" src="img/user.png">
+                                    </figure>
+                                    <div class="file has-name">
+                                        <label class="file-label">
+                                            <input id="file" class="file-input" type="file" name="resume" name="fotoPerfil">
+                                            <span class="file-cta">
+                                                <span class="file-icon">
+                                                    <i class="fas fa-upload"></i>
+                                                </span>
+                                                <span class="file-label">
+                                                    Escolha uma foto
+                                                </span>
+                                            </span>
+                                            <div id="filename" class="file-name">
+
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="column">
                                 <div class="field">
                                     <h5 class="subtitle">Dados Pessoais</h5>
@@ -30,12 +54,30 @@
                                         <input class="input is-small" type="text" name="nome" required>
                                     </div>
                                 </div>
-                                <div class="field">
-                                    <label class="label is-left">Data nascimento</label>
-                                    <div class="control">
-                                        <input class="input is-small" type="date" name="dataNascimento" required>
+                                <div class="columns">
+                                    <div class="column">
+                                        <div class="field">
+                                            <label class="label is-left">Data nascimento</label>
+                                            <div class="control">
+                                                <input class="input is-small" type="date" name="dataNascimento" required>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="column">
+                                        <div class="field">
+                                            <label class="label is-left">Sexo</label>
+                                            <div class="control">
+                                                <div class="select is-small">
+                                                    <select name="sexo">
+                                                        <option value="Feminino">Feminino</option>
+                                                        <option value="Masculino">Masculino</option>
+                                                    </select>
+                                                </div>         
+                                            </div>
+                                        </div>
+                                    </div>          
                                 </div>
+
                                 <div class="field">
                                     <h5 class="subtitle">Endereço</h5>
                                     <label class="label is-left">Rua/nº</label>
@@ -135,10 +177,12 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </form>  
                 </div>
             </div> 
         </section> 
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
             var erro = "${param.erroCadastroUsuario}";
@@ -148,6 +192,28 @@
             if (erro == "2") {
                 swal("Erro", "Este email já está sendo utilizado", "error");
             }
+
+            //exibe o src da imagem
+            var file = document.getElementById("file");
+            file.onchange = function () {
+                if (file.files.length > 0)
+                {
+
+                    document.getElementById('filename').innerHTML = file.files[0].name;
+
+                }
+            };
+
+            //altera a foto de exibição do perfil
+            $("#file").on('change', function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#fotoperfil').attr("src", e.target.result).fadeIn();
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
         </script>
     </body>
 </html>

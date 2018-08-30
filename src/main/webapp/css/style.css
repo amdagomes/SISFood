@@ -51,6 +51,23 @@ and open the template in the editor.
     margin-bottom: 1rem;
     display: inline-block;
 }
+.fotoperfil .file-label{
+  display: block;
+}
+.fotoperfil .file-name{
+  border-width: 1px;
+}
+.fotoperfil input{
+    display: block;
+}
+.fotoperfil figure{
+    width: 150px;
+    height: 150px;
+    border: 1px solid #ccc;
+    border-radius: 290486px;
+    overflow: hidden;
+    margin: 0 auto 1rem auto;
+}
 .footer-form, .box-login input[type=submit]{
     margin-top: 1rem;
 }
