@@ -30,7 +30,7 @@
                                     </figure>
                                     <div class="file has-name">
                                         <label class="file-label">
-                                            <input id="file" class="file-input" type="file" name="resume" name="fotoPerfil">
+                                            <input id="file" class="file-input" type="file" accept="image/*" name="fotoPerfil">
                                             <span class="file-cta">
                                                 <span class="file-icon">
                                                     <i class="fas fa-upload"></i>
@@ -186,10 +186,10 @@
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
             var erro = "${param.erroCadastroUsuario}";
-            if (erro == "1") {
+            if (erro === "1") {
                 swal("Erro", "Verifique a data de nascimento", "error");
             }
-            if (erro == "2") {
+            if (erro === "2") {
                 swal("Erro", "Este email já está sendo utilizado", "error");
             }
 
