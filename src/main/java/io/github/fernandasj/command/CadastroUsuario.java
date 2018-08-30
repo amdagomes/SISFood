@@ -8,6 +8,7 @@ package io.github.fernandasj.command;
 import io.github.fernandasj.controle.GerenciadorUsuario;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -35,7 +36,12 @@ public class CadastroUsuario implements Command {
 
         GerenciadorUsuario gerenciador = new GerenciadorUsuario();
        try {
-            if(gerenciador.buscaUsuario(email) != null){
+            LocalDate data = LocalDate.parse(dataNascimento);
+            LocalDate dataRequerida = LocalDate.of(2008, 01, 01);
+            System.out.println(dataRequerida.isBefore(data));
+            if(dataRequerida.isBefore(data)){
+                response.sendRedirect("cadastro.jsp?erroCadastroUsuario=1");
+            }else if(gerenciador.buscaUsuario(email) != null){
                  response.sendRedirect("cadastro.jsp?erroCadastroUsuario=2");
             } else{
                 gerenciador.adiciona(nome, email, senha, LocalDate.parse(dataNascimento), rua, numeroCasa, cidade, cep, estado);

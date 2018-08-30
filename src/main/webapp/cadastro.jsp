@@ -143,7 +143,7 @@
         <script>
             var erro = "${param.erroCadastroUsuario}";
             if (erro == "1") {
-                swal("Erro!!", "Preencha todos os campos", "error");
+                swal("Erro", "Verifique a data de nascimento", "error");
             }
             if (erro == "2") {
                 swal("Erro", "Este email já está sendo utilizado", "error");
