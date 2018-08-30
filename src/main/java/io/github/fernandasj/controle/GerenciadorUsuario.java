@@ -19,9 +19,9 @@ public class GerenciadorUsuario {
         return userDao.autenticar(email, senha);
     }
 
-    public boolean Adiciona(String nome,String username,String email,String senha, LocalDate dataNascimento,
+    public boolean adiciona(String nome,String email,String senha, LocalDate dataNascimento,
             String rua,String numeroCasa,String cidade,String cep,String estado) throws Exception{
-        Usuario usuario = new Usuario (nome,username,email,senha,dataNascimento,rua,numeroCasa,cidade,cep,estado);
+        Usuario usuario = new Usuario (nome,email,senha,dataNascimento,rua,numeroCasa,cidade,cep,estado);
         return userDao.salvar(usuario);
         
     }

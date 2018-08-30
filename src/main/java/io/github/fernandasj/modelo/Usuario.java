@@ -32,11 +32,10 @@ public class Usuario implements Serializable {
     private String estado;
     private String cidade;
     private String cep;
-    private String username;
 
     public Usuario(String tipoUsuario,String email, String senha, String nome, byte[] fotoPerfil, String telefone, String sexo, String profissao,
             LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua,String numeroCasa,
-            String estado, String cidade, String cep, String username) {
+            String estado, String cidade, String cep) {
         this.id = id;
         this.email = email;
         this.senha = senha;
@@ -53,14 +52,13 @@ public class Usuario implements Serializable {
         this.estado = estado;
         this.cidade = cidade;
         this.cep = cep;
-        this.username = username;
     }
 
     public Usuario() {
        
     }
 
-    public Usuario(int id, String tipoUsuario, String email, String senha, String nome, byte[] fotoPerfil, InputStream foto, String telefone, String sexo, String profissao, LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua,String numeroCasa, String estado, String cidade, String cep, String username) {
+    public Usuario(int id, String tipoUsuario, String email, String senha, String nome, byte[] fotoPerfil, InputStream foto, String telefone, String sexo, String profissao, LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua,String numeroCasa, String estado, String cidade, String cep) {
         this.id = id;
         this.tipoUsuario = tipoUsuario;
         this.email = email;
@@ -79,9 +77,8 @@ public class Usuario implements Serializable {
         this.estado = estado;
         this.cidade = cidade;
         this.cep = cep;
-        this.username = username;
     }
-     public Usuario( String tipoUsuario, String email, String senha, String nome, String telefone, String sexo, String profissao, LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua, String estado, String cidade, String cep, String username) {
+     public Usuario( String tipoUsuario, String email, String senha, String nome, String telefone, String sexo, String profissao, LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua, String estado, String cidade, String cep) {
         
         this.tipoUsuario = tipoUsuario;
         this.email = email;
@@ -100,14 +97,12 @@ public class Usuario implements Serializable {
         this.estado = estado;
         this.cidade = cidade;
         this.cep = cep;
-        this.username = username;
     }
 
     
 
-    public Usuario(String nome, String username, String email, String senha, LocalDate dataNascimento, String rua, String numeroCasa, String cidade, String cep, String estado) {
+    public Usuario(String nome, String email, String senha, LocalDate dataNascimento, String rua, String numeroCasa, String cidade, String cep, String estado) {
        this.nome= nome;
-       this.username = username;
        this.email=email;
        this.senha=senha;
        this.dataNascimento= dataNascimento;
@@ -266,37 +261,28 @@ public int getId() {
         this.cep = cep;
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 67 * hash + this.id;
-        hash = 67 * hash + Objects.hashCode(this.tipoUsuario);
-        hash = 67 * hash + Objects.hashCode(this.email);
-        hash = 67 * hash + Objects.hashCode(this.senha);
-        hash = 67 * hash + Objects.hashCode(this.nome);
-        hash = 67 * hash + Arrays.hashCode(this.fotoPerfil);
-        hash = 67 * hash + Objects.hashCode(this.foto);
-        hash = 67 * hash + Objects.hashCode(this.telefone);
-        hash = 67 * hash + Objects.hashCode(this.sexo);
-        hash = 67 * hash + Objects.hashCode(this.profissao);
-        hash = 67 * hash + Objects.hashCode(this.dataNascimento);
-        hash = 67 * hash + Objects.hashCode(this.CartegoriaEstabelecimento);
-        hash = 67 * hash + Float.floatToIntBits(this.nota);
-        hash = 67 * hash + Objects.hashCode(this.descricao);
-        hash = 67 * hash + Objects.hashCode(this.rua);
-        hash = 67 * hash + Objects.hashCode(this.numeroCasa);
-        hash = 67 * hash + Objects.hashCode(this.estado);
-        hash = 67 * hash + Objects.hashCode(this.cidade);
-        hash = 67 * hash + Objects.hashCode(this.cep);
-        hash = 67 * hash + Objects.hashCode(this.username);
+        int hash = 7;
+        hash = 29 * hash + this.id;
+        hash = 29 * hash + Objects.hashCode(this.tipoUsuario);
+        hash = 29 * hash + Objects.hashCode(this.email);
+        hash = 29 * hash + Objects.hashCode(this.senha);
+        hash = 29 * hash + Objects.hashCode(this.nome);
+        hash = 29 * hash + Arrays.hashCode(this.fotoPerfil);
+        hash = 29 * hash + Objects.hashCode(this.foto);
+        hash = 29 * hash + Objects.hashCode(this.telefone);
+        hash = 29 * hash + Objects.hashCode(this.sexo);
+        hash = 29 * hash + Objects.hashCode(this.profissao);
+        hash = 29 * hash + Objects.hashCode(this.dataNascimento);
+        hash = 29 * hash + Objects.hashCode(this.CartegoriaEstabelecimento);
+        hash = 29 * hash + Float.floatToIntBits(this.nota);
+        hash = 29 * hash + Objects.hashCode(this.descricao);
+        hash = 29 * hash + Objects.hashCode(this.rua);
+        hash = 29 * hash + Objects.hashCode(this.numeroCasa);
+        hash = 29 * hash + Objects.hashCode(this.estado);
+        hash = 29 * hash + Objects.hashCode(this.cidade);
+        hash = 29 * hash + Objects.hashCode(this.cep);
         return hash;
     }
 
@@ -360,9 +346,6 @@ public int getId() {
         if (!Objects.equals(this.cep, other.cep)) {
             return false;
         }
-        if (!Objects.equals(this.username, other.username)) {
-            return false;
-        }
         if (!Arrays.equals(this.fotoPerfil, other.fotoPerfil)) {
             return false;
         }
@@ -377,15 +360,6 @@ public int getId() {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", tipoUsuario=" + tipoUsuario + ", email=" + email + ", senha=" 
-                + senha + ", nome=" + nome + ", fotoPerfil=" + fotoPerfil + ", foto=" + foto + ", telefone=" 
-                + telefone + ", sexo=" + sexo + ", profissao=" + profissao + ", dataNascimento=" + dataNascimento +
-                ", CartegoriaEstabelecimento=" + CartegoriaEstabelecimento + ", nota=" + nota + ", descricao=" + descricao 
-                + ", rua=" + rua + ", numeroCasa=" + numeroCasa + ", estado=" + estado + ", cidade=" + cidade + ", cep="
-                + cep + ", username=" + username + '}';
-    }
-
-    
-
-   
+        return "Usuario{" + "id=" + id + ", tipoUsuario=" + tipoUsuario + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", fotoPerfil=" + fotoPerfil + ", foto=" + foto + ", telefone=" + telefone + ", sexo=" + sexo + ", profissao=" + profissao + ", dataNascimento=" + dataNascimento + ", CartegoriaEstabelecimento=" + CartegoriaEstabelecimento + ", nota=" + nota + ", descricao=" + descricao + ", rua=" + rua + ", numeroCasa=" + numeroCasa + ", estado=" + estado + ", cidade=" + cidade + ", cep=" + cep + '}';
+    }   
 }

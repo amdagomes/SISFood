@@ -115,11 +115,6 @@
                                             <i class="fas fa-user"></i>
                                         </span>
                                     </div>
-                                    <br>
-                                    <div>
-                                        <label class="label is-left">Nome de usuario</label>
-                                        <input class="input is-small" type="text" name="username"placeholder="username" required>
-                                    </div>
                                     <div class="field">
                                         <label class="label">Senha</label>
                                         <p class="control has-icons-left">
@@ -144,13 +139,14 @@
                 </div>
             </div> 
         </section> 
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         <script>
             var erro = "${param.erroCadastroUsuario}";
             if (erro == "1") {
                 swal("Erro!!", "Preencha todos os campos", "error");
             }
             if (erro == "2") {
-                swal("Erro!!", "Este email já está sendo utilizado", "error");
+                swal("Erro", "Este email já está sendo utilizado", "error");
             }
         </script>
     </body>

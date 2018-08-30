@@ -27,7 +27,6 @@ public class NewMain {
         usuario.setDataNascimento(LocalDate.now());
         usuario.setProfissao("estudante");
         usuario.setCidade("cz");
-        usuario.setUsername("testes");
         usuario.setRua("rua");
         usuario.setDescricao("descricao");
         usuario.setSexo("feminino");

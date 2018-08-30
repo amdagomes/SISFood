@@ -22,7 +22,7 @@ public class UsuarioDao implements Dao<Usuario> {
     public boolean salvar(Usuario obj) throws SQLException, Exception {
         con = ConnectionFactory.getConnection();
         String sql = "INSERT INTO USUARIO(tipoUsuario,nome,telefone,sexo,email,profissao,dataNascimento,cartegoriaEstabelecimento,nota,descricao,"
-                + "rua,numeroCasa,estado,cidade,cep,username,senha)VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+                + "rua,numeroCasa,estado,cidade,cep,senha) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, obj.getTipoUsuario());
@@ -40,8 +40,7 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(13, obj.getEstado());
             stmt.setString(14, obj.getCidade());
             stmt.setString(15, obj.getCep());
-            stmt.setString(16, obj.getUsername());
-            stmt.setString(17, obj.getSenha());
+            stmt.setString(16, obj.getSenha());
             stmt.execute();
             stmt.close();
         }
@@ -70,7 +69,7 @@ public class UsuarioDao implements Dao<Usuario> {
                     resultado.getString("senha"), resultado.getString("nome"), resultado.getString("telefone"), resultado.getString("sexo"),
                     resultado.getString("profissao"), resultado.getDate("dataNascimento").toLocalDate(), resultado.getString("cartegoriaEstabelecimento"),
                     resultado.getFloat("nota"), resultado.getString("descricao"), resultado.getString("rua"),
-                    resultado.getString("estado"), resultado.getString("cidade"), resultado.getString("cep"), resultado.getString("username"));
+                    resultado.getString("estado"), resultado.getString("cidade"), resultado.getString("cep"));
             resultado.close();
             stmt.close();
             con.close();
@@ -141,7 +140,7 @@ public class UsuarioDao implements Dao<Usuario> {
             }
             String sql = "UPDATE USUARIO SET tipoUsuario =?,email =?,nome = ?"
                     + "telefone = ?,sexo = ? profissao = ?,dataNascimento = ?,cartegoriaEstabelecimento =?"
-                    + "nota = ?,descricao =?,rua = ?,estado = ? cidade =?,cep =? username =? senha =? WHERE email= ?";
+                    + "nota = ?,descricao =?,rua = ?,estado = ? cidade =?,cep =?, senha =? WHERE email= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setString(1, obj.getTipoUsuario());
@@ -158,7 +157,6 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(12, obj.getEstado());
             stmt.setString(13, obj.getCidade());
             stmt.setString(14, obj.getCep());
-            stmt.setString(15, obj.getUsername());
             stmt.setString(15, obj.getSenha());
 
             stmt.execute();

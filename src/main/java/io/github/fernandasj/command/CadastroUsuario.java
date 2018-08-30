@@ -25,14 +25,11 @@ public class CadastroUsuario implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         String nome = request.getParameter("nome");
         String dataNascimento = request.getParameter("dataNascimento");
-        ;
         String rua = request.getParameter("rua");
         String numeroCasa = request.getParameter("numero");
-
         String cep = request.getParameter("cep");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        String username = request.getParameter("username");
         String cidade = request.getParameter("cidade");
         String estado = request.getParameter("estado");
 
@@ -41,7 +38,7 @@ public class CadastroUsuario implements Command {
             if(gerenciador.buscaUsuario(email) != null){
                  response.sendRedirect("cadastro.jsp?erroCadastroUsuario=2");
             } else{
-                gerenciador.Adiciona(nome, username, email, senha, LocalDate.parse(dataNascimento), rua, numeroCasa, cidade, cep, estado);
+                gerenciador.adiciona(nome, email, senha, LocalDate.parse(dataNascimento), rua, numeroCasa, cidade, cep, estado);
                 response.sendRedirect("index.jsp");
             }
         } catch (Exception ex) {
