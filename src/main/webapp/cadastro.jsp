@@ -21,7 +21,7 @@
                     <div class="image logo">
                         <img src="img/logo.png">
                     </div>
-                    <form method="post" action="front?action=CadastroUsuario" >
+                    <form method="post" action="front?action=CadastroUsuario" enctype="multipart/form-data" >
                         <div class="columns">
                             <div class="column is-3 is-vertical-center">
                                 <div class="field fotoperfil is-centered">
@@ -87,7 +87,7 @@
                                                 <input class="input is-small" type="text" name="rua" required>
                                             </div>
                                             <div class="column">
-                                                <input class="input is-small" type="text" placeholder="nº" name="numero">
+                                                <input class="input is-small" type="text" placeholder="nº" name="numeroCasa">
                                             </div>
                                         </div>   
                                     </div>

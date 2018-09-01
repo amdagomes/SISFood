@@ -1,9 +1,9 @@
 package io.github.fernandasj.dao;
-
-
 import io.github.fernandasj.dao.Dao;
 import io.github.fernandasj.modelo.Usuario;
 import io.github.fernandasj.repository.ConnectionFactory;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -18,40 +18,38 @@ public class UsuarioDao implements Dao<Usuario> {
 
     private Connection con;
 //Falta adicionar a foto
+
     @Override
     public boolean salvar(Usuario obj) throws SQLException, Exception {
         con = ConnectionFactory.getConnection();
-        String sql = "INSERT INTO USUARIO(tipoUsuario,nome,telefone,sexo,email,profissao,dataNascimento,cartegoriaEstabelecimento,nota,descricao,"
-                + "rua,numeroCasa,estado,cidade,cep,senha) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO USUARIO(nome, email, senha, sexo, dataNascimento,rua, cidade, cep, numeroCasa,estado,fotoPerfil)"
+                + " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
-            stmt.setString(1, obj.getTipoUsuario());
-            stmt.setString(2, obj.getNome());
-            stmt.setString(3, obj.getTelefone());
-            stmt.setString(4, obj.getSexo());
-            stmt.setString(5, obj.getEmail());
-            stmt.setString(6, obj.getProfissao());
-            stmt.setDate(7, Date.valueOf(obj.getDataNascimento()));
-            stmt.setString(8, obj.getCartegoriaEstabelecimento());
-            stmt.setFloat(9, obj.getNota());
-            stmt.setString(10, obj.getDescricao());
-            stmt.setString(11, obj.getRua());
-            stmt.setString(12,obj.getNumeroCasa());
-            stmt.setString(13, obj.getEstado());
-            stmt.setString(14, obj.getCidade());
-            stmt.setString(15, obj.getCep());
-            stmt.setString(16, obj.getSenha());
+
+            stmt.setString(1, obj.getNome());
+            stmt.setString(2, obj.getEmail());
+            stmt.setString(3,obj.getSenha());
+            stmt.setString(4 ,obj.getSexo());
+            stmt.setDate(5, Date.valueOf(obj.getDataNascimento()));
+            stmt.setString(6, obj.getRua());
+            stmt.setString(7, obj.getCidade());
+            stmt.setString(8, obj.getCep());
+            stmt.setString(9, obj.getNumeroCasa());
+            stmt.setString(10, obj.getEstado());
+            stmt.setBytes(11, obj.getFotoPerfil());
             stmt.execute();
             stmt.close();
+           
+
+            
         }
-        con.close();
-
-        return true;
-
+         con.close();
+    return true;
     }
 
     @Override
-    public Usuario buscar(Object obj) throws SQLException {
+    public Usuario buscar(String email) throws SQLException {
 
         try {
             con = ConnectionFactory.getConnection();
@@ -61,15 +59,16 @@ public class UsuarioDao implements Dao<Usuario> {
 
         String sql = "SELECT * FROM usuario WHERE email= ?";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setObject(1, obj);
+        stmt.setString(1, email);
         ResultSet resultado = stmt.executeQuery();
 
         if (resultado.next()) {
-            Usuario u = new Usuario(resultado.getString("tipoUsuario"), resultado.getString("email"),
-                    resultado.getString("senha"), resultado.getString("nome"), resultado.getString("telefone"), resultado.getString("sexo"),
-                    resultado.getString("profissao"), resultado.getDate("dataNascimento").toLocalDate(), resultado.getString("cartegoriaEstabelecimento"),
-                    resultado.getFloat("nota"), resultado.getString("descricao"), resultado.getString("rua"),
-                    resultado.getString("estado"), resultado.getString("cidade"), resultado.getString("cep"));
+            Usuario u = new Usuario(resultado.getString("email"), resultado.getString("nome"),
+                    resultado.getString("senha"), resultado.getString("sexo"),
+                    resultado.getDate("dataNascimento").toLocalDate(),
+                     resultado.getString("rua"),
+                    resultado.getString("estado"), resultado.getString("cidade"), resultado.getString("cep"), 
+                    resultado.getString("numeroCasa"), resultado.getBytes("fotoPerfil"));
             resultado.close();
             stmt.close();
             con.close();
@@ -83,8 +82,8 @@ public class UsuarioDao implements Dao<Usuario> {
     }
 
     @Override
-    public boolean deletar(Object obj) throws SQLException {
-        if (buscar(obj) != null) {
+    public boolean deletar(String email) throws SQLException {
+        if (buscar(email) != null) {
 
             try {
                 con = ConnectionFactory.getConnection();
@@ -96,7 +95,7 @@ public class UsuarioDao implements Dao<Usuario> {
 
             String sql = "DELETE FROM Usuario WHERE email= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setObject(1, obj);
+            stmt.setString(1,email);
             stmt.execute();
             stmt.close();
             con.close();
@@ -140,19 +139,17 @@ public class UsuarioDao implements Dao<Usuario> {
             }
             String sql = "UPDATE USUARIO SET tipoUsuario =?,email =?,nome = ?"
                     + "telefone = ?,sexo = ? profissao = ?,dataNascimento = ?,cartegoriaEstabelecimento =?"
-                    + "nota = ?,descricao =?,rua = ?,estado = ? cidade =?,cep =?, senha =? WHERE email= ?";
+                    + "nota = ?,rua = ?,estado = ? cidade =?,cep =?, senha =? WHERE email= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
 
-            stmt.setString(1, obj.getTipoUsuario());
             stmt.setString(2, obj.getNome());
             stmt.setString(3, obj.getTelefone());
             stmt.setString(4, obj.getSexo());
             stmt.setString(5, obj.getEmail());
             stmt.setString(6, obj.getProfissao());
             stmt.setDate(7, Date.valueOf(obj.getDataNascimento()));
-            stmt.setString(8, obj.getCartegoriaEstabelecimento());
-            stmt.setFloat(9, obj.getNota());
-            stmt.setString(10, obj.getDescricao());
+
+           
             stmt.setString(11, obj.getRua());
             stmt.setString(12, obj.getEstado());
             stmt.setString(13, obj.getCidade());
@@ -163,12 +160,8 @@ public class UsuarioDao implements Dao<Usuario> {
 
             stmt.close();
             con.close();
-           
-            
+
             return true;
         }
     }
-
 }
-
-

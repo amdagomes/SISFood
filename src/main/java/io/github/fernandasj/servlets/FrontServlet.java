@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet("/front")
 @MultipartConfig
+
 public class FrontServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -28,19 +28,18 @@ public class NewMain {
         usuario.setProfissao("estudante");
         usuario.setCidade("cz");
         usuario.setRua("rua");
-        usuario.setDescricao("descricao");
+        
         usuario.setSexo("feminino");
         usuario.setSenha("123");
         usuario.setEstado("pb");
-        usuario.setTipoUsuario("consumidor");
+      
         usuario.setTelefone("233333333");
         usuario.setCep("00000000");
-        usuario.setCartegoriaEstabelecimento("teste");
-        usuario.setNota((float) 0.9);
+       
         //dao.salvar(usuario);
         
 
-        //System.out.println(dao.autenticar("testess@gmail.com", "123"));
+        System.out.println(dao.buscar("rafa10@gmail.com"));
 
     }
 

@@ -9,9 +9,9 @@ import java.sql.SQLException;
  */
 public interface Dao<T> {   
     boolean salvar(T obj) throws SQLException, Exception;
-    T buscar(Object obj) throws SQLException;
+    T buscar(String obj) throws SQLException;
     boolean atualizar(T obj) throws SQLException;
-    boolean deletar(Object obj) throws SQLException;
+    boolean deletar(String obj) throws SQLException;
    
     
 }
