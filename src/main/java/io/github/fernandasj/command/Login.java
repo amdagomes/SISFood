@@ -26,16 +26,18 @@ public class Login implements Command {
 
         try {
             try {
-                if (g.autenticar(request.getParameter("email"), request.getParameter("senha"))) {
-                    
+                if (u != null) {
+                    response.sendRedirect("home.jsp");
+                } else if (g.autenticar(request.getParameter("email"), request.getParameter("senha"))) {
+
                     Usuario atual;
                     atual = g.buscaUsuario(request.getParameter("email"));
                     session.setAttribute("usuario", atual);
-                    
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp" );
+
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
                     dispatcher.forward(request, response);
                     response.sendRedirect("home.jsp");
-                    
+
                 }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);

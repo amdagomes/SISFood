@@ -101,16 +101,18 @@ public class Usuario implements Serializable {
 
     
 
-    public Usuario(String nome, String email, String senha, LocalDate dataNascimento, String rua, String numeroCasa, String cidade, String cep, String estado) {
+    public Usuario(String nome, String email, String senha, String sexo, LocalDate dataNascimento, String rua, String numeroCasa, String cidade, String cep, String estado, byte[] fotoPerfil) {
        this.nome= nome;
        this.email=email;
        this.senha=senha;
+       this.sexo = sexo;
        this.dataNascimento= dataNascimento;
        this.rua= rua;
        this.numeroCasa= numeroCasa;
        this.cidade=cidade;
        this.cep=cep;
        this.estado= estado;
+       this.fotoPerfil = fotoPerfil;
     }
 
     public Usuario(String email,String senha){

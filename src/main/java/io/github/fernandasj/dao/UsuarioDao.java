@@ -1,10 +1,6 @@
 package io.github.fernandasj.dao;
-import io.github.fernandasj.dao.Dao;
 import io.github.fernandasj.modelo.Usuario;
 import io.github.fernandasj.repository.ConnectionFactory;
-import java.io.FileInputStream;
-import java.io.InputStream;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -17,7 +13,6 @@ import java.util.logging.Logger;
 public class UsuarioDao implements Dao<Usuario> {
 
     private Connection con;
-//Falta adicionar a foto
 
     @Override
     public boolean salvar(Usuario obj) throws SQLException, Exception {
@@ -39,10 +34,7 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(10, obj.getEstado());
             stmt.setBytes(11, obj.getFotoPerfil());
             stmt.execute();
-            stmt.close();
-           
-
-            
+            stmt.close();     
         }
          con.close();
     return true;

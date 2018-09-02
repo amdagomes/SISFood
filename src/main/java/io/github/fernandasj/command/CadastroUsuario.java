@@ -10,15 +10,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import static jdk.nashorn.tools.ShellFunctions.input;
 
 /**
  *
@@ -46,6 +43,7 @@ public class CadastroUsuario implements Command {
             InputStream stream = part.getInputStream();
             stream.read(fotoPerfil);
             stream.close();
+            
             GerenciadorUsuario gerenciador = new GerenciadorUsuario();
             LocalDate data = LocalDate.parse(dataNascimento);
             LocalDate dataRequerida = LocalDate.of(2008, 01, 01);

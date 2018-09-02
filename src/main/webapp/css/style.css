@@ -11,9 +11,28 @@ and open the template in the editor.
   display: flex;
   align-items: center;
 }
+.is-orange{
+    color:white;
+    background-color: #e37b40;
+}
+.is-orange a{
+    color:rgba(0,0,0,.7);
+}
+.is-orange a:hover{
+    color:rgba(0,0,0,.7);
+    background-color: rgba(124,62,27,.1);
+}
 .h100{
     height: 100vh;
     overflow: hidden;
+}
+.background-gray{
+  background-color: #e9ebee;
+}
+.coluna{
+  background-color: white;
+  border: 1px solid #dddfe2;
+  border-radius: 10px;
 }
 .background{
     background: url(../img/bg.jpg);
