@@ -39,6 +39,9 @@ public class Login implements Command {
                     response.sendRedirect("home.jsp");
 
                 }
+                else{
+                     response.sendRedirect("index.jsp");
+                }
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             }

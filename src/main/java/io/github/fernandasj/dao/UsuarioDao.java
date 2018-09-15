@@ -1,4 +1,5 @@
 package io.github.fernandasj.dao;
+
 import io.github.fernandasj.modelo.Usuario;
 import io.github.fernandasj.repository.ConnectionFactory;
 import java.sql.Connection;
@@ -24,8 +25,8 @@ public class UsuarioDao implements Dao<Usuario> {
 
             stmt.setString(1, obj.getNome());
             stmt.setString(2, obj.getEmail());
-            stmt.setString(3,obj.getSenha());
-            stmt.setString(4 ,obj.getSexo());
+            stmt.setString(3, obj.getSenha());
+            stmt.setString(4, obj.getSexo());
             stmt.setDate(5, Date.valueOf(obj.getDataNascimento()));
             stmt.setString(6, obj.getRua());
             stmt.setString(7, obj.getCidade());
@@ -34,14 +35,13 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(10, obj.getEstado());
             stmt.setBytes(11, obj.getFotoPerfil());
             stmt.execute();
-            stmt.close();     
+            stmt.close();
         }
-         con.close();
-    return true;
+        con.close();
+        return true;
     }
 
-    @Override
-    public Usuario buscar(String email) throws SQLException {
+    public Usuario buscarPorId(int id) throws SQLException {
 
         try {
             con = ConnectionFactory.getConnection();
@@ -49,17 +49,17 @@ public class UsuarioDao implements Dao<Usuario> {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT * FROM usuario WHERE email= ?";
+        String sql = "SELECT * FROM usuario WHERE idUsuario= ?";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setString(1, email);
+        stmt.setInt(1, id);
         ResultSet resultado = stmt.executeQuery();
 
         if (resultado.next()) {
             Usuario u = new Usuario(resultado.getString("email"), resultado.getString("nome"),
                     resultado.getString("senha"), resultado.getString("sexo"),
                     resultado.getDate("dataNascimento").toLocalDate(),
-                     resultado.getString("rua"),
-                    resultado.getString("estado"), resultado.getString("cidade"), resultado.getString("cep"), 
+                    resultado.getString("rua"),
+                    resultado.getString("estado"), resultado.getString("cidade"), resultado.getString("cep"),
                     resultado.getString("numeroCasa"), resultado.getBytes("fotoPerfil"));
             resultado.close();
             stmt.close();
@@ -87,7 +87,7 @@ public class UsuarioDao implements Dao<Usuario> {
 
             String sql = "DELETE FROM Usuario WHERE email= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1,email);
+            stmt.setString(1, email);
             stmt.execute();
             stmt.close();
             con.close();
@@ -129,9 +129,9 @@ public class UsuarioDao implements Dao<Usuario> {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String sql = "UPDATE USUARIO SET tipoUsuario =?,email =?,nome = ?"
-                    + "telefone = ?,sexo = ? profissao = ?,dataNascimento = ?,cartegoriaEstabelecimento =?"
-                    + "nota = ?,rua = ?,estado = ? cidade =?,cep =?, senha =? WHERE email= ?";
+            String sql = "UPDATE USUARIO SET email =?,nome = ?"
+                    + "telefone = ?,sexo = ? profissao = ?,dataNascimento = ?"
+                    + "rua = ?,estado = ? cidade =?,cep =?, senha =? WHERE email= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setString(2, obj.getNome());
@@ -141,7 +141,6 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(6, obj.getProfissao());
             stmt.setDate(7, Date.valueOf(obj.getDataNascimento()));
 
-           
             stmt.setString(11, obj.getRua());
             stmt.setString(12, obj.getEstado());
             stmt.setString(13, obj.getCidade());
@@ -156,4 +155,70 @@ public class UsuarioDao implements Dao<Usuario> {
             return true;
         }
     }
+
+    public Usuario BuscarPorNome(String nome) throws SQLException {
+        try {
+            con = ConnectionFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String sql = "SELECT * FROM usuario WHERE nome= ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, nome);
+        ResultSet resultado = stmt.executeQuery();
+
+        if (resultado.next()) {
+            Usuario u = new Usuario(resultado.getString("email"), resultado.getString("nome"),
+                    resultado.getString("senha"), resultado.getString("sexo"),
+                    resultado.getDate("dataNascimento").toLocalDate(),
+                    resultado.getString("rua"),
+                    resultado.getString("estado"), resultado.getString("cidade"), resultado.getString("cep"),
+                    resultado.getString("numeroCasa"), resultado.getBytes("fotoPerfil"));
+            resultado.close();
+            stmt.close();
+            con.close();
+            return u;
+        }
+        resultado.close();
+        stmt.close();
+        con.close();
+
+        return null;
+    }
+
+    @Override
+
+    public Usuario buscar(String email) throws SQLException {
+
+        try {
+            con = ConnectionFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String sql = "SELECT * FROM usuario WHERE email= ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, email);
+        ResultSet resultado = stmt.executeQuery();
+
+        if (resultado.next()) {
+            Usuario u = new Usuario(resultado.getString("email"), resultado.getString("nome"),
+                    resultado.getString("senha"), resultado.getString("sexo"),
+                    resultado.getDate("dataNascimento").toLocalDate(),
+                    resultado.getString("rua"),
+                    resultado.getString("estado"), resultado.getString("cidade"), resultado.getString("cep"),
+                    resultado.getString("numeroCasa"), resultado.getBytes("fotoPerfil"));
+            resultado.close();
+            stmt.close();
+            con.close();
+            return u;
+        }
+        resultado.close();
+        stmt.close();
+        con.close();
+
+        return null;
+    }
+
 }

@@ -1,8 +1,8 @@
 package io.github.fernandasj.modelo;
 
-import java.io.InputStream;
+
 import java.io.Serializable;
-import java.sql.Date;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Objects;
@@ -14,17 +14,14 @@ import java.util.Objects;
 public class Usuario implements Serializable {
 
     private int id;
-    private String tipoUsuario;
     private String email;
     private String senha;
     private String nome;
     private byte[] fotoPerfil;
-    private InputStream foto;
     private String telefone;
     private String sexo;
     private String profissao;
     private LocalDate dataNascimento;
-    private String CartegoriaEstabelecimento;
     private float nota;
     private String descricao;
     private String rua;
@@ -33,92 +30,50 @@ public class Usuario implements Serializable {
     private String cidade;
     private String cep;
 
-    public Usuario(String tipoUsuario,String email, String senha, String nome, byte[] fotoPerfil, String telefone, String sexo, String profissao,
-            LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua,String numeroCasa,
-            String estado, String cidade, String cep) {
+    public Usuario(int id, String email, String senha, String nome, byte[] fotoPerfil, String telefone, String sexo, String profissao, LocalDate dataNascimento, float nota, String descricao, String rua, String numeroCasa, String estado, String cidade, String cep) {
         this.id = id;
         this.email = email;
         this.senha = senha;
         this.nome = nome;
+        this.fotoPerfil = fotoPerfil;
         this.telefone = telefone;
         this.sexo = sexo;
         this.profissao = profissao;
         this.dataNascimento = dataNascimento;
-        this.CartegoriaEstabelecimento = CartegoriaEstabelecimento;
         this.nota = nota;
         this.descricao = descricao;
         this.rua = rua;
-        this.numeroCasa=numeroCasa;
+        this.numeroCasa = numeroCasa;
         this.estado = estado;
         this.cidade = cidade;
         this.cep = cep;
     }
+
+   
 
     public Usuario() {
-       
-    }
 
-    public Usuario(int id, String tipoUsuario, String email, String senha, String nome, byte[] fotoPerfil, InputStream foto, String telefone, String sexo, String profissao, LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua,String numeroCasa, String estado, String cidade, String cep) {
-        this.id = id;
-        this.tipoUsuario = tipoUsuario;
-        this.email = email;
-        this.senha = senha;
-        this.nome = nome;
-        this.fotoPerfil = fotoPerfil;
-        this.foto = foto;
-        this.telefone = telefone;
-        this.sexo = sexo;
-        this.profissao = profissao;
-        this.dataNascimento = dataNascimento;
-        this.CartegoriaEstabelecimento = CartegoriaEstabelecimento;
-        this.nota = nota;
-        this.descricao = descricao;
-        this.rua = rua;
-        this.estado = estado;
-        this.cidade = cidade;
-        this.cep = cep;
     }
-     public Usuario( String tipoUsuario, String email, String senha, String nome, String telefone, String sexo, String profissao, LocalDate dataNascimento, String CartegoriaEstabelecimento, float nota, String descricao, String rua, String estado, String cidade, String cep) {
-        
-        this.tipoUsuario = tipoUsuario;
-        this.email = email;
-        this.senha = senha;
-        this.nome = nome;
-        this.fotoPerfil = fotoPerfil;
-        this.foto = foto;
-        this.telefone = telefone;
-        this.sexo = sexo;
-        this.profissao = profissao;
-        this.dataNascimento = dataNascimento;
-        this.CartegoriaEstabelecimento = CartegoriaEstabelecimento;
-        this.nota = nota;
-        this.descricao = descricao;
-        this.rua = rua;
-        this.estado = estado;
-        this.cidade = cidade;
-        this.cep = cep;
-    }
-
-    
 
     public Usuario(String nome, String email, String senha, String sexo, LocalDate dataNascimento, String rua, String numeroCasa, String cidade, String cep, String estado, byte[] fotoPerfil) {
-       this.nome= nome;
-       this.email=email;
-       this.senha=senha;
-       this.sexo = sexo;
-       this.dataNascimento= dataNascimento;
-       this.rua= rua;
-       this.numeroCasa= numeroCasa;
-       this.cidade=cidade;
-       this.cep=cep;
-       this.estado= estado;
-       this.fotoPerfil = fotoPerfil;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.sexo = sexo;
+        this.dataNascimento = dataNascimento;
+        this.rua = rua;
+        this.numeroCasa = numeroCasa;
+        this.cidade = cidade;
+        this.cep = cep;
+        this.estado = estado;
+        this.fotoPerfil = fotoPerfil;
     }
 
-    public Usuario(String email,String senha){
-        this.email=email;
-        this.senha=senha;
+    public Usuario(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
     }
+
     public String getNumeroCasa() {
         return numeroCasa;
     }
@@ -126,18 +81,10 @@ public class Usuario implements Serializable {
     public void setNumeroCasa(String numeroCasa) {
         this.numeroCasa = numeroCasa;
     }
-public int getId() {
+
+    public int getId() {
         return id;
     }
-
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-    
 
     public String getEmail() {
         return email;
@@ -163,10 +110,7 @@ public int getId() {
         this.nome = nome;
     }
 
-    public InputStream getFoto() {
-        return foto;
-    }
-
+  
     public byte[] getFotoPerfil() {
         return fotoPerfil;
     }
@@ -207,14 +151,7 @@ public int getId() {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getCartegoriaEstabelecimento() {
-        return CartegoriaEstabelecimento;
-    }
-
-    public void setCartegoriaEstabelecimento(String CartegoriaEstabelecimento) {
-        this.CartegoriaEstabelecimento = CartegoriaEstabelecimento;
-    }
-
+   
     public float getNota() {
         return nota;
     }
@@ -265,26 +202,23 @@ public int getId() {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.id;
-        hash = 29 * hash + Objects.hashCode(this.tipoUsuario);
-        hash = 29 * hash + Objects.hashCode(this.email);
-        hash = 29 * hash + Objects.hashCode(this.senha);
-        hash = 29 * hash + Objects.hashCode(this.nome);
-        hash = 29 * hash + Arrays.hashCode(this.fotoPerfil);
-        hash = 29 * hash + Objects.hashCode(this.foto);
-        hash = 29 * hash + Objects.hashCode(this.telefone);
-        hash = 29 * hash + Objects.hashCode(this.sexo);
-        hash = 29 * hash + Objects.hashCode(this.profissao);
-        hash = 29 * hash + Objects.hashCode(this.dataNascimento);
-        hash = 29 * hash + Objects.hashCode(this.CartegoriaEstabelecimento);
-        hash = 29 * hash + Float.floatToIntBits(this.nota);
-        hash = 29 * hash + Objects.hashCode(this.descricao);
-        hash = 29 * hash + Objects.hashCode(this.rua);
-        hash = 29 * hash + Objects.hashCode(this.numeroCasa);
-        hash = 29 * hash + Objects.hashCode(this.estado);
-        hash = 29 * hash + Objects.hashCode(this.cidade);
-        hash = 29 * hash + Objects.hashCode(this.cep);
+        int hash = 5;
+        hash = 73 * hash + this.id;
+        hash = 73 * hash + Objects.hashCode(this.email);
+        hash = 73 * hash + Objects.hashCode(this.senha);
+        hash = 73 * hash + Objects.hashCode(this.nome);
+        hash = 73 * hash + Arrays.hashCode(this.fotoPerfil);
+        hash = 73 * hash + Objects.hashCode(this.telefone);
+        hash = 73 * hash + Objects.hashCode(this.sexo);
+        hash = 73 * hash + Objects.hashCode(this.profissao);
+        hash = 73 * hash + Objects.hashCode(this.dataNascimento);
+        hash = 73 * hash + Float.floatToIntBits(this.nota);
+        hash = 73 * hash + Objects.hashCode(this.descricao);
+        hash = 73 * hash + Objects.hashCode(this.rua);
+        hash = 73 * hash + Objects.hashCode(this.numeroCasa);
+        hash = 73 * hash + Objects.hashCode(this.estado);
+        hash = 73 * hash + Objects.hashCode(this.cidade);
+        hash = 73 * hash + Objects.hashCode(this.cep);
         return hash;
     }
 
@@ -306,9 +240,6 @@ public int getId() {
         if (Float.floatToIntBits(this.nota) != Float.floatToIntBits(other.nota)) {
             return false;
         }
-        if (!Objects.equals(this.tipoUsuario, other.tipoUsuario)) {
-            return false;
-        }
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
@@ -325,9 +256,6 @@ public int getId() {
             return false;
         }
         if (!Objects.equals(this.profissao, other.profissao)) {
-            return false;
-        }
-        if (!Objects.equals(this.CartegoriaEstabelecimento, other.CartegoriaEstabelecimento)) {
             return false;
         }
         if (!Objects.equals(this.descricao, other.descricao)) {
@@ -351,9 +279,6 @@ public int getId() {
         if (!Arrays.equals(this.fotoPerfil, other.fotoPerfil)) {
             return false;
         }
-        if (!Objects.equals(this.foto, other.foto)) {
-            return false;
-        }
         if (!Objects.equals(this.dataNascimento, other.dataNascimento)) {
             return false;
         }
@@ -362,6 +287,11 @@ public int getId() {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", tipoUsuario=" + tipoUsuario + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", fotoPerfil=" + fotoPerfil + ", foto=" + foto + ", telefone=" + telefone + ", sexo=" + sexo + ", profissao=" + profissao + ", dataNascimento=" + dataNascimento + ", CartegoriaEstabelecimento=" + CartegoriaEstabelecimento + ", nota=" + nota + ", descricao=" + descricao + ", rua=" + rua + ", numeroCasa=" + numeroCasa + ", estado=" + estado + ", cidade=" + cidade + ", cep=" + cep + '}';
-    }   
+        return "Usuario{" + "id=" + id + ", email=" + email + ", senha=" + senha + 
+                ", nome=" + nome + ", fotoPerfil=" + fotoPerfil + ", telefone=" + telefone +
+                ", sexo=" + sexo + ", profissao=" + profissao + ", dataNascimento=" + dataNascimento
+                + ", nota=" + nota + ", descricao=" + descricao + ", rua=" + rua + ", numeroCasa=" + 
+                numeroCasa + ", estado=" + estado + ", cidade=" + cidade + ", cep=" + cep + '}';
+    }
+
 }

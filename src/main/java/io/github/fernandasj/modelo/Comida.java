@@ -18,17 +18,40 @@ public class Comida {
     private float nota;
     private float preco;
     private String nome;
-    private int idUsuario;
-    private LocalDate horaFuncionamento;
+    private String comentario;
+   
+    private int idEstabelecimento;
+   
+    
+    public Comida(){}
 
-    public Comida(String descricao, float nota, float preco, String nome,  LocalDate horaFuncionamento) {
+    public Comida(int idComida, String descricao, float nota, float preco, String nome, int idEstabelecimento) {
+        this.idComida = idComida;
+        this.descricao = descricao;
+        this.nota = nota;
+        this.preco = preco;
+        this.nome = nome;
+        this.idEstabelecimento = idEstabelecimento;
+       
+    }
+
+    public Comida( int idEstabelecimento,String descricao, float nota, float preco, String nome) {
+        this.idEstabelecimento = idEstabelecimento;
         this.descricao = descricao;
         this.nota = nota;
         this.preco = preco;
         this.nome = nome;
         
-        this.horaFuncionamento = horaFuncionamento;
     }
+
+   public Comida(String descricao, float nota, float preco, String nome) {
+        this.descricao = descricao;
+        this.nota = nota;
+        this.preco = preco;
+        this.nome = nome;
+        
+    }
+
 
     public int getIdComida() {
         return idComida;
@@ -70,21 +93,14 @@ public class Comida {
         this.nome = nome;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public int getIdEstabelecimento() {
+        return idEstabelecimento;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdEstabelecimento(int idEstabelecimento) {
+        this.idEstabelecimento = idEstabelecimento;
     }
-
-    public LocalDate getHoraFuncionamento() {
-        return horaFuncionamento;
-    }
-
-    public void setHoraFuncionamento(LocalDate horaFuncionamento) {
-        this.horaFuncionamento = horaFuncionamento;
-    }
+    
 
     @Override
     public int hashCode() {
@@ -94,8 +110,7 @@ public class Comida {
         hash = 53 * hash + Float.floatToIntBits(this.nota);
         hash = 53 * hash + Float.floatToIntBits(this.preco);
         hash = 53 * hash + Objects.hashCode(this.nome);
-        hash = 53 * hash + this.idUsuario;
-        hash = 53 * hash + Objects.hashCode(this.horaFuncionamento);
+       
         return hash;
     }
 
@@ -120,25 +135,27 @@ public class Comida {
         if (Float.floatToIntBits(this.preco) != Float.floatToIntBits(other.preco)) {
             return false;
         }
-        if (this.idUsuario != other.idUsuario) {
-            return false;
-        }
+      
         if (!Objects.equals(this.descricao, other.descricao)) {
             return false;
         }
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
-        if (!Objects.equals(this.horaFuncionamento, other.horaFuncionamento)) {
-            return false;
-        }
+       
         return true;
     }
 
     @Override
     public String toString() {
-        return "Comida{" + "idComida=" + idComida + ", descricao=" + descricao + ", nota=" + nota + ", preco=" + preco + ", nome=" + nome + ", idUsuario=" + idUsuario + ", horaFuncionamento=" + horaFuncionamento + '}';
+        return "Comida{" + "idComida=" + idComida + ", descricao=" + descricao + ", nota=" + nota + ", preco=" + preco + ", "
+                + "nome=" + nome + ", "
+                + "idEstabelecimento=" + idEstabelecimento + '}';
     }
+
+    
+
+    
     
     
 }
