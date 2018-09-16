@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="ct" uri="/WEB-INF/tlds/custonTags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -61,14 +63,14 @@
 
         <section class="section">
             <div class="container ">
-                <div class="columns">
+                <div class="columns is-3">
                     <div class="column coluna is-3">
                         <div class="fotoperfil">
                             <figure class="image">
-                                <img class="is-rounded" src="img/user.png">
+                                <img class="is-rounded" src="${sessionScope.usuario.foto}">
                             </figure>
                             <h4 class="has-text-dark has-text-centered has-text-weight-semibold is-size-5">
-                                Nome
+                                ${sessionScope.usuario.nome}
                             </h4>
                             <h6 class="has-text-grey-light has-text-centered">
                                 Descrição do user

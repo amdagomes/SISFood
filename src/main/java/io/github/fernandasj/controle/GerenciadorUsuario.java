@@ -19,10 +19,14 @@ public class GerenciadorUsuario {
         return userDao.autenticar(email, senha);
     }
 
-    public boolean adiciona(String nome,String email,String senha,String sexo, LocalDate dataNascimento,
-            String rua,String numeroCasa,String cidade,String cep,String estado,byte[] fotoPerfil) throws Exception{
-        Usuario usuario = new Usuario(nome,email,senha,sexo,dataNascimento,rua,numeroCasa,cidade,cep,estado,fotoPerfil);
+    public boolean adiciona(String email, String senha, String nome, String sexo, LocalDate dataNascimento, String rua, 
+                            String numeroCasa, String estado, String cidade, String cep) throws Exception{
+        Usuario usuario = new Usuario(email,senha,nome,sexo,dataNascimento, rua, numeroCasa,estado, cidade,cep);
         return userDao.salvar(usuario);     
+    }
+    
+    public boolean setFoto(int id, String foto) throws SQLException{
+        return userDao.setFoto(id, foto);
     }
     
     public Usuario buscaUsuario(String email) throws SQLException {

@@ -17,22 +17,21 @@ public class UsuarioDao implements Dao<Usuario> {
     @Override
     public boolean salvar(Usuario obj) throws SQLException, Exception {
         con = ConnectionFactory.getConnection();
-        String sql = "INSERT INTO USUARIO(nome, email, senha, sexo, dataNascimento,rua, cidade, cep, numeroCasa,estado,fotoPerfil)"
-                + " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO USUARIO(email,senha,nome,sexo,dataNascimento, rua, numeroCasa,estado, cidade,cep)"
+                + " VALUES(?,?,?,?,?,?,?,?,?,?)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
-            stmt.setString(1, obj.getNome());
-            stmt.setString(2, obj.getEmail());
-            stmt.setString(3,obj.getSenha());
+            stmt.setString(1, obj.getEmail());
+            stmt.setString(2, obj.getSenha());
+            stmt.setString(3,obj.getNome());
             stmt.setString(4 ,obj.getSexo());
             stmt.setDate(5, Date.valueOf(obj.getDataNascimento()));
             stmt.setString(6, obj.getRua());
-            stmt.setString(7, obj.getCidade());
-            stmt.setString(8, obj.getCep());
-            stmt.setString(9, obj.getNumeroCasa());
-            stmt.setString(10, obj.getEstado());
-            stmt.setBytes(11, obj.getFotoPerfil());
+            stmt.setString(7, obj.getNumeroCasa());
+            stmt.setString(8, obj.getEstado());
+            stmt.setString(9, obj.getCidade());
+            stmt.setString(10, obj.getCep());
             stmt.execute();
             stmt.close();     
         }
@@ -55,12 +54,12 @@ public class UsuarioDao implements Dao<Usuario> {
         ResultSet resultado = stmt.executeQuery();
 
         if (resultado.next()) {
-            Usuario u = new Usuario(resultado.getString("email"), resultado.getString("nome"),
-                    resultado.getString("senha"), resultado.getString("sexo"),
-                    resultado.getDate("dataNascimento").toLocalDate(),
-                     resultado.getString("rua"),
+            Usuario u = new Usuario(resultado.getInt("idUsuario"), resultado.getString("email"), resultado.getString("senha"),
+                    resultado.getString("nome"), resultado.getString("telefone"), resultado.getString("sexo"),
+                    resultado.getString("profissao"), resultado.getDate("dataNascimento").toLocalDate(),
+                    resultado.getString("descricao"), resultado.getString("rua"), resultado.getString("numeroCasa"),
                     resultado.getString("estado"), resultado.getString("cidade"), resultado.getString("cep"), 
-                    resultado.getString("numeroCasa"), resultado.getBytes("fotoPerfil"));
+                    resultado.getString("fotoPerfil"));
             resultado.close();
             stmt.close();
             con.close();
@@ -155,5 +154,22 @@ public class UsuarioDao implements Dao<Usuario> {
 
             return true;
         }
+    }
+    
+    public boolean setFoto(int id, String foto) throws SQLException{
+        try {
+            con = ConnectionFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        String sql = "update usuario set foto = ? where idusuario = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, foto);
+        stmt.setInt(2, id);
+        stmt.execute();
+        stmt.close();
+        con.close();
+        
+        return true;
     }
 }

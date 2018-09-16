@@ -6,16 +6,16 @@
 package io.github.fernandasj.command;
 
 import io.github.fernandasj.controle.GerenciadorUsuario;
+import io.github.fernandasj.modelo.Usuario;
 import java.io.IOException;
-import java.io.InputStream;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
 
 /**
  *
@@ -36,14 +36,7 @@ public class CadastroUsuario implements Command {
         String numeroCasa = request.getParameter("numeroCasa");
         String estado = request.getParameter("estado");
 
-        Part part;
         try {
-            part = request.getPart("fotoPerfil");
-            byte[] fotoPerfil = new byte[(int) part.getSize()];
-            InputStream stream = part.getInputStream();
-            stream.read(fotoPerfil);
-            stream.close();
-            
             GerenciadorUsuario gerenciador = new GerenciadorUsuario();
             LocalDate data = LocalDate.parse(dataNascimento);
             LocalDate dataRequerida = LocalDate.of(2008, 01, 01);
@@ -51,17 +44,17 @@ public class CadastroUsuario implements Command {
                 response.sendRedirect("cadastro.jsp?erroCadastroUsuario=1");
             } else if (gerenciador.buscaUsuario(email) != null) {
                 response.sendRedirect("cadastro.jsp?erroCadastroUsuario=2");
-            } else {
-                gerenciador.adiciona(nome, email, senha, sexo, LocalDate.parse(dataNascimento), rua, numeroCasa, cidade, cep, estado, fotoPerfil);
-                response.sendRedirect("index.jsp");
+            } else if (gerenciador.adiciona(email, senha, nome, sexo, data, rua, numeroCasa, estado, cidade, cep)) {
+                Usuario user = gerenciador.buscaUsuario(email);
+                //Imagem.execute(request, user.getId());
+                RequestDispatcher dispatcher = request.getRequestDispatcher("front?action=Imagem&id=" + user.getId());
+                dispatcher.forward(request, response);
             }
 
-        } catch (IOException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         } catch (Exception ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
 
     }
