@@ -14,6 +14,7 @@ public class Usuario implements Serializable {
     private String email;
     private String senha;
     private String nome;
+    private String fotoPerfil;
     private String telefone;
     private String sexo;
     private String profissao;
@@ -40,6 +41,26 @@ public class Usuario implements Serializable {
         this.estado = estado;
         this.cidade = cidade;
         this.cep = cep;
+    }
+    
+    
+    
+    public Usuario(int id, String email, String senha, String nome, String fotoPerfil, String telefone, String sexo, String profissao, LocalDate dataNascimento, String descricao, String rua, String numeroCasa, String estado, String cidade, String cep) {
+        this.id = id;
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
+        this.fotoPerfil = fotoPerfil;
+        this.telefone = telefone;
+        this.sexo = sexo;
+        this.profissao = profissao;
+        this.dataNascimento = dataNascimento;
+        this.descricao = descricao;
+        this.rua = rua;
+        this.numeroCasa = numeroCasa;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.cep = cep;
     } 
     
     public Usuario(int id, String foto) {
@@ -47,7 +68,7 @@ public class Usuario implements Serializable {
         this.foto = foto;
     }
 
-    public Usuario(String email, String senha, String nome, String telefone, String sexo, String profissao, LocalDate dataNascimento, String CartegoriaEstabelecimento, String descricao, String rua, String numeroCasa, String estado, String cidade, String cep) {
+    public Usuario(String email, String senha, String nome, String telefone, String sexo, String profissao, LocalDate dataNascimento, String descricao, String rua, String numeroCasa, String estado, String cidade, String cep) {
         this.email = email;
         this.senha = senha;
         this.nome = nome;
@@ -62,7 +83,26 @@ public class Usuario implements Serializable {
         this.cidade = cidade;
         this.cep = cep;
     }
-    
+
+    public Usuario(int id, String nome, String email, String senha, String sexo, LocalDate dataNascimento, String descricao, String rua, String numeroCasa, String cidade, String cep, String estado, String fotoPerfil) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.sexo = sexo;
+        this.dataNascimento = dataNascimento;
+        this.descricao = descricao;
+        this.rua = rua;
+        this.numeroCasa = numeroCasa;
+        this.estado = estado;
+        this.rua = rua;
+        this.numeroCasa = numeroCasa;
+        this.cidade = cidade;
+        this.cep = cep;
+        this.estado = estado;
+        this.fotoPerfil = fotoPerfil;
+    }
+
     public Usuario(int id, String email, String senha, String nome, String telefone, String sexo, String profissao, LocalDate dataNascimento, String descricao, String rua, String numeroCasa, String estado, String cidade, String cep, String foto) {
         this.id = id;
         this.email = email;
@@ -80,6 +120,11 @@ public class Usuario implements Serializable {
         this.cep = cep;
         this.foto = foto;
     }   
+    
+    public Usuario(String email, String senha) {
+        this.email = email;
+        this.senha = senha;
+    }
 
     public int getId() {
         return id;
@@ -111,6 +156,14 @@ public class Usuario implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public String getFotoPerfil() {
+        return fotoPerfil;
+    }
+
+    public void setFotoPerfil(String fotoPerfil) {
+        this.fotoPerfil = fotoPerfil;
     }
 
     public String getTelefone() {
@@ -204,21 +257,22 @@ public class Usuario implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + this.id;
-        hash = 89 * hash + Objects.hashCode(this.email);
-        hash = 89 * hash + Objects.hashCode(this.senha);
-        hash = 89 * hash + Objects.hashCode(this.nome);
-        hash = 89 * hash + Objects.hashCode(this.telefone);
-        hash = 89 * hash + Objects.hashCode(this.sexo);
-        hash = 89 * hash + Objects.hashCode(this.profissao);
-        hash = 89 * hash + Objects.hashCode(this.dataNascimento);
-        hash = 89 * hash + Objects.hashCode(this.descricao);
-        hash = 89 * hash + Objects.hashCode(this.rua);
-        hash = 89 * hash + Objects.hashCode(this.numeroCasa);
-        hash = 89 * hash + Objects.hashCode(this.estado);
-        hash = 89 * hash + Objects.hashCode(this.cidade);
-        hash = 89 * hash + Objects.hashCode(this.cep);
-        hash = 89 * hash + Objects.hashCode(this.foto);
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + Objects.hashCode(this.email);
+        hash = 79 * hash + Objects.hashCode(this.senha);
+        hash = 79 * hash + Objects.hashCode(this.nome);
+        hash = 79 * hash + Objects.hashCode(this.fotoPerfil);
+        hash = 79 * hash + Objects.hashCode(this.telefone);
+        hash = 79 * hash + Objects.hashCode(this.sexo);
+        hash = 79 * hash + Objects.hashCode(this.profissao);
+        hash = 79 * hash + Objects.hashCode(this.dataNascimento);
+        hash = 79 * hash + Objects.hashCode(this.descricao);
+        hash = 79 * hash + Objects.hashCode(this.rua);
+        hash = 79 * hash + Objects.hashCode(this.numeroCasa);
+        hash = 79 * hash + Objects.hashCode(this.estado);
+        hash = 79 * hash + Objects.hashCode(this.cidade);
+        hash = 79 * hash + Objects.hashCode(this.cep);
+        hash = 79 * hash + Objects.hashCode(this.foto);
         return hash;
     }
 
@@ -244,6 +298,9 @@ public class Usuario implements Serializable {
             return false;
         }
         if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.fotoPerfil, other.fotoPerfil)) {
             return false;
         }
         if (!Objects.equals(this.telefone, other.telefone)) {
@@ -284,6 +341,10 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id=" + id + ", email=" + email + ", senha=" + senha + ", nome=" + nome + ", telefone=" + telefone + ", sexo=" + sexo + ", profissao=" + profissao + ", dataNascimento=" + dataNascimento + ", descricao=" + descricao + ", rua=" + rua + ", numeroCasa=" + numeroCasa + ", estado=" + estado + ", cidade=" + cidade + ", cep=" + cep + ", foto=" + foto + '}';
+        return "Usuario{" + "id=" + id + ", email=" + email + ", senha=" + senha + ", nome=" + nome + 
+                ", fotoPerfil=" + fotoPerfil + ", telefone=" + telefone + ", sexo=" + sexo + ", profissao=" 
+                + profissao + ", dataNascimento=" + dataNascimento + ", descricao=" + descricao + ", rua=" + rua 
+                + ", numeroCasa=" + numeroCasa + ", estado=" + estado + ", cidade=" + cidade + ", cep=" + cep 
+                + ", foto=" + foto + '}';
     }
 }

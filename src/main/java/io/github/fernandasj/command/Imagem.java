@@ -27,6 +27,7 @@ public class Imagem implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         int id = Integer.parseInt(request.getParameter("id"));
+        System.out.println("id: " + id);
         GerenciadorUsuario userDao = new GerenciadorUsuario();
 
         try {
@@ -35,14 +36,16 @@ public class Imagem implements Command {
             InputStream input = foto.getInputStream();
             BufferedImage imagem = ImageIO.read(input);
 
-            File diretorio = new File(request.getServletContext().getRealPath("") + "upload_images/");
-            String caminho = diretorio + "/" + id + ".jpg";
+            File diretorio = new File(request.getServletContext().getRealPath("") + "upload_images");
+            String caminho = diretorio + "\\" + id + ".jpg";
+            
             System.out.println("Diretorio: " + diretorio);
-
+            System.out.println("caminho: " + caminho);
+            
             if (!diretorio.exists()) {
                 diretorio.mkdirs(); //mkdir() cria somente um diretório, mkdirs() cria diretórios e subdiretórios.
             }
-            ImageIO.write(imagem, "jpg", new File(diretorio + "/" + id + ".jpg"));
+            ImageIO.write(imagem, "jpg", new File(diretorio + "\\" + id + ".jpg"));
             if (userDao.setFoto(id, caminho)) {
                 System.out.println("ATUALIZOU!");
             } else {

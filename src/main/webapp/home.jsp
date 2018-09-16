@@ -73,7 +73,7 @@
                                 ${sessionScope.usuario.nome}
                             </h4>
                             <h6 class="has-text-grey-light has-text-centered">
-                                Descrição do user
+                                ${sessionScope.usuario.descricao}
                             </h6>
                         </div>
                     </div>

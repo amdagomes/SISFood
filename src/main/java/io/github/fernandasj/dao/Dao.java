@@ -1,6 +1,5 @@
 package io.github.fernandasj.dao;
 
-import java.io.InputStream;
 import java.sql.SQLException;
 
 /**

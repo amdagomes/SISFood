@@ -7,11 +7,8 @@ package io.github.fernandasj.command;
 
 import io.github.fernandasj.controle.GerenciadorUsuario;
 import io.github.fernandasj.modelo.Usuario;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +43,6 @@ public class CadastroUsuario implements Command {
                 response.sendRedirect("cadastro.jsp?erroCadastroUsuario=2");
             } else if (gerenciador.adiciona(email, senha, nome, sexo, data, rua, numeroCasa, estado, cidade, cep)) {
                 Usuario user = gerenciador.buscaUsuario(email);
-                //Imagem.execute(request, user.getId());
                 RequestDispatcher dispatcher = request.getRequestDispatcher("front?action=Imagem&id=" + user.getId());
                 dispatcher.forward(request, response);
             }
