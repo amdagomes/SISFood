@@ -49,17 +49,17 @@ CREATE TABLE Comida(
     nota numeric(1,1),
     preco float NOT NULL,
     nome varchar(200) NOT NULL,
-    idUsuario int,
     idEstabelecimento int,
     PRIMARY KEY(idComida),
-    FOREIGN KEY(idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento),
-    FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)
+    FOREIGN KEY(idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
+    
 );
 
 
 CREATE TABLE Chekin(
     idChekin serial,
     horario TIMESTAMP,
+    dia DATE,
     consumidor int NOT NULL,
     estabelecimento int NOT NULL,
     PRIMARY KEY(idChekin),
@@ -77,6 +77,17 @@ CREATE TABLE AvaliarEstabelecimento(
     FOREIGN KEY(consumidor) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(estabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
     );
+CREATE TABLE RecomendarEstabelecimento(
+    idRecomendacao serial,
+    estabelecimento int,
+    remetente int NOT NULL,
+    destinatario int NOT NULL,
+    comentario varchar(300),
+    PRIMARY KEY(idRecomendacao),
+    FOREIGN KEY(destinatario) REFERENCES Usuario(idUsuario),
+    FOREIGN KEY(remetente) REFERENCES Usuario(idUsuario),
+    FOREIGN KEY(estabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
+);
 
 CREATE TABLE AvaliarComida(
     idAvaliacao serial,
@@ -119,8 +130,10 @@ CREATE TABLE SolicitaAmizade(
     remetente int NOT NULL,
     destinatario int NOT NULL,
     horario TIMESTAMP,
+    situacao varchar(15),
     PRIMARY KEY(idSolicitacao),
     FOREIGN KEY(destinatario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(remetente) REFERENCES Usuario(idUsuario)
 );
+
 
