@@ -1,12 +1,10 @@
 <%-- 
-    Document   : home
-    Created on : 16/08/2018, 09:10:49
+    Document   : estabelecimento
+    Created on : 18/09/2018, 11:11:30
     Author     : Amanda
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="ct" uri="/WEB-INF/tlds/custonTags" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -44,22 +42,21 @@
                             <aside class="menu">
 
                                 <ul>
-                                    <a href=""><li class="link-ativo">Feed</li></a>
-                                    <a href=""><li>Editar Perfil</li></a>
-                                    <a href=""><li>Criar Página</li></a>
+                                    <a href=""><li>Inicio</li></a>
                                     <li>
-                                        <p class="menu-label">Minhas páginas</p>
+                                        <p class="menu-label">Nome do estabelecimento</p>
                                         <ul>
-                                            <a href=""><li>Pag1</li></a>
+                                            <a href=""><li class="link-ativo">Feed</li></a>
+                                            <a href=""><li>Cardápio</li></a>
                                             <a href=""><li>Pag1</li></a>
                                         </ul>
                                     </li>
                                     <a href="front?action=Logout"><li class="menu-label">
-                                        <span class="icon">
-                                            <i class="fas fa-power-off"></i>
-                                        </span>
-                                        Sair
-                                    </li></a>
+                                            <span class="icon">
+                                                <i class="fas fa-power-off"></i>
+                                            </span>
+                                            Sair
+                                        </li></a>
                                 </ul>
 
                             </aside>
@@ -105,7 +102,7 @@
                                         </div>
                                         <div class="level-right">
                                             <div class="level-item">
-                                                <input class="button is-orange" type="submit" value="Publicar" />
+                                                <input class="button is-orange is-outlined" type="submit" value="Publicar" />
                                             </div>
                                         </div>
                                     </div>
@@ -241,3 +238,4 @@
     </script>
 </body>
 </html>
+
