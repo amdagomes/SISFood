@@ -16,6 +16,7 @@
         <meta name="description" content="Rede Social voltada para o ramo alimenticio.">
         <meta name="keywords" content="social, media, rede, social, food, alimento">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+        <link rel="stylesheet" href="css/bulma-badge.min.css">
         <link rel="stylesheet" href="css/style.css">
         <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     </head>
@@ -45,6 +46,7 @@
 
                                 <ul>
                                     <a href=""><li class="link-ativo">Feed</li></a>
+                                    <a href=""><li>Menssagens</li></a>
                                     <a href=""><li>Editar Perfil</li></a>
                                     <a href=""><li>Criar Página</li></a>
                                     <li>
@@ -55,11 +57,12 @@
                                         </ul>
                                     </li>
                                     <a href="front?action=Logout"><li class="menu-label">
-                                        <span class="icon">
-                                            <i class="fas fa-power-off"></i>
-                                        </span>
-                                        Sair
-                                    </li></a>
+                                            <span class="icon">
+                                                <i class="fas fa-power-off"></i>
+                                            </span>
+                                            Sair
+
+                                        </li></a>
                                 </ul>
 
                             </aside>
@@ -127,7 +130,7 @@
                                     <p class="subtitle is-7">15 de setembro às 23:30</p>
                                 </div>
                                 <div class="media-right">
-                                    <div class="dropdown is-right is-pointer">
+                                    <div class="dropdown drop is-right is-pointer">
                                         <div class="dropdown-trigger">
                                             <span class="icon is-small">
                                                 <i class="fas fa-ellipsis-h"></i>
@@ -204,14 +207,20 @@
             </div>
 
         </div>
+
     </section>
 
     <script>
         const dropdown = document.querySelector('.dropdown');
-
         dropdown.addEventListener('click', () => {
             dropdown.classList.toggle('is-active');
         });
+
+        const drop = document.querySelector('.drop');
+        drop.addEventListener('click', () => {
+            drop.classList.toggle('is-active');
+        });
+
 
         document.addEventListener('DOMContentLoaded', () => {
 

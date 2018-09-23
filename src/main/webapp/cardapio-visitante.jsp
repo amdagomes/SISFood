@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cardapio
-    Created on : 18/09/2018, 11:12:19
+    Document   : cardapio-visitante
+    Created on : 22/09/2018, 21:39:24
     Author     : Amanda
 --%>
 
@@ -20,7 +20,7 @@
     </head>
     <body class="background-gray">
         <%@ include file="header.jsp"%>
-
+        
         <section class="section">
             <div class="container ">
                 <div class="columns is-2">
@@ -32,16 +32,15 @@
                                 </figure>
                                 <div>
                                     <p class="has-text-dark has-text-centered has-text-weight-semibold is-size-5">
-                                        ${sessionScope.usuario.nome}
+                                        Nome Establecimento
                                     </p>
                                     <p class="has-text-grey-light has-text-centered">
-                                        ${sessionScope.usuario.descricao}
+                                        descrição...
                                     </p>
                                 </div>
                             </div>
 
-                            <aside class="menu">
-
+                            <aside class="menu">                           
                                 <ul>
                                     <a href=""><li>Inicio</li></a>
                                     <li>
@@ -58,8 +57,7 @@
                                             </span>
                                             Sair
                                         </li></a>
-                                </ul>
-
+                                </ul>       
                             </aside>
                         </div>
                     </div>
@@ -74,14 +72,6 @@
                                                 <strong>Cardápio</strong>
                                             </p>
                                         </div>
-                                    </div>
-
-                                    <div class="level-right">
-                                        <a id="showModal" title="Adicionar prato">
-                                            <span class="icon is-medium">
-                                                <i class="fas fa-plus-circle"></i>
-                                            </span>
-                                        </a>
                                     </div>
                                 </nav>
                             </div>
@@ -103,15 +93,40 @@
                                     </div>
                                     <nav class="level is-mobile">
                                         <div class="level-left">
-                                            <p>Nota:</p>
+                                            <p>Avalie:</p>
+                                        </div>
+                                        <div class="level-right">
+                                            <div class="estrelas">
+                                                <input type="radio" id="cm_star-empty" name="fb" value="" checked/>
+                                                <label id="star1" for="cm_star-1">
+                                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                                </label>
+                                                <input type="radio" id="cm_star-1" name="fb" value="1"/>
+                                                <label id="star2" for="cm_star-2">
+                                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                                </label>
+                                                <input type="radio" id="cm_star-2" name="fb" value="2"/>
+                                                <label id="star3" for="cm_star-3">
+                                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                                </label>
+                                                <input type="radio" id="cm_star-3" name="fb" value="3"/>
+                                                <label id="star4" for="cm_star-4">
+                                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                                </label>
+                                                <input type="radio" id="cm_star-4" name="fb" value="4"/>
+                                                <label id="star5" for="cm_star-5">
+                                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                                </label>
+                                                <input type="radio" id="cm_star-5" name="fb" value="5"/>
+                                            </div>
                                         </div>
                                     </nav>
                                 </div>
 
                                 <div class="media-right">
                                     <div class="level">
-                                        <a class="level-item" title="Deletar">
-                                            <span class="icon is-small"><i class="fas fa-trash-alt"></i></i></span>
+                                        <a class="level-item" title="Compartilhar">
+                                            <span class="icon is-small"><i class="fas fa-share-alt"></i></span>
                                         </a>
                                     </div>
                                 </div>
@@ -119,48 +134,6 @@
                             </article>
 
                         </div>
-                    </div>  
-                    <!-- MODAL PARA ADICIONAR PRATO NO CARDAPIO -->
-                    <div class="modal">
-                        <div class="modal-background"></div>
-                        <div class="modal-content">
-                            <form class="form-cardapio" action="">
-                                <p class="title is-size-5">Adicionar prato ao cardápio</p>
-                                <div class="field is-grouped">
-                                    <p class="control is-expanded">
-                                        <input class="input is-small" type="text" placeholder="Nome" name="nome">
-                                    </p>
-                                    <p class="control">
-                                        <input class="input is-small" type="text" placeholder="Preço. Ex.: 10,00" name="preco">
-                                    </p>
-                                </div>
-
-                                <textarea class="textarea" placeholder="Descrição..." rows="2"></textarea>
-
-                                <div class="file is-small file-custom">
-                                    <span class="file-name" id="filename"></span>
-
-                                    <label class="file-label">
-                                        <input class="file-input" type="file" name="foto" id="file">
-                                        <span class="file-cta">
-                                            <span class="file-icon">
-                                                <i class="fas fa-upload"></i>
-                                            </span>
-                                            <span class="file-label">
-                                                Selecione uma foto…
-                                            </span>
-                                        </span>
-                                    </label>
-                                </div>
-
-                                <div class="field">
-                                    <div class="control">
-                                        <input class="button is-success is-fullwidth" type="submit" value="Adicionar">
-                                    </div>
-                                </div>    
-                            </form>                         
-                        </div>
-                        <button class="modal-close is-large" aria-label="close"></button>
                     </div>  
                 </div>
         </section>
@@ -171,29 +144,52 @@
             crossorigin="anonymous">
         </script>
         <script>
+
             const dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', () => {
                 dropdown.classList.toggle('is-active');
             });
-            
-            $("#showModal").click(function () {
-                $(".modal").addClass("is-active");
+
+            $(function () {
+                $('.estrelas input').click(function () {
+                    var valor = $(this).attr('value');
+
+                    for (var i = 0; i <= 5; i++) {
+                        if (i <= valor) {
+                            $('#star' + i).addClass("gold");
+                        } else {
+                            $('#star' + i).removeClass("gold");
+                        }
+                    }
+                });
             });
 
-            $(".modal-close").click(function () {
-                $(".modal").removeClass("is-active");
-            });
+            document.addEventListener('DOMContentLoaded', () => {
 
-            var file = document.getElementById("file");
-            file.onchange = function () {
-                if (file.files.length > 0)
-                {
+                // Get all "navbar-burger" elements
+                const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-                    document.getElementById('filename').innerHTML = file.files[0].name;
+                // Check if there are any navbar burgers
+                if ($navbarBurgers.length > 0) {
 
+                    // Add a click event on each of them
+                    $navbarBurgers.forEach(el => {
+                        el.addEventListener('click', () => {
+
+                            // Get the target from the "data-target" attribute
+                            const target = el.dataset.target;
+                            const $target = document.getElementById(target);
+
+                            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                            el.classList.toggle('is-active');
+                            $target.classList.toggle('is-active');
+
+                        });
+                    });
                 }
-            };
 
+            });
         </script>
     </body>
 </html>
+

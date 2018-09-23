@@ -32,12 +32,25 @@
                                 </div>
                             </div>
                         </form>
+                    </div>            
+                    <div class="navbar-item dropdown is-right is-pointer notf">
+                        <div class="dropdown-trigger">   
+                            <span class="icon is-small badge" data-badge="8" aria-controls="dropdown-menu">
+                                <i class="fa fa-bell" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                            <div class="dropdown-content">
+                                <a href="#" class="dropdown-item">
+                                    Notficação 1
+                                </a>
+                                <a class="dropdown-item">
+                                    Nofiticação 2
+                                </a>
+                            </div>
+                        </div>
                     </div>
-
-                    <a class="navbar-item active-link" href="front?action=Logout">
-                        <span class="icon">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </span>
+                    <a class="navbar-item" href="front?action=Logout">
                         <span>
                             Sair
                         </span>

@@ -160,6 +160,10 @@ a.button-send .fa-paper-plane:hover{
     display: inline-block;
 }
 
+.notf{
+  padding: .5rem 1.75rem;
+}
+
 .fotoperfil{
   margin-bottom: 2.5rem;
   padding: 30px 10px 0 10px;
@@ -238,7 +242,15 @@ div.modal-content{
 div.file-custom span.file-name{
   width: 60%;
   max-width: 300px;
-      border-width: 1px;
+  border-width: 1px;
+}
+
+div.estrelas input[type=radio] {
+  display: none;
+}
+.gold{
+  /*content:'\f005';*/
+  color: #FC0;
 }
 
 @media screen and (max-width: 770px){
@@ -251,3 +263,4 @@ div.file-custom span.file-name{
       height: 100%;
   }
 }
+
