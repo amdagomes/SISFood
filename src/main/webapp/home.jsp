@@ -45,9 +45,9 @@
                             <aside class="menu">
 
                                 <ul>
-                                    <a href=""><li class="link-ativo">Feed</li></a>
+                                    <a href="front?action=Incio"><li class="link-ativo">Feed</li></a>
                                     <a href=""><li>Menssagens</li></a>
-                                    <a href=""><li>Editar Perfil</li></a>
+                                    <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
                                     <a href=""><li>Criar Página</li></a>
                                     <li>
                                         <p class="menu-label">Minhas páginas</p>

@@ -14,7 +14,7 @@ estado varchar (10),
 telefone varchar(15) ,
 profissao varchar(100),
 descricao varchar(255),
-fotoPerfil bytea NOT NULL,
+fotoPerfil varchar(255),
 PRIMARY KEY(idUsuario)  );
 
 

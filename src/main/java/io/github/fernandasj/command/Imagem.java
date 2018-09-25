@@ -14,50 +14,39 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 /**
  *
  * @author Amanda
  */
-public class Imagem implements Command {
+public class Imagem {
 
-    @Override
-    public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        int id = Integer.parseInt(request.getParameter("id"));
+    public static boolean setImage(int id, Part foto, String prefix) throws ServletException {
         System.out.println("id: " + id);
         GerenciadorUsuario userDao = new GerenciadorUsuario();
 
         try {
-
-            Part foto = request.getPart("fotoPerfil");
             InputStream input = foto.getInputStream();
             BufferedImage imagem = ImageIO.read(input);
 
-            File diretorio = new File(request.getServletContext().getRealPath("") + "upload_images");
-            String caminho = diretorio + "\\" + id + ".jpg";
+            File diretorio = new File("C:\\Users\\Amanda\\Documents\\Amanda\\ADS\\SISFood\\src\\main\\webapp\\upload_images");
             
             System.out.println("Diretorio: " + diretorio);
-            System.out.println("caminho: " + caminho);
             
             if (!diretorio.exists()) {
                 diretorio.mkdirs(); //mkdir() cria somente um diretório, mkdirs() cria diretórios e subdiretórios.
             }
-            ImageIO.write(imagem, "jpg", new File(diretorio + "\\" + id + ".jpg"));
-            if (userDao.setFoto(id, caminho)) {
-                System.out.println("ATUALIZOU!");
-            } else {
-                System.out.println("NÃO AtUALIZOU");
-            }
+            ImageIO.write(imagem, "jpg", new File(diretorio + "\\" + prefix + "-" + id + ".jpg"));
+            
+            userDao.setFoto(id, "upload_images\\" + prefix + "-" + id + ".jpg");
 
-            response.sendRedirect("index.jsp");
         } catch (FileNotFoundException | SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+         return true;
     }
 
 }

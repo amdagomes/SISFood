@@ -12,6 +12,10 @@ and open the template in the editor.
   align-items: center;
 }
 
+.p10{
+    padding: 15px 15px 15px 10px;
+}
+
 .is-orange{
     color:white;
     background-color: #e37b40;

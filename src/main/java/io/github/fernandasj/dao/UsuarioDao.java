@@ -128,23 +128,26 @@ public class UsuarioDao implements Dao<Usuario> {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String sql = "UPDATE USUARIO SET email =?,nome = ?"
-                    + "telefone = ?,sexo = ? profissao = ?,dataNascimento = ?"
-                    + "rua = ?,estado = ? cidade =?,cep =?, senha =? WHERE email= ?";
+            String sql = "UPDATE usuario SET nome = ?, email = ?, senha = ?,"
+                    + "sexo = ?, dataNascimento = ?, rua = ?, cidade = ?, cep = ?,"
+                    + "numeroCasa = ?, estado = ?, telefone = ?, profissao = ?, descricao = ? WHERE idUsuario = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-
-            stmt.setString(2, obj.getNome());
-            stmt.setString(3, obj.getTelefone());
+             
+            stmt.setString(1, obj.getNome());         
+            stmt.setString(2, obj.getEmail());
+            stmt.setString(3, obj.getSenha());
             stmt.setString(4, obj.getSexo());
-            stmt.setString(5, obj.getEmail());
-            stmt.setString(6, obj.getProfissao());
-            stmt.setDate(7, Date.valueOf(obj.getDataNascimento()));
-            stmt.setString(11, obj.getRua());
-            stmt.setString(12, obj.getEstado());
-            stmt.setString(13, obj.getCidade());
-            stmt.setString(14, obj.getCep());
-            stmt.setString(15, obj.getSenha());
-
+            stmt.setDate(5, Date.valueOf(obj.getDataNascimento()));
+            stmt.setString(6, obj.getRua());
+            stmt.setString(7, obj.getCidade());
+            stmt.setString(8, obj.getCep());
+            stmt.setString(9, obj.getNumeroCasa());
+            stmt.setString(10, obj.getEstado());
+            stmt.setString(11, obj.getTelefone());
+            stmt.setString(12, obj.getProfissao());
+            stmt.setString(13, obj.getDescricao());
+            stmt.setInt(14, obj.getId());
+            
             stmt.execute();
 
             stmt.close();

@@ -120,6 +120,23 @@ public class Usuario implements Serializable {
         this.cep = cep;
         this.foto = foto;
     }   
+
+    public Usuario(int id, String email, String senha, String nome, String telefone, String sexo, String profissao, LocalDate dataNascimento, String descricao, String rua, String numeroCasa, String estado, String cidade, String cep) {
+        this.id = id;
+        this.email = email;
+        this.senha = senha;
+        this.nome = nome;
+        this.telefone = telefone;
+        this.sexo = sexo;
+        this.profissao = profissao;
+        this.dataNascimento = dataNascimento;
+        this.descricao = descricao;
+        this.rua = rua;
+        this.numeroCasa = numeroCasa;
+        this.estado = estado;
+        this.cidade = cidade;
+        this.cep = cep;
+    }
     
     public Usuario(String email, String senha) {
         this.email = email;
