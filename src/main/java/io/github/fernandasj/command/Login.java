@@ -30,13 +30,10 @@ public class Login implements Command {
                     response.sendRedirect("home.jsp");
                 } else if (g.autenticar(request.getParameter("email"), request.getParameter("senha"))) {
 
-                    Usuario atual;
-                    atual = g.buscaUsuario(request.getParameter("email"));
+                    Usuario atual = g.buscaUsuario(request.getParameter("email"));
                     session.setAttribute("usuario", atual);
 
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
-                    dispatcher.forward(request, response);
-                    response.sendRedirect("home.jsp");
+                    request.getRequestDispatcher("home.jsp").forward(request, response);
 
                 } else {
                     response.sendRedirect("index.jsp");

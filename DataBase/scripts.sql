@@ -14,9 +14,10 @@ estado varchar (10),
 telefone varchar(15) ,
 profissao varchar(100),
 descricao varchar(255),
-fotoPerfil varchar,
+fotoPerfil varchar(255),
 PRIMARY KEY(idUsuario)
 );
+
 
 
 CREATE TABLE Estabelecimento(
@@ -41,7 +42,7 @@ FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)
 
 
 );
-
+-- inserir estabelecimento para testar cardapio
 insert into estabelecimento (idUsuario, nome, telefone, fotoEstabelecimento,
     cartegoria, nota, descricao, rua,estado, cidade, cep, dia, horaAbre, horaFecha) values (1,
     'Subway', '35352101', 'foto', 'lanchonete', 4.5, 'descricao', 'rua','pb', 'cz', 58900000,

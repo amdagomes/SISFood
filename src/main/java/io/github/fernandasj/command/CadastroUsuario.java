@@ -43,8 +43,8 @@ public class CadastroUsuario implements Command {
                 response.sendRedirect("cadastro.jsp?erroCadastroUsuario=2");
             } else if (gerenciador.adiciona(email, senha, nome, sexo, data, rua, numeroCasa, estado, cidade, cep)) {
                 Usuario user = gerenciador.buscaUsuario(email);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("front?action=Imagem&id=" + user.getId());
-                dispatcher.forward(request, response);
+                Imagem.setImage(user.getId(), request.getPart("fotoPerfil"), "user");
+                request.getRequestDispatcher("index.jsp").forward(request, response);
             }
 
         } catch (SQLException ex) {

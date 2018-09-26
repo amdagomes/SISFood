@@ -32,4 +32,8 @@ public class GerenciadorUsuario {
     public Usuario buscaUsuario(String email) throws SQLException {
         return userDao.buscar(email);
     }
+    
+    public boolean atualizar(Usuario obj) throws SQLException{
+        return userDao.atualizar(obj);
+    }
 }
