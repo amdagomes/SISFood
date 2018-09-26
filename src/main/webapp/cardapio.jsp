@@ -3,7 +3,7 @@
     Created on : 18/09/2018, 11:12:19
     Author     : Amanda
 --%>
-
+<%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -63,7 +63,8 @@
                             </aside>
                         </div>
                     </div>
-
+                                    
+                     
                     <div class="column">
                         <div class="media-box">
                             <div class="cardapio">
@@ -86,24 +87,28 @@
                                 </nav>
                             </div>
 
+                        <!--cardapio-->
+                        <jsp:useBean id="dao" class="io.github.fernandasj.dao.ComidaDao"/>
+                        
+                        <c:forEach var="comida" items="${dao.buscarPorEstabelecimento(8)}">
                             <article class="media item-cardapio">
                                 <figure class="media-left">
                                     <p class="image is-128x128">
-                                        <img src="https://bulma.io/images/placeholders/128x128.png">
+                                        <img src="https://bulma.io/images/placeholders/128x128.png"/>
                                     </p>
                                 </figure>
                                 <div class="media-content">
                                     <div class="content">
                                         <p>
-                                            <strong>Nome</strong> <small>Preço: $</small>
+                                            <strong>${comida.nome}</strong> <small>Preço: R$ ${comida.preco}</small>
                                             <br>
-                                            Descrição... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem.
+                                            ${comida.descricao}
                                             <br> 
                                         </p>
                                     </div>
                                     <nav class="level is-mobile">
                                         <div class="level-left">
-                                            <p>Nota:</p>
+                                            <p>Nota: ${comida.nota}</p>
                                         </div>
                                     </nav>
                                 </div>
@@ -117,14 +122,14 @@
                                 </div>
 
                             </article>
-
+                        </c:forEach>
                         </div>
                     </div>  
-                    <!-- MODAL PARA ADICIONAR PRATO NO CARDAPIO -->
+                    <!--MODAL PARA ADICIONAR PRATO NO CARDAPIO-->
                     <div class="modal">
                         <div class="modal-background"></div>
                         <div class="modal-content">
-                            <form class="form-cardapio" action="">
+                            <form class="form-cardapio" method="post" action="front?action=CadastroComida">
                                 <p class="title is-size-5">Adicionar prato ao cardápio</p>
                                 <div class="field is-grouped">
                                     <p class="control is-expanded">
@@ -135,7 +140,7 @@
                                     </p>
                                 </div>
 
-                                <textarea class="textarea" placeholder="Descrição..." rows="2"></textarea>
+                                <textarea class="textarea" placeholder="Descrição..." rows="2" name="descricao"></textarea>
 
                                 <div class="file is-small file-custom">
                                     <span class="file-name" id="filename"></span>
@@ -155,6 +160,7 @@
 
                                 <div class="field">
                                     <div class="control">
+                                        <input type="hidden" name="identificador" value="CadastroComida">
                                         <input class="button is-success is-fullwidth" type="submit" value="Adicionar">
                                     </div>
                                 </div>    

@@ -14,8 +14,9 @@ estado varchar (10),
 telefone varchar(15) ,
 profissao varchar(100),
 descricao varchar(255),
-fotoPerfil bytea NOT NULL,
-PRIMARY KEY(idUsuario)  );
+fotoPerfil varchar,
+PRIMARY KEY(idUsuario)
+);
 
 
 CREATE TABLE Estabelecimento(
@@ -23,7 +24,7 @@ idEstabelecimento serial,
 idUsuario int ,
 nome varchar(200) NOT NULL,
 telefone varchar(20),
-fotoEstabelecimento bytea NOT NULL,
+fotoEstabelecimento varchar,
 cartegoria varchar (50) NOT NULL,
 nota numeric(1,1),
 descricao varchar(200),
@@ -41,6 +42,10 @@ FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)
 
 );
 
+insert into estabelecimento (idUsuario, nome, telefone, fotoEstabelecimento,
+    cartegoria, nota, descricao, rua,estado, cidade, cep, dia, horaAbre, horaFecha) values (1,
+    'Subway', '35352101', 'foto', 'lanchonete', 4.5, 'descricao', 'rua','pb', 'cz', 58900000,
+    'segunda', SYSDATETIME(), SYSDATETIME())
 
 
 
@@ -53,7 +58,7 @@ CREATE TABLE Comida(
     idEstabelecimento int,
     PRIMARY KEY(idComida),
     FOREIGN KEY(idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
-    
+
 );
 
 

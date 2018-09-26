@@ -15,8 +15,8 @@ import java.util.Objects;
 public class Comida {
     private int idComida;
     private String descricao;
-    private float nota;
-    private float preco;
+    private double nota;
+    private double preco;
     private String nome;
     private String comentario;
    
@@ -25,7 +25,7 @@ public class Comida {
     
     public Comida(){}
 
-    public Comida(int idComida, String descricao, float nota, float preco, String nome, int idEstabelecimento) {
+    public Comida(int idComida, String descricao, double nota, double preco, String nome, int idEstabelecimento) {
         this.idComida = idComida;
         this.descricao = descricao;
         this.nota = nota;
@@ -35,7 +35,7 @@ public class Comida {
        
     }
 
-    public Comida( int idEstabelecimento,String descricao, float nota, float preco, String nome) {
+    public Comida( int idEstabelecimento,String descricao, double nota, double preco, String nome) {
         this.idEstabelecimento = idEstabelecimento;
         this.descricao = descricao;
         this.nota = nota;
@@ -44,7 +44,7 @@ public class Comida {
         
     }
 
-   public Comida(String descricao, float nota, float preco, String nome) {
+   public Comida(String descricao, double nota, double preco, String nome) {
         this.descricao = descricao;
         this.nota = nota;
         this.preco = preco;
@@ -69,19 +69,19 @@ public class Comida {
         this.descricao = descricao;
     }
 
-    public float getNota() {
+    public double getNota() {
         return nota;
     }
 
-    public void setNota(float nota) {
+    public void setNota(double nota) {
         this.nota = nota;
     }
 
-    public float getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 
@@ -100,17 +100,17 @@ public class Comida {
     public void setIdEstabelecimento(int idEstabelecimento) {
         this.idEstabelecimento = idEstabelecimento;
     }
-    
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.idComida;
-        hash = 53 * hash + Objects.hashCode(this.descricao);
-        hash = 53 * hash + Float.floatToIntBits(this.nota);
-        hash = 53 * hash + Float.floatToIntBits(this.preco);
-        hash = 53 * hash + Objects.hashCode(this.nome);
-       
+        int hash = 7;
+        hash = 89 * hash + this.idComida;
+        hash = 89 * hash + Objects.hashCode(this.descricao);
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.nota) ^ (Double.doubleToLongBits(this.nota) >>> 32));
+        hash = 89 * hash + (int) (Double.doubleToLongBits(this.preco) ^ (Double.doubleToLongBits(this.preco) >>> 32));
+        hash = 89 * hash + Objects.hashCode(this.nome);
+        hash = 89 * hash + Objects.hashCode(this.comentario);
+        hash = 89 * hash + this.idEstabelecimento;
         return hash;
     }
 
@@ -129,22 +129,11 @@ public class Comida {
         if (this.idComida != other.idComida) {
             return false;
         }
-        if (Float.floatToIntBits(this.nota) != Float.floatToIntBits(other.nota)) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.preco) != Float.floatToIntBits(other.preco)) {
-            return false;
-        }
-      
-        if (!Objects.equals(this.descricao, other.descricao)) {
-            return false;
-        }
-        if (!Objects.equals(this.nome, other.nome)) {
-            return false;
-        }
-       
         return true;
     }
+    
+
+  
 
     @Override
     public String toString() {

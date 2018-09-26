@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -33,8 +34,8 @@ public class ComidaDao implements ComidaDaoIF {
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, obj.getIdEstabelecimento());
             stmt.setString(2, obj.getDescricao());
-            stmt.setFloat(3, obj.getNota());
-            stmt.setFloat(4, obj.getPreco());
+            stmt.setDouble(3, obj.getNota());
+            stmt.setDouble(4, obj.getPreco());
             stmt.setString(5, obj.getNome());
             stmt.execute();
             stmt.close();
@@ -87,8 +88,8 @@ public class ComidaDao implements ComidaDaoIF {
                     + "preco = ?,nome = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getDescricao());
-            stmt.setFloat(2, obj.getNota());
-            stmt.setFloat(3, obj.getPreco());
+            stmt.setDouble(2, obj.getNota());
+            stmt.setDouble(3, obj.getPreco());
             stmt.setString(4, obj.getNome());
             stmt.execute();
 
@@ -168,6 +169,43 @@ public class ComidaDao implements ComidaDaoIF {
         con.close();
 
         return rc;
+    }
+    
+    public List<Comida> buscarPorEstabelecimento(int idEstabelecimento) throws SQLException, ClassNotFoundException {
+        Statement stmt;
+        try {
+            con = ConnectionFactory.getConnection();
+            
+            stmt = con.createStatement(
+                    ResultSet.TYPE_SCROLL_SENSITIVE, 
+                    ResultSet.CONCUR_READ_ONLY, 
+                    ResultSet.CLOSE_CURSORS_AT_COMMIT
+            );
+            
+            String sql = "SELECT * FROM comida WHERE idEstabelecimento= "+idEstabelecimento;
+                        
+            ResultSet resultado = stmt.executeQuery(sql);
+
+            List<Comida> comidas = new ArrayList<>();
+            while (resultado.next()){
+                Comida c = new Comida(resultado.getInt("idcomida"),
+                        resultado.getString("descricao"), 
+                        resultado.getDouble("nota"), 
+                        resultado.getDouble("preco"), 
+                        resultado.getString("nome"),
+                        resultado.getInt("idEstabelecimento"));
+                comidas.add(c);
+            }
+            resultado.close();
+            stmt.close();
+            return comidas;
+                
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        
+        con.close();
+        return null;
     }
 }
 

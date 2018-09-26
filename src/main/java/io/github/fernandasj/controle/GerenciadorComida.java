@@ -17,8 +17,9 @@ import io.github.fernandasj.repository.DaoFactoryIF;
 public class GerenciadorComida {
     private DaoFactoryIF fabrica = null;
     private ComidaDao dao = new ComidaDao();
+    
     public boolean Adicionar (int idUsuario,String descricao,float preco,float nota,String nome) throws Exception{
-        Comida comida= new Comida(idUsuario,descricao,preco,nota,nome);
+        Comida comida = new Comida(idUsuario,descricao,preco,nota,nome);
         return dao.salvar(comida);
     }
 }
