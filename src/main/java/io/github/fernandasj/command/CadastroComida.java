@@ -6,8 +6,6 @@
 package io.github.fernandasj.command;
 
 import io.github.fernandasj.controle.GerenciadorComida;
-import io.github.fernandasj.modelo.Estabelecimento;
-import io.github.fernandasj.modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;

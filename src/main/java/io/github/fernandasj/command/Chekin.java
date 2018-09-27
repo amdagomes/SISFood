@@ -5,9 +5,7 @@
  */
 package io.github.fernandasj.command;
 
-import io.github.fernandasj.controle.GerenciadorUsuario;
 import io.github.fernandasj.controle.GerenciarChekin;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.logging.Level;

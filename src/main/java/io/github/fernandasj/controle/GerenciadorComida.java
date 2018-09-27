@@ -22,4 +22,8 @@ public class GerenciadorComida {
         Comida comida = new Comida(idUsuario,descricao,preco,nota,nome);
         return dao.salvar(comida);
     }
+    
+    public boolean Deletar (int idComida) throws Exception{
+        return dao.deletar(idComida);
+    }
 }

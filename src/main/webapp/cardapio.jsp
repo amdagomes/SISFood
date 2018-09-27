@@ -89,7 +89,6 @@
 
                         <!--cardapio-->
                         <jsp:useBean id="dao" class="io.github.fernandasj.dao.ComidaDao"/>
-                        
                         <c:forEach var="comida" items="${dao.buscarPorEstabelecimento(8)}">
                             <article class="media item-cardapio">
                                 <figure class="media-left">
@@ -115,12 +114,11 @@
 
                                 <div class="media-right">
                                     <div class="level">
-                                        <a class="level-item" title="Deletar">
+                                        <a class="level-item" title="Deletar" href="front?action=DeletarComida&idComida=${comida.idComida}">
                                             <span class="icon is-small"><i class="fas fa-trash-alt"></i></i></span>
                                         </a>
                                     </div>
                                 </div>
-
                             </article>
                         </c:forEach>
                         </div>
@@ -136,7 +134,7 @@
                                         <input class="input is-small" type="text" placeholder="Nome" name="nome">
                                     </p>
                                     <p class="control">
-                                        <input class="input is-small" type="text" placeholder="Preço. Ex.: 10,00" name="preco">
+                                        <input class="input is-small" type="text" placeholder="Preço. Ex.: 10.00" name="preco">
                                     </p>
                                 </div>
 

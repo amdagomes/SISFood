@@ -110,7 +110,7 @@ public class ComidaDao implements ComidaDaoIF {
                 Logger.getLogger(ComidaDao.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            String sql = "DELETE FROM Comida WHERE id= ?";
+            String sql = "DELETE FROM Comida WHERE idComida= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, idComida);
             stmt.execute();
