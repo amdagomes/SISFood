@@ -29,14 +29,15 @@ public class ComidaDao implements ComidaDaoIF {
     @Override
     public boolean salvar(Comida obj) throws SQLException, Exception {
         con = ConnectionFactory.getConnection();
-        String sql = "INSERT INTO COMIDA(idEstabelecimento,descricao, nota,preco,nome)"
+        String sql = "INSERT INTO COMIDA(idEstabelecimento,descricao, preco, nome, foto)"
                 + " VALUES(?,?,?,?,?)";
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, obj.getIdEstabelecimento());
             stmt.setString(2, obj.getDescricao());
-            stmt.setDouble(3, obj.getNota());
-            stmt.setDouble(4, obj.getPreco());
-            stmt.setString(5, obj.getNome());
+            stmt.setDouble(3, obj.getPreco());
+            stmt.setString(4, obj.getNome());
+            stmt.setString(5, obj.getFoto());
+            
             stmt.execute();
             stmt.close();
         }
@@ -59,7 +60,8 @@ public class ComidaDao implements ComidaDaoIF {
         ResultSet resultado = stmt.executeQuery();
 
         if (resultado.next()) {
-            Comida c = new Comida(resultado.getString("descricao"), resultado.getFloat("nota"), resultado.getFloat("preco"), resultado.getString("nome"));
+            Comida c = new Comida(resultado.getString("descricao"), resultado.getFloat("nota"), 
+                    resultado.getFloat("preco"), resultado.getString("nome"), resultado.getString("foto"));
             resultado.close();
             stmt.close();
             con.close();
@@ -85,14 +87,15 @@ public class ComidaDao implements ComidaDaoIF {
                 Logger.getLogger(ComidaDao.class.getName()).log(Level.SEVERE, null, ex);
             }
             String sql = "UPDATE COMIDA SET descricao =?,nota = ?"
-                    + "preco = ?,nome = ?";
+                    + "preco = ?,nome = ?, foto = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getDescricao());
             stmt.setDouble(2, obj.getNota());
             stmt.setDouble(3, obj.getPreco());
             stmt.setString(4, obj.getNome());
-            stmt.execute();
-
+            stmt.setString(5, obj.getFoto());
+            
+            stmt.execute();  
             stmt.close();
             con.close();
 
@@ -193,7 +196,8 @@ public class ComidaDao implements ComidaDaoIF {
                         resultado.getDouble("nota"), 
                         resultado.getDouble("preco"), 
                         resultado.getString("nome"),
-                        resultado.getInt("idEstabelecimento"));
+                        resultado.getInt("idEstabelecimento"),
+                        resultado.getString("foto"));
                 comidas.add(c);
             }
             resultado.close();
@@ -207,6 +211,5 @@ public class ComidaDao implements ComidaDaoIF {
         con.close();
         return null;
     }
+
 }
-
-

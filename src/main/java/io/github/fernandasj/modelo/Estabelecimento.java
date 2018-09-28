@@ -19,8 +19,8 @@ public class Estabelecimento {
     private int idUsuario;
     private String nome;
     private String telefone;
-    private byte[] foto;
-    private String cartegoria;
+    private String foto;
+    private String categoria;
     private float nota;
     private String descricao;
     private String rua;
@@ -34,14 +34,14 @@ public class Estabelecimento {
     public Estabelecimento() {
     }
 
-    public Estabelecimento(int id, int idUsuario, String nome, String telefone, byte[] foto, String cartegoria,
+    public Estabelecimento(int id, int idUsuario, String nome, String telefone, String foto, String categoria,
             float nota, String descricao, String rua, String estado, String cidade, String cep, String dia, Time horaAbre, Time horaFecha) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.telefone = telefone;
         this.foto = foto;
-        this.cartegoria = cartegoria;
+        this.categoria = categoria;
         this.nota = nota;
         this.descricao = descricao;
         this.rua = rua;
@@ -53,14 +53,13 @@ public class Estabelecimento {
         this.horaFecha = horaFecha;
     }
 
-    public Estabelecimento(int idUsuario, String nome, String telefone, byte[] foto, String cartegoria,
-            float nota, String descricao, String rua, String estado, String cidade, String cep, String dia, Time horaAbre, Time horaFecha) {
+    public Estabelecimento(int idUsuario, String nome, String telefone, String foto, String categoria,
+             String descricao, String rua, String estado, String cidade, String cep, String dia, Time horaAbre, Time horaFecha) {
         this.idUsuario = idUsuario;
         this.nome = nome;
         this.telefone = telefone;
         this.foto = foto;
-        this.cartegoria = cartegoria;
-        this.nota = nota;
+        this.categoria = categoria;
         this.descricao = descricao;
         this.rua = rua;
         this.estado = estado;
@@ -71,12 +70,12 @@ public class Estabelecimento {
         this.horaFecha = horaFecha;
     }
 
-    public Estabelecimento(String nome, String telefone, byte[] foto, String cartegoria,
+    public Estabelecimento(String nome, String telefone, String foto, String categoria,
             float nota, String descricao, String rua, String estado, String cidade, String cep, String dia, Time horaAbre, Time horaFecha) {
         this.nome = nome;
         this.telefone = telefone;
         this.foto = foto;
-        this.cartegoria = cartegoria;
+        this.categoria = categoria;
         this.nota = nota;
         this.descricao = descricao;
         this.rua = rua;
@@ -120,20 +119,20 @@ public class Estabelecimento {
         this.telefone = telefone;
     }
 
-    public byte[] getFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    public void setFoto(byte[] foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
-    public String getCartegoria() {
-        return cartegoria;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setCartegoria(String cartegoria) {
-        this.cartegoria = cartegoria;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public float getNota() {
@@ -210,21 +209,22 @@ public class Estabelecimento {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 47 * hash + this.id;
-        hash = 47 * hash + Objects.hashCode(this.nome);
-        hash = 47 * hash + Objects.hashCode(this.telefone);
-        hash = 47 * hash + Arrays.hashCode(this.foto);
-        hash = 47 * hash + Objects.hashCode(this.cartegoria);
-        hash = 47 * hash + Float.floatToIntBits(this.nota);
-        hash = 47 * hash + Objects.hashCode(this.descricao);
-        hash = 47 * hash + Objects.hashCode(this.rua);
-        hash = 47 * hash + Objects.hashCode(this.estado);
-        hash = 47 * hash + Objects.hashCode(this.cidade);
-        hash = 47 * hash + Objects.hashCode(this.cep);
-        hash = 47 * hash + Objects.hashCode(this.dia);
-        hash = 47 * hash + Objects.hashCode(this.horaAbre);
-        hash = 47 * hash + Objects.hashCode(this.horaFecha);
+        int hash = 7;
+        hash = 79 * hash + this.id;
+        hash = 79 * hash + this.idUsuario;
+        hash = 79 * hash + Objects.hashCode(this.nome);
+        hash = 79 * hash + Objects.hashCode(this.telefone);
+        hash = 79 * hash + Objects.hashCode(this.foto);
+        hash = 79 * hash + Objects.hashCode(this.categoria);
+        hash = 79 * hash + Float.floatToIntBits(this.nota);
+        hash = 79 * hash + Objects.hashCode(this.descricao);
+        hash = 79 * hash + Objects.hashCode(this.rua);
+        hash = 79 * hash + Objects.hashCode(this.estado);
+        hash = 79 * hash + Objects.hashCode(this.cidade);
+        hash = 79 * hash + Objects.hashCode(this.cep);
+        hash = 79 * hash + Objects.hashCode(this.dia);
+        hash = 79 * hash + Objects.hashCode(this.horaAbre);
+        hash = 79 * hash + Objects.hashCode(this.horaFecha);
         return hash;
     }
 
@@ -243,6 +243,9 @@ public class Estabelecimento {
         if (this.id != other.id) {
             return false;
         }
+        if (this.idUsuario != other.idUsuario) {
+            return false;
+        }
         if (Float.floatToIntBits(this.nota) != Float.floatToIntBits(other.nota)) {
             return false;
         }
@@ -252,7 +255,10 @@ public class Estabelecimento {
         if (!Objects.equals(this.telefone, other.telefone)) {
             return false;
         }
-        if (!Objects.equals(this.cartegoria, other.cartegoria)) {
+        if (!Objects.equals(this.foto, other.foto)) {
+            return false;
+        }
+        if (!Objects.equals(this.categoria, other.categoria)) {
             return false;
         }
         if (!Objects.equals(this.descricao, other.descricao)) {
@@ -273,9 +279,6 @@ public class Estabelecimento {
         if (!Objects.equals(this.dia, other.dia)) {
             return false;
         }
-        if (!Arrays.equals(this.foto, other.foto)) {
-            return false;
-        }
         if (!Objects.equals(this.horaAbre, other.horaAbre)) {
             return false;
         }
@@ -287,10 +290,10 @@ public class Estabelecimento {
 
     @Override
     public String toString() {
-        return "Estabelecimento{" + "id=" + id + ", idUsuario=" + idUsuario + ", nome=" + nome + ", telefone=" + telefone
-                + ", foto=" + foto + ", cartegoria=" + cartegoria + ", nota=" + nota + ", descricao=" + descricao
-                + ", rua=" + rua + ", estado=" + estado + ", cidade=" + cidade + ", cep=" + cep + ", "
-                + "dia=" + dia + ", horaAbre=" + horaAbre + ", horaFecha=" + horaFecha + '}';
+        return "Estabelecimento{" + "id=" + id + ", idUsuario=" + idUsuario + ", nome=" + nome + ", telefone=" 
+                + telefone + ", foto=" + foto + ", categoria=" + categoria + ", nota=" + nota + ", descricao=" 
+                + descricao + ", rua=" + rua + ", estado=" + estado + ", cidade=" + cidade + ", cep=" + cep 
+                + ", dia=" + dia + ", horaAbre=" + horaAbre + ", horaFecha=" + horaFecha + '}';
     }
-
+    
 }

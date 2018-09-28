@@ -21,9 +21,10 @@ import javax.servlet.http.Part;
  * @author Amanda
  */
 public class Imagem {
+    
+    private static int cont = 0;
 
-    public static boolean setImage(int id, Part foto, String prefix) throws ServletException {
-        System.out.println("id: " + id);
+    public static boolean setImage(int id, Part foto, String prefix) throws ServletException, SQLException, ClassNotFoundException {
         GerenciadorUsuario userDao = new GerenciadorUsuario();
 
         try {
@@ -31,14 +32,14 @@ public class Imagem {
             BufferedImage imagem = ImageIO.read(input);
 
             File diretorio = new File("C:\\Users\\Amanda\\Documents\\Amanda\\ADS\\SISFood\\src\\main\\webapp\\upload_images");
-            
+
             System.out.println("Diretorio: " + diretorio);
-            
+
             if (!diretorio.exists()) {
                 diretorio.mkdirs(); //mkdir() cria somente um diretório, mkdirs() cria diretórios e subdiretórios.
             }
             ImageIO.write(imagem, "jpg", new File(diretorio + "\\" + prefix + "-" + id + ".jpg"));
-            
+
             userDao.setFoto(id, "upload_images\\" + prefix + "-" + id + ".jpg");
 
         } catch (FileNotFoundException | SQLException e) {
@@ -46,7 +47,32 @@ public class Imagem {
         } catch (IOException e) {
             e.printStackTrace();
         }
-         return true;
+        return true;
+    }
+
+    public static String setImg(Part foto, String nome, String tipo) {
+
+        try {
+            cont++;
+            
+            InputStream input = foto.getInputStream();
+            BufferedImage imagem = ImageIO.read(input);
+
+            File diretorio = new File("C:\\Users\\Amanda\\Documents\\Amanda\\ADS\\SISFood\\src\\main\\webapp\\upload_images");
+
+            System.out.println("Diretorio: " + diretorio);
+
+            if (!diretorio.exists()) {
+                diretorio.mkdirs(); //mkdir() cria somente um diretório, mkdirs() cria diretórios e subdiretórios.
+            }
+            ImageIO.write(imagem, "jpg", new File(diretorio + "\\"+ tipo + "-" + nome + ".jpg"));
+  
+            return "upload_images\\" + tipo + "-" + nome + ".jpg";
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

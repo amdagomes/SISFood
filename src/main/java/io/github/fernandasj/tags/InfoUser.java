@@ -7,6 +7,8 @@ package io.github.fernandasj.tags;
 
 import io.github.fernandasj.controle.GerenciadorUsuario;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
@@ -20,10 +22,10 @@ public class InfoUser extends SimpleTagSupport {
     @Override
     public void doTag() {
 
-        GerenciadorUsuario userDao = new GerenciadorUsuario();
         try {
+            GerenciadorUsuario userDao = new GerenciadorUsuario();
             getJspContext().setAttribute("user", userDao.buscaUsuario(email));
-        } catch (SQLException  ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             ex.printStackTrace();
         }
 

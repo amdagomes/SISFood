@@ -9,7 +9,6 @@ import io.github.fernandasj.controle.GerenciadorUsuario;
 import io.github.fernandasj.modelo.Usuario;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

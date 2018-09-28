@@ -236,8 +236,6 @@ div.modal-content{
   padding: 10px;
   background-color: white;
   border-radius: 5px;
-  -webkit-box-shadow: 0px 0px 9px 16px #D6D6D6; 
-  box-shadow: 0px 0px 9px 16px #D6D6D6;
 }
 .file-custom{
   margin-top: .75rem;
@@ -257,6 +255,13 @@ div.estrelas input[type=radio] {
   color: #FC0;
 }
 
+.modal{
+    max-width: 750px;
+}
+
+.navbar{
+    z-index: 1;
+}
 @media screen and (max-width: 770px){
   .h100{
       height: auto;

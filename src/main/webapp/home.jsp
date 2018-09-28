@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="ct" uri="/WEB-INF/tlds/custonTags" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -15,10 +15,11 @@
         <meta name="viewport" content="whidth: device-width, initial-scale-1.0, maximun-scale-1.0">
         <meta name="description" content="Rede Social voltada para o ramo alimenticio.">
         <meta name="keywords" content="social, media, rede, social, food, alimento">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+        <link rel="stylesheet" href="css/bulma.css">
         <link rel="stylesheet" href="css/bulma-badge.min.css">
-        <link rel="stylesheet" href="css/style.css">
         <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body class="background-gray">
         <%@ include file="header.jsp"%>
@@ -48,21 +49,24 @@
                                     <a href="front?action=Incio"><li class="link-ativo">Feed</li></a>
                                     <a href=""><li>Menssagens</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
-                                    <a href=""><li>Criar Página</li></a>
+                                    <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
                                         <p class="menu-label">Minhas páginas</p>
                                         <ul>
-                                            <a href=""><li>Pag1</li></a>
-                                            <a href=""><li>Pag1</li></a>
+                                            <jsp:useBean id="control" class="io.github.fernandasj.controle.GerenciadorEstabelecimento"/>
+                                            <c:forEach var="pagina" items="${control.meusEstabelecimentos(sessionScope.usuario.id)}">
+                                                <a href="front?action=PaginaEstabelecimento&id=${pagina.id}"><li>${pagina.nome}</li></a>
+                                            </c:forEach>     
                                         </ul>
                                     </li>
-                                    <a href="front?action=Logout"><li class="menu-label">
+                                    <a href="front?action=Logout">
+                                        <li class="menu-label">
                                             <span class="icon">
                                                 <i class="fas fa-power-off"></i>
                                             </span>
                                             Sair
-
-                                        </li></a>
+                                        </li>
+                                    </a>
                                 </ul>
 
                             </aside>
@@ -210,6 +214,10 @@
 
     </section>
 
+    <%@ include file="cadastrar-estabelecimento.jsp"%>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
     <script>
         const dropdown = document.querySelector('.dropdown');
         dropdown.addEventListener('click', () => {
@@ -221,6 +229,25 @@
             drop.classList.toggle('is-active');
         });
 
+        //exibe o src da imagem
+        var file = document.getElementById("arquivo");
+        file.onchange = function () {
+            if (file.files.length > 0)
+            {
+                document.getElementById('nomearquivo').innerHTML = file.files[0].name;
+            }
+        };
+
+        //altera a foto de exibição do perfil
+        $("#arquivo").on('change', function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#foto').attr("src", e.target.result).fadeIn();
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -247,6 +274,7 @@
             }
 
         });
+
     </script>
 </body>
 </html>

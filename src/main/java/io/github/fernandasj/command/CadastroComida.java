@@ -6,13 +6,13 @@
 package io.github.fernandasj.command;
 
 import io.github.fernandasj.controle.GerenciadorComida;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import io.github.fernandasj.modelo.Estabelecimento;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -24,26 +24,25 @@ public class CadastroComida implements Command {
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
          HttpSession session = request.getSession();
          
-        //Estabelecimento estabelecimento = (Estabelecimento) session.getAttribute("estabelecimento");
+        Estabelecimento estabelecimento = (Estabelecimento) session.getAttribute("estabelecimento");
          
-        //alterar quando o modulo estabelecimento estiver pronto
-         int estabelecimento = 8;
         
-         String descricao = request.getParameter("descricao");
-         String preco = request.getParameter("preco");
+        String descricao = request.getParameter("descricao");
+        String preco = request.getParameter("preco");
+        //alterar quando o calculo de nota estiver pronto
+        String nota = "2.5";
          
-         //alterar quando o calculo de nota estiver pronto
-         String nota = "2.5";
-         
-         String nome = request.getParameter("nome");
+        String nome = request.getParameter("nome");
                   
-        try {          
+        try { 
+            Part foto = request.getPart("foto");
+            
             GerenciadorComida g = new GerenciadorComida();
-            g.Adicionar(estabelecimento, descricao, Float.parseFloat(nota),  Float.parseFloat(preco), nome);
+            g.Adicionar(estabelecimento.getId(), descricao, Float.parseFloat(preco), nome, Imagem.setImg(foto, nome, "comida"));
             RequestDispatcher dispatcher = request.getRequestDispatcher("cardapio.jsp");
             dispatcher.forward(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(CadastroComida.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }        
     }
     

@@ -26,8 +26,8 @@ idUsuario int ,
 nome varchar(200) NOT NULL,
 telefone varchar(20),
 fotoEstabelecimento varchar,
-cartegoria varchar (50) NOT NULL,
-nota numeric(1,1),
+categoria varchar (50) NOT NULL,
+nota numeric(5,2),
 descricao varchar(200),
 rua varchar(200) NOT NULL,
 estado varchar(10) NOT NULL,
@@ -44,7 +44,7 @@ FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)
 );
 -- inserir estabelecimento para testar cardapio
 insert into estabelecimento (idUsuario, nome, telefone, fotoEstabelecimento,
-    cartegoria, nota, descricao, rua,estado, cidade, cep, dia, horaAbre, horaFecha) values (1,
+    categoria, nota, descricao, rua,estado, cidade, cep, dia, horaAbre, horaFecha) values (1,
     'Subway', '35352101', 'foto', 'lanchonete', 4.5, 'descricao', 'rua','pb', 'cz', 58900000,
     'segunda', SYSDATETIME(), SYSDATETIME())
 
@@ -53,10 +53,11 @@ insert into estabelecimento (idUsuario, nome, telefone, fotoEstabelecimento,
 CREATE TABLE Comida(
     idComida serial,
     descricao varchar(300) NOT NULL,
-    nota numeric(1,1),
+    nota numeric(5,2),
     preco float NOT NULL,
     nome varchar(200) NOT NULL,
     idEstabelecimento int,
+    foto varchar(255),	
     PRIMARY KEY(idComida),
     FOREIGN KEY(idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
 
@@ -78,7 +79,7 @@ CREATE TABLE AvaliarEstabelecimento(
     idAvaliacao serial,
     consumidor int NOT NULL,
     estabelecimento int NOT NULL,
-    nota numeric(1,1) NOT NULL,
+    nota numeric(5,2) NOT NULL,
     comentario varchar(500),
     PRIMARY KEY(idAvaliacao),
     FOREIGN KEY(consumidor) REFERENCES Usuario(idUsuario),
@@ -100,7 +101,7 @@ CREATE TABLE AvaliarComida(
     idAvaliacao serial,
     consumidor int NOT NULL,
     estabelecimento int NOT NULL,
-    nota numeric(1,1) NOT NULL,
+    nota numeric(5,2) NOT NULL,
     comentario varchar(500),
     comida int,
     PRIMARY KEY(idAvaliacao),

@@ -28,14 +28,14 @@
                         <div class="media-box">
                             <div class="fotoperfil">
                                 <figure class="image">
-                                    <img class="is-rounded" src="${sessionScope.usuario.fotoPerfil}">
+                                    <img class="is-rounded" src="${sessionScope.estabelecimento.foto}">
                                 </figure>
                                 <div>
                                     <p class="has-text-dark has-text-centered has-text-weight-semibold is-size-5">
-                                        ${sessionScope.usuario.nome}
+                                        ${sessionScope.estabelecimento.nome}
                                     </p>
                                     <p class="has-text-grey-light has-text-centered">
-                                        ${sessionScope.usuario.descricao}
+                                        ${sessionScope.estabelecimento.descricao}
                                     </p>
                                 </div>
                             </div>
@@ -43,13 +43,13 @@
                             <aside class="menu">
 
                                 <ul>
-                                    <a href=""><li>Inicio</li></a>
+                                    <a href="front?action=Inicio"><li>Inicio</li></a>
                                     <li>
                                         <p class="menu-label">Nome do estabelecimento</p>
                                         <ul>
-                                            <a href=""><li class="link-ativo">Feed</li></a>
-                                            <a href=""><li>Cardápio</li></a>
-                                            <a href=""><li>Perfil</li></a>
+                                            <a href="estabelecimento.jsp"><li class="link-ativo">Feed</li></a>
+                                            <a href="cardapio.jsp"><li>Cardápio</li></a>
+                                            <a href="perfil-estabelecimento.jsp"><li>Perfil</li></a>
                                         </ul>
                                     </li>
                                     <a href="front?action=Logout"><li class="menu-label">

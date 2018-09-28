@@ -2,6 +2,7 @@ package io.github.fernandasj.controle;
 
 import io.github.fernandasj.dao.UsuarioDao;
 import io.github.fernandasj.modelo.Usuario;
+import io.github.fernandasj.repository.DaoFactory;
 import io.github.fernandasj.repository.DaoFactoryIF;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -13,7 +14,12 @@ import java.time.LocalDate;
 public class GerenciadorUsuario {
 
     private DaoFactoryIF fabrica = null;
-    private UsuarioDao userDao = new UsuarioDao();
+    private UsuarioDao userDao = null;
+    
+    public GerenciadorUsuario() throws SQLException, ClassNotFoundException{
+        fabrica = DaoFactory.createFactory();
+        userDao = fabrica.criaUsuarioDao();
+    }
 
     public boolean autenticar(String email, String senha) throws SQLException, ClassNotFoundException {
         return userDao.autenticar(email, senha);

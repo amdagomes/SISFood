@@ -15,8 +15,9 @@
         <meta name="viewport" content="whidth: device-width, initial-scale-1.0, maximun-scale-1.0">
         <meta name="description" content="Rede Social voltada para o ramo alimenticio.">
         <meta name="keywords" content="social, media, rede, social, food, alimento">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+        <link rel="stylesheet" href="css/bulma.css">
         <link rel="stylesheet" href="css/bulma-badge.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
         <link rel="stylesheet" href="css/style.css">
         <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     </head>
@@ -48,12 +49,14 @@
                                     <a href="front?action=Inicio"><li>Feed</li></a>
                                     <a href=""><li>Menssagens</li></a>
                                     <a href="perfil-usuario.jsp"><li class="link-ativo">Editar Perfil</li></a>
-                                    <a href=""><li>Criar Página</li></a>
+                                    <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
                                         <p class="menu-label">Minhas páginas</p>
                                         <ul>
-                                            <a href=""><li>Pag1</li></a>
-                                            <a href=""><li>Pag1</li></a>
+                                            <jsp:useBean id="control" class="io.github.fernandasj.controle.GerenciadorEstabelecimento"/>
+                                            <c:forEach var="pagina" items="${control.meusEstabelecimentos(sessionScope.usuario.id)}">
+                                                <a href="front?action=PaginaEstabelecimento&id=${pagina.id}"><li>${pagina.nome}</li></a>
+                                                    </c:forEach>     
                                         </ul>
                                     </li>
                                     <a href="front?action=Logout"><li class="menu-label">
@@ -101,7 +104,7 @@
                                                     </span>
                                                 </span>
                                                 <div id="filename" class="file-name">
-                                                    
+
                                                 </div>
                                             </label>
                                         </div>
@@ -232,7 +235,7 @@
                                             </div>
                                             <div class="field">
                                                 <p class="control">
-                                                    <input onclick="myFunction()" class="button is-success is-fullwidth is-rounded" type="submit" value="Atualizar">
+                                                    <input class="button is-success is-fullwidth is-rounded" type="submit" value="Atualizar">
                                                 </p>
                                             </div>
                                         </div>
@@ -248,14 +251,11 @@
 
         </section>
 
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <%@ include file="cadastrar-estabelecimento.jsp"%>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
         <script>
-            
-            
-           function myFunction() {
-                setTimeout(function(){ alert("Hello"); }, 3000);
-           }
-            
             const dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', () => {
                 dropdown.classList.toggle('is-active');
@@ -269,7 +269,7 @@
                 }
             };
 
-            //altera a foto de exibição do perfil
+            //altera a foto de exibição de criar pagina
             $("#file").on('change', function () {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();
@@ -279,7 +279,26 @@
                     reader.readAsDataURL(this.files[0]);
                 }
             });
-            
+
+            //exibe o src da imagem de criar pagina
+            var file = document.getElementById("arquivo");
+            file.onchange = function () {
+                if (file.files.length > 0)
+                {
+                    document.getElementById('nomearquivo').innerHTML = file.files[0].name;
+                }
+            };
+
+            //altera a foto de exibição do perfil
+            $("#arquivo").on('change', function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#foto').attr("src", e.target.result).fadeIn();
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
 
             document.addEventListener('DOMContentLoaded', () => {
 

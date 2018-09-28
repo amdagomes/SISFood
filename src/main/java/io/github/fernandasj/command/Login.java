@@ -20,31 +20,27 @@ public class Login implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-        GerenciadorUsuario g = new GerenciadorUsuario();
-        HttpSession session = request.getSession();
-        Usuario u = (Usuario) session.getAttribute("usuario");
 
         try {
-            try {
-                if (u != null) {
-                    response.sendRedirect("home.jsp");
-                } else if (g.autenticar(request.getParameter("email"), request.getParameter("senha"))) {
+            GerenciadorUsuario g = new GerenciadorUsuario();
+            HttpSession session = request.getSession();
+            Usuario u = (Usuario) session.getAttribute("usuario");
 
-                    Usuario atual = g.buscaUsuario(request.getParameter("email"));
-                    session.setAttribute("usuario", atual);
+            if (u != null) {
+                response.sendRedirect("home.jsp");
+            } else if (g.autenticar(request.getParameter("email"), request.getParameter("senha"))) {
 
-                    request.getRequestDispatcher("home.jsp").forward(request, response);
+                Usuario atual = g.buscaUsuario(request.getParameter("email"));
+                session.setAttribute("usuario", atual);
 
-                } else {
-                    response.sendRedirect("index.jsp");
-                }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                request.getRequestDispatcher("home.jsp").forward(request, response);
+
+            } else {
+                response.sendRedirect("index.jsp");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (SQLException | IOException | ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
 
     }

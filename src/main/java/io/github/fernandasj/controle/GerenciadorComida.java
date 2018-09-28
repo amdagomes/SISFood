@@ -9,6 +9,8 @@ package io.github.fernandasj.controle;
 import io.github.fernandasj.dao.ComidaDao;
 import io.github.fernandasj.modelo.Comida;
 import io.github.fernandasj.repository.DaoFactoryIF;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -18,12 +20,17 @@ public class GerenciadorComida {
     private DaoFactoryIF fabrica = null;
     private ComidaDao dao = new ComidaDao();
     
-    public boolean Adicionar (int idUsuario,String descricao,float preco,float nota,String nome) throws Exception{
-        Comida comida = new Comida(idUsuario,descricao,preco,nota,nome);
+    public boolean Adicionar (int idEstabelecimento, String descricao,float preco, String nome, String foto) throws Exception{
+        Comida comida = new Comida(idEstabelecimento, descricao, preco, nome, foto);
         return dao.salvar(comida);
+    }
+    
+    public List<Comida> buscaPorEstabelecimento(int id) throws SQLException, ClassNotFoundException{
+        return dao.buscarPorEstabelecimento(id);
     }
     
     public boolean Deletar (int idComida) throws Exception{
         return dao.deletar(idComida);
     }
+
 }

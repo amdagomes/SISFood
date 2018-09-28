@@ -5,15 +5,13 @@
  */
 package io.github.fernandasj.dao;
 
-import io.github.fernandasj.modelo.Comida;
 import io.github.fernandasj.modelo.Estabelecimento;
-
 import io.github.fernandasj.repository.ConnectionFactory;
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -30,23 +28,22 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
     @Override
     public boolean salvar(Estabelecimento obj) throws SQLException, Exception {
         con = ConnectionFactory.getConnection();
-        String sql = " INSERT INTO Estabelecimento (idUsuario,nome,telefone,fotoEstabelecimento,cartegoria"
-                + ",nota,descricao,rua,estado,cidade,cep,dia,horaAbre,HoraFecha)"
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = " INSERT INTO Estabelecimento (idUsuario, nome, telefone, categoria, "
+                + "descricao, rua, estado, cidade, cep, horaAbre, HoraFecha, fotoEstabelecimento)"
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, obj.getIdUsuario());
-            stmt.setString(1, obj.getNome());
-            stmt.setString(2, obj.getTelefone());
-            stmt.setBytes(3, obj.getFoto());
-            stmt.setString(4, obj.getCartegoria());
-            stmt.setFloat(5, obj.getNota());
-            stmt.setString(6, obj.getDescricao());
-            stmt.setString(7, obj.getRua());
-            stmt.setString(8, obj.getEstado());
-            stmt.setString(9, obj.getCidade());
-            stmt.setString(10, obj.getCep());
-            stmt.setTime(11, obj.getHoraAbre());
-            stmt.setTime(12, obj.getHoraFecha());
+            stmt.setString(2, obj.getNome());
+            stmt.setString(3, obj.getTelefone());
+            stmt.setString(4, obj.getCategoria());
+            stmt.setString(5, obj.getDescricao());
+            stmt.setString(6, obj.getRua());
+            stmt.setString(7, obj.getEstado());
+            stmt.setString(8, obj.getCidade());
+            stmt.setString(9, obj.getCep());
+            stmt.setTime(10, obj.getHoraAbre());
+            stmt.setTime(11, obj.getHoraFecha());
+            stmt.setString(12, obj.getFoto());
             stmt.execute();
             stmt.close();
         }
@@ -63,14 +60,14 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
             Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT * Estabelecimento WHERE nome= ?";
+        String sql = "SELECT * Estabelecimento WHERE nome = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, nome);
         ResultSet resultado = stmt.executeQuery();
 
         if (resultado.next()) {
             Estabelecimento e = new Estabelecimento(resultado.getString("nome"), resultado.getString("Telefone"),
-                    resultado.getBytes("foto"), resultado.getString("cartegoria"), resultado.getFloat("nota"),
+                    resultado.getString("fotoEstabelecimeto"), resultado.getString("cartegoria"), resultado.getFloat("nota"),
                     resultado.getString("descricao"), resultado.getString("rua"), resultado.getString("estado"),
                     resultado.getString("cidade"), resultado.getString("cep"), resultado.getString("dia"),
                     resultado.getTime("horaAbre"), resultado.getTime("horaFecha"));
@@ -98,13 +95,13 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
             } catch (ClassNotFoundException ex) { 
                 Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String sql = "UPDATE Estabelecimento SET nome =?,telefone=?,fotoEstabelecimento=?,cartegoria=?,nota=?,descricao=?,"
-                    + "rua=?,estado=?,cidade=?,cep=?,dia=?,horaAbre=?,horaFecha=?";
+            String sql = "UPDATE Estabelecimento SET nome = ?, telefone = ?, fotoEstabelecimento = ?, categoria = ?,"
+                    + "nota = ?, descricao = ?, rua = ?, estado = ?, cidade = ?, cep = ?, dia = ?, horaAbre = ?, horaFecha = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setString(1, obj.getNome());
             stmt.setString(2, obj.getTelefone());
-            stmt.setString(3, obj.getCartegoria());
+            stmt.setString(3, obj.getCategoria());
             stmt.setFloat(4, obj.getNota());
             stmt.setString(5, obj.getDescricao());
             stmt.setString(6, obj.getRua());
@@ -192,36 +189,68 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
 
         return rc;
     }
+    
+    public List<Estabelecimento> listMeusEstabelecimentos(int id) throws SQLException{
+        Statement stmt;
+        try {
+            con = ConnectionFactory.getConnection();
+             con = ConnectionFactory.getConnection();
+            
+            stmt = con.createStatement(
+                    ResultSet.TYPE_SCROLL_SENSITIVE, 
+                    ResultSet.CONCUR_READ_ONLY, 
+                    ResultSet.CLOSE_CURSORS_AT_COMMIT
+            );
+            
+            String sql = "SELECT * FROM estabelecimento WHERE idUsuario = " + id;
+        
+            ResultSet r = stmt.executeQuery(sql);
+            
+            List<Estabelecimento> meusEstabelecimentos = new ArrayList<>();
+        
+            while(r.next()){
+                Estabelecimento e = new Estabelecimento(r.getInt("idestabelecimento"), r.getInt("idusuario"), 
+                        r.getString("nome"), r.getString("telefone"), r.getString("fotoestabelecimento"), r.getString("categoria"),
+                        r.getFloat("nota"), r.getString("descricao"), r.getString("rua"), r.getString("estado"), r.getString("cidade"),
+                        r.getString("cep"), null, r.getTime("horaabre"), r.getTime("horafecha"));
+                meusEstabelecimentos.add(e);
+            }
+            r.close();
+            return meusEstabelecimentos;
+        } catch (ClassNotFoundException ex) { 
+            Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return null;
+    }
 
-
-    private Estabelecimento buscarPorId(int id) throws SQLException {
+    public Estabelecimento buscarPorId(int id) throws SQLException {
        try {
             con = ConnectionFactory.getConnection();
         } catch (ClassNotFoundException ex) { 
             Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT * Estabelecimento WHERE idEstabelecimento= ?";
+        String sql = "SELECT * FROM estabelecimento WHERE idEstabelecimento = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);
-        ResultSet resultado = stmt.executeQuery();
+        ResultSet r = stmt.executeQuery();
 
-        if (resultado.next()) {
-            Estabelecimento e = new Estabelecimento(resultado.getString("nome"), resultado.getString("Telefone"),
-                    resultado.getBytes("foto"), resultado.getString("cartegoria"), resultado.getFloat("nota"),
-                    resultado.getString("descricao"), resultado.getString("rua"), resultado.getString("estado"),
-                    resultado.getString("cidade"), resultado.getString("cep"), resultado.getString("dia"),
-                    resultado.getTime("horaAbre"), resultado.getTime("horaFecha"));
-            resultado.close();
+        if (r.next()) {
+            Estabelecimento e = new Estabelecimento(r.getInt("idestabelecimento"), r.getInt("idusuario"), 
+                        r.getString("nome"), r.getString("telefone"), r.getString("fotoestabelecimento"), r.getString("categoria"),
+                        r.getFloat("nota"), r.getString("descricao"), r.getString("rua"), r.getString("estado"), r.getString("cidade"),
+                        r.getString("cep"), null, r.getTime("horaabre"), r.getTime("horafecha"));
+            r.close();
             stmt.close();
             con.close();
             return e;
         }
-        resultado.close();
+        r.close();
         stmt.close();
         con.close();
 
         return null;
     }
-    }
+}
 

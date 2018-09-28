@@ -38,11 +38,11 @@ public class AtualizaPerfil implements Command {
         String telefone = request.getParameter("telefone");
         String descricao = request.getParameter("descricao");
         
-        
-        GerenciadorUsuario userDao = new GerenciadorUsuario();
         Usuario u = new Usuario(id, email, senha, nome, telefone, sexo, profissao, LocalDate.parse(dataNascimento), descricao, rua, numeroCasa, estado, cidade, cep);
 
         try {
+            GerenciadorUsuario userDao = new GerenciadorUsuario();
+            
             userDao.atualizar(u);
             if(request.getPart("fotoPerfil").getSize() != 0){
                 System.out.println("entrou");
@@ -56,9 +56,9 @@ public class AtualizaPerfil implements Command {
             session.setAttribute("usuario", userDao.buscaUsuario(email));
             response.sendRedirect("perfil-usuario.jsp");
             //request.getRequestDispatcher("perfil-usuario.jsp").forward(request, response);
-        } catch (IOException | SQLException ex) {
+        } catch (IOException | SQLException | ClassNotFoundException ex) {
            ex.printStackTrace();
-        }
+        } 
 
     }
 
