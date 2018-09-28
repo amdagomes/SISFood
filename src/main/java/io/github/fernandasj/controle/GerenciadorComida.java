@@ -9,6 +9,7 @@ package io.github.fernandasj.controle;
 import io.github.fernandasj.dao.ComidaDao;
 import io.github.fernandasj.modelo.Comida;
 import io.github.fernandasj.repository.DaoFactoryIF;
+import java.sql.SQLException;
 
 /**
  *
@@ -25,5 +26,9 @@ public class GerenciadorComida {
     
     public boolean Deletar (int idComida) throws Exception{
         return dao.deletar(idComida);
+    }
+    
+    public boolean Atualizar (Comida comida) throws SQLException{
+        return dao.atualizar(comida);
     }
 }
