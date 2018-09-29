@@ -54,14 +54,16 @@ public class ComidaDao implements ComidaDaoIF {
             Logger.getLogger(ComidaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT * FROM comida WHERE idComida= ?";
+        String sql = "SELECT * FROM comida WHERE idComida = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, idComida);
         ResultSet resultado = stmt.executeQuery();
 
         if (resultado.next()) {
-            Comida c = new Comida(resultado.getString("descricao"), resultado.getFloat("nota"), 
-                    resultado.getFloat("preco"), resultado.getString("nome"), resultado.getString("foto"));
+            Comida c = new Comida(resultado.getInt("idComida"), resultado.getString("descricao"), 
+                    resultado.getFloat("nota"), resultado.getFloat("preco"), resultado.getString("nome"), 
+                    resultado.getInt("idEstabelecimento"), resultado.getString("foto"));
+
             resultado.close();
             stmt.close();
             con.close();
@@ -86,14 +88,16 @@ public class ComidaDao implements ComidaDaoIF {
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ComidaDao.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String sql = "UPDATE COMIDA SET descricao =?,nota = ?"
-                    + "preco = ?,nome = ?, foto = ?";
+
+            String sql = "UPDATE comida SET descricao = ?, nome = ?, preco = ?, foto = ? WHERE idcomida = ?";
+
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setString(1, obj.getDescricao());
-            stmt.setDouble(2, obj.getNota());
+            stmt.setString(2, obj.getNome());
             stmt.setDouble(3, obj.getPreco());
-            stmt.setString(4, obj.getNome());
-            stmt.setString(5, obj.getFoto());
+            stmt.setString(4, obj.getFoto());
+            stmt.setInt(5, obj.getIdComida());
+            System.out.println("Foto da atualização: " + obj.getFoto());
             
             stmt.execute();  
             stmt.close();

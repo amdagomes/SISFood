@@ -255,6 +255,10 @@ div.estrelas input[type=radio] {
   color: #FC0;
 }
 
+.item-cardapio .media-right a:first-child{
+    margin-right: .5rem;
+}
+
 .modal{
     max-width: 750px;
 }

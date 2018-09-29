@@ -79,7 +79,7 @@
                                     </div>
 
                                     <div class="level-right">
-                                        <a href="#adc-prato" rel="modal:open" title="Adicionar prato">
+                                        <a class="has-text-success" href="#adc-prato" rel="modal:open" title="Adicionar prato">
                                             <span class="icon is-medium">
                                                 <i class="fas fa-plus-circle"></i>
                                             </span>
@@ -115,56 +115,96 @@
 
                                     <div class="media-right">
                                         <div class="level">
-                                            <a class="level-item" title="Deletar" href="front?action=DeletarComida&idComida=${comida.idComida}">
-                                                <span class="icon is-small"><i class="fas fa-trash-alt"></i></i></span>
+                                            <a class="level-item" title="Editar" href="#${comida.idComida}" rel="modal:open">
+                                                <span class="icon is-small"><i class="fas fa-pencil-alt"></i></span>
+                                            </a>
+                                            <a class="level-item has-text-danger" title="Deletar" href="front?action=DeletarComida&idComida=${comida.idComida}">
+                                                <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>
                                             </a>
                                         </div>
                                     </div>
                                 </article>
+                                <!--EDITAR PRATO NO CARDAPIO-->
+
+                                <form id="${comida.idComida}" class="form-cardapio modal" method="post" action="front?action=AtualizarComida" enctype="multipart/form-data">
+                                    <input type="hidden" value="${comida.idComida}" name="idComida">
+                                    <p class="title is-size-5">Editar prato</p>
+                                    <div class="field is-grouped">
+                                        <p class="control is-expanded">
+                                            <input class="input is-small" type="text" value="${comida.nome}" name="nome">
+                                        </p>
+                                        <p class="control">
+                                            <input class="input is-small" type="text" value="${comida.preco}" name="preco">
+                                        </p>
+                                    </div>
+
+                                    <textarea class="textarea"  rows="2" name="descricao">${comida.descricao}</textarea>
+
+                                    <div class="file is-small file-custom">
+                                        <span class="file-name" id="filename"></span>
+
+                                        <label class="file-label">
+                                            <input class="file-input" type="file" name="foto" value="${comida.foto}" id="file">
+                                            <span class="file-cta">
+                                                <span class="file-icon">
+                                                    <i class="fas fa-upload"></i>
+                                                </span>
+                                                <span class="file-label">
+                                                    Selecione uma foto…
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="button is-success is-fullwidth" type="submit" value="Adicionar">
+                                        </div>
+                                    </div>    
+                                </form> 
                             </c:forEach>
                         </div>
                     </div>                           
                 </div>
         </section>
+        
+        <!--MODAL CADASTRAR COMIDA-->
+        <form id="adc-prato" class="form-cardapio modal" method="post" action="front?action=CadastroComida" enctype="multipart/form-data">
+            <p class="title is-size-5">Adicionar prato ao cardapio</p>
+            <div class="field is-grouped">
+                <p class="control is-expanded">
+                    <input class="input is-small" type="text" placeholder="Nome" name="nome">
+                </p>
+                <p class="control">
+                    <input class="input is-small" type="text" placeholder="Ex.: 10.50" name="preco">
+                </p>
+            </div>
 
-        <!--MODAL PARA ADICIONAR PRATO NO CARDAPIO-->
-            <form id="adc-prato" class="form-cardapio modal" method="post" action="front?action=CadastroComida" enctype="multipart/form-data">
-                <p class="title is-size-5">Adicionar prato ao cardápio</p>
-                <div class="field is-grouped">
-                    <p class="control is-expanded">
-                        <input class="input is-small" type="text" placeholder="Nome" name="nome">
-                    </p>
-                    <p class="control">
-                        <input class="input is-small" type="text" placeholder="Preço. Ex.: 10.00" name="preco">
-                    </p>
-                </div>
+            <textarea class="textarea"  rows="2" name="descricao" placeholder="Descrição..."></textarea>
 
-                <textarea class="textarea" placeholder="Descrição..." rows="2" name="descricao"></textarea>
+            <div class="file is-small file-custom">
+                <span class="file-name" id="filename"></span>
 
-                <div class="file is-small file-custom">
-                    <span class="file-name" id="filename"></span>
-
-                    <label class="file-label">
-                        <input class="file-input" type="file" name="foto" id="file">
-                        <span class="file-cta">
-                            <span class="file-icon">
-                                <i class="fas fa-upload"></i>
-                            </span>
-                            <span class="file-label">
-                                Selecione uma foto…
-                            </span>
+                <label class="file-label">
+                    <input class="file-input" type="file" name="foto" id="file">
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
                         </span>
-                    </label>
+                        <span class="file-label">
+                            Selecione uma foto…
+                        </span>
+                    </span>
+                </label>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <input class="button is-success is-fullwidth" type="submit" value="Adicionar">
                 </div>
-
-                <div class="field">
-                    <div class="control">
-                        <input class="button is-success is-fullwidth" type="submit" value="Adicionar">
-                    </div>
-                </div>    
-            </form>   
-
-
+            </div>    
+        </form> 
+                    
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
         <script>
@@ -185,9 +225,7 @@
             file.onchange = function () {
                 if (file.files.length > 0)
                 {
-
                     document.getElementById('filename').innerHTML = file.files[0].name;
-
                 }
             };
 

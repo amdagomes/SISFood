@@ -49,7 +49,6 @@ public class Comida {
         this.foto = foto;
     }
 
-
     public int getIdComida() {
         return idComida;
     }
