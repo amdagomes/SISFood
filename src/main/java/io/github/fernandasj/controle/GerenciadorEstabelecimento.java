@@ -41,4 +41,8 @@ public class GerenciadorEstabelecimento {
     public Estabelecimento buscarPorId(int id) throws SQLException{
         return estabelecimentoDao.buscarPorId(id);
     }
+    
+    public boolean atualizarPerfil(Estabelecimento obj) throws SQLException{
+        return estabelecimentoDao.atualizar(obj);
+    }
 }

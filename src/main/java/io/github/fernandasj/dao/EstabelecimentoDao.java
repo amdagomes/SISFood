@@ -85,8 +85,7 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
 
     @Override
     public boolean atualizar(Estabelecimento obj) throws SQLException {
-        Estabelecimento e = buscar(obj.getNome());
-        if (e == null) {
+        if (obj == null) {
             return false;
         } else {
 
@@ -96,22 +95,22 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
                 Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
             }
             String sql = "UPDATE Estabelecimento SET nome = ?, telefone = ?, fotoEstabelecimento = ?, categoria = ?,"
-                    + "nota = ?, descricao = ?, rua = ?, estado = ?, cidade = ?, cep = ?, dia = ?, horaAbre = ?, horaFecha = ?";
+                    + "descricao = ?, rua = ?, estado = ?, cidade = ?, cep = ?, horaAbre = ?, horaFecha = ? "
+                    + "WHERE idestabelecimento = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
 
             stmt.setString(1, obj.getNome());
             stmt.setString(2, obj.getTelefone());
-            stmt.setString(3, obj.getCategoria());
-            stmt.setFloat(4, obj.getNota());
+            stmt.setString(3, obj.getFoto());
+            stmt.setString(4, obj.getCategoria());
             stmt.setString(5, obj.getDescricao());
             stmt.setString(6, obj.getRua());
             stmt.setString(7, obj.getEstado());
             stmt.setString(8, obj.getCidade());
             stmt.setString(9, obj.getCep());
-            stmt.setString(10, obj.getDia());
-            stmt.setTime(11, obj.getHoraAbre());
-            stmt.setTime(12, obj.getHoraFecha());
-
+            stmt.setTime(10, obj.getHoraAbre());
+            stmt.setTime(11, obj.getHoraFecha());
+            stmt.setInt(12, obj.getId());
             stmt.execute();
 
             stmt.close();

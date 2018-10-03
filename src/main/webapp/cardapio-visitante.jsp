@@ -56,7 +56,7 @@
                                                 <i class="fas fa-power-off"></i>
                                             </span>
                                             Sair
-                                        </li></a>
+                                    </li></a>
                                 </ul>       
                             </aside>
                         </div>

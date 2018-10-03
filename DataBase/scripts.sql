@@ -102,7 +102,6 @@ CREATE TABLE AvaliarComida(
     consumidor int NOT NULL,
     estabelecimento int NOT NULL,
     nota numeric(5,2) NOT NULL,
-    comentario varchar(500),
     comida int,
     PRIMARY KEY(idAvaliacao),
     FOREIGN KEY(consumidor) REFERENCES Usuario(idUsuario),
@@ -110,6 +109,15 @@ CREATE TABLE AvaliarComida(
     FOREIGN KEY(comida) REFERENCES Comida(idComida)
 );
 
+CREATE TABLE ComentarComida(
+    idComentario serial,
+    usuario int,
+    comida int,
+    comentario varchar(255),
+    PRIMARY KEY(idComentario),
+    FOREIGN KEY(usuario) REFERENCES Usuario(idUsuario)
+);
+                                                                                           
 CREATE TABLE RecomendarComida(
     idRecomendacao serial,
     comida int NOT NULL,
@@ -142,6 +150,4 @@ CREATE TABLE SolicitaAmizade(
     PRIMARY KEY(idSolicitacao),
     FOREIGN KEY(destinatario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(remetente) REFERENCES Usuario(idUsuario)
-);
-
-
+);                                                                                        
