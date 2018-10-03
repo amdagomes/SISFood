@@ -51,7 +51,7 @@ public class AtualizaPerfil implements Command {
               
             HttpSession session = request.getSession();
             
-            session.removeAttribute("usuario");
+            //session.removeAttribute("usuario");
             
             session.setAttribute("usuario", userDao.buscaUsuario(email));
             response.sendRedirect("perfil-usuario.jsp");

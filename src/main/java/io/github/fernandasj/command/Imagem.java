@@ -21,8 +21,6 @@ import javax.servlet.http.Part;
  * @author Amanda
  */
 public class Imagem {
-    
-    private static int cont = 0;
 
     public static boolean setImage(int id, Part foto, String prefix) throws ServletException, SQLException, ClassNotFoundException {
         GerenciadorUsuario userDao = new GerenciadorUsuario();
@@ -53,7 +51,6 @@ public class Imagem {
     public static String setImg(Part foto, String nome, String tipo) {
 
         try {
-            cont++;
             
             InputStream input = foto.getInputStream();
             BufferedImage imagem = ImageIO.read(input);

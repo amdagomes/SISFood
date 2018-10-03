@@ -125,7 +125,7 @@
                                                     <label class="has-text-weight-normal label is-right">Foto</label>
                                                     <div class="file is-small  is-right">
                                                         <label class="file-label">
-                                                            <input class="file-input" type="file" name="resume" id="file" >
+                                                            <input class="file-input" type="file" name="foto" id="file" >
                                                             <span class="file-cta">
                                                                 <span class="file-icon">
                                                                     <i class="fas fa-upload"></i>
@@ -138,6 +138,22 @@
                                                                 ${sessionScope.estabelecimento.foto}
                                                             </span>
                                                         </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="column is-2">
+                                                <div class="field">
+                                                    <label class="has-text-weight-normal label is-left">Abre às</label>
+                                                    <div class="control">
+                                                        <input class="input is-small" type="time" name="horaAbre" value="${sessionScope.estabelecimento.horaAbre}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="column is-2">
+                                                <div class="field">
+                                                    <label class="has-text-weight-normal label is-left">Fecha às</label>
+                                                    <div class="control">
+                                                        <input class="input is-small" type="time" name="horaFecha" value="${sessionScope.estabelecimento.horaFecha}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -180,7 +196,7 @@
                                                             <input class="button is-fullwidth is-success is-rounded" type="submit" value="Atualizar">
                                                         </div>
                                                     </div>
-                                                    
+
                                                     <div class="column">
                                                         <div class="control">
                                                             <input class="button is-fullwidth is-danger is-rounded" type="submit" value="Deletar Página">
@@ -207,7 +223,7 @@
             dropdown.addEventListener('click', () => {
                 dropdown.classList.toggle('is-active');
             });
-            
+
             var file = document.getElementById("file");
             file.onchange = function () {
                 if (file.files.length > 0)
