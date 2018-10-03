@@ -45,7 +45,7 @@
                                 <ul>
                                     <a href="front?action=Inicio"><li>Inicio</li></a>
                                     <li>
-                                        <p class="menu-label">Nome do estabelecimento</p>
+                                        <p class="menu-label">MINHA PÁGINA</p>
                                         <ul>
                                             <a href="estabelecimento.jsp"><li class="link-ativo">Feed</li></a>
                                             <a href="cardapio.jsp"><li>Cardápio</li></a>

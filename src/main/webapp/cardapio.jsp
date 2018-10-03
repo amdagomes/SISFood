@@ -46,11 +46,11 @@
                                 <ul>
                                     <a href="front?action=Inicio"><li>Inicio</li></a>
                                     <li>
-                                        <p class="menu-label">Nome do estabelecimento</p>
+                                        <p class="menu-label">MINHA PÁGINA</p>
                                         <ul>
                                             <a href="estabelecimento.jsp"><li>Feed</li></a>
                                             <a href="cardapio.jsp"><li class="link-ativo">Cardápio</li></a>
-                                            <a href="perfil-estabelecimento"><li>Mais Informações</li></a>
+                                            <a href="perfil-estabelecimento.jsp"><li>Perfil</li></a>
                                         </ul>
                                     </li>
                                     <a href="front?action=Logout"><li class="menu-label">
