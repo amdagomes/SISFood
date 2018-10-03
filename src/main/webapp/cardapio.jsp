@@ -1,3 +1,4 @@
+
 <%-- 
     Document   : cardapio
     Created on : 18/09/2018, 11:12:19
@@ -46,11 +47,11 @@
                                 <ul>
                                     <a href="front?action=Inicio"><li>Inicio</li></a>
                                     <li>
-                                        <p class="menu-label">Nome do estabelecimento</p>
+                                        <p class="menu-label">MINHA PÁGINA</p>
                                         <ul>
                                             <a href="estabelecimento.jsp"><li>Feed</li></a>
                                             <a href="cardapio.jsp"><li class="link-ativo">Cardápio</li></a>
-                                            <a href="perfil-estabelecimento"><li>Mais Informações</li></a>
+                                            <a href="perfil-estabelecimento.jsp"><li>Perfil</li></a>
                                         </ul>
                                     </li>
                                     <a href="front?action=Logout"><li class="menu-label">
@@ -212,15 +213,12 @@
             dropdown.addEventListener('click', () => {
                 dropdown.classList.toggle('is-active');
             });
-
             $("#showModal").click(function () {
                 $(".modal").addClass("is-active");
             });
-
             $(".modal-close").click(function () {
                 $(".modal").removeClass("is-active");
             });
-
             var file = document.getElementById("file");
             file.onchange = function () {
                 if (file.files.length > 0)
@@ -228,7 +226,6 @@
                     document.getElementById('filename').innerHTML = file.files[0].name;
                 }
             };
-
         </script>
     </body>
 </html>
