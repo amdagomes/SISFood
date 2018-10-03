@@ -3,7 +3,7 @@
     Created on : 22/09/2018, 21:39:24
     Author     : Amanda
 --%>
-
+<%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -75,19 +75,23 @@
                                     </div>
                                 </nav>
                             </div>
-
+                            
+                            <jsp:useBean id="dao" class="io.github.fernandasj.dao.ComidaDao"/>
+                            <c:forEach var="comida" items="${dao.buscarPorEstabelecimento(sessionScope.estabelecimento.id)}">
                             <article class="media item-cardapio">
                                 <figure class="media-left">
                                     <p class="image is-128x128">
-                                        <img src="https://bulma.io/images/placeholders/128x128.png">
+                                        <img src="${comida.foto}">
                                     </p>
                                 </figure>
                                 <div class="media-content">
                                     <div class="content">
                                         <p>
-                                            <strong>Nome</strong> <small>Preço: $</small>
+                                            <a class="level-item" title="Editar" href="${comida.idComida}" rel="modal:open">
+                                                <strong>${comida.nome}</strong>
+                                            </a> <small>Preço: R$  ${comida.preco}</small>
                                             <br>
-                                            Descrição... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem.
+                                            ${comida.descricao}
                                             <br> 
                                         </p>
                                     </div>
@@ -132,7 +136,45 @@
                                 </div>
 
                             </article>
+                            <!--EDITAR PRATO NO CARDAPIO-->
 
+                                <form id="${comida.idComida}" class="form-cardapio modal" method="post" action="front?action=AtualizarComida" enctype="multipart/form-data">
+                                    <input type="hidden" value="${comida.idComida}" name="idComida">
+                                    <p class="title is-size-5">Editar prato</p>
+                                    <div class="field is-grouped">
+                                        <p class="control is-expanded">
+                                            <input class="input is-small" type="text" value="${comida.nome}" name="nome">
+                                        </p>
+                                        <p class="control">
+                                            <input class="input is-small" type="text" value="${comida.preco}" name="preco">
+                                        </p>
+                                    </div>
+
+                                    <textarea class="textarea"  rows="2" name="descricao">${comida.descricao}</textarea>
+
+                                    <div class="file is-small file-custom">
+                                        <span class="file-name" id="filename"></span>
+
+                                        <label class="file-label">
+                                            <input class="file-input" type="file" name="foto" value="${comida.foto}" id="file">
+                                            <span class="file-cta">
+                                                <span class="file-icon">
+                                                    <i class="fas fa-upload"></i>
+                                                </span>
+                                                <span class="file-label">
+                                                    Selecione uma foto…
+                                                </span>
+                                            </span>
+                                        </label>
+                                    </div>
+
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="button is-success is-fullwidth" type="submit" value="Adicionar">
+                                        </div>
+                                    </div>    
+                                </form> 
+                            </c:forEach>
                         </div>
                     </div>  
                 </div>
@@ -148,6 +190,14 @@
             const dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', () => {
                 dropdown.classList.toggle('is-active');
+            });
+            
+            $("#showModal").click(function () {
+                $(".modal").addClass("is-active");
+            });
+
+            $(".modal-close").click(function () {
+                $(".modal").removeClass("is-active");
             });
 
             $(function () {
