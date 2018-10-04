@@ -121,9 +121,9 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
     }
 
     @Override
-    public boolean deletar(String nome) throws SQLException {
+    public boolean deletar(int id) throws SQLException {
 
-        if (buscar(nome) != null) {
+        if (buscarPorId(id) != null) {
 
             try {
                 con = ConnectionFactory.getConnection();
@@ -131,9 +131,9 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
                 Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            String sql = "DELETE FROM Estabelecimento WHERE nome= ?";
+            String sql = "DELETE FROM Estabelecimento WHERE idestabelecimento = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, nome);
+            stmt.setInt(1, id);
             stmt.execute();
             stmt.close();
             con.close();
@@ -141,6 +141,7 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
         }
         return false;
     }
+    
      public void recomendaEstabelecimento(int remetente, int destinatario, String comentario)
             throws SQLException {
 

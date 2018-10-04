@@ -73,8 +73,8 @@ public class UsuarioDao implements Dao<Usuario> {
     }
 
     @Override
-    public boolean deletar(String email) throws SQLException {
-        if (buscar(email) != null) {
+    public boolean deletar(int id) throws SQLException {
+        if (buscarPorId(id) != null) {
 
             try {
                 con = ConnectionFactory.getConnection();
@@ -84,9 +84,9 @@ public class UsuarioDao implements Dao<Usuario> {
                 Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            String sql = "DELETE FROM Usuario WHERE email= ?";
+            String sql = "DELETE FROM Usuario WHERE idusuario = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, email);
+            stmt.setInt(1, id);
             stmt.execute();
             stmt.close();
             con.close();

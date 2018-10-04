@@ -45,4 +45,8 @@ public class GerenciadorEstabelecimento {
     public boolean atualizarPerfil(Estabelecimento obj) throws SQLException{
         return estabelecimentoDao.atualizar(obj);
     }
+    
+    public boolean deletar(int id) throws SQLException{
+        return estabelecimentoDao.deletar(id);
+    }
 }
