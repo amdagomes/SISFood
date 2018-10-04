@@ -6,6 +6,7 @@ import io.github.fernandasj.repository.DaoFactory;
 import io.github.fernandasj.repository.DaoFactoryIF;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -45,5 +46,9 @@ public class GerenciadorUsuario {
     
     public boolean atualizar(Usuario obj) throws SQLException{
         return userDao.atualizar(obj);
+    }
+    
+    public List<Usuario> listarPorNome(String nome) throws SQLException{
+        return userDao.listarPorNome(nome);
     }
 }

@@ -27,7 +27,7 @@ public class PaginaEstabelecimento implements Command{
         try {
             GerenciadorEstabelecimento gEstbl = new GerenciadorEstabelecimento();
             Estabelecimento e = gEstbl.buscarPorId(id);
-            System.out.println("Estabelecimneto: " + e);
+
             HttpSession session = request.getSession();
             session.setAttribute("estabelecimento", e);
             

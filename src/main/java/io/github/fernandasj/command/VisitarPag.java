@@ -10,30 +10,38 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class VisitarPagina implements Command{
+public class VisitarPag implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         HttpSession session = request.getSession();
         String tipo = request.getParameter("t");
+        String pag = request.getParameter("pag");
         int id = Integer.parseInt(request.getParameter("id"));
-        System.out.println("Tipo: " + tipo);
-        System.out.println("Id: " + id);
+
         try {
             GerenciadorEstabelecimento gEstbl = new GerenciadorEstabelecimento();
             GerenciadorUsuario gUsuario = new GerenciadorUsuario();
-            
-            if(tipo.equals("u")){
+
+            if (tipo.equals("u")) {
                 session.setAttribute("visita", gUsuario.buscaPorId(id));
-                request.getRequestDispatcher("cardapio-visitante.jsp").forward(request, response);
-            } else{
+                if (pag.equals("user")) {
+                    request.getRequestDispatcher("visita-user.jsp").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("cardapio-visitante.jsp").forward(request, response);
+                }
+            } else {
                 session.setAttribute("visita", gEstbl.buscarPorId(id));
-                request.getRequestDispatcher("cardapio-visitante.jsp").forward(request, response);
+                if (pag.equals("estbl")) {
+                    request.getRequestDispatcher("visita-estbl.jsp").forward(request, response);
+                } else {
+                    request.getRequestDispatcher("cardapio-visitante.jsp").forward(request, response);
+                } 
             }
         } catch (Exception ex) {
-            Logger.getLogger(VisitarPagina.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(VisitarPag.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
 }

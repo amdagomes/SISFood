@@ -22,7 +22,7 @@
             <div id="navMenu" class="navbar-menu">
                 <div class="navbar-end has-text-centered-mobile">
                     <div class="navbar-item">
-                        <form method="post" class="search">
+                        <form method="post" class="search" action="front?action=Buscar">
                             <div class="field has-addons">
                                 <div class="control">
                                     <input class="input is-small" type="text" placeholder="Search.." name="search">
