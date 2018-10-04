@@ -5,20 +5,38 @@
  */
 package io.github.fernandasj.modelo;
 
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Objects;
 
 
-public class chekin {
+public class Chekin {
    private int chekin;
    private Timestamp horario;
+   private LocalDate dia;
    private int consumidor;
    private int estabelecimento;
 
-    public chekin(int chekin, Timestamp horario) {
+    public Chekin(int chekin, Timestamp horario) {
         this.chekin = chekin;
         this.horario = horario;
     }
+
+    public Chekin(){}
+    
+    public Chekin(Timestamp horario, LocalDate dia, int consumidor, int estabelecimento) {
+        this.horario = horario;
+        this.dia = dia;
+        this.consumidor = consumidor;
+        this.estabelecimento = estabelecimento;
+    }
+
+    public Chekin (Timestamp horario, LocalDate dia){
+        this.horario = horario;
+        this.dia = dia;
+    }
+    
 
     public int getChekin() {
         return chekin;
@@ -44,6 +62,10 @@ public class chekin {
         this.horario = horario;
     }
 
+    public LocalDate getDia() {
+        return dia;
+    }
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -65,7 +87,7 @@ public class chekin {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final chekin other = (chekin) obj;
+        final Chekin other = (Chekin) obj;
         if (this.chekin != other.chekin) {
             return false;
         }

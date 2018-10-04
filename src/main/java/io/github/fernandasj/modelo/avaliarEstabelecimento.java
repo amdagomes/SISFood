@@ -13,13 +13,13 @@ import java.util.Objects;
  */
 public class avaliarEstabelecimento {
     private int idAvaliacao;
-    private int consumidr;
+    private int consumidor;
     private int estabelecimento;
     private float nota;
     private String comentario;
 
-    public avaliarEstabelecimento(int consumidr, int estabelecimento, float nota, String comentario) {
-        this.consumidr = consumidr;
+    public avaliarEstabelecimento(int consumidor, int estabelecimento, float nota, String comentario) {
+        this.consumidor = consumidor;
         this.estabelecimento = estabelecimento;
         this.nota = nota;
         this.comentario = comentario;
@@ -29,8 +29,8 @@ public class avaliarEstabelecimento {
         return idAvaliacao;
     }
 
-    public int getConsumidr() {
-        return consumidr;
+    public int getConsumidor() {
+        return consumidor;
     }
 
     public int getEstabelecimento() {
@@ -49,8 +49,8 @@ public class avaliarEstabelecimento {
         this.idAvaliacao = idAvaliacao;
     }
 
-    public void setConsumidr(int consumidr) {
-        this.consumidr = consumidr;
+    public void setConsumidor(int consumidor) {
+        this.consumidor = consumidor;
     }
 
     public void setEstabelecimento(int estabelecimento) {
@@ -69,7 +69,7 @@ public class avaliarEstabelecimento {
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + this.idAvaliacao;
-        hash = 67 * hash + this.consumidr;
+        hash = 67 * hash + this.consumidor;
         hash = 67 * hash + this.estabelecimento;
         hash = 67 * hash + Float.floatToIntBits(this.nota);
         hash = 67 * hash + Objects.hashCode(this.comentario);
@@ -91,7 +91,7 @@ public class avaliarEstabelecimento {
         if (this.idAvaliacao != other.idAvaliacao) {
             return false;
         }
-        if (this.consumidr != other.consumidr) {
+        if (this.consumidor != other.consumidor) {
             return false;
         }
         if (this.estabelecimento != other.estabelecimento) {
@@ -108,7 +108,8 @@ public class avaliarEstabelecimento {
 
     @Override
     public String toString() {
-        return "avaliarEstabelecimento{" + "idAvaliacao=" + idAvaliacao + ", consumidr=" + consumidr + ", estabelecimento=" + estabelecimento + ", nota=" + nota + ", comentario=" + comentario + '}';
+        return "avaliarEstabelecimento{" + "idAvaliacao=" + idAvaliacao + ", consumidr=" + consumidor + 
+                ", estabelecimento=" + estabelecimento + ", nota=" + nota + ", comentario=" + comentario + '}';
     }
     
 }

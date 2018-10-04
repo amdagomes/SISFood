@@ -5,7 +5,6 @@
  */
 package io.github.fernandasj.modelo;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 /**
@@ -15,19 +14,39 @@ import java.util.Objects;
 public class Comida {
     private int idComida;
     private String descricao;
-    private float nota;
-    private float preco;
+    private double nota;
+    private double preco;
     private String nome;
-    private int idUsuario;
-    private LocalDate horaFuncionamento;
+    private String foto;
+    private int idEstabelecimento;
+   
+    public Comida(){}
 
-    public Comida(String descricao, float nota, float preco, String nome,  LocalDate horaFuncionamento) {
+    public Comida(int idComida, String descricao, double nota, double preco, String nome, int idEstabelecimento, String foto) {
+        this.idComida = idComida;
         this.descricao = descricao;
         this.nota = nota;
         this.preco = preco;
         this.nome = nome;
-        
-        this.horaFuncionamento = horaFuncionamento;
+        this.idEstabelecimento = idEstabelecimento;
+        this.foto = foto;
+       
+    }
+
+    public Comida(int idEstabelecimento,String descricao, double preco, String nome, String foto) {
+        this.idEstabelecimento = idEstabelecimento;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.nome = nome;
+        this.foto = foto;
+    }
+
+   public Comida(String descricao, double nota, double preco, String nome, String foto) {
+        this.descricao = descricao;
+        this.nota = nota;
+        this.preco = preco;
+        this.nome = nome;
+        this.foto = foto;
     }
 
     public int getIdComida() {
@@ -46,19 +65,19 @@ public class Comida {
         this.descricao = descricao;
     }
 
-    public float getNota() {
+    public double getNota() {
         return nota;
     }
 
-    public void setNota(float nota) {
+    public void setNota(double nota) {
         this.nota = nota;
     }
 
-    public float getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(float preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 
@@ -70,32 +89,32 @@ public class Comida {
         this.nome = nome;
     }
 
-    public int getIdUsuario() {
-        return idUsuario;
+    public int getIdEstabelecimento() {
+        return idEstabelecimento;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdEstabelecimento(int idEstabelecimento) {
+        this.idEstabelecimento = idEstabelecimento;
     }
 
-    public LocalDate getHoraFuncionamento() {
-        return horaFuncionamento;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setHoraFuncionamento(LocalDate horaFuncionamento) {
-        this.horaFuncionamento = horaFuncionamento;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.idComida;
-        hash = 53 * hash + Objects.hashCode(this.descricao);
-        hash = 53 * hash + Float.floatToIntBits(this.nota);
-        hash = 53 * hash + Float.floatToIntBits(this.preco);
-        hash = 53 * hash + Objects.hashCode(this.nome);
-        hash = 53 * hash + this.idUsuario;
-        hash = 53 * hash + Objects.hashCode(this.horaFuncionamento);
+        int hash = 5;
+        hash = 67 * hash + this.idComida;
+        hash = 67 * hash + Objects.hashCode(this.descricao);
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.nota) ^ (Double.doubleToLongBits(this.nota) >>> 32));
+        hash = 67 * hash + (int) (Double.doubleToLongBits(this.preco) ^ (Double.doubleToLongBits(this.preco) >>> 32));
+        hash = 67 * hash + Objects.hashCode(this.nome);
+        hash = 67 * hash + Objects.hashCode(this.foto);
+        hash = 67 * hash + this.idEstabelecimento;
         return hash;
     }
 
@@ -114,13 +133,13 @@ public class Comida {
         if (this.idComida != other.idComida) {
             return false;
         }
-        if (Float.floatToIntBits(this.nota) != Float.floatToIntBits(other.nota)) {
+        if (Double.doubleToLongBits(this.nota) != Double.doubleToLongBits(other.nota)) {
             return false;
         }
-        if (Float.floatToIntBits(this.preco) != Float.floatToIntBits(other.preco)) {
+        if (Double.doubleToLongBits(this.preco) != Double.doubleToLongBits(other.preco)) {
             return false;
         }
-        if (this.idUsuario != other.idUsuario) {
+        if (this.idEstabelecimento != other.idEstabelecimento) {
             return false;
         }
         if (!Objects.equals(this.descricao, other.descricao)) {
@@ -129,7 +148,7 @@ public class Comida {
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
-        if (!Objects.equals(this.horaFuncionamento, other.horaFuncionamento)) {
+        if (!Objects.equals(this.foto, other.foto)) {
             return false;
         }
         return true;
@@ -137,8 +156,8 @@ public class Comida {
 
     @Override
     public String toString() {
-        return "Comida{" + "idComida=" + idComida + ", descricao=" + descricao + ", nota=" + nota + ", preco=" + preco + ", nome=" + nome + ", idUsuario=" + idUsuario + ", horaFuncionamento=" + horaFuncionamento + '}';
+        return "Comida{" + "idComida=" + idComida + ", descricao=" + descricao + ", nota=" + nota + ", preco=" 
+                + preco + ", nome=" + nome + ", foto=" + foto + ", idEstabelecimento=" + idEstabelecimento + '}';
     }
-    
-    
+
 }

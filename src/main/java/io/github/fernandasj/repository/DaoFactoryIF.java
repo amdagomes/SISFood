@@ -1,11 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package io.github.fernandasj.repository;
 
-import io.github.fernandasj.modelo.Usuario;
+import io.github.fernandasj.dao.AvaliarComidaDao;
+import io.github.fernandasj.dao.AvaliarEstabelecimentoDao;
+import io.github.fernandasj.dao.ComidaDao;
+import io.github.fernandasj.dao.EstabelecimentoDao;
+import io.github.fernandasj.dao.UsuarioDao;
 import java.sql.SQLException;
 
 /**
@@ -13,5 +12,15 @@ import java.sql.SQLException;
  * @author Amanda
  */
 public interface DaoFactoryIF {
-     public Usuario criaConsumidorDao()  throws SQLException, ClassNotFoundException;
+     
+    public UsuarioDao criaUsuarioDao()  throws SQLException, ClassNotFoundException;
+     
+    public EstabelecimentoDao criaEstabelecimentoDao() throws SQLException, ClassNotFoundException; 
+    
+    public ComidaDao criaComidaDao() throws SQLException, ClassNotFoundException;
+    
+    public AvaliarComidaDao criaAvaliarComidaDao() throws SQLException, ClassNotFoundException;
+    
+    public AvaliarEstabelecimentoDao criaAvaliaEstabelecimentoDao() throws SQLException, ClassNotFoundException;
+    
 }
