@@ -32,7 +32,7 @@ public class Comentar implements Command{
         try {
             
             if(gC.adiciona( comentario,usuario.getId(),Integer.parseInt(idPublicacao))){
-                response.sendRedirect("home.jsp"); 
+               request.getRequestDispatcher("home.jsp").forward(request, response);
             }
             else{
                  response.sendRedirect("index.jsp");

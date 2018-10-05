@@ -30,7 +30,7 @@ public class Publicar implements Command {
 
         try {
             if(gp.adiciona(usuario.getId(), texto)){
-                response.sendRedirect("home.jsp"); 
+               request.getRequestDispatcher("home.jsp").forward(request, response);
             }
             else{
                  response.sendRedirect("index.jsp");

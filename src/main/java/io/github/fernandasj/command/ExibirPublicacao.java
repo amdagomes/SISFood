@@ -44,9 +44,9 @@ public class ExibirPublicacao implements Command {
                 Usuario user = gU.buscaPorId(idUsuario);
                  
                 request.setAttribute("user", user);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("home.jsp");
-                dispatcher.forward(request, response);
-                 System.out.println(publicacao.getIdUsuario());
+                response.sendRedirect("home.jsp");
+                
+               
             } catch (SQLException ex) {
                 Logger.getLogger(ExibirPublicacao.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
