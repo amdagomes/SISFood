@@ -44,7 +44,7 @@
                             <aside class="menu">
 
                                 <ul>
-                                    <a href="front?action=Incio"><li class="link-ativo">Feed</li></a>
+                                    <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
                                     <a href="perfil-usuario.jsp"><li>Perfil</li></a>
                                     <li>
                                         <a href="home.jsp"><p class="menu-label">voltar</p></a>
