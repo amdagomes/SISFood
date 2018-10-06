@@ -77,7 +77,7 @@
                             </div>
                             
                             <jsp:useBean id="dao" class="io.github.fernandasj.dao.ComidaDao"/>
-                            <c:forEach var="comida" items="${dao.buscarPorEstabelecimento(8)}">
+                            <c:forEach var="comida" items="${dao.buscarPorEstabelecimento(sessionScope.visita.id)}">
                             <article class="media item-cardapio">
                                 <figure class="media-left">
                                     <p class="image is-128x128">
