@@ -281,6 +281,14 @@ div.estrelas input[type=radio] {
     z-index: 1;
 }
 
+div.dropdown-menu .dropdown-content{
+    min-width: 250px;
+}
+.navbar-item div.dropdown-content figure img{
+    height: 100% !important;
+    max-height: 64px;
+}
+
 div.r-usuarios figure, div.r-estabelecimentos figure{
     max-height: 150px;
     width: 150px;

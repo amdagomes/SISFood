@@ -55,25 +55,33 @@ public class AmizadeDao implements AmizadeDaoIF<SolicitaAmizade>{
     }
 
     @Override
-    public boolean isAmigo(int remetente, int destintario) throws ClassNotFoundException, SQLException {
+    public SolicitaAmizade isAmigo(int remetente, int destinatario) throws ClassNotFoundException, SQLException {
         con = ConnectionFactory.getConnection();
         
-        String sql = "SELECT * FROM solicitaamizade WHERE remetente = ? AND destinatario = ?";
+        String sql = "SELECT * FROM solicitaamizade WHERE (remetente = ? AND destinatario = ?) OR (remetente = ? AND destinatario = ?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, remetente);
-        stmt.setInt(2, destintario);
+        stmt.setInt(2, destinatario);
+        stmt.setInt(3, remetente);
+        stmt.setInt(4, destinatario);
         
         ResultSet rs = stmt.executeQuery();
         
+        SolicitaAmizade sa = new SolicitaAmizade();
+        
         if(rs.next()){
-            con.close();
-            return true;
+            sa.setDestinatario(rs.getInt("destinatario"));
+            sa.setRemetente(rs.getInt("remetente"));
+            sa.setSolicitacao(rs.getString("situacao"));
+            sa.setIdSolicitacao(rs.getInt("idsolicitacao"));
+            return sa;
         }
         
         con.close();
-        return false;
+        return null;
     }
     
+    //apagar metodo situacao
     public String situacao(int remetente, int destinatario) throws ClassNotFoundException, SQLException{
         con = ConnectionFactory.getConnection();
         
@@ -116,7 +124,7 @@ public class AmizadeDao implements AmizadeDaoIF<SolicitaAmizade>{
             
             lista.add(sa);
         }
-        
+
         con.close();
         
         return lista;
@@ -139,5 +147,30 @@ public class AmizadeDao implements AmizadeDaoIF<SolicitaAmizade>{
             con.close();
             return 0;
         }
+    }
+    
+    public List listaSolicitacoes(int id) throws SQLException, ClassNotFoundException{
+        con = ConnectionFactory.getConnection();
+        
+        String sql = "SELECT * FROM solicitaamizade WHERE destinatario = ? AND situacao = ?";
+        PreparedStatement stmt = con.prepareStatement(sql); 
+        stmt.setInt(1, id);
+        stmt.setString(2, StatusAmizade.SOLICITADO.getStatus());
+        
+        ResultSet rs = stmt.executeQuery();
+        
+        List lista = new ArrayList();
+        SolicitaAmizade sa = new SolicitaAmizade();
+        
+        while(rs.next()){
+            sa.setIdSolicitacao(rs.getInt("idsolicitacao"));
+            sa.setRemetente(rs.getInt("remetente"));
+            sa.setDestinatario(rs.getInt("destinatario"));
+            lista.add(sa);
+        }
+        
+        con.close();
+        
+        return lista;
     }
 }

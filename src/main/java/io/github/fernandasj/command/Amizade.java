@@ -21,6 +21,7 @@ public class Amizade implements Command {
         String metodo = request.getParameter("met");
         int remetente = u.getId();
         int destinatario = Integer.parseInt(request.getParameter("dest"));
+        String pag = request.getParameter("pag"); //pagina para qual deve ser redirecionada
 
         try {
             GerenciadorAmizade gAmizade = new GerenciadorAmizade();

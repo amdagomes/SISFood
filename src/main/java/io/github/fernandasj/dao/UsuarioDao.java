@@ -267,6 +267,7 @@ public class UsuarioDao implements Dao<Usuario> {
             lista.add(u);
         }
         
+        con.close();
         return lista;
     }
 }

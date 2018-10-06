@@ -43,7 +43,7 @@
 
                             <aside class="menu">
                                 <ul>
-                                    <a href="front?action=Incio"><li>Feed</li></a>
+                                    <a href="front?action=Inicio"><li>Feed</li></a>
                                     <a href=""><li>Menssagens</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
                                     <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
@@ -114,7 +114,49 @@
                                                         </div>
                                                     </div>
                                                     <div class="media-right">
-                                                        <%@include file="g-amizade.jsp" %>
+                                                        <ct:verificaSituacaoUsuario remetente="${sessionScope.usuario.id}" destinatario="${usuarios.id}"/>
+                                                        <c:choose>
+                                                            <c:when test="${situacaoAmizade != null}">
+                                                                <c:choose>
+                                                                    <c:when test="${situacaoAmizade.solicitacao.equals('amigo')}">
+                                                                        <a class="button is-small is-danger">
+                                                                            <span class="icon is-small">
+                                                                                <i class="fas fa-user-slash"></i>
+                                                                            </span>
+                                                                            <span>Desfazer Amizade</span>
+                                                                        </a>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <c:choose>
+                                                                            <c:when test="${sessionScope.usuario.id == situacaoAmizade.remetente}">
+                                                                                <a class="button is-small is-success" disabled>
+                                                                                    <span class="icon is-small">
+                                                                                        <i class="fas fa-check"></i>
+                                                                                    </span>
+                                                                                    <span>Amizade Solicitada</span>
+                                                                                </a>
+                                                                            </c:when>
+                                                                            <c:otherwise>
+                                                                                <a class="button is-small is-success">
+                                                                                    <span>Aceitar</span>
+                                                                                </a>
+                                                                                <a class="button is-small is-danger">
+                                                                                    <span>Recusar</span>
+                                                                                </a>
+                                                                            </c:otherwise>
+                                                                        </c:choose>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a class="button is-small is-info" href="front?action=Amizade&met=adiciona&dest=${usuarios.id}">
+                                                                    <span class="icon is-small">
+                                                                        <i class="fas fa-user-plus"></i>
+                                                                    </span>
+                                                                    <span>Adiconar Amigo</span>
+                                                                </a>
+                                                            </c:otherwise>
+                                                        </c:choose>
                                                     </div>
                                                 </article>
                                             </c:if>

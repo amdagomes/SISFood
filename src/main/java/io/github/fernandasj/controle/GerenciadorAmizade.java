@@ -6,9 +6,11 @@
 package io.github.fernandasj.controle;
 
 import io.github.fernandasj.dao.AmizadeDao;
+import io.github.fernandasj.modelo.SolicitaAmizade;
 import io.github.fernandasj.repository.DaoFactory;
 import io.github.fernandasj.repository.DaoFactoryIF;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -30,5 +32,13 @@ public class GerenciadorAmizade {
     
     public int countPNotificacoes(int id) throws ClassNotFoundException, SQLException{
         return dao.countPSolicitacoes(id);
+    }
+    
+    public List listaSolicitacoes(int id) throws SQLException, ClassNotFoundException{
+        return dao.listaSolicitacoes(id);
+    }
+    
+    public SolicitaAmizade verificaSituacao(int remetente, int destinatario) throws ClassNotFoundException, SQLException{
+        return dao.isAmigo(remetente, destinatario);
     }
 }

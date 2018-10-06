@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="ct" uri="/WEB-INF/tlds/CustomTags"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,6 +40,49 @@
                                     <p class="has-text-grey-light has-text-centered">
                                         ${sessionScope.visita.descricao}
                                     </p>
+                                    <ct:verificaSituacaoUsuario remetente="${sessionScope.usuario.id}" destinatario="${sessionScope.visita.id}"/>
+                                    <c:choose>
+                                        <c:when test="${situacaoAmizade != null}">
+                                            <c:choose>
+                                                <c:when test="${situacaoAmizade.solicitacao.equals('amigo')}">
+                                                    <a class="button is-small is-danger">
+                                                        <span class="icon is-small">
+                                                            <i class="fas fa-user-slash"></i>
+                                                        </span>
+                                                        <span>Desfazer Amizade</span>
+                                                    </a>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <c:choose>
+                                                        <c:when test="${sessionScope.usuario.id == situacaoAmizade.remetente}">
+                                                            <a class="button is-small is-success" disabled>
+                                                                <span class="icon is-small">
+                                                                    <i class="fas fa-check"></i>
+                                                                </span>
+                                                                <span>Amizade Solicitada</span>
+                                                            </a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a class="button is-small is-success">
+                                                                <span>Aceitar</span>
+                                                            </a>
+                                                            <a class="button is-small is-danger">
+                                                                <span>Recusar</span>
+                                                            </a>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a class="button is-small is-info" href="front?action=Amizade&met=adiciona&dest=${visita.id}">
+                                                <span class="icon is-small">
+                                                    <i class="fas fa-user-plus"></i>
+                                                </span>
+                                                <span>Adiconar Amigo</span>
+                                            </a>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
 
@@ -47,7 +92,7 @@
                                     <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
                                     <a href="perfil-usuario.jsp"><li>Perfil</li></a>
                                     <li>
-                                        <a href="home.jsp"><p class="menu-label">voltar</p></a>
+                                        <a href="front?action=Inicio"><p class="menu-label">voltar</p></a>
                                     </li>
                                     <a href="front?action=Logout">
                                         <li class="menu-label">
@@ -156,7 +201,7 @@
                 </div>
             </div>
         </section>
-                                    
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>                            
         <script>
             const dropdown = document.querySelector('.dropdown');

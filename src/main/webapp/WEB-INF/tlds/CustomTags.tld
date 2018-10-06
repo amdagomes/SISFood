@@ -16,6 +16,36 @@
       <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>
+  <tag>
+    <name>buscaUsuario</name>
+    <description>Busca usuário pelo id</description>
+    <body-content>empty</body-content>
+    <tag-class>io.github.fernandasj.tags.BuscaUsuario</tag-class>
+    <attribute>
+      <name>user</name>
+      <type>int</type>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  <tag>
+    <name>verificaSituacaoUsuario</name>
+    <description>Verifica a situação da amizade dos usuários</description>
+    <body-content>empty</body-content>
+    <tag-class>io.github.fernandasj.tags.VerificaSituacaoUsuario</tag-class>
+    <attribute>
+      <name>remetente</name>
+      <type>int</type>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>destinatario</name>
+      <type>int</type>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
   <!-- A validator verifies that the tags are used correctly at JSP
           translation time. Validator entries look like this: 
        <validator>

@@ -5,6 +5,7 @@
  */
 package io.github.fernandasj.dao;
 
+import io.github.fernandasj.modelo.SolicitaAmizade;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface AmizadeDaoIF<T>{
     
     public boolean solicitaAmizade(int remetente, int destintario) throws ClassNotFoundException, SQLException;
     public boolean desfazerAmizade(int remetente, int destintario) throws ClassNotFoundException, SQLException;
-    public boolean isAmigo(int remetente, int destintario) throws ClassNotFoundException, SQLException;
+    public SolicitaAmizade isAmigo(int remetente, int destintario) throws ClassNotFoundException, SQLException;
     public List<T> listarAmigos(int id) throws ClassNotFoundException, SQLException;
     
 }

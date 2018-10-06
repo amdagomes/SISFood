@@ -1,22 +1,27 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package io.github.fernandasj.tags;
 
 import io.github.fernandasj.controle.GerenciadorAmizade;
+import io.github.fernandasj.controle.GerenciadorUsuario;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 /**
  *
  * @author Amanda
  */
-public class BuscaNotificacao extends SimpleTagSupport{
+public class BuscaUsuario extends SimpleTagSupport{
     
     private int user;
     
     @Override
     public void doTag(){
         try {
-            GerenciadorAmizade gAmizade = new GerenciadorAmizade();
-            getJspContext().setAttribute("notificacoes", gAmizade.countPNotificacoes(user));
-            getJspContext().setAttribute("solicitacoes", gAmizade.listaSolicitacoes(user));
+            GerenciadorUsuario gUser = new GerenciadorUsuario();
+            getJspContext().setAttribute("userBuscado", gUser.buscaPorId(user));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

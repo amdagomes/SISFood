@@ -65,7 +65,7 @@ public class Usuario implements Serializable {
     
     public Usuario(int id, String foto) {
         this.id = id;
-        this.fotoPerfil = fotoPerfil;
+        this.fotoPerfil = foto;
     }
 
     public Usuario(String email, String senha, String nome, String telefone, String sexo, String profissao, LocalDate dataNascimento, String descricao, String rua, String numeroCasa, String estado, String cidade, String cep) {
