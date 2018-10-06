@@ -5,8 +5,10 @@
  */
 package io.github.fernandasj.controle;
 
+import io.github.fernandasj.dao.AvaliarEstabelecimentoDao;
 import io.github.fernandasj.dao.EstabelecimentoDao;
 import io.github.fernandasj.modelo.Estabelecimento;
+import io.github.fernandasj.modelo.avaliarEstabelecimento;
 import io.github.fernandasj.repository.DaoFactory;
 import io.github.fernandasj.repository.DaoFactoryIF;
 import java.sql.SQLException;
@@ -21,10 +23,12 @@ public class GerenciadorEstabelecimento {
 
     private DaoFactoryIF fabrica = null;
     private EstabelecimentoDao estabelecimentoDao = null;
+    private AvaliarEstabelecimentoDao avaliarDao = null;
     
     public GerenciadorEstabelecimento() throws SQLException, ClassNotFoundException{
         fabrica = DaoFactory.createFactory();
         estabelecimentoDao = fabrica.criaEstabelecimentoDao();
+        avaliarDao = fabrica.criaAvaliaEstabelecimentoDao();
     }
     
     public boolean adicionar (int idUsuario,String nome, String telefone, String foto, String cartegoria, 
@@ -52,5 +56,9 @@ public class GerenciadorEstabelecimento {
     
     public boolean deletar(int id) throws SQLException{
         return estabelecimentoDao.deletar(id);
+    }
+    
+    public boolean avaliarEstabelecimento(avaliarEstabelecimento avaliacao) throws Exception{
+        return avaliarDao.salvar(avaliacao);
     }
 }
