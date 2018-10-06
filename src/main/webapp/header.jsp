@@ -4,6 +4,7 @@
     Author     : Amanda
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,7 +23,7 @@
             <div id="navMenu" class="navbar-menu">
                 <div class="navbar-end has-text-centered-mobile">
                     <div class="navbar-item">
-                        <form method="post" class="search">
+                        <form method="post" class="search" action="front?action=Buscar">
                             <div class="field has-addons">
                                 <div class="control">
                                     <input class="input is-small" type="text" placeholder="Search.." name="search">
@@ -35,7 +36,9 @@
                     </div>            
                     <div class="navbar-item dropdown is-right is-pointer notf">
                         <div class="dropdown-trigger">   
-                            <span class="icon is-small badge" data-badge="8" aria-controls="dropdown-menu">
+                            <jsp:useBean id="amizadeDao" class="io.github.fernandasj.controle.GerenciadorAmizade"/>
+                            <c:set var="pedidosAmizade" value="${amizadeDao.countPNotificacoes(sessionScope.usuario.id)}"></c:set>
+                            <span class="icon is-small badge" data-badge="${pedidosAmizade}" aria-controls="dropdown-menu">
                                 <i class="fa fa-bell" aria-hidden="true"></i>
                             </span>
                         </div>

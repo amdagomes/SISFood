@@ -60,11 +60,11 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
             Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT * Estabelecimento WHERE nome = ?";
+        String sql = "SELECT * Estabelecimento WHERE nome = %?%";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, nome);
         ResultSet resultado = stmt.executeQuery();
-
+        
         if (resultado.next()) {
             Estabelecimento e = new Estabelecimento(resultado.getString("nome"), resultado.getString("Telefone"),
                     resultado.getString("fotoEstabelecimeto"), resultado.getString("cartegoria"), resultado.getFloat("nota"),
@@ -121,9 +121,9 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
     }
 
     @Override
-    public boolean deletar(String nome) throws SQLException {
+    public boolean deletar(int id) throws SQLException {
 
-        if (buscar(nome) != null) {
+        if (buscarPorId(id) != null) {
 
             try {
                 con = ConnectionFactory.getConnection();
@@ -131,9 +131,9 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
                 Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            String sql = "DELETE FROM Estabelecimento WHERE nome= ?";
+            String sql = "DELETE FROM Estabelecimento WHERE idestabelecimento = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, nome);
+            stmt.setInt(1, id);
             stmt.execute();
             stmt.close();
             con.close();
@@ -141,6 +141,7 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
         }
         return false;
     }
+    
      public void recomendaEstabelecimento(int remetente, int destinatario, String comentario)
             throws SQLException {
 
@@ -155,13 +156,41 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, remetente);
         stmt.setInt(2, destinatario);
-       stmt.setString(3, comentario);
+        stmt.setString(3, comentario);
         stmt.execute();
 
         stmt.close();
         con.close();
     }
 
+     public List listarPorNome(String nome) throws SQLException{
+         
+        try {
+            con = ConnectionFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        
+        String sql = "SELECT * FROM estabelecimento WHERE nome ilike ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, "%"+nome+"%");
+        
+        ResultSet rs = stmt.executeQuery();
+        
+        Estabelecimento e = new Estabelecimento();
+        List estbls = new ArrayList();
+        
+        while(rs.next()){
+            e.setId(rs.getInt("idestabelecimento"));
+            e.setIdUsuario(rs.getInt("idusuario"));
+            e.setNome(rs.getString("nome"));
+            e.setDescricao(rs.getString("descricao"));
+            e.setFoto(rs.getString("fotoEstabelecimento"));
+            
+            estbls.add(e);
+        }
+         return estbls;
+     }
    
     public List<Estabelecimento> ListarRecomendados(int id) throws SQLException {
 
@@ -180,7 +209,6 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
         while (rs.next()) {
             Estabelecimento e = buscarPorId(rs.getInt("estabelecimento"));
             rc.add(e);
-
         }
         rs.close();
         stmt.close();

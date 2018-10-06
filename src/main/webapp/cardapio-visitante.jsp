@@ -28,14 +28,14 @@
                         <div class="media-box">
                             <div class="fotoperfil">
                                 <figure class="image">
-                                    <img class="is-rounded" src="${sessionScope.usuario.fotoPerfil}">
+                                    <img class="is-rounded" src="${sessionScope.visita.foto}">
                                 </figure>
                                 <div>
                                     <p class="has-text-dark has-text-centered has-text-weight-semibold is-size-5">
-                                        Nome Establecimento
+                                        ${sessionScope.visita.nome}
                                     </p>
                                     <p class="has-text-grey-light has-text-centered">
-                                        descrição...
+                                        ${sessionScope.visita.descricao}
                                     </p>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                             </div>
                             
                             <jsp:useBean id="dao" class="io.github.fernandasj.dao.ComidaDao"/>
-                            <c:forEach var="comida" items="${dao.buscarPorEstabelecimento(sessionScope.estabelecimento.id)}">
+                            <c:forEach var="comida" items="${dao.buscarPorEstabelecimento(sessionScope.visita.id)}">
                             <article class="media item-cardapio">
                                 <figure class="media-left">
                                     <p class="image is-128x128">
@@ -87,9 +87,8 @@
                                 <div class="media-content">
                                     <div class="content">
                                         <p>
-                                            <a class="level-item" title="Editar" href="${comida.idComida}" rel="modal:open">
-                                                <strong>${comida.nome}</strong>
-                                            </a> <small>Preço: R$  ${comida.preco}</small>
+                                            <strong>${comida.nome}</strong>
+                                            <small>Preço: R$  ${comida.preco}</small>
                                             <br>
                                             ${comida.descricao}
                                             <br> 
@@ -136,44 +135,6 @@
                                 </div>
 
                             </article>
-                            <!--EDITAR PRATO NO CARDAPIO-->
-
-                                <form id="${comida.idComida}" class="form-cardapio modal" method="post" action="front?action=AtualizarComida" enctype="multipart/form-data">
-                                    <input type="hidden" value="${comida.idComida}" name="idComida">
-                                    <p class="title is-size-5">Editar prato</p>
-                                    <div class="field is-grouped">
-                                        <p class="control is-expanded">
-                                            <input class="input is-small" type="text" value="${comida.nome}" name="nome">
-                                        </p>
-                                        <p class="control">
-                                            <input class="input is-small" type="text" value="${comida.preco}" name="preco">
-                                        </p>
-                                    </div>
-
-                                    <textarea class="textarea"  rows="2" name="descricao">${comida.descricao}</textarea>
-
-                                    <div class="file is-small file-custom">
-                                        <span class="file-name" id="filename"></span>
-
-                                        <label class="file-label">
-                                            <input class="file-input" type="file" name="foto" value="${comida.foto}" id="file">
-                                            <span class="file-cta">
-                                                <span class="file-icon">
-                                                    <i class="fas fa-upload"></i>
-                                                </span>
-                                                <span class="file-label">
-                                                    Selecione uma foto…
-                                                </span>
-                                            </span>
-                                        </label>
-                                    </div>
-
-                                    <div class="field">
-                                        <div class="control">
-                                            <input class="button is-success is-fullwidth" type="submit" value="Adicionar">
-                                        </div>
-                                    </div>    
-                                </form> 
                             </c:forEach>
                         </div>
                     </div>  

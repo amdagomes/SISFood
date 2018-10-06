@@ -8,9 +8,12 @@ and open the template in the editor.
     Author     : Amanda
 */
 .is-vertical-center {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
+
+.block{display:block}
+.none{display:none}
 
 .p10{
     padding: 15px 15px 15px 10px;
@@ -46,83 +49,94 @@ and open the template in the editor.
 }
 
 .background-gray{
-  background-color: #e9ebee;
+    background-color: #e9ebee;
 }
 
 div.media-box{
-  background-color: white;
-  border: 1px solid #dddfe2;
-  margin-bottom: .5rem;
-  border-radius: 5px;
-  padding: 0;
+    background-color: white;
+    border: 1px solid #dddfe2;
+    margin-bottom: .5rem;
+    border-radius: 5px;
+    padding: 0;
 }
 
 .criar-publicacao{
-  padding: 10px;
+    padding: 10px;
 }
 
 .menu{
-  padding: 10px;
+    padding: 10px;
 }
 
 .media-box nav div.file span{
-  background-color: #f1f1f1;
-  border-color: #f1f1f1;
-  padding: 0;
-  height: 1rem;
+    background-color: #f1f1f1;
+    border-color: #f1f1f1;
+    padding: 0;
+    height: 1rem;
 }
 
 .media-box nav div.file input{
-  height: .5rem;
-  overflow: hidden;
+    height: .5rem;
+    overflow: hidden;
 }
 
 .breadcrumb:not(:last-child), div.cardapio{
-  margin-bottom: 0;
-  padding: 10px 15px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  background-color: #f1f1f1;
+    margin-bottom: 0;
+    padding: 10px 15px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #f1f1f1;
 }
 
+.header-busca{
+    margin-bottom: 0;
+    padding: 10px 15px 0 15px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #f1f1f1;
+}
+
+.r-usuarios, .r-estabelecimentos{
+    padding: 10px 15px;
+}
 .card{
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .is-pointer{
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .comentario{
-  padding: 10px;
-  font-size: .9rem;
-  border-top: 1px solid #dddfe2;
+    padding: 10px;
+    font-size: .9rem;
+    border-top: 1px solid #dddfe2;
 }
 
 .comentario:not(.media:last-child) .media {
-  border-bottom: 1px solid #dddfe2;
+    border-bottom: 1px solid #dddfe2;
 }
 
 .textarea{
-  resize: none;
+    resize: none;
 }
 
 .has-text-green{
-  color:rgba(10,10,10,.2);
+    color:rgba(10,10,10,.2);
 }
 
 a.button-send .fa-paper-plane{
-  color:white;
+    color:white;
 }
 
 a.button-send .fa-paper-plane:hover{
-  color:#e37b40;
+    color:#e37b40;
 }
 
 .title-comentario{
-  font-weight: 600;
+    font-weight: 600;
 }
 
 .background{
@@ -135,23 +149,23 @@ a.button-send .fa-paper-plane:hover{
 }
 
 .box-login{
-   height: 100%;
-   background-color: rgba(0,0,0,.8);
-   text-align: center;
-   margin: 0;
-   padding: 0;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    text-align: center;
+    margin: 0;
+    padding: 0;
 }
 .box-login label, .box-login h5{
-  text-align: left;
-  font-weight: 400;
+    text-align: left;
+    font-weight: 400;
 }
 .box-login h5{
-  font-size: 1.15rem;
-  margin-bottom: 1rem !important;
-  border-bottom: 1px solid #4a4a4a;
+    font-size: 1.15rem;
+    margin-bottom: 1rem !important;
+    border-bottom: 1px solid #4a4a4a;
 }
 .box-login .label:not(:last-child){
-  margin-bottom: .1rem;
+    margin-bottom: .1rem;
 }
 .box-login div.box{
     padding: 2.5rem 1.5rem;
@@ -165,20 +179,20 @@ a.button-send .fa-paper-plane:hover{
 }
 
 .notf{
-  padding: .5rem 1.75rem;
+    padding: .5rem 1.75rem;
 }
 
 .fotoperfil{
-  margin-bottom: 2.5rem;
-  padding: 30px 10px 0 10px;
+    margin-bottom: 2.5rem;
+    padding: 30px 10px 0 10px;
 }
 
 .fotoperfil .file-label{
-  display: block;
+    display: block;
 }
 
 .fotoperfil .file-name{
-  border-width: 1px;
+    border-width: 1px;
 }
 
 .fotoperfil input{
@@ -195,26 +209,26 @@ a.button-send .fa-paper-plane:hover{
 }
 
 aside.menu{
-  padding: 0;
+    padding: 0;
 }
 aside.menu li{
-  padding: 5px 15px;
+    padding: 5px 15px;
 }
 
 aside.menu li ul{
-  padding: 0;
+    padding: 0;
 }
 
 aside.menu .link-ativo{
-  border-left: 3px solid #e37b40;
-  border-right: 2px solid #e9ebee;
-  background-color: #e9ebee;
-  color: #4a4a4a !important;
-  font-weight: 500;
+    border-left: 3px solid #e37b40;
+    border-right: 2px solid #e9ebee;
+    background-color: #e9ebee;
+    color: #4a4a4a !important;
+    font-weight: 500;
 }
 
 aside.menu .menu-label{
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .footer-form, .box-login input[type=submit]{
@@ -226,33 +240,33 @@ aside.menu .menu-label{
 }
 
 div.modal-content{
-  width: 400px;
+    width: 400px;
 }
 .item-cardapio{
-  padding: 10px;
+    padding: 10px;
 }
 .form-cardapio{
-  width: auto;
-  padding: 10px;
-  background-color: white;
-  border-radius: 5px;
+    width: auto;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
 }
 .file-custom{
-  margin-top: .75rem;
-  margin-bottom: .75rem;
+    margin-top: .75rem;
+    margin-bottom: .75rem;
 }
 div.file-custom span.file-name{
-  width: 60%;
-  max-width: 300px;
-  border-width: 1px;
+    width: 60%;
+    max-width: 300px;
+    border-width: 1px;
 }
 
 div.estrelas input[type=radio] {
-  display: none;
+    display: none;
 }
 .gold{
-  /*content:'\f005';*/
-  color: #FC0;
+    /*content:'\f005';*/
+    color: #FC0;
 }
 
 .item-cardapio .media-right a:first-child{
@@ -266,14 +280,23 @@ div.estrelas input[type=radio] {
 .navbar{
     z-index: 1;
 }
+
+div.r-usuarios figure, div.r-estabelecimentos figure{
+    max-height: 150px;
+    width: 150px;
+    overflow: hidden;
+}
+div.r-usuarios figure img, div.r-estabelecimentos figure img{
+    max-height: 100%;
+}
 @media screen and (max-width: 770px){
-  .h100{
-      height: auto;
-      overflow: inherit;
-  }
-  .box-login{
-      padding: 1rem 0;
-      height: 100%;
-  }
+    .h100{
+        height: auto;
+        overflow: inherit;
+    }
+    .box-login{
+        padding: 1rem 0;
+        height: 100%;
+    }
 }
 

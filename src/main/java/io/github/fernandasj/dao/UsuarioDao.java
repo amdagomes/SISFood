@@ -7,6 +7,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,8 +75,8 @@ public class UsuarioDao implements Dao<Usuario> {
     }
 
     @Override
-    public boolean deletar(String email) throws SQLException {
-        if (buscar(email) != null) {
+    public boolean deletar(int id) throws SQLException {
+        if (buscarPorId(id) != null) {
 
             try {
                 con = ConnectionFactory.getConnection();
@@ -84,9 +86,9 @@ public class UsuarioDao implements Dao<Usuario> {
                 Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            String sql = "DELETE FROM Usuario WHERE email= ?";
+            String sql = "DELETE FROM Usuario WHERE idusuario = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setString(1, email);
+            stmt.setInt(1, id);
             stmt.execute();
             stmt.close();
             con.close();
@@ -164,7 +166,7 @@ public class UsuarioDao implements Dao<Usuario> {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT * FROM usuario WHERE nome= ?";
+        String sql = "SELECT * FROM usuario WHERE nome = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, nome);
         ResultSet resultado = stmt.executeQuery();
@@ -237,5 +239,34 @@ public class UsuarioDao implements Dao<Usuario> {
         con.close();
 
         return true;
+    }
+    
+    public List<Usuario> listarPorNome(String nome) throws SQLException{
+        
+        try {
+            con = ConnectionFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        
+        String sql = "SELECT idusuario, nome, descricao, fotoPerfil FROM usuario WHERE nome ilike ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setString(1, "%"+nome+"%");
+        
+        ResultSet rs = stmt.executeQuery();
+        
+        List<Usuario> lista = new ArrayList<>();
+        Usuario u = new Usuario();
+        
+        while(rs.next()){
+            u.setId(rs.getInt("idusuario"));
+            u.setNome(rs.getString("nome"));
+            u.setDescricao(rs.getString("descricao"));
+            u.setFotoPerfil(rs.getString("fotoPerfil"));
+            
+            lista.add(u);
+        }
+        
+        return lista;
     }
 }

@@ -1,5 +1,6 @@
 package io.github.fernandasj.repository;
 
+import io.github.fernandasj.dao.AmizadeDao;
 import io.github.fernandasj.dao.AvaliarComidaDao;
 import io.github.fernandasj.dao.AvaliarEstabelecimentoDao;
 import io.github.fernandasj.dao.ComidaDao;
@@ -36,6 +37,11 @@ public class DaoFactoryBD implements DaoFactoryIF {
     @Override
     public AvaliarEstabelecimentoDao criaAvaliaEstabelecimentoDao() throws SQLException, ClassNotFoundException{
         return new AvaliarEstabelecimentoDao();
+    }
+
+    @Override
+    public AmizadeDao criaAmizadeDao() throws SQLException, ClassNotFoundException {
+        return new AmizadeDao();
     }
 
 }

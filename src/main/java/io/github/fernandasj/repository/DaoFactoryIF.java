@@ -1,5 +1,6 @@
 package io.github.fernandasj.repository;
 
+import io.github.fernandasj.dao.AmizadeDao;
 import io.github.fernandasj.dao.AvaliarComidaDao;
 import io.github.fernandasj.dao.AvaliarEstabelecimentoDao;
 import io.github.fernandasj.dao.ComidaDao;
@@ -22,5 +23,7 @@ public interface DaoFactoryIF {
     public AvaliarComidaDao criaAvaliarComidaDao() throws SQLException, ClassNotFoundException;
     
     public AvaliarEstabelecimentoDao criaAvaliaEstabelecimentoDao() throws SQLException, ClassNotFoundException;
+    
+    public AmizadeDao criaAmizadeDao() throws SQLException, ClassNotFoundException;
     
 }
