@@ -105,7 +105,7 @@ public class AmizadeDao implements AmizadeDaoIF<SolicitaAmizade>{
     public List<SolicitaAmizade> listarAmigos(int id) throws ClassNotFoundException, SQLException {
         con = ConnectionFactory.getConnection();
         
-        String sql = "SELECT * FROM solicitaamizade WHERE remetente = ? OR destinatario AND situacao = ?";
+        String sql = "SELECT * FROM solicitaamizade WHERE (remetente = ? OR destinatario = ?) AND situacao = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);
         stmt.setInt(2, id);
@@ -114,9 +114,9 @@ public class AmizadeDao implements AmizadeDaoIF<SolicitaAmizade>{
         ResultSet rs = stmt.executeQuery();
         
         List<SolicitaAmizade> lista = new ArrayList<>();
-        SolicitaAmizade sa = new SolicitaAmizade();
         
         while(rs.next()){
+            SolicitaAmizade sa = new SolicitaAmizade();
             sa.setIdSolicitacao(rs.getInt("idsolicitacao"));
             sa.setRemetente(rs.getInt("remetente"));
             sa.setDestinatario(rs.getInt("destinatario"));

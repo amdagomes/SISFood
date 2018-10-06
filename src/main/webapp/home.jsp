@@ -47,6 +47,7 @@
 
                                 <ul>
                                     <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
+                                    <a href="amigos.jsp"><li>Amigos</li></a>
                                     <a href=""><li>Menssagens</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
                                     <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>

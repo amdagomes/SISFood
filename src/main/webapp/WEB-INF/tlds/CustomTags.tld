@@ -46,6 +46,19 @@
       <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>
+  <tag>
+    <name>listaAmigos</name>
+    <description>Lista os amigos de um usuário</description>
+    <body-content>empty</body-content>
+    <tag-class>io.github.fernandasj.tags.ListaAmigos</tag-class>
+    <attribute>
+      <name>user</name>
+      <type>int</type>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  
   <!-- A validator verifies that the tags are used correctly at JSP
           translation time. Validator entries look like this: 
        <validator>

@@ -49,4 +49,8 @@ public class GerenciadorAmizade {
     public SolicitaAmizade verificaSituacao(int remetente, int destinatario) throws ClassNotFoundException, SQLException{
         return dao.isAmigo(remetente, destinatario);
     }
+    
+    public List listaAmigos(int id) throws ClassNotFoundException, SQLException{
+        return dao.listarAmigos(id);
+    }
 }
