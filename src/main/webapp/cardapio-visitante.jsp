@@ -123,7 +123,7 @@
                                                     </label>
                                                     <input type="radio" id="cm_star-5" name="nota" value="5"/>
                                                 </div>
-                                                <input type="submit" value="avaliar">
+                                                <input class="button small is-primary" type="submit" value="avaliar">
                                             </form>
                                         </div>
                                     </nav>
