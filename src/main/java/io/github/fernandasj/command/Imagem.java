@@ -30,7 +30,7 @@ public class Imagem {
             BufferedImage imagem = ImageIO.read(input);
 
             File diretorio = new File("C:\\Users\\Amanda\\Documents\\Amanda\\ADS\\SISFood\\src\\main\\webapp\\upload_images");
-
+//            File diretorio = new File("/NetBeansProjects/SISFood/SISFood/src/main/webapp/upload_images");
             System.out.println("Diretorio: " + diretorio);
 
             if (!diretorio.exists()) {

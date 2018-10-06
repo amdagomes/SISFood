@@ -99,31 +99,32 @@
                                             <p>Avalie:</p>
                                         </div>
                                         <div class="level-right">
-                                            <a href="front?action=avaliarComida&idComida=${comida.idComida}">
+                                            <form method="post" action="front?action=AvaliacaoComida&idComida=${comida.idComida}">
                                                 <div class="estrelas">
-                                                    <input type="radio" id="cm_star-empty" name="fb" value="" checked/>
+                                                    <input type="radio" id="cm_star-empty" name="nota" value="" checked/>
                                                     <label id="star1" for="cm_star-1">
                                                         <span class="icon is-small"><i class="fas fa-star"></i></span>
                                                     </label>
-                                                    <input type="radio" id="cm_star-1" name="fb" value="1"/>
+                                                    <input type="radio" id="cm_star-1" name="nota" value="1"/>
                                                     <label id="star2" for="cm_star-2">
                                                         <span class="icon is-small"><i class="fas fa-star"></i></span>
                                                     </label>
-                                                    <input type="radio" id="cm_star-2" name="fb" value="2"/>
+                                                    <input type="radio" id="cm_star-2" name="nota" value="2"/>
                                                     <label id="star3" for="cm_star-3">
                                                         <span class="icon is-small"><i class="fas fa-star"></i></span>
                                                     </label>
-                                                    <input type="radio" id="cm_star-3" name="fb" value="3"/>
+                                                    <input type="radio" id="cm_star-3" name="nota" value="3"/>
                                                     <label id="star4" for="cm_star-4">
                                                         <span class="icon is-small"><i class="fas fa-star"></i></span>
                                                     </label>
-                                                    <input type="radio" id="cm_star-4" name="fb" value="4"/>
+                                                    <input type="radio" id="cm_star-4" name="nota" value="4"/>
                                                     <label id="star5" for="cm_star-5">
                                                         <span class="icon is-small"><i class="fas fa-star"></i></span>
                                                     </label>
-                                                    <input type="radio" id="cm_star-5" name="fb" value="5"/>
+                                                    <input type="radio" id="cm_star-5" name="nota" value="5"/>
                                                 </div>
-                                            </a>
+                                                <input type="submit" value="avaliar">
+                                            </form>
                                         </div>
                                     </nav>
                                 </div>
