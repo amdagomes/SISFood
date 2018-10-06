@@ -26,11 +26,15 @@ public class Amizade implements Command {
         try {
             GerenciadorAmizade gAmizade = new GerenciadorAmizade();
 
-            if(metodo.equals("adiciona")) {
+            if(metodo.equals("solicita")) {
+                gAmizade.solicitaAmizade(remetente, destinatario);
+            } else if(metodo.equals("adiciona")){
                 gAmizade.adiciona(remetente, destinatario);
+            } else{
+                gAmizade.remove(remetente, destinatario);
             }
             
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+            request.getRequestDispatcher(pag + ".jsp").forward(request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

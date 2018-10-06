@@ -40,12 +40,13 @@
                                     <p class="has-text-grey-light has-text-centered">
                                         ${sessionScope.visita.descricao}
                                     </p>
+                                    <br>
                                     <ct:verificaSituacaoUsuario remetente="${sessionScope.usuario.id}" destinatario="${sessionScope.visita.id}"/>
                                     <c:choose>
                                         <c:when test="${situacaoAmizade != null}">
                                             <c:choose>
-                                                <c:when test="${situacaoAmizade.solicitacao.equals('amigo')}">
-                                                    <a class="button is-small is-danger">
+                                                <c:when test="${situacaoAmizade.solicitacao == 'amigo'}">
+                                                    <a href="front?action=Amizade&met=remove&dest=${visita.id}&pag=visita-user" class="button is-small is-danger">
                                                         <span class="icon is-small">
                                                             <i class="fas fa-user-slash"></i>
                                                         </span>
@@ -63,10 +64,10 @@
                                                             </a>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <a class="button is-small is-success">
+                                                            <a href="front?action=Amizade&met=adiciona&dest=${visita.id}&pag=visita-user" class="button is-small is-success">
                                                                 <span>Aceitar</span>
                                                             </a>
-                                                            <a class="button is-small is-danger">
+                                                            <a href="front?action=Amizade&met=remove&dest=${visita.id}&pag=visita-user" class="button is-small is-danger">
                                                                 <span>Recusar</span>
                                                             </a>
                                                         </c:otherwise>
@@ -75,7 +76,7 @@
                                             </c:choose>
                                         </c:when>
                                         <c:otherwise>
-                                            <a class="button is-small is-info" href="front?action=Amizade&met=adiciona&dest=${visita.id}">
+                                            <a class="button is-small is-info" href="front?action=Amizade&met=solicita&dest=${visita.id}&pag=visita-user">
                                                 <span class="icon is-small">
                                                     <i class="fas fa-user-plus"></i>
                                                 </span>

@@ -42,10 +42,12 @@ public class AmizadeDao implements AmizadeDaoIF<SolicitaAmizade>{
     public boolean desfazerAmizade(int remetente, int destintario) throws ClassNotFoundException, SQLException {
         con = ConnectionFactory.getConnection();
         
-        String sql = "DELETE FROM solicitaamizade WHERE remetente = ? AND destinatario = ?";
+        String sql = "DELETE FROM solicitaamizade WHERE (remetente = ? AND destinatario = ?) OR (remetente = ? AND destinatario = ?)";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, remetente);
         stmt.setInt(2, destintario);
+        stmt.setInt(3, destintario);
+        stmt.setInt(4, remetente);
         
         boolean retorno = stmt.executeUpdate() > 0;
         
@@ -62,8 +64,8 @@ public class AmizadeDao implements AmizadeDaoIF<SolicitaAmizade>{
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, remetente);
         stmt.setInt(2, destinatario);
-        stmt.setInt(3, remetente);
-        stmt.setInt(4, destinatario);
+        stmt.setInt(3, destinatario);
+        stmt.setInt(4, remetente);
         
         ResultSet rs = stmt.executeQuery();
         
@@ -81,35 +83,33 @@ public class AmizadeDao implements AmizadeDaoIF<SolicitaAmizade>{
         return null;
     }
     
-    //apagar metodo situacao
-    public String situacao(int remetente, int destinatario) throws ClassNotFoundException, SQLException{
+    public boolean aceitaSolicitacao(int remetente, int destinatario) throws SQLException, ClassNotFoundException{
         con = ConnectionFactory.getConnection();
         
-        String sql = "SELECT situacao FROM solicitaamizade WHERE remetente = ? AND destinatario = ?";
+        String sql = "UPDATE solicitaamizade SET situacao = ? WHERE (remetente = ? AND destinatario = ?) OR (remetente = ? AND destinatario = ?)";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setInt(1, remetente);
-        stmt.setInt(2, destinatario);
+        stmt.setString(1, StatusAmizade.AMIGO.getStatus());
+        stmt.setInt(2, remetente);
+        stmt.setInt(3, destinatario);
+        stmt.setInt(4, destinatario);
+        stmt.setInt(5, remetente);
         
-        ResultSet rs = stmt.executeQuery();
-        
-        if(rs.next()){
-            con.close();
-            return rs.getString("situacao");
-        }
-        
+        stmt.execute();
+        stmt.close();
         con.close();
         
-        return null;
+        return true;
     }
 
     @Override
     public List<SolicitaAmizade> listarAmigos(int id) throws ClassNotFoundException, SQLException {
         con = ConnectionFactory.getConnection();
         
-        String sql = "SELECT * FROM solicitaamizade WHERE remetente = ? AND situacao = ?";
+        String sql = "SELECT * FROM solicitaamizade WHERE remetente = ? OR destinatario AND situacao = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);
-        stmt.setString(2, "amigo");
+        stmt.setInt(2, id);
+        stmt.setString(3, "amigo");
         
         ResultSet rs = stmt.executeQuery();
         
@@ -160,9 +160,9 @@ public class AmizadeDao implements AmizadeDaoIF<SolicitaAmizade>{
         ResultSet rs = stmt.executeQuery();
         
         List lista = new ArrayList();
-        SolicitaAmizade sa = new SolicitaAmizade();
-        
+          
         while(rs.next()){
+            SolicitaAmizade sa = new SolicitaAmizade();
             sa.setIdSolicitacao(rs.getInt("idsolicitacao"));
             sa.setRemetente(rs.getInt("remetente"));
             sa.setDestinatario(rs.getInt("destinatario"));

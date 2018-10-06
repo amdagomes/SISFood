@@ -51,7 +51,7 @@
                                             <div class="dropdown-item">
                                                 <article class="media">
                                                     <figure class="media-left">
-                                                        <p class="image is-64x64">
+                                                        <p class="image is-98x98">
                                                             <a href="front?action=VisitarPag&id=${userBuscado.id}&pag=user&t=u">
                                                                 <img src="${userBuscado.fotoPerfil}">
                                                             </a>
@@ -64,10 +64,10 @@
                                                                     ${userBuscado.nome}
                                                                 </a>                                                    
                                                             </p>  
-                                                            <a class="button is-small is-success">
+                                                            <a href="front?action=Amizade&met=adiciona&dest=${userBuscado.id}&pag=home" class="button is-small is-success">
                                                                 <span>Aceitar</span>
                                                             </a>
-                                                            <a class="button is-small is-danger">
+                                                            <a href="front?action=Amizade&met=remove&dest=${userBuscado.id}&pag=home" class="button is-small is-danger">
                                                                 <span>Recusar</span>
                                                             </a>
                                                         </div>
@@ -90,8 +90,7 @@
                             Sair
                         </span>
                     </a>
-                </div>
-
+                </div>                       
             </div>
         </div>
     </header>

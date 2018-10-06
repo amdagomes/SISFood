@@ -26,8 +26,16 @@ public class GerenciadorAmizade {
         dao = fabrica.criaAmizadeDao();
     }
     
-    public boolean adiciona(int remetente, int destinatario) throws SQLException, ClassNotFoundException{
+    public boolean solicitaAmizade(int remetente, int destinatario) throws SQLException, ClassNotFoundException{
         return dao.solicitaAmizade(remetente, destinatario);
+    }
+    
+    public boolean adiciona(int remetente, int destinatario) throws SQLException, ClassNotFoundException{
+        return dao.aceitaSolicitacao(remetente, destinatario);
+    }
+    
+    public boolean remove(int remetente, int destinatario) throws ClassNotFoundException, SQLException{
+        return dao.desfazerAmizade(remetente, destinatario);
     }
     
     public int countPNotificacoes(int id) throws ClassNotFoundException, SQLException{

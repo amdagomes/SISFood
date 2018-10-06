@@ -119,7 +119,7 @@
                                                             <c:when test="${situacaoAmizade != null}">
                                                                 <c:choose>
                                                                     <c:when test="${situacaoAmizade.solicitacao.equals('amigo')}">
-                                                                        <a class="button is-small is-danger">
+                                                                        <a href="front?action=Amizade&met=remove&dest=${usuarios.id}&pag=resultado-busca" class="button is-small is-danger">
                                                                             <span class="icon is-small">
                                                                                 <i class="fas fa-user-slash"></i>
                                                                             </span>
@@ -137,10 +137,10 @@
                                                                                 </a>
                                                                             </c:when>
                                                                             <c:otherwise>
-                                                                                <a class="button is-small is-success">
+                                                                                <a href="front?action=Amizade&met=adiciona&dest=${usuarios.id}&pag=resultado-busca" class="button is-small is-success">
                                                                                     <span>Aceitar</span>
                                                                                 </a>
-                                                                                <a class="button is-small is-danger">
+                                                                                <a href="front?action=Amizade&met=remove&dest=${usuarios.id}&pag=resultado-busca" class="button is-small is-danger">
                                                                                     <span>Recusar</span>
                                                                                 </a>
                                                                             </c:otherwise>
@@ -149,7 +149,7 @@
                                                                 </c:choose>
                                                             </c:when>
                                                             <c:otherwise>
-                                                                <a class="button is-small is-info" href="front?action=Amizade&met=adiciona&dest=${usuarios.id}">
+                                                                <a class="button is-small is-info" href="front?action=Amizade&met=solicita&dest=${usuarios.id}&pag=resultado-busca">
                                                                     <span class="icon is-small">
                                                                         <i class="fas fa-user-plus"></i>
                                                                     </span>
