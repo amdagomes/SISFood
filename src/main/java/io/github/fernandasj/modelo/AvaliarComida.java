@@ -14,61 +14,55 @@ import java.util.Objects;
 public class AvaliarComida {
     private int idAvaliacao;
     private int consumidor;
-    private int estabelecimento;
     private float nota;
     private String comentario;
     private int comida;
 
-    public AvaliarComida(int consumidor, int estabelecimento, float nota, String comentario, int comida) {
+    public AvaliarComida(int consumidor, float nota, String comentario, int comida) {
         this.consumidor = consumidor;
-        this.estabelecimento = estabelecimento;
         this.nota = nota;
         this.comentario = comentario;
         this.comida = comida;
+    }
+
+    public AvaliarComida() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getIdAvaliacao() {
         return idAvaliacao;
     }
 
-    public int getConsumidor() {
-        return consumidor;
-    }
-
-    public int getEstabelecimento() {
-        return estabelecimento;
-    }
-
-    public float getNota() {
-        return nota;
-    }
-
-    public String getComentario() {
-        return comentario;
-    }
-
-    public int getComida() {
-        return comida;
-    }
-
     public void setIdAvaliacao(int idAvaliacao) {
         this.idAvaliacao = idAvaliacao;
+    }
+
+    public int getConsumidor() {
+        return consumidor;
     }
 
     public void setConsumidor(int consumidor) {
         this.consumidor = consumidor;
     }
 
-    public void setEstabelecimento(int estabelecimento) {
-        this.estabelecimento = estabelecimento;
+    public float getNota() {
+        return nota;
     }
 
     public void setNota(float nota) {
         this.nota = nota;
     }
 
+    public String getComentario() {
+        return comentario;
+    }
+
     public void setComentario(String comentario) {
         this.comentario = comentario;
+    }
+
+    public int getComida() {
+        return comida;
     }
 
     public void setComida(int comida) {
@@ -78,12 +72,11 @@ public class AvaliarComida {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 73 * hash + this.idAvaliacao;
-        hash = 73 * hash + this.consumidor;
-        hash = 73 * hash + this.estabelecimento;
-        hash = 73 * hash + Float.floatToIntBits(this.nota);
-        hash = 73 * hash + Objects.hashCode(this.comentario);
-        hash = 73 * hash + this.comida;
+        hash = 97 * hash + this.idAvaliacao;
+        hash = 97 * hash + this.consumidor;
+        hash = 97 * hash + Float.floatToIntBits(this.nota);
+        hash = 97 * hash + Objects.hashCode(this.comentario);
+        hash = 97 * hash + this.comida;
         return hash;
     }
 
@@ -102,27 +95,13 @@ public class AvaliarComida {
         if (this.idAvaliacao != other.idAvaliacao) {
             return false;
         }
-        if (this.consumidor != other.consumidor) {
-            return false;
-        }
-        if (this.estabelecimento != other.estabelecimento) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.nota) != Float.floatToIntBits(other.nota)) {
-            return false;
-        }
-        if (this.comida != other.comida) {
-            return false;
-        }
-        if (!Objects.equals(this.comentario, other.comentario)) {
-            return false;
-        }
         return true;
     }
 
     @Override
     public String toString() {
-        return "AvaliarComida{" + "idAvaliacao=" + idAvaliacao + ", consumidor=" + consumidor + ", estabelecimento=" + estabelecimento + ", nota=" + nota + ", comentario=" + comentario + ", comida=" + comida + '}';
-    }
-    
+        return "AvaliarComida{" + "idAvaliacao=" + idAvaliacao + ", "
+                + "consumidor=" + consumidor + ", nota=" + nota + ", "
+                + "comentario=" + comentario + ", comida=" + comida + '}';
+    }   
 }

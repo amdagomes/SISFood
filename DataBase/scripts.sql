@@ -44,7 +44,7 @@ CREATE TABLE Comida(
     preco float NOT NULL,
     nome varchar(200) NOT NULL,
     idEstabelecimento int,
-    foto varchar(255),	
+    foto varchar(255),
     PRIMARY KEY(idComida),
     FOREIGN KEY(idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -96,15 +96,15 @@ CREATE TABLE AvaliarComida(
     FOREIGN KEY(comida) REFERENCES Comida(idComida) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE TABLE ComentarComida(
-    idComentario serial,
-    usuario int,
-    comida int,
-    comentario varchar(255),
-    PRIMARY KEY(idComentario),
-    FOREIGN KEY(usuario) REFERENCES Usuario(idUsuario)
-);
-                                                                                           
+-- CREATE TABLE ComentarComida(
+--     idComentario serial,
+--     usuario int,
+--     comida int,
+--     comentario varchar(255),
+--     PRIMARY KEY(idComentario),
+--     FOREIGN KEY(usuario) REFERENCES Usuario(idUsuario)
+-- );
+
 CREATE TABLE RecomendarComida(
     idRecomendacao serial,
     comida int NOT NULL,
@@ -137,4 +137,4 @@ CREATE TABLE SolicitaAmizade(
     PRIMARY KEY(idSolicitacao),
     FOREIGN KEY(destinatario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(remetente) REFERENCES Usuario(idUsuario)
-);                                                                                        
+);

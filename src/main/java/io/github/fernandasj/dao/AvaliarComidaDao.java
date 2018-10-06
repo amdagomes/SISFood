@@ -24,13 +24,12 @@ public class AvaliarComidaDao {
 
     public boolean salvar(AvaliarComida obj) throws SQLException, Exception {
         con = ConnectionFactory.getConnection();
-        String sql = "INSERT INTO AvaliarComida(consumidor,estabelecimento,nota,comentario,comida)"
-                + " VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO AvaliarComida(consumidor,nota,comentario,comida)"
+                + " VALUES(?,?,?,?)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
             stmt.setInt(1, obj.getConsumidor());
-            stmt.setInt(2, obj.getEstabelecimento());
             stmt.setFloat(3, obj.getNota());
             stmt.setString(4, obj.getComentario());
             stmt.setInt(5, obj.getComida());
@@ -55,7 +54,7 @@ public class AvaliarComidaDao {
         ResultSet resultado = stmt.executeQuery();
 
         if (resultado.next()) {
-            AvaliarComida Av = new AvaliarComida(resultado.getInt("consumidor"), resultado.getInt("estabelecimento"),
+            AvaliarComida Av = new AvaliarComida(resultado.getInt("consumidor"),
                     resultado.getFloat("nota"), resultado.getString("Comentario"), resultado.getInt("Comida"));
 
             resultado.close();
