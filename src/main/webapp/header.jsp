@@ -1,10 +1,11 @@
-<%-- 
+<%--
     Document   : header
     Created on : 18/09/2018, 11:24:10
     Author     : Amanda
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="ct" uri="/WEB-INF/tlds/CustomTags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -36,9 +37,8 @@
                     </div>            
                     <div class="navbar-item dropdown is-right is-pointer notf">
                         <div class="dropdown-trigger">   
-                            <jsp:useBean id="amizadeDao" class="io.github.fernandasj.controle.GerenciadorAmizade"/>
-                            <c:set var="pedidosAmizade" value="${amizadeDao.countPNotificacoes(sessionScope.usuario.id)}"></c:set>
-                            <span class="icon is-small badge" data-badge="${pedidosAmizade}" aria-controls="dropdown-menu">
+                            <ct:buscaNotificacao user="${sessionScope.usuario.id}" />
+                            <span class="icon is-small badge" data-badge="${notificacoes}" aria-controls="dropdown-menu">
                                 <i class="fa fa-bell" aria-hidden="true"></i>
                             </span>
                         </div>

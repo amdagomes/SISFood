@@ -2,21 +2,20 @@
 <taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
   <tlib-version>1.0</tlib-version>
   <short-name>ct</short-name>
-  <uri>/WEB-INF/tlds/custonTags</uri>
+  <uri>/WEB-INF/tlds/CustomTags</uri>
   
   <tag>
-    <name>InfoUser</name>
-    <description>Busca os dados de perfil do usuario</description>
+    <name>buscaNotificacao</name>
+    <description>Busca as notificações do usuário</description>
     <body-content>empty</body-content>
-    <tag-class>io.github.fernandasj.tags.InfoUser</tag-class>
+    <tag-class>io.github.fernandasj.tags.BuscaNotificacao</tag-class>
     <attribute>
-      <name>email</name>
-      <type>String</type>
+      <name>user</name>
+      <type>int</type>
       <required>true</required>
       <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>
-  
   <!-- A validator verifies that the tags are used correctly at JSP
           translation time. Validator entries look like this: 
        <validator>

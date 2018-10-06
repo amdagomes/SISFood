@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="ct" uri="/WEB-INF/tlds/custonTags" %>
+<%@taglib prefix="ct" uri="/WEB-INF/tlds/CustomTags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
