@@ -21,40 +21,70 @@ public class Publicacao implements Comparable <Publicacao>{
     private int idPublicacao;
     private int idUsuario;
     private String texto;
-    private String foto;
     private String datahora;
+    private int idEstabelecimento;
     public  Publicacao(){
     }
 
-    public Publicacao(int idPublicacao, int idUsuario, String texto, String foto, String datahora) {
+    public Publicacao(int idPublicacao, int idUsuario, String texto, String datahora) {
         this.idPublicacao = idPublicacao;
         this.idUsuario = idUsuario;
         this.texto = texto;
-        this.foto = foto;
+       
         this.datahora=datahora;
     }
 
-   
+    public Publicacao(int idPublicacao, int idUsuario, String texto,  String datahora, int idEstabelecimento) {
+        this.idPublicacao = idPublicacao;
+        this.idUsuario = idUsuario;
+        this.texto = texto;
+      
+        this.datahora = datahora;
+        this.idEstabelecimento = idEstabelecimento;
+    }
+
+    public Publicacao(int idPublicacao, String texto, int idEstabelecimento,String datahora) {
+        this.idPublicacao = idPublicacao;
+        
+        this.texto = texto;
+       
+        this.datahora = datahora;
+        this.idEstabelecimento = idEstabelecimento;
+    }
 public Publicacao(int idUsuario){
     this.idUsuario=idUsuario;
+  
 }
+
   
  public Publicacao( int idUsuario, String texto, String foto, String datahora) {
         this.idUsuario = idUsuario;
         this.texto = texto;
-        this.foto = foto;
+       
          this.datahora=datahora;
     }
+  public Publicacao(  String texto, int idEstabelecimento,String foto, String datahora) {
+        this.idEstabelecimento=idEstabelecimento;
+        this.texto = texto;
+        
+         this.datahora=datahora;
+    }
+
 
     public Publicacao(int idUsuario, String texto) {
         this.idUsuario = idUsuario;
         this.texto = texto;
     }
-
+     
     public Publicacao ( int idUsuario, String texto, String foto) {
         this.idUsuario = idUsuario;
         this.texto = texto;
-        this.foto = foto;
+       
+    }
+
+    public Publicacao(String texto, int idEstabelecimento) {
+        this.texto=texto;
+        this.idEstabelecimento=idEstabelecimento;
     }
 
     public int getIdPublicacao() {
@@ -81,13 +111,7 @@ public Publicacao(int idUsuario){
         this.texto = texto;
     }
 
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
+   
 
     public  String getDatahora() {
         return datahora;
@@ -97,17 +121,23 @@ public Publicacao(int idUsuario){
         this.datahora = datahora;
     }
 
-  
+    public int getIdEstabelecimento() {
+        return idEstabelecimento;
+    }
+
+    public void setIdEstabelecimento(int idEstabelecimento) {
+        this.idEstabelecimento = idEstabelecimento;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 17 * hash + this.idPublicacao;
-        hash = 17 * hash + this.idUsuario;
-        hash = 17 * hash + Objects.hashCode(this.texto);
-        hash = 17 * hash + Objects.hashCode(this.foto);
-        hash = 17 * hash + Objects.hashCode(this.datahora);
+        int hash = 7;
+        hash = 67 * hash + this.idPublicacao;
+        hash = 67 * hash + this.idUsuario;
+        hash = 67 * hash + Objects.hashCode(this.texto);
        
+        hash = 67 * hash + Objects.hashCode(this.datahora);
+        hash = 67 * hash + this.idEstabelecimento;
         return hash;
     }
 
@@ -129,24 +159,29 @@ public Publicacao(int idUsuario){
         if (this.idUsuario != other.idUsuario) {
             return false;
         }
+        if (this.idEstabelecimento != other.idEstabelecimento) {
+            return false;
+        }
         if (!Objects.equals(this.texto, other.texto)) {
             return false;
         }
-        if (!Objects.equals(this.foto, other.foto)) {
-            return false;
-        }
+       
         if (!Objects.equals(this.datahora, other.datahora)) {
             return false;
         }
-       
         return true;
     }
 
     @Override
     public String toString() {
-        return "Publicacao{" + "idPublicacao=" + idPublicacao + ", idUsuario=" + idUsuario + ","
-                + " texto=" + texto + ", foto=" + foto + ", data=" + datahora + '}';
+        return "Publicacao{" + "idPublicacao=" + idPublicacao + ", idUsuario=" + idUsuario + ", "
+                + "texto=" + texto +  ", datahora=" + datahora + ", idEstabelecimento="
+                + idEstabelecimento + '}';
     }
+
+  
+
+   
 
     @Override
     public int compareTo(Publicacao p) {

@@ -17,10 +17,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author Amanda
  */
-
 @WebFilter(filterName = "filtroAutorizacao",
         urlPatterns = {"/home.jsp","/estabelecimento.jsp","/cardapio.jsp","/estabelecimento.jsp",
-            "/cardapio-visitante.jsp","/perfil-estabelecimento.jsp","/perfil-usuario"})
+            "/cardapio-visitante.jsp","/perfil-estabelecimento.jsp","/perfil-usuario","/minhaPublicacao","/FeedPaginas"})
 public class AutorizacaoFilter implements Filter {
 
     @Override

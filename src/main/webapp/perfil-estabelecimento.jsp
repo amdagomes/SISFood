@@ -199,7 +199,7 @@
 
                                                     <div class="column">
                                                         <div class="control">
-                                                            <input class="button is-fullwidth is-danger is-rounded" type="submit" value="Deletar Página">
+                                                            <a class="button is-fullwidth is-danger is-rounded" href="front?action=DeletarEstabelecimento">Deletar Página</a>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -33,9 +33,11 @@
                                 <div>
                                     <p class="has-text-dark has-text-centered has-text-weight-semibold is-size-5">
                                         ${sessionScope.estabelecimento.nome}
+                                        
                                     </p>
                                     <p class="has-text-grey-light has-text-centered">
                                         ${sessionScope.estabelecimento.descricao}
+                                        
                                     </p>
                                 </div>
                             </div>
@@ -47,7 +49,7 @@
                                     <li>
                                         <p class="menu-label">MINHA PÁGINA</p>
                                         <ul>
-                                            <a href="estabelecimento.jsp"><li class="link-ativo">Feed</li></a>
+                                            <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
                                             <a href="cardapio.jsp"><li>Cardápio</li></a>
                                             <a href="perfil-estabelecimento.jsp"><li>Perfil</li></a>
                                         </ul>
@@ -66,7 +68,7 @@
 
                     <div class="column">
                         <!-- Criar publicação-->
-                        <form action="">
+                        <form method="post" action="front?action=PublicarEstabelecimento">
                             <div class="media-box">
                                 <nav class="breadcrumb has-bullet-separator" aria-label="breadcrumbs">
                                     <ul>
@@ -93,9 +95,11 @@
                                 <div class="criar-publicacao">
                                     <div class="field">
                                         <p class="control">
-                                            <textarea class="textarea" placeholder="Faça uma publicação..." rows="2"></textarea>
+                                            <textarea class="textarea" placeholder="Faça uma publicação..." rows="2" name="texto"></textarea>
                                         </p>
+                                         <input type ="hidden" name="idEstabelecimento" value= ${sessionScope.estabelecimento.id}>
                                     </div>
+                                   
                                     <div class="level">
                                         <div class="level-left">
                                             <div class="level-item">
@@ -112,17 +116,23 @@
                     </div>
 
                     <!-- Publicação -->
+                     <jsp:useBean id="daoE" class="io.github.fernandasj.dao.EstabelecimentoDao"/> 
+                    <jsp:useBean id="dao" class="io.github.fernandasj.dao.PublicacaoEstabelecimentoDao"/>
+
+                    <c:forEach var="publicacao" items="${dao.listar(sessionScope.estabelecimento.id)}">
+                        <c:set var="estab" value="${daoE.buscarPorId(publicacao.idEstabelecimento)}"/>  
+
                     <div class="card media-box">
                         <div class="card-content">
                             <div class="media">
                                 <div class="media-left">
                                     <figure class="image is-64x64">
-                                        <img class="is-rounded" src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                                        <img class="is-rounded" src="${estab.foto}" alt="Placeholder image">
                                     </figure>
                                 </div>
                                 <div class="media-content">
-                                    <p class="title is-5">John Smith</p>
-                                    <p class="subtitle is-7">15 de setembro às 23:30</p>
+                                    <p class="title is-5">${estab.nome}</p>
+                                    <p class="subtitle is-7">${publicacao.datahora}</p>
                                 </div>
                                 <div class="media-right">
                                     <div class="dropdown drop is-right is-pointer">
@@ -136,7 +146,7 @@
                                                 <a href="#" class="dropdown-item">
                                                     Compartilhar
                                                 </a>
-                                                <a href="#" class="dropdown-item">
+                                                <a title="excluir"href="front?action=DeletarPublicacao&idPublicacao=${publicacao.idPublicacao}" class="dropdown-item">
                                                     Deletar
                                                 </a>
                                             </div>
@@ -145,62 +155,75 @@
                                 </div>
                             </div>
                             <div class="card-image">
-                                <figure class="image is-16by9">
-                                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                                </figure>
+                               
+                                  ${publicacao.texto}
+                             
                             </div>
                             <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
+                              
                             </div>
-                        </div>
-
+                        </div> 
+                          
                         <!-- Comentatio da publicação-->
+                         <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioEstabelecimentoDao"/>
+                         <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/>
+                         
+                         
+                            <c:forEach var="comentario" items="${daoC.listar(publicacao.idPublicacao)}">
+                                <c:set var="userComentario" value="${daoU.buscarPorId(comentario.comentarista)}"/>
+                               
+                                
                         <div class="comentario">
                             <article class="media">
                                 <figure class="media-left">
                                     <p class="image is-48x48">
-                                        <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                                        <img class="is-rounded" src="${userComentario.fotoPerfil}">
                                     </p>
                                 </figure>
                                 <div class="media-content">
                                     <div class="content">
                                         <p>
-                                            <span class="title-comentario">John Smith</span> <small>data/hora</small>
+                                            <span class="title-comentario">${userComentario.nome}</span> <small>${comentario.datahora}</small>
                                             <br>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                                             ${comentario.comentario}
                                         </p>
                                     </div>
                                 </div>
                             </article>
                         </div>
+                                       
+                            </c:forEach>
 
                         <!-- Escrever comentario-->
+                          <form  method="post" action="front?action=ComentarPubliEstabelecimento">
                         <article class="media comentario">
                             <figure class="media-left">
                                 <p class="image is-48x48">
-                                    <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                                    <img class="is-rounded" src="${sessionScope.estabelecimento.foto}">
                                 </p>
                             </figure>
                             <div class="media-content">
                                 <div class="field">
                                     <p class="control">
-                                        <textarea class="textarea" placeholder="Escreva um comentario..." rows="1"></textarea>
+                                        <textarea class="textarea" placeholder="Escreva um comentario..." rows="1" name="comentario"></textarea>
                                     </p>
+                                    <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
                                 </div>
                             </div>
-                            <a href="#" class="button-send">
+                             <button type="submit">
                                 <span class="icon is-large">
                                     <span class="fa-stack fa-lg">
                                         <i class="fas fa-circle fa-stack-2x has-text-green"></i>
                                         <i class="fas fa-paper-plane fa-stack-1x"></i>
                                     </span>
                                 </span>
-                            </a>
+                             </button>
                     </div>
+                                </c:forEach>
                     </article>
                 </div>
             </div>
-
+  
         </div>
     </section>
 

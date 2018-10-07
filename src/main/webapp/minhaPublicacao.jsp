@@ -49,7 +49,7 @@
                                     <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
                                     <a href="FeedPaginas.jsp"><li class="link-ativo">Feed páginas</li></a>
                                     <a href=""><li>Menssagens</li></a>
-                                     <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
+                                     <a href="MinhaPublicacao.jsp"><li>Minhas publicações</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
                                     <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
@@ -126,7 +126,7 @@
                    <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/> 
                     <jsp:useBean id="dao" class="io.github.fernandasj.dao.PublicacaoDao"/>
 
-                    <c:forEach var="publicacao" items="${dao.listarFeed(sessionScope.usuario.id)}">
+                    <c:forEach var="publicacao" items="${dao.listar(sessionScope.usuario.id)}">
                         <c:set var="user" value="${daoU.buscarPorId(publicacao.idUsuario)}"/>  
 
                         <div class="card media-box">
@@ -150,10 +150,14 @@
                                             </div>
                                             <div class="dropdown-menu" id="dropdown-menu3" role="menu">
                                                 <div class="dropdown-content">
-                                                    
+                                                    <a href="#" class="dropdown-item">
+                                                        Compartilhar
+                                                    </a>
                                                   
                                                         
-                                                  
+                                                    <a title="excluir"href="front?action=DeletarPublicacao&idPublicacao=${publicacao.idPublicacao}" class="dropdown-item">
+                                                        Deletar
+                                                    </a>
                                                     
         
                                                         

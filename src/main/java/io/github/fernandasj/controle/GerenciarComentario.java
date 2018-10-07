@@ -6,6 +6,7 @@
 package io.github.fernandasj.controle;
 
 import io.github.fernandasj.dao.ComentarioDao;
+import io.github.fernandasj.dao.ComentarioEstabelecimentoDao;
 import io.github.fernandasj.modelo.Comentario;
 import io.github.fernandasj.repository.DaoFactoryIF;
 import java.sql.SQLException;
@@ -17,6 +18,8 @@ import java.sql.SQLException;
 public class GerenciarComentario {
      private DaoFactoryIF fabrica = null;
     private ComentarioDao Dao = new  ComentarioDao();
+    private ComentarioEstabelecimentoDao dao = new ComentarioEstabelecimentoDao();
+    
     
     public boolean adiciona(String comentario,int comentarista,int idPublicacao) throws Exception{
         Comentario c= new Comentario( comentarista,comentario,idPublicacao);
@@ -26,4 +29,9 @@ public class GerenciarComentario {
     public Comentario Busca(int idComentario) throws SQLException{
         return Dao.buscar(idComentario);
     }
+    public boolean adicionaComentario(String comentario,int comentarista,int idPublicacao) throws Exception{
+        Comentario c= new Comentario( comentarista,comentario,idPublicacao);
+        return dao.salvar(c);
+    }
+    
 }

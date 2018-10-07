@@ -29,7 +29,7 @@ public class Imagem {
             InputStream input = foto.getInputStream();
             BufferedImage imagem = ImageIO.read(input);
 
-            File diretorio = new File("C:\\Users\\Amanda\\Documents\\Amanda\\ADS\\SISFood\\src\\main\\webapp\\upload_images");
+            File diretorio = new File("C:\\Users\\Cliente\\Desktop\\SISFood\\src\\main\\webapp\\upload_images");
 
             System.out.println("Diretorio: " + diretorio);
 
@@ -55,7 +55,7 @@ public class Imagem {
             InputStream input = foto.getInputStream();
             BufferedImage imagem = ImageIO.read(input);
 
-            File diretorio = new File("C:\\Users\\Amanda\\Documents\\Amanda\\ADS\\SISFood\\src\\main\\webapp\\upload_images");
+            File diretorio = new File("C:\\Users\\Cliente\\Desktop\\SISFood\\src\\main\\webapp\\upload_images");
 
             System.out.println("Diretorio: " + diretorio);
 
