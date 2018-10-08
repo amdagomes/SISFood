@@ -13,14 +13,15 @@
         <meta name="viewport" content="whidth: device-width, initial-scale-1.0, maximun-scale-1.0">
         <meta name="description" content="Rede Social voltada para o ramo alimenticio.">
         <meta name="keywords" content="social, media, rede, social, food, alimento">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+        <link rel="stylesheet" href="css/bulma.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
         <link rel="stylesheet" href="css/bulma-badge.min.css">
         <link rel="stylesheet" href="css/style.css">
         <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     </head>
     <body class="background-gray">
         <%@ include file="header.jsp"%>
-        
+
         <section class="section">
             <div class="container ">
                 <div class="columns is-2">
@@ -37,17 +38,38 @@
                                     <p class="has-text-grey-light has-text-centered">
                                         ${sessionScope.visita.descricao}
                                     </p>
+                                    <p class="has-text-centered">
+                                        <a href="#avaliar" rel="modal:open">Avalie!</a>
+                                    </p>
                                 </div>
                             </div>
-
+                            <div class="level is-small">
+                                <div class="level-item has-text-centered">
+                                    <div>
+                                        <p class="is-size-6 has-text-weight-semibold">                                            
+                                            <span class="icon is-small">
+                                                3,4
+                                                <i class="fas fa-star"></i>
+                                            </span>
+                                        </p>
+                                        <p class="heading">Nota</p>                    
+                                    </div>
+                                </div>
+                                <div class="level-item has-text-centered">
+                                    <div>
+                                        <p class="is-size-6 has-text-weight-semibold">${sessionScope.visita.categoria}</p>
+                                        <p class="heading">Categoria</p>                    
+                                    </div>
+                                </div>
+                            </div>
                             <aside class="menu">                           
                                 <ul>
-                                    <a href=""><li>Inicio</li></a>
+                                    <a href="front?action=Inicio"><li>Inicio</li></a>
                                     <li>
-                                        <p class="menu-label">Nome do estabelecimento</p>
+                                        <p class="menu-label">Estabelecimento</p>
                                         <ul>
-                                            <a href=""><li>Feed</li></a>
-                                            <a href=""><li class="link-ativo">Cardápio</li></a>
+                                            <a href="visita-estbl.jsp"><li>Feed</li></a>
+                                            <a href="front?action=VisitarPag&id=${sessionScope.visita.id}&pag=cardapio&t=e"><li class="link-ativo">Cardápio</li></a>
                                             <a href=""><li>Mais Informações</li></a>
                                         </ul>
                                     </li>
@@ -56,7 +78,7 @@
                                                 <i class="fas fa-power-off"></i>
                                             </span>
                                             Sair
-                                    </li></a>
+                                        </li></a>
                                 </ul>       
                             </aside>
                         </div>
@@ -75,84 +97,128 @@
                                     </div>
                                 </nav>
                             </div>
-                            
+
                             <jsp:useBean id="dao" class="io.github.fernandasj.dao.ComidaDao"/>
                             <c:forEach var="comida" items="${dao.buscarPorEstabelecimento(sessionScope.visita.id)}">
-                            <article class="media item-cardapio">
-                                <figure class="media-left">
-                                    <p class="image is-128x128">
-                                        <img src="${comida.foto}">
-                                    </p>
-                                </figure>
-                                <div class="media-content">
-                                    <div class="content">
-                                        <p>
-                                            <strong>${comida.nome}</strong>
-                                            <small>Preço: R$  ${comida.preco}</small>
-                                            <br>
-                                            ${comida.descricao}
-                                            <br> 
+                                <article class="media item-cardapio">
+                                    <figure class="media-left">
+                                        <p class="image is-128x128">
+                                            <img src="${comida.foto}">
                                         </p>
-                                    </div>
-                                    <nav class="level is-mobile">
-                                        <div class="level-left">
-                                            <p>Avalie:</p>
+                                    </figure>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <strong>${comida.nome}</strong>
+                                                <small>Preço: R$  ${comida.preco}</small>
+                                                <br>
+                                                ${comida.descricao}
+                                                <br> 
+                                            </p>
                                         </div>
-                                        <div class="level-right">
-                                            <div class="estrelas">
-                                                <input type="radio" id="cm_star-empty" name="fb" value="" checked/>
-                                                <label id="star1" for="cm_star-1">
-                                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                                </label>
-                                                <input type="radio" id="cm_star-1" name="fb" value="1"/>
-                                                <label id="star2" for="cm_star-2">
-                                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                                </label>
-                                                <input type="radio" id="cm_star-2" name="fb" value="2"/>
-                                                <label id="star3" for="cm_star-3">
-                                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                                </label>
-                                                <input type="radio" id="cm_star-3" name="fb" value="3"/>
-                                                <label id="star4" for="cm_star-4">
-                                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                                </label>
-                                                <input type="radio" id="cm_star-4" name="fb" value="4"/>
-                                                <label id="star5" for="cm_star-5">
-                                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                                </label>
-                                                <input type="radio" id="cm_star-5" name="fb" value="5"/>
+                                        <nav class="level is-mobile">
+                                            <div class="level-left">
+                                                <p>Avalie:</p>
                                             </div>
-                                        </div>
-                                    </nav>
-                                </div>
-
-                                <div class="media-right">
-                                    <div class="level">
-                                        <a class="level-item" title="Compartilhar">
-                                            <span class="icon is-small"><i class="fas fa-share-alt"></i></span>
-                                        </a>
+                                            <div class="level-right">
+                                                <div class="estrelas">
+                                                    <input type="radio" id="cm_star-empty" name="fb" value="" checked/>
+                                                    <label id="star1" for="cm_star-1">
+                                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                                    </label>
+                                                    <input type="radio" id="cm_star-1" name="fb" value="1"/>
+                                                    <label id="star2" for="cm_star-2">
+                                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                                    </label>
+                                                    <input type="radio" id="cm_star-2" name="fb" value="2"/>
+                                                    <label id="star3" for="cm_star-3">
+                                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                                    </label>
+                                                    <input type="radio" id="cm_star-3" name="fb" value="3"/>
+                                                    <label id="star4" for="cm_star-4">
+                                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                                    </label>
+                                                    <input type="radio" id="cm_star-4" name="fb" value="4"/>
+                                                    <label id="star5" for="cm_star-5">
+                                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                                    </label>
+                                                    <input type="radio" id="cm_star-5" name="fb" value="5"/>
+                                                </div>
+                                            </div>
+                                        </nav>
                                     </div>
-                                </div>
 
-                            </article>
+                                    <div class="media-right">
+                                        <div class="level">
+                                            <a class="level-item" title="Compartilhar">
+                                                <span class="icon is-small"><i class="fas fa-share-alt"></i></span>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </article>
                             </c:forEach>
                         </div>
                     </div>  
                 </div>
+            </div>
+
+            <!-- MODAL AVALIAR ESTABELECIMENTO-->
+            <form id="avaliar" class="form-cardapio modal" method="post" action="front?action=AvaliacaoComida">
+                <p class="title is-size-5">Avalie e deixe seu comentario</p>
+                <div class="field is-grouped">
+                    <div class="level is-mobile">
+                        <div class="level-left">
+                            <p>Dê sua nota: </p>
+                        </div>
+                        <div class="level-right">
+                            <div class="estrelas">
+                                <input type="radio" id="cm_star-empty" name="nota" value="" checked/>
+                                <label id="star1" for="cm_star-1">
+                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                </label>
+                                <input type="radio" id="cm_star-1" name="nota" value="1"/>
+                                <label id="star2" for="cm_star-2">
+                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                </label>
+                                <input type="radio" id="cm_star-2" name="nota" value="2"/>
+                                <label id="star3" for="cm_star-3">
+                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                </label>
+                                <input type="radio" id="cm_star-3" name="nota" value="3"/>
+                                <label id="star4" for="cm_star-4">
+                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                </label>
+                                <input type="radio" id="cm_star-4" name="nota" value="4"/>
+                                <label id="star5" for="cm_star-5">
+                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                </label>
+                                <input type="radio" id="cm_star-5" name="nota" value="5"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <textarea class="textarea"  rows="2" name="comentario" placeholder="Comente..."></textarea>
+
+                <div class="field bt-margin-top">
+                    <div class="control">
+                        <input class="button is-success is-fullwidth" type="submit" value="Avaliar">
+                    </div>
+                </div>    
+            </form>  
         </section>
 
-        <script
-            src="https://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-            crossorigin="anonymous">
-        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
         <script>
 
             const dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', () => {
                 dropdown.classList.toggle('is-active');
             });
-            
+
             $("#showModal").click(function () {
                 $(".modal").addClass("is-active");
             });
