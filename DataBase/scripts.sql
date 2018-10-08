@@ -96,14 +96,6 @@ CREATE TABLE AvaliarComida(
     FOREIGN KEY(comida) REFERENCES Comida(idComida) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
--- CREATE TABLE ComentarComida(
---     idComentario serial,
---     usuario int,
---     comida int,
---     comentario varchar(255),
---     PRIMARY KEY(idComentario),
---     FOREIGN KEY(usuario) REFERENCES Usuario(idUsuario)
--- );
 
 CREATE TABLE RecomendarComida(
     idRecomendacao serial,
