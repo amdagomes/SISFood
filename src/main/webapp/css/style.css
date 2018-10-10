@@ -261,6 +261,9 @@ div.file-custom span.file-name{
     border-width: 1px;
 }
 
+div.estrelas{
+    margin-left: 10px;
+}
 div.estrelas input[type=radio] {
     display: none;
 }
@@ -309,6 +312,15 @@ div.r-usuarios figure img, div.r-estabelecimentos figure img{
    max-width: 150px;
    height: 100%;
    max-height: 150px;
+}
+div.accordion-header{
+    border-radius: 0 !important;
+}
+.accordion-body article.media{
+    padding: 10px;
+}
+.bt-margin-top{
+    margin-top: 10px;
 }
 @media screen and (max-width: 770px){
     .h100{

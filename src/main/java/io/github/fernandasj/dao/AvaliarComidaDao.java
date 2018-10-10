@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package io.github.fernandasj.dao;
 
 import io.github.fernandasj.modelo.AvaliarComida;
@@ -24,16 +19,15 @@ public class AvaliarComidaDao {
 
     public boolean salvar(AvaliarComida obj) throws SQLException, Exception {
         con = ConnectionFactory.getConnection();
-        String sql = "INSERT INTO AvaliarComida(consumidor,estabelecimento,nota,comentario,comida)"
-                + " VALUES(?,?,?,?,?)";
+        String sql = "INSERT INTO AvaliarComida(consumidor,comentario,nota,comida)"
+                + " VALUES(?,?,?,?)";
 
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
 
             stmt.setInt(1, obj.getConsumidor());
-            stmt.setInt(2, obj.getEstabelecimento());
+            stmt.setString(2, obj.getComentario());
             stmt.setFloat(3, obj.getNota());
-            stmt.setString(4, obj.getComentario());
-            stmt.setInt(5, obj.getComida());
+            stmt.setInt(4, obj.getComida());
             stmt.execute();
             stmt.close();
         }
@@ -55,7 +49,7 @@ public class AvaliarComidaDao {
         ResultSet resultado = stmt.executeQuery();
 
         if (resultado.next()) {
-            AvaliarComida Av = new AvaliarComida(resultado.getInt("consumidor"), resultado.getInt("estabelecimento"),
+            AvaliarComida Av = new AvaliarComida(resultado.getInt("consumidor"),
                     resultado.getFloat("nota"), resultado.getString("Comentario"), resultado.getInt("Comida"));
 
             resultado.close();
