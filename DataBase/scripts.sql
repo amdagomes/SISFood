@@ -87,7 +87,7 @@ CREATE TABLE RecomendarEstabelecimento(
 CREATE TABLE AvaliarComida(
     idAvaliacao serial,
     consumidor int NOT NULL,
-    estabelecimento int NOT NULL,
+    comentario VARCHAR(300),
     nota numeric(5,2) NOT NULL,
     comida int,
     PRIMARY KEY(idAvaliacao),

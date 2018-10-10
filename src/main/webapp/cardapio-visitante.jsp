@@ -98,8 +98,8 @@
                                         </div>
                                         <nav class="level is-mobile">
                                             <div class="level-left">
-                                                <a href="#avaliar" rel="modal:open">
-                                                   <p>Dê sua nota</p>
+                                                <a href="#${comida.idComida}" rel="modal:open">
+                                                    <p>Dê sua nota</p>
                                                 </a>
                                             </div>
                                         </nav>
@@ -140,56 +140,40 @@
                                             </article>
                                         </div>
                                     </article>
-                                </section>
+                                </section>    
+                                <!--MODAL AVALIAR COMIDA-->
+                                <form id="${comida.idComida}" class="form-cardapio modal" method="post" action="front?action=AvaliacaoComida">
+                                    <p class="title is-size-5">Avalie e deixe seu comentario</p>
+                                    <input type="hidden" name="idComida" value="${comida.idComida}"/>
+                                    <div class="field is-grouped">
+                                        <div class="level is-mobile">
+                                            <div class="level-left">
+                                                <p>Dê sua nota: </p>
+                                            </div>
+                                            <div class="level-right select is-small">
+                                                <select name="nota">
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <textarea class="textarea"  rows="2" name="comentario" placeholder="Comente..."></textarea>
+
+                                    <div class="field bt-margin-top">
+                                        <div class="control">
+                                            <input class="button is-success is-fullwidth" type="submit" value="Avaliar">
+                                        </div>
+                                    </div>    
+                                </form> 
                             </c:forEach>
                         </div>
                     </div>  
                 </div>
-                <!--MODAL AVALIAR COMIDA-->
-                <form id="avaliar" class="form-cardapio modal" method="post" action="front?action=AvaliacaoComida">
-                    <p class="title is-size-5">Avalie e deixe seu comentario</p>
-                    <div class="field is-grouped">
-                        <div class="level is-mobile">
-                            <div class="level-left">
-                                <p>Dê sua nota: </p>
-                            </div>
-                            <div class="level-right">
-                                <div class="estrelas">
-                                    <input type="radio" id="cm_star-empty" name="nota" value="" checked/>
-                                    <label id="star1" for="cm_star-1">
-                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                    </label>
-                                    <input type="radio" id="cm_star-1" name="nota" value="1"/>
-                                    <label id="star2" for="cm_star-2">
-                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                    </label>
-                                    <input type="radio" id="cm_star-2" name="nota" value="2"/>
-                                    <label id="star3" for="cm_star-3">
-                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                    </label>
-                                    <input type="radio" id="cm_star-3" name="nota" value="3"/>
-                                    <label id="star4" for="cm_star-4">
-                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                    </label>
-                                    <input type="radio" id="cm_star-4" name="nota" value="4"/>
-                                    <label id="star5" for="cm_star-5">
-                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                    </label>
-                                    <input type="radio" id="cm_star-5" name="nota" value="5"/>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
-
-                    <textarea class="textarea"  rows="2" name="comentario" placeholder="Comente..."></textarea>
-
-                    <div class="field bt-margin-top">
-                        <div class="control">
-                            <input class="button is-success is-fullwidth" type="submit" value="Avaliar">
-                        </div>
-                    </div>    
-                </form> 
         </section>
 
         <script
@@ -217,6 +201,7 @@
 
                 $(function () {
                     $('.estrelas input').click(function () {
+
                         var valor = $(this).attr('value');
 
                         for (var i = 0; i <= 5; i++) {
