@@ -49,7 +49,7 @@
                                     <div>
                                         <p class="is-size-6 has-text-weight-semibold">                                            
                                             <span class="icon is-small">
-                                                3,4
+                                                ${sessionScope.visita.nota}
                                                 <i class="fas fa-star"></i>
                                             </span>
                                         </p>
