@@ -5,8 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="ct" uri="/WEB-INF/tlds/custonTags" %>
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
+<%@taglib prefix="ct" uri="/WEB-INF/tlds/CustomTags"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -48,8 +48,9 @@
                                 <ul>
                                     <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
                                     <a href="FeedPaginas.jsp"><li class="link-ativo">Feed páginas</li></a>
-                                    <a href=""><li>Menssagens</li></a>
-                                     <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
+                                    <a href="amigos.jsp"><li>Amigos</li></a>
+                                    <a href=""><li>Mensagens</li></a>
+                                    <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
                                     <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
@@ -58,7 +59,7 @@
                                             <jsp:useBean id="control" class="io.github.fernandasj.controle.GerenciadorEstabelecimento"/>
                                             <c:forEach var="pagina" items="${control.meusEstabelecimentos(sessionScope.usuario.id)}">
                                                 <a href="front?action=PaginaEstabelecimento&id=${pagina.id}"><li>${pagina.nome}</li></a>
-                                            </c:forEach>     
+                                                    </c:forEach>     
                                         </ul>
                                     </li>
                                     <a href="front?action=Logout">
@@ -121,9 +122,8 @@
                                 </div>   
                         </form>
                     </div>
-
                     <!-- Publicação -->
-                   <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/> 
+                    <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/> 
                     <jsp:useBean id="dao" class="io.github.fernandasj.dao.PublicacaoDao"/>
 
                     <c:forEach var="publicacao" items="${dao.listarFeed(sessionScope.usuario.id)}">
@@ -150,32 +150,25 @@
                                             </div>
                                             <div class="dropdown-menu" id="dropdown-menu3" role="menu">
                                                 <div class="dropdown-content">
-                                                    
-                                                  
-                                                        
-                                                  
-                                                    
-        
-                                                        
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                               
+
                                 <div class="card-image" >
-                                 <p>
-                                    ${publicacao.texto}
-                                 </p>
+                                    <p>
+                                        ${publicacao.texto}
+                                    </p>
                                 </div>
-                               
+
                                 <div class="content">
 
                                 </div>
                             </div>
 
-                        <!-- Comentatio da publicação-->
-                         <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioDao"/>
+                            <!-- Comentatio da publicação-->
+                            <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioDao"/>
                             <c:forEach var="comentario" items="${daoC.listar(publicacao.idPublicacao)}">
                                 <c:set var="userComentario" value="${daoU.buscarPorId(comentario.comentarista)}"/>
                                 <div class="comentario">
@@ -199,8 +192,9 @@
                                 </div>
                             </c:forEach>
 
-                        <!-- Escrever comentario-->
-                       <form  method="post" action="front?action=Comentar">
+
+                            <!-- Escrever comentario-->
+                            <form  method="post" action="front?action=Comentar">
                                 <article class="media comentario">
                                     <figure class="media-left">
                                         <p class="image is-48x48">
@@ -214,10 +208,9 @@
                                             </p>
                                         </div>
                                         <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
+                                         <input type="hidden" name ="pagina" value="home">
                                     </div>
                                     <button type="submit">
-
-
                                         <span class="icon is-large">
                                             <span class="fa-stack fa-lg">
                                                 <i class="fas fa-circle fa-stack-2x has-text-green"></i>
@@ -226,11 +219,11 @@
                                             </span>
                                         </span>
                                     </button>
+                            </article>
+                           </form>
 
                                     </div>
-                            </form>
 
-                            </article>
                         </c:forEach>    
                     </div>
 
@@ -241,67 +234,68 @@
         </section>
 
 
-    <%@ include file="cadastrar-estabelecimento.jsp"%>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <script>
-        const dropdown = document.querySelector('.dropdown');
-        dropdown.addEventListener('click', () => {
-            dropdown.classList.toggle('is-active');
-        });
+        <%@ include file="cadastrar-estabelecimento.jsp"%>
 
-        const drop = document.querySelector('.drop');
-        drop.addEventListener('click', () => {
-            drop.classList.toggle('is-active');
-        });
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        <script>
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.addEventListener('click', () => {
+                dropdown.classList.toggle('is-active');
+            });
 
-        //exibe o src da imagem
-        var file = document.getElementById("arquivo");
-        file.onchange = function () {
-            if (file.files.length > 0)
-            {
-                document.getElementById('nomearquivo').innerHTML = file.files[0].name;
-            }
-        };
+            const drop = document.querySelector('.drop');
+            drop.addEventListener('click', () => {
+                drop.classList.toggle('is-active');
+            });
 
-        //altera a foto de exibição do perfil
-        $("#arquivo").on('change', function () {
-            if (this.files && this.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#foto').attr("src", e.target.result).fadeIn();
+            //exibe o src da imagem
+            var file = document.getElementById("arquivo");
+            file.onchange = function () {
+                if (file.files.length > 0)
+                {
+                    document.getElementById('nomearquivo').innerHTML = file.files[0].name;
                 }
-                reader.readAsDataURL(this.files[0]);
-            }
-        });
+            };
 
-        document.addEventListener('DOMContentLoaded', () => {
+            //altera a foto de exibição do perfil
+            $("#arquivo").on('change', function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#foto').attr("src", e.target.result).fadeIn();
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
 
-            // Get all "navbar-burger" elements
-            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            document.addEventListener('DOMContentLoaded', () => {
 
-            // Check if there are any navbar burgers
-            if ($navbarBurgers.length > 0) {
+                // Get all "navbar-burger" elements
+                const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-                // Add a click event on each of them
-                $navbarBurgers.forEach(el => {
-                    el.addEventListener('click', () => {
+                // Check if there are any navbar burgers
+                if ($navbarBurgers.length > 0) {
 
-                        // Get the target from the "data-target" attribute
-                        const target = el.dataset.target;
-                        const $target = document.getElementById(target);
+                    // Add a click event on each of them
+                    $navbarBurgers.forEach(el => {
+                        el.addEventListener('click', () => {
 
-                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                        el.classList.toggle('is-active');
-                        $target.classList.toggle('is-active');
+                            // Get the target from the "data-target" attribute
+                            const target = el.dataset.target;
+                            const $target = document.getElementById(target);
 
+                            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                            el.classList.toggle('is-active');
+                            $target.classList.toggle('is-active');
+
+                        });
                     });
-                });
-            }
+                }
 
-        });
+            });
 
-    </script>
-</body>
+        </script>
+    </body>
 </html>

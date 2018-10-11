@@ -33,11 +33,9 @@
                                 <div>
                                     <p class="has-text-dark has-text-centered has-text-weight-semibold is-size-5">
                                         ${sessionScope.estabelecimento.nome}
-                                        
                                     </p>
                                     <p class="has-text-grey-light has-text-centered">
                                         ${sessionScope.estabelecimento.descricao}
-                                        
                                     </p>
                                 </div>
                             </div>
@@ -49,7 +47,7 @@
                                     <li>
                                         <p class="menu-label">MINHA PÁGINA</p>
                                         <ul>
-                                            <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
+                                            <a href="estabelecimento.jsp"><li class="link-ativo">Feed</li></a>
                                             <a href="cardapio.jsp"><li>Cardápio</li></a>
                                             <a href="perfil-estabelecimento.jsp"><li>Perfil</li></a>
                                         </ul>
@@ -68,7 +66,7 @@
 
                     <div class="column">
                         <!-- Criar publicação-->
-                        <form method="post" action="front?action=PublicarEstabelecimento">
+                       <form method="post" action="front?action=PublicarEstabelecimento">
                             <div class="media-box">
                                 <nav class="breadcrumb has-bullet-separator" aria-label="breadcrumbs">
                                     <ul>
@@ -115,6 +113,7 @@
                         </form>
                     </div>
 
+
                     <!-- Publicação -->
                      <jsp:useBean id="daoE" class="io.github.fernandasj.dao.EstabelecimentoDao"/> 
                     <jsp:useBean id="dao" class="io.github.fernandasj.dao.PublicacaoEstabelecimentoDao"/>
@@ -155,17 +154,17 @@
                                 </div>
                             </div>
                             <div class="card-image">
-                               
-                                  ${publicacao.texto}
+                               <div class="content">
+                                ${publicacao.texto}
+                            </div>
+                                
                              
                             </div>
-                            <div class="content">
-                              
-                            </div>
+                            
                         </div> 
                           
                         <!-- Comentatio da publicação-->
-                         <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioEstabelecimentoDao"/>
+                       <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioEstabelecimentoDao"/>
                          <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/>
                          
                          
@@ -194,8 +193,9 @@
                                        
                             </c:forEach>
 
+
                         <!-- Escrever comentario-->
-                          <form  method="post" action="front?action=ComentarPubliEstabelecimento">
+                      <form  method="post" action="front?action=Comentar">
                         <article class="media comentario">
                             <figure class="media-left">
                                 <p class="image is-48x48">
@@ -208,6 +208,7 @@
                                         <textarea class="textarea" placeholder="Escreva um comentario..." rows="1" name="comentario"></textarea>
                                     </p>
                                     <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
+                                    <input type="hidden" name ="pagina" value="estabelecimento">
                                 </div>
                             </div>
                              <button type="submit">
@@ -218,14 +219,20 @@
                                     </span>
                                 </span>
                              </button>
+                                     </article>
+                      </form>
                     </div>
-                                </c:forEach>
-                    </article>
+                           </c:forEach>       
+                   
+                                    
+                     
+                                  
                 </div>
             </div>
   
         </div>
     </section>
+
 
     <script>
         const dropdown = document.querySelector('.dropdown');

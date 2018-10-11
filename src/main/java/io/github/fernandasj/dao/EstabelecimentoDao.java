@@ -264,7 +264,7 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
         ResultSet r = stmt.executeQuery();
 
         if (r.next()) {
-            Estabelecimento e = new Estabelecimento(r.getInt("idEstabelecimento"), r.getInt("idusuario"), 
+            Estabelecimento e = new Estabelecimento(r.getInt("idestabelecimento"), r.getInt("idusuario"), 
                         r.getString("nome"), r.getString("telefone"), r.getString("fotoestabelecimento"), r.getString("categoria"),
                         r.getFloat("nota"), r.getString("descricao"), r.getString("rua"), r.getString("estado"), r.getString("cidade"),
                         r.getString("cep"), null, r.getTime("horaabre"), r.getTime("horafecha"));

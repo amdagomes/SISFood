@@ -53,11 +53,6 @@ public class Estabelecimento {
         this.horaFecha = horaFecha;
     }
 
-    public Estabelecimento(int id,String nome,String foto){
-         this.id = id;
-         this.nome = nome;
-         this.foto = foto;
-    }
     public Estabelecimento(int idUsuario, String nome, String telefone, String foto, String categoria,
              String descricao, String rua, String estado, String cidade, String cep, String dia, Time horaAbre, Time horaFecha) {
         this.idUsuario = idUsuario;

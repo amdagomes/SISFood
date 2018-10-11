@@ -6,7 +6,6 @@
 package io.github.fernandasj.command;
 
 import io.github.fernandasj.controle.GerenciarComentario;
-import io.github.fernandasj.modelo.Publicacao;
 import io.github.fernandasj.modelo.Usuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +18,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Cliente
  */
-public class Comentar implements Command{
+public class ComentarPerfil  implements Command{
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
@@ -28,13 +27,11 @@ public class Comentar implements Command{
       
         String comentario = request.getParameter("comentario");
         String idPublicacao = request.getParameter("idPublicacao");
-         String pagina = request.getParameter("pagina");
         GerenciarComentario gC = new GerenciarComentario();
         try {
             
             if(gC.adiciona( comentario,usuario.getId(),Integer.parseInt(idPublicacao))){
-               //request.getRequestDispatcher("home.jsp").forward(request, response);
-               request.getRequestDispatcher(pagina + ".jsp").forward(request, response);
+               request.getRequestDispatcher("visita-user.jsp").forward(request, response);
             }
             else{
                  response.sendRedirect("index.jsp");
@@ -48,3 +45,7 @@ public class Comentar implements Command{
     }
     
 }
+
+    
+    
+

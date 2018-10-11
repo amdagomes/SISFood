@@ -14,46 +14,39 @@ estado varchar (10),
 telefone varchar(15) ,
 profissao varchar(100),
 descricao varchar(255),
-fotoPerfil bytea NOT NULL,
-PRIMARY KEY(idUsuario)  );
-
+fotoPerfil varchar(255),
+PRIMARY KEY(idUsuario)
+);
 
 CREATE TABLE Estabelecimento(
 idEstabelecimento serial,
 idUsuario int ,
 nome varchar(200) NOT NULL,
 telefone varchar(20),
-fotoEstabelecimento bytea NOT NULL,
-cartegoria varchar (50) NOT NULL,
-nota numeric(1,1),
+fotoEstabelecimento varchar,
+categoria varchar (50) NOT NULL,
+nota numeric(5,2),
 descricao varchar(200),
 rua varchar(200) NOT NULL,
 estado varchar(10) NOT NULL,
 cidade varchar(50) NOT NULL,
 cep varchar(10) ,
-dia varchar(30) NOT NULL,
+dia varchar(30),
 horaAbre TIME NOT NULL,
 horaFecha TIME NOT NULL,
 PRIMARY KEY(idEstabelecimento),
 FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)
-
-
-
 );
-
-
-
-
 CREATE TABLE Comida(
     idComida serial,
     descricao varchar(300) NOT NULL,
-    nota numeric(1,1),
+    nota numeric(5,2),
     preco float NOT NULL,
     nome varchar(200) NOT NULL,
     idEstabelecimento int,
+    foto varchar(255),	
     PRIMARY KEY(idComida),
-    FOREIGN KEY(idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
-    
+    FOREIGN KEY(idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 
@@ -65,19 +58,20 @@ CREATE TABLE Chekin(
     estabelecimento int NOT NULL,
     PRIMARY KEY(idChekin),
     FOREIGN KEY(consumidor) REFERENCES Usuario(idUsuario),
-    FOREIGN KEY(estabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
+    FOREIGN KEY(estabelecimento) REFERENCES Estabelecimento(idEstabelecimento) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE AvaliarEstabelecimento(
     idAvaliacao serial,
     consumidor int NOT NULL,
     estabelecimento int NOT NULL,
-    nota numeric(1,1) NOT NULL,
+    nota numeric(5,2) NOT NULL,
     comentario varchar(500),
     PRIMARY KEY(idAvaliacao),
     FOREIGN KEY(consumidor) REFERENCES Usuario(idUsuario),
-    FOREIGN KEY(estabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
-    );
+    FOREIGN KEY(estabelecimento) REFERENCES Estabelecimento(idEstabelecimento) ON UPDATE CASCADE ON DELETE CASCADE
+);
+
 CREATE TABLE RecomendarEstabelecimento(
     idRecomendacao serial,
     estabelecimento int,
@@ -87,22 +81,30 @@ CREATE TABLE RecomendarEstabelecimento(
     PRIMARY KEY(idRecomendacao),
     FOREIGN KEY(destinatario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(remetente) REFERENCES Usuario(idUsuario),
-    FOREIGN KEY(estabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
+    FOREIGN KEY(estabelecimento) REFERENCES Estabelecimento(idEstabelecimento) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE AvaliarComida(
     idAvaliacao serial,
     consumidor int NOT NULL,
     estabelecimento int NOT NULL,
-    nota numeric(1,1) NOT NULL,
-    comentario varchar(500),
+    nota numeric(5,2) NOT NULL,
     comida int,
     PRIMARY KEY(idAvaliacao),
     FOREIGN KEY(consumidor) REFERENCES Usuario(idUsuario),
-    FOREIGN KEY(estabelecimento) REFERENCES Estabelecimento(idEstabelecimento),
-    FOREIGN KEY(comida) REFERENCES Comida(idComida)
+    FOREIGN KEY(estabelecimento) REFERENCES Estabelecimento(idEstabelecimento) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY(comida) REFERENCES Comida(idComida) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+CREATE TABLE ComentarComida(
+    idComentario serial,
+    usuario int,
+    comida int,
+    comentario varchar(255),
+    PRIMARY KEY(idComentario),
+    FOREIGN KEY(usuario) REFERENCES Usuario(idUsuario)
+);
+                                                                                           
 CREATE TABLE RecomendarComida(
     idRecomendacao serial,
     comida int NOT NULL,
@@ -112,7 +114,7 @@ CREATE TABLE RecomendarComida(
     PRIMARY KEY(idRecomendacao),
     FOREIGN KEY(destinatario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(remetente) REFERENCES Usuario(idUsuario),
-    FOREIGN KEY(comida) REFERENCES Comida(idComida)
+    FOREIGN KEY(comida) REFERENCES Comida(idComida) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
 CREATE TABLE Mensagem(
@@ -135,27 +137,4 @@ CREATE TABLE SolicitaAmizade(
     PRIMARY KEY(idSolicitacao),
     FOREIGN KEY(destinatario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(remetente) REFERENCES Usuario(idUsuario)
-);
-
-CREATE TABLE publicacao(
-idPublicacao serial,
-texto text,
-foto varchar(500),
-datahora TIMESTAMP,
-idUsuario int,
-PRIMARY KEY(idPublicacao),
-FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)
-
-);
-CREATE TABLE comentario(
-idComentario serial,
-comentario text,
-comentarista int,
-datahora TIMESTAMP,
-idPublicacao int,
-PRIMARY KEY(idComentario),
-FOREIGN KEY(idPublicacao) REFERENCES publicacao(idPublicacao),ON DELETE CASCADE 
-FOREIGN KEY(comentarista) REFERENCES Usuario(idUsuario)ON DELETE CASCADE 
-
-
-);
+);                                                                                        

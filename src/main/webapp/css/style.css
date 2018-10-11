@@ -80,7 +80,7 @@ div.media-box{
     overflow: hidden;
 }
 
-.breadcrumb:not(:last-child), div.cardapio{
+.breadcrumb:not(:last-child), div.cardapio, .header-pag{
     margin-bottom: 0;
     padding: 10px 15px;
     border-top-left-radius: 5px;
@@ -281,6 +281,14 @@ div.estrelas input[type=radio] {
     z-index: 1;
 }
 
+div.dropdown-menu .dropdown-content{
+    min-width: 250px;
+}
+.navbar-item div.dropdown-content figure img{
+    height: 100% !important;
+    max-height: 64px;
+}
+
 div.r-usuarios figure, div.r-estabelecimentos figure{
     max-height: 150px;
     width: 150px;
@@ -288,6 +296,19 @@ div.r-usuarios figure, div.r-estabelecimentos figure{
 }
 div.r-usuarios figure img, div.r-estabelecimentos figure img{
     max-height: 100%;
+}
+
+.amigos-item{
+    padding: 10px 10px 0 10px;
+}
+.amigos-item:last-child{
+    padding: 10px;
+}
+.amigos-item figure img{
+   width: 100%;
+   max-width: 150px;
+   height: 100%;
+   max-height: 150px;
 }
 @media screen and (max-width: 770px){
     .h100{

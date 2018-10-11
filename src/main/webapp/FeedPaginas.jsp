@@ -129,7 +129,7 @@
                                 </c:forEach>
 
                                 <!-- Escrever comentario-->
-                                 <form  method="post" action="front?action=ComentarPubliEstabelecimento"
+                                <form  method="post" action="front?action=Comentar">
                                 <article class="media comentario">
                                     <figure class="media-left">
                                         <p class="image is-48x48">
@@ -141,6 +141,7 @@
                                             <p class="control">
                                                 <textarea class="textarea" placeholder="Escreva um comentario..." rows="1" name="comentario"></textarea>
                                            <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
+                                           <input type="hidden" name ="pagina" value="FeedPaginas">
                                             </p>
                                         </div>
                                     </div>
@@ -150,10 +151,14 @@
                                                 <i class="fas fa-circle fa-stack-2x has-text-green"></i>
                                                 <i class="fas fa-paper-plane fa-stack-1x"></i>
                                             </span>
+                                           
                                         </span>
                                     </button>
-                            </div> </c:forEach>
-                        </article>
+                                           </article>
+                                </form>
+                            </div> 
+                        </c:forEach>
+                        
                     </div>
                 </div>
             </div>

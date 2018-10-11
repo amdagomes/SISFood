@@ -1,9 +1,9 @@
 <%-- 
-    Document   : cardapio-visitante
-    Created on : 22/09/2018, 21:39:24
+    Document   : visita-estbl
+    Created on : 07/10/2018, 13:06:40
     Author     : Amanda
 --%>
-<%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,8 +14,8 @@
         <meta name="description" content="Rede Social voltada para o ramo alimenticio.">
         <meta name="keywords" content="social, media, rede, social, food, alimento">
         <link rel="stylesheet" href="css/bulma.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
         <link rel="stylesheet" href="css/bulma-badge.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
         <link rel="stylesheet" href="css/style.css">
         <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
     </head>
@@ -27,6 +27,7 @@
                 <div class="columns is-2">
                     <div class="column is-3">
                         <div class="media-box">
+
                             <div class="fotoperfil">
                                 <figure class="image">
                                     <img class="is-rounded" src="${sessionScope.visita.foto}">
@@ -62,14 +63,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <aside class="menu">                           
+                            <aside class="menu">             
                                 <ul>
                                     <a href="front?action=Inicio"><li>Inicio</li></a>
                                     <li>
                                         <p class="menu-label">Estabelecimento</p>
                                         <ul>
-                                            <a href="visita-estbl.jsp"><li>Feed</li></a>
-                                            <a href="front?action=VisitarPag&id=${sessionScope.visita.id}&pag=cardapio&t=e"><li class="link-ativo">Cardápio</li></a>
+                                            <a href="visita-estbl.jsp"><li class="link-ativo">Feed</li></a>
+                                            <a href="front?action=VisitarPag&id=${sessionScope.visita.id}&pag=cardapio&t=e"><li>Cardápio</li></a>
                                             <a href=""><li>Mais Informações</li></a>
                                         </ul>
                                     </li>
@@ -85,81 +86,113 @@
                     </div>
 
                     <div class="column">
-                        <div class="media-box">
-                            <div class="cardapio">
-                                <nav class="level">
-                                    <div class="level-left">
-                                        <div class="level-item">
-                                            <p class="subtitle is-5">
-                                                <strong>Cardápio</strong>
-                                            </p>
+
+                        <!-- Publicação -->
+                         <jsp:useBean id="daoE" class="io.github.fernandasj.dao.EstabelecimentoDao"/> 
+                    <jsp:useBean id="dao" class="io.github.fernandasj.dao.PublicacaoEstabelecimentoDao"/>
+
+                    <c:forEach var="publicacao" items="${dao.listar(sessionScope.visita.id)}">
+                        <c:set var="estab" value="${daoE.buscarPorId(publicacao.idEstabelecimento)}"/>  
+
+                        <div class="card media-box">
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-64x64">
+                                            <img class="is-rounded" src="${estab.foto}" alt="Placeholder image">
+                                        </figure>
+                                    </div>
+                                    <div class="media-content">
+                                        <p class="title is-5"> ${estab.nome}</p>
+                                        <p class="subtitle is-7">${publicacao.datahora}</p>
+                                    </div>
+                                    <div class="media-right">
+                                        <div class="dropdown drop is-right is-pointer">
+                                            <div class="dropdown-trigger">
+                                                <span class="icon is-small">
+                                                    <i class="fas fa-ellipsis-h"></i>
+                                                </span>
+                                            </div>
+                                            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                                                <div class="dropdown-content">
+                                                    <a href="#" class="dropdown-item">
+                                                        Compartilhar
+                                                    </a>
+                                                    <a href="#" class="dropdown-item">
+                                                        Deletar
+                                                    </a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </nav>
+                                </div>
+                                <div class="card-image">
+                                    <div class="content">
+                                    ${publicacao.texto}
+                                </div>
+                                </div>
+                               
                             </div>
 
-                            <jsp:useBean id="dao" class="io.github.fernandasj.dao.ComidaDao"/>
-                            <c:forEach var="comida" items="${dao.buscarPorEstabelecimento(sessionScope.visita.id)}">
-                                <article class="media item-cardapio">
+                            <!-- Comentatio da publicação-->
+                            <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioEstabelecimentoDao"/>
+                         <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/>
+                         
+                         
+                            <c:forEach var="comentario" items="${daoC.listar(publicacao.idPublicacao)}">
+                                <c:set var="userComentario" value="${daoU.buscarPorId(comentario.comentarista)}"/>
+                               
+                            <div class="comentario">
+                                <article class="media">
                                     <figure class="media-left">
-                                        <p class="image is-128x128">
-                                            <img src="${comida.foto}">
+                                        <p class="image is-48x48">
+                                            <img class="is-rounded" src="${userComentario.fotoPerfil}">
                                         </p>
                                     </figure>
                                     <div class="media-content">
                                         <div class="content">
                                             <p>
-                                                <strong>${comida.nome}</strong>
-                                                <small>Preço: R$  ${comida.preco}</small>
+                                                <span class="title-comentario">${userComentario.nome}</span> <small>${comentario.datahora}</small>
                                                 <br>
-                                                ${comida.descricao}
-                                                <br> 
+                                                 ${comentario.comentario}
                                             </p>
                                         </div>
-                                        <nav class="level is-mobile">
-                                            <div class="level-left">
-                                                <p>Avalie:</p>
-                                            </div>
-                                            <div class="level-right">
-                                                <div class="estrelas">
-                                                    <input type="radio" id="cm_star-empty" name="fb" value="" checked/>
-                                                    <label id="star1" for="cm_star-1">
-                                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                                    </label>
-                                                    <input type="radio" id="cm_star-1" name="fb" value="1"/>
-                                                    <label id="star2" for="cm_star-2">
-                                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                                    </label>
-                                                    <input type="radio" id="cm_star-2" name="fb" value="2"/>
-                                                    <label id="star3" for="cm_star-3">
-                                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                                    </label>
-                                                    <input type="radio" id="cm_star-3" name="fb" value="3"/>
-                                                    <label id="star4" for="cm_star-4">
-                                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                                    </label>
-                                                    <input type="radio" id="cm_star-4" name="fb" value="4"/>
-                                                    <label id="star5" for="cm_star-5">
-                                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                                    </label>
-                                                    <input type="radio" id="cm_star-5" name="fb" value="5"/>
-                                                </div>
-                                            </div>
-                                        </nav>
                                     </div>
-
-                                    <div class="media-right">
-                                        <div class="level">
-                                            <a class="level-item" title="Compartilhar">
-                                                <span class="icon is-small"><i class="fas fa-share-alt"></i></span>
-                                            </a>
-                                        </div>
-                                    </div>
-
                                 </article>
-                            </c:forEach>
+                            </div>
+  </c:forEach>
+                            <!-- Escrever comentario-->
+                              <form  method="post" action="front?action=Comentar">
+                            <article class="media comentario">
+                                <figure class="media-left">
+                                    <p class="image is-48x48">
+                                        <img class="is-rounded" src="">
+                                    </p>
+                                </figure>
+                                <div class="media-content">
+                                    <div class="field">
+                                        <p class="control">
+                                            <textarea class="textarea" placeholder="Escreva um comentario..." rows="1" name="comentario"></textarea>
+                                        </p>
+                                        <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
+                                        <input type="hidden" name ="pagina" value="visita-estbl">
+                                    </div>
+                                </div>
+                                 <button type="submit">
+                                    <span class="icon is-large">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fas fa-circle fa-stack-2x has-text-green"></i>
+                                            <i class="fas fa-paper-plane fa-stack-1x"></i>
+                                            
+                                        </span>
+                                    </span>
+                                   </button>
+                                      </article>
+                              </form>
+
                         </div>
-                    </div>  
+                                     </c:forEach>
+                    </div>
                 </div>
             </div>
 
@@ -207,38 +240,39 @@
                         <input class="button is-success is-fullwidth" type="submit" value="Avaliar">
                     </div>
                 </div>    
-            </form>  
+            </form>                              
         </section>
-
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
         <script>
-
             const dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', () => {
                 dropdown.classList.toggle('is-active');
             });
 
-            $("#showModal").click(function () {
-                $(".modal").addClass("is-active");
+            const drop = document.querySelector('.drop');
+            drop.addEventListener('click', () => {
+                drop.classList.toggle('is-active');
             });
 
-            $(".modal-close").click(function () {
-                $(".modal").removeClass("is-active");
-            });
+            //exibe o src da imagem
+            var file = document.getElementById("arquivo");
+            file.onchange = function () {
+                if (file.files.length > 0)
+                {
+                    document.getElementById('nomearquivo').innerHTML = file.files[0].name;
+                }
+            };
 
-            $(function () {
-                $('.estrelas input').click(function () {
-                    var valor = $(this).attr('value');
-
-                    for (var i = 0; i <= 5; i++) {
-                        if (i <= valor) {
-                            $('#star' + i).addClass("gold");
-                        } else {
-                            $('#star' + i).removeClass("gold");
-                        }
+            //altera a foto de exibição do perfil
+            $("#arquivo").on('change', function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#foto').attr("src", e.target.result).fadeIn();
                     }
-                });
+                    reader.readAsDataURL(this.files[0]);
+                }
             });
 
             document.addEventListener('DOMContentLoaded', () => {
@@ -266,7 +300,7 @@
                 }
 
             });
+
         </script>
     </body>
 </html>
-

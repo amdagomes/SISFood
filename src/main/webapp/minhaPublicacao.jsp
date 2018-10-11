@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="ct" uri="/WEB-INF/tlds/custonTags" %>
+
 <%@taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
 <!DOCTYPE html>
 <html>
@@ -218,6 +218,8 @@
                                             </p>
                                         </div>
                                         <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
+                                         <input type="hidden" name ="pagina" value="minhaPublicacao">
+                                      
                                     </div>
                                     <button type="submit">
 
@@ -230,13 +232,15 @@
                                             </span>
                                         </span>
                                     </button>
+                                                                  </article>
+                                                                    </form>
+
 
                                     </div>
-                            </form>
+</c:forEach>
 
-                            </article>
-                        </c:forEach>    
                     </div>
+                            
 
                 </div>
 

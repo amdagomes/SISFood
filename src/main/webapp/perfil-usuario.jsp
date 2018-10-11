@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="ct" uri="/WEB-INF/tlds/custonTags" %>
+<%@taglib prefix="ct" uri="/WEB-INF/tlds/CustomTags"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -47,6 +47,7 @@
 
                                 <ul>
                                     <a href="front?action=Inicio"><li>Feed</li></a>
+                                    <a href="amigos.jsp"><li>Amigos</li></a>
                                     <a href=""><li>Menssagens</li></a>
                                     <a href="perfil-usuario.jsp"><li class="link-ativo">Editar Perfil</li></a>
                                     <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>

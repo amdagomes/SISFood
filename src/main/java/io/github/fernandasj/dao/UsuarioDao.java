@@ -42,8 +42,7 @@ public class UsuarioDao implements Dao<Usuario> {
         return true;
     }
 
-    
-public Usuario buscarPorId(int id) throws SQLException {
+    public Usuario buscarPorId(int id) throws SQLException {
 
         try {
             con = ConnectionFactory.getConnection();
@@ -74,7 +73,6 @@ public Usuario buscarPorId(int id) throws SQLException {
 
         return null;
     }
-
 
     @Override
     public boolean deletar(int id) throws SQLException {
@@ -269,6 +267,7 @@ public Usuario buscarPorId(int id) throws SQLException {
             lista.add(u);
         }
         
+        con.close();
         return lista;
     }
 }

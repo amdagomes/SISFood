@@ -86,9 +86,9 @@ public class PublicacaoDao {
         }
 
         String sql = "SELECT  DISTINCT idPublicacao from publicacao p,solicitaAmizade s "
-                + " where p.idUsuario= s.remetente and situacao = 'amigo' and s.remetente =?"
+                + " where  p.idUsuario= ? or p.idUsuario= s.remetente and situacao = 'amigo' and s.remetente =?"
                 + " or p.idUsuario =s.destinatario and situacao='amigo' and s.remetente =? "
-                + "or p.idUsuario= ? "
+                
                 + "or p.idUsuario= s.remetente and situacao = 'amigo' and s.destinatario =? "
                 + " or p.idUsuario =s.destinatario and situacao='amigo' and s.destinatario =? ";
 
