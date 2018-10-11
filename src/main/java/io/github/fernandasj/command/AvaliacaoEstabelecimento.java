@@ -32,7 +32,7 @@ public class AvaliacaoEstabelecimento implements Command {
         try {
             GerenciadorEstabelecimento g = new GerenciadorEstabelecimento();            
             g.avaliarEstabelecimento(avaliacao);
-            response.sendRedirect("cardapio-visitante.jsp");
+            response.sendRedirect("visita-estbl.jsp");
 
         } catch (SQLException | IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
