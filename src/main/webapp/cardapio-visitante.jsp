@@ -200,6 +200,8 @@
             <!-- MODAL AVALIAR ESTABELECIMENTO-->
             <form id="avaliar" class="form-cardapio modal" method="post" action="front?action=AvaliacaoComida">
                 <p class="title is-size-5">Avalie e deixe seu comentario</p>
+                <input type="hidden" name="idEstabelecimento" value="${sessionScope.visita.id}">
+                <input type="hidden" name="pagina" value="visita-estbl">
                 <div class="field is-grouped">
                     <div class="level is-mobile">
                         <div class="level-left">

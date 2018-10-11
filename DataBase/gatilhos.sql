@@ -19,7 +19,7 @@ RETURNS TRIGGER AS $$
 DECLARE
     media Estabelecimento.nota%type;
 BEGIN
-    SELECT INTO media AVG(A.nota) FROM AvaliarEstabelecimento A WHERE estabelecimento = NEW.estabelecimento
+    SELECT INTO media AVG(A.nota) FROM AvaliarEstabelecimento A WHERE estabelecimento = NEW.estabelecimento;
     UPDATE Estabelecimento SET nota = media WHERE idEstabelecimento = NEW.estabelecimento;
     RETURN NEW;
 END $$ LANGUAGE plpgsql;

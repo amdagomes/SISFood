@@ -1,6 +1,7 @@
 package io.github.fernandasj.command;
 
 import io.github.fernandasj.controle.GerenciadorEstabelecimento;
+import io.github.fernandasj.modelo.Estabelecimento;
 import io.github.fernandasj.modelo.Usuario;
 import io.github.fernandasj.modelo.avaliarEstabelecimento;
 import java.io.IOException;
@@ -21,19 +22,22 @@ public class AvaliacaoEstabelecimento implements Command {
         HttpSession session = request.getSession();
 
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-
+        Estabelecimento estbl = (Estabelecimento) session.getAttribute("visita");
+        
         int consumidor = usuario.getId();
         int estabelecimento = Integer.parseInt(request.getParameter("idEstabelecimento"));
         float nota = Float.parseFloat(request.getParameter("nota"));
         String comentario = request.getParameter("comentario");
+        String pagina = request.getParameter("pagina");
 
         avaliarEstabelecimento avaliacao = new avaliarEstabelecimento(consumidor, estabelecimento, nota, comentario);
 
         try {
             GerenciadorEstabelecimento g = new GerenciadorEstabelecimento();            
             g.avaliarEstabelecimento(avaliacao);
-            response.sendRedirect("visita-estbl.jsp");
-
+            //seta a seção com os novos valores do estabelecimento
+            session.setAttribute("visita", g.buscarPorId(estbl.getId()));
+            request.getRequestDispatcher(pagina + ".jsp").forward(request, response);
         } catch (SQLException | IOException | ClassNotFoundException ex) {
             ex.printStackTrace();
         } catch (Exception ex) {
