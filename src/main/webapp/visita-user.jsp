@@ -195,7 +195,7 @@
                                                 </p>
                                             </div>
                                             <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
-                                            <input type="hidden" name ="pagina" value="visita-user">
+                                            <input type="hidden" name ="pagina" value="visita-user"/>
                                         </div>
 
                                         <button type="submit">

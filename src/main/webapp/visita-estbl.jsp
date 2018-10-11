@@ -160,9 +160,9 @@
                                     </div>
                                 </article>
                             </div>
-  </c:forEach>
+                            </c:forEach>
                             <!-- Escrever comentario-->
-                              <form  method="post" action="front?action=Comentar">
+                              <form  method="post" action="front?action=ComentarPubliEstabelecimento">
                             <article class="media comentario">
                                 <figure class="media-left">
                                     <p class="image is-48x48">
@@ -187,10 +187,11 @@
                                         </span>
                                     </span>
                                    </button>
-                                      </article>
-                              </form>
+                                      
 
                         </div>
+                                        </article>
+                              </form>
                                      </c:forEach>
                     </div>
                 </div>

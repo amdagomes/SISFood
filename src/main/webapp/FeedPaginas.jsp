@@ -129,7 +129,7 @@
                                 </c:forEach>
 
                                 <!-- Escrever comentario-->
-                                <form  method="post" action="front?action=Comentar">
+                                <form  method="post" action="front?action=ComentarPubliEstabelecimento">
                                 <article class="media comentario">
                                     <figure class="media-left">
                                         <p class="image is-48x48">

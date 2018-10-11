@@ -27,17 +27,16 @@ public class ComentarPubliEstabelecimento implements Command {
         HttpSession session = request.getSession();
         Usuario usuario = (Usuario) session.getAttribute("usuario");
        
-      
+       String pagina = request.getParameter("pagina");
         String comentario = request.getParameter("comentario");
         String idPublicacao = request.getParameter("idPublicacao");
+        
         GerenciarComentario gC = new GerenciarComentario();
         try {
             
             if(gC.adicionaComentario(comentario,usuario.getId(),Integer.parseInt(idPublicacao))){
-                 request.getRequestDispatcher("FeedPaginas.jsp").forward(request, response);
-               request.getRequestDispatcher("estabelecimento.jsp").forward(request, response);
-               request.getRequestDispatcher("FeedPaginas.jsp").forward(request, response);
-               
+               request.getRequestDispatcher(pagina + ".jsp").forward(request, response);
+                 //request.getRequestDispatcher("visita-estbl.jsp").forward(request, response);
             }
            
             else{

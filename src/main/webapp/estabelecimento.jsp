@@ -195,7 +195,7 @@
 
 
                         <!-- Escrever comentario-->
-                      <form  method="post" action="front?action=Comentar">
+                      <form  method="post" action="front?action=ComentarPubliEstabelecimento">
                         <article class="media comentario">
                             <figure class="media-left">
                                 <p class="image is-48x48">
@@ -209,7 +209,9 @@
                                     </p>
                                     <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
                                     <input type="hidden" name ="pagina" value="estabelecimento">
+                                    
                                 </div>
+                                    
                             </div>
                              <button type="submit">
                                 <span class="icon is-large">
