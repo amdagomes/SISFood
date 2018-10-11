@@ -34,12 +34,16 @@ and open the template in the editor.
     border-color: #D1713B;
 }
 
+.navbar-link::after{
+    color:rgb(74, 74, 74) !important;
+    border-color:rgb(74, 74, 74) !important;
+}
 .is-orange a{
-    color:rgba(0,0,0,.7);
+    color:rgb(74, 74, 74);
 }
 
-.is-orange a:hover{
-    color:rgba(0,0,0,.7);
+.is-orange a:hover, .navbar-item.has-dropdown:hover{
+    color:rgb(74, 74, 74);
     background-color: rgba(124,62,27,.1);
 }
 
@@ -321,6 +325,10 @@ div.accordion-header{
 }
 .bt-margin-top{
     margin-top: 10px;
+}
+.info-perfil div.column{
+    padding-bottom: 0.2rem;
+    padding-top: 0;
 }
 @media screen and (max-width: 770px){
     .h100{

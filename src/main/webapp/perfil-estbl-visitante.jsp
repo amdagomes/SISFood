@@ -1,9 +1,3 @@
-<%-- 
-    Document   : visita-estbl
-    Created on : 07/10/2018, 13:06:40
-    Author     : Amanda
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -69,9 +63,9 @@
                                     <li>
                                         <p class="menu-label">Estabelecimento</p>
                                         <ul>
-                                            <a href="visita-estbl.jsp"><li class="link-ativo">Feed</li></a>
+                                            <a href="visita-estbl.jsp"><li>Feed</li></a>
                                             <a href="front?action=VisitarPag&id=${sessionScope.visita.id}&pag=cardapio&t=e"><li>Cardápio</li></a>
-                                            <a href="perfil-estbl-visitante.jsp"><li>Mais Informações</li></a>
+                                            <a href="perfil-estbl-visitante.jsp"><li class="link-ativo">Mais Informações</li></a>
                                         </ul>
                                     </li>
                                     <a href="front?action=Logout"><li class="menu-label">
@@ -86,94 +80,47 @@
                     </div>
 
                     <div class="column">
-
-                        <!-- Publicação -->
-                        <div class="card media-box">
-                            <div class="card-content">
-                                <div class="media">
-                                    <div class="media-left">
-                                        <figure class="image is-64x64">
-                                            <img class="is-rounded" src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                                        </figure>
+                        <div class="media-box">
+                            <div class="header-pag">
+                                <p class="subtitle is-5">
+                                    <strong>Perfil</strong>
+                                </p>
+                            </div>
+                            <div style="padding: 15px 30px;">
+                                <p class="title is-size-4">${sessionScope.visita.nome}</p>
+                                <p class="subtitle is-size-6 has-text-justified">${sessionScope.visita.descricao}</p>
+                                <div class="info-perfil">
+                                    <div class="columns">
+                                        <div class="column is-narrow">
+                                            <span class="has-text-weight-semibold">Categoria:</span> ${sessionScope.visita.categoria}
+                                        </div>
+                                        <div class="column is-narrow">
+                                            <span class="has-text-weight-semibold">Telefone:</span> ${sessionScope.visita.telefone}
+                                        </div>
+                                        <div class="column is-narrow">
+                                            <span class="has-text-weight-semibold">Abre às:</span> ${sessionScope.visita.horaAbre}
+                                        </div>
+                                        <div class="column is-narrow">
+                                            <span class="has-text-weight-semibold">Fecha às:</span> ${sessionScope.visita.horaFecha}
+                                        </div>
                                     </div>
-                                    <div class="media-content">
-                                        <p class="title is-5">John Smith</p>
-                                        <p class="subtitle is-7">15 de setembro às 23:30</p>
-                                    </div>
-                                    <div class="media-right">
-                                        <div class="dropdown drop is-right is-pointer">
-                                            <div class="dropdown-trigger">
-                                                <span class="icon is-small">
-                                                    <i class="fas fa-ellipsis-h"></i>
-                                                </span>
-                                            </div>
-                                            <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-                                                <div class="dropdown-content">
-                                                    <a href="#" class="dropdown-item">
-                                                        Compartilhar
-                                                    </a>
-                                                    <a href="#" class="dropdown-item">
-                                                        Deletar
-                                                    </a>
-                                                </div>
-                                            </div>
+                                    <div class="columns">
+                                        <div class="column is-narrow">
+                                            <span class="has-text-weight-semibold">Rua:</span> ${sessionScope.visita.rua}
+                                        </div>
+                                        <div class="column is-narrow">
+                                            <span class="has-text-weight-semibold">Cidade:</span> ${sessionScope.visita.cidade}
+                                        </div>
+                                        <div class="column is-narrow">
+                                            <span class="has-text-weight-semibold">Estado:</span> ${sessionScope.visita.estado}
+                                        </div>
+                                        <div class="column is-narrow">
+                                            <span class="has-text-weight-semibold">CEP:</span> ${sessionScope.visita.cep}
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card-image">
-                                    <figure class="image is-16by9">
-                                        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                                    </figure>
-                                </div>
-                                <div class="content">
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
-                                </div>
                             </div>
-
-                            <!-- Comentatio da publicação-->
-                            <div class="comentario">
-                                <article class="media">
-                                    <figure class="media-left">
-                                        <p class="image is-48x48">
-                                            <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-                                        </p>
-                                    </figure>
-                                    <div class="media-content">
-                                        <div class="content">
-                                            <p>
-                                                <span class="title-comentario">John Smith</span> <small>data/hora</small>
-                                                <br>
-                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-
-                            <!-- Escrever comentario-->
-                            <article class="media comentario">
-                                <figure class="media-left">
-                                    <p class="image is-48x48">
-                                        <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-                                    </p>
-                                </figure>
-                                <div class="media-content">
-                                    <div class="field">
-                                        <p class="control">
-                                            <textarea class="textarea" placeholder="Escreva um comentario..." rows="1"></textarea>
-                                        </p>
-                                    </div>
-                                </div>
-                                <a href="#" class="button-send">
-                                    <span class="icon is-large">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fas fa-circle fa-stack-2x has-text-green"></i>
-                                            <i class="fas fa-paper-plane fa-stack-1x"></i>
-                                        </span>
-                                    </span>
-                                </a>
                         </div>
-                        </article>
                     </div>
                 </div>
             </div>
@@ -245,32 +192,6 @@
                 });
             });
             
-            document.addEventListener('DOMContentLoaded', () => {
-
-                // Get all "navbar-burger" elements
-                const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-                // Check if there are any navbar burgers
-                if ($navbarBurgers.length > 0) {
-
-                    // Add a click event on each of them
-                    $navbarBurgers.forEach(el => {
-                        el.addEventListener('click', () => {
-
-                            // Get the target from the "data-target" attribute
-                            const target = el.dataset.target;
-                            const $target = document.getElementById(target);
-
-                            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                            el.classList.toggle('is-active');
-                            $target.classList.toggle('is-active');
-
-                        });
-                    });
-                }
-
-            });
-
         </script>
     </body>
 </html>

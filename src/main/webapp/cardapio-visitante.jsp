@@ -49,7 +49,7 @@
                                     <div>
                                         <p class="is-size-6 has-text-weight-semibold">                                            
                                             <span class="icon is-small">
-                                                3,4
+                                                ${sessionScope.visita.nota}
                                                 <i class="fas fa-star"></i>
                                             </span>
                                         </p>
@@ -71,7 +71,7 @@
                                         <ul>
                                             <a href="visita-estbl.jsp"><li>Feed</li></a>
                                             <a href="front?action=VisitarPag&id=${sessionScope.visita.id}&pag=cardapio&t=e"><li class="link-ativo">Cardápio</li></a>
-                                            <a href=""><li>Mais Informações</li></a>
+                                            <a href="perfil-estbl-visitante.jsp"><li>Mais Informações</li></a>
                                         </ul>
                                     </li>
                                     <a href="front?action=Logout"><li class="menu-label">
@@ -266,16 +266,16 @@
             $(function () {
                 $('.estrelas input').click(function () {
                     var valor = $(this).attr('value');
-
                     for (var i = 0; i <= 5; i++) {
                         if (i <= valor) {
                             $('#star' + i).addClass("gold");
                         } else {
                             $('#star' + i).removeClass("gold");
                         }
-                    });
+                    }
                 });
-            }
+            });
+            
                 document.addEventListener('DOMContentLoaded', () => {
 
                     // Get all "navbar-burger" elements

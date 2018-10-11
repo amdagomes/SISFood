@@ -50,7 +50,6 @@
                                     <a href="amigos.jsp"><li>Amigos</li></a>
                                     <a href=""><li>Menssagens</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
-                                    <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
                                         <p class="menu-label">Minhas páginas</p>
                                         <ul>
@@ -214,8 +213,6 @@
         </div>
 
     </section>
-
-    <%@ include file="cadastrar-estabelecimento.jsp"%>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>

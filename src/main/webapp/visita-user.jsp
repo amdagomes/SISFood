@@ -5,8 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="ct" uri="/WEB-INF/tlds/CustomTags"%>
+<%@taglib prefix="mTags" tagdir="/WEB-INF/tags/" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,56 +43,17 @@
                                     </p>
                                     <br>
                                     <ct:verificaSituacaoUsuario remetente="${sessionScope.usuario.id}" destinatario="${sessionScope.visita.id}"/>
-                                    <c:choose>
-                                        <c:when test="${situacaoAmizade != null}">
-                                            <c:choose>
-                                                <c:when test="${situacaoAmizade.solicitacao == 'amigo'}">
-                                                    <a href="front?action=Amizade&met=remove&dest=${visita.id}&pag=visita-user" class="button is-small is-danger">
-                                                        <span class="icon is-small">
-                                                            <i class="fas fa-user-slash"></i>
-                                                        </span>
-                                                        <span>Desfazer Amizade</span>
-                                                    </a>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <c:choose>
-                                                        <c:when test="${sessionScope.usuario.id == situacaoAmizade.remetente}">
-                                                            <a class="button is-small is-success" disabled>
-                                                                <span class="icon is-small">
-                                                                    <i class="fas fa-check"></i>
-                                                                </span>
-                                                                <span>Amizade Solicitada</span>
-                                                            </a>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <a href="front?action=Amizade&met=adiciona&dest=${visita.id}&pag=visita-user" class="button is-small is-success">
-                                                                <span>Aceitar</span>
-                                                            </a>
-                                                            <a href="front?action=Amizade&met=remove&dest=${visita.id}&pag=visita-user" class="button is-small is-danger">
-                                                                <span>Recusar</span>
-                                                            </a>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </c:otherwise>
-                                            </c:choose>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <a class="button is-small is-info" href="front?action=Amizade&met=solicita&dest=${visita.id}&pag=visita-user">
-                                                <span class="icon is-small">
-                                                    <i class="fas fa-user-plus"></i>
-                                                </span>
-                                                <span>Adiconar Amigo</span>
-                                            </a>
-                                        </c:otherwise>
-                                    </c:choose>
+                                    <p class="has-text-centered">
+                                        <mTags:situacaoAmizade situacao="${situacaoAmizade}" usuario="${visita}" pagina="visita-user"/>                                   
+                                    </p>    
                                 </div>
                             </div>
 
                             <aside class="menu">
 
                                 <ul>
-                                    <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
-                                    <a href="perfil-usuario.jsp"><li>Perfil</li></a>
+                                    <a href="front?action=VisitarPag&id=${sessionScope.visita.id}&pag=user&t=u"><li class="link-ativo">Feed</li></a>
+                                    <a href="perfil-user-visitante.jsp"><li>Perfil</li></a>
                                     <li>
                                         <a href="front?action=Inicio"><p class="menu-label">voltar</p></a>
                                     </li>
@@ -203,7 +165,8 @@
             </div>
         </section>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>                            
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>                            
         <script>
             const dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', () => {
