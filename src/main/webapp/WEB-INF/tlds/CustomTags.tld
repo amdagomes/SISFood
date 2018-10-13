@@ -58,7 +58,18 @@
       <rtexprvalue>true</rtexprvalue>
     </attribute>
   </tag>
-  
+  <tag>
+    <name>listAvaliacoesComida</name>
+    <description>Lista as avaliações de comida</description>
+    <body-content>empty</body-content>
+    <tag-class>io.github.fernandasj.tags.ListAvaliacoesComida</tag-class>
+    <attribute>
+      <name>idComida</name>
+      <type>int</type>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
   <!-- A validator verifies that the tags are used correctly at JSP
           translation time. Validator entries look like this: 
        <validator>

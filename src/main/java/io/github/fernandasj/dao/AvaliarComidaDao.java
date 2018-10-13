@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,6 +64,32 @@ public class AvaliarComidaDao {
         con.close();
 
         return null;
+    }
+       
+    public List<AvaliarComida> listAvaliacoes(int idComida) throws SQLException{
+        try {
+            con = ConnectionFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AvaliarComidaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        String sql = "SELECT * FROM AvaliarComida WHERE comida = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idComida);
+        ResultSet rs = stmt.executeQuery();
+            
+        List<AvaliarComida> avaliacoes = new ArrayList();
+        
+        while(rs.next()){
+             AvaliarComida avl = new AvaliarComida();
+             avl.setConsumidor(rs.getInt("consumidor"));
+             avl.setNota(rs.getFloat("nota"));
+             avl.setComentario(rs.getString("comentario"));
+             avaliacoes.add(avl);
+        }
+        
+        con.close();
+        return avaliacoes;
     }
 
     public boolean atualizar(AvaliarComida obj) throws SQLException {

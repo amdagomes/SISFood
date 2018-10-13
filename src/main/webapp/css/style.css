@@ -330,6 +330,7 @@ div.accordion-header{
     padding-bottom: 0.2rem;
     padding-top: 0;
 }
+
 @media screen and (max-width: 770px){
     .h100{
         height: auto;

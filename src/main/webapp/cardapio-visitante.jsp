@@ -119,6 +119,9 @@
                                         </div>
                                         <nav class="level is-mobile">
                                             <div class="level-left">
+                                                <p>Nota: ${comida.nota}</p>
+                                            </div>
+                                            <div class="level-right">
                                                 <a href="#${comida.idComida}" rel="modal:open">
                                                     <p>Dê sua nota</p>
                                                 </a>
@@ -142,23 +145,37 @@
                                             <button class="toggle" aria-label="toggle"></button>
                                         </div>
                                         <div class="accordion-body">
-                                            <!-- COMENTARIOS -->
-                                            <article class="media">
-                                                <figure class="media-left">
-                                                    <p class="image is-48x48">
-                                                        <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-                                                    </p>
-                                                </figure>
-                                                <div class="media-content">
-                                                    <div class="content">
-                                                        <p>
-                                                            <span class="title-comentario">John Smith</span> <small>data/hora</small>
-                                                            <br>
-                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                                            <!-- COMENTARIOS -->        
+                                            <ct:listAvaliacoesComida idComida="${comida.idComida}"/>
+                                            <c:forEach var="avaliacao" items="${avaliacoes}">
+                                                <ct:buscaUsuario user="${avaliacao.consumidor}"/>
+                                                <article class="media">
+                                                    <figure class="media-left">
+                                                        <p class="image is-48x48">
+                                                            <img class="is-rounded" src="${userBuscado.fotoPerfil}">
                                                         </p>
+                                                    </figure>
+                                                    <div class="media-content">
+                                                        <div class="content">
+                                                            <p>
+                                                                <c:choose>
+                                                                    <c:when test="${avaliacao.consumidor != sessionScope.usuario.id}">
+                                                                        <a href="front?action=VisitarPag&id=${userBuscado.id}&pag=user&t=u">
+                                                                            <span class="title-comentario">${userBuscado.nome}</span>
+                                                                        </a>
+                                                                        <small>nota: ${avaliacao.nota}</small>  
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <span class="title-comentario">${userBuscado.nome}</span> <small>nota: ${avaliacao.nota}</small>
+                                                                    </c:otherwise>
+                                                                </c:choose>        
+                                                                <br>
+                                                                ${avaliacao.comentario}
+                                                            </p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </article>
+                                                </article>
+                                            </c:forEach>
                                         </div>
                                     </article>
                                 </section>    
@@ -277,32 +294,32 @@
                     }
                 });
             });
-            
-                document.addEventListener('DOMContentLoaded', () => {
 
-                    // Get all "navbar-burger" elements
-                    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            document.addEventListener('DOMContentLoaded', () => {
 
-                    // Check if there are any navbar burgers
-                    if ($navbarBurgers.length > 0) {
+                // Get all "navbar-burger" elements
+                const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-                        // Add a click event on each of them
-                        $navbarBurgers.forEach(el => {
-                            el.addEventListener('click', () => {
+                // Check if there are any navbar burgers
+                if ($navbarBurgers.length > 0) {
 
-                                // Get the target from the "data-target" attribute
-                                const target = el.dataset.target;
-                                const $target = document.getElementById(target);
+                    // Add a click event on each of them
+                    $navbarBurgers.forEach(el => {
+                        el.addEventListener('click', () => {
 
-                                // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                                el.classList.toggle('is-active');
-                                $target.classList.toggle('is-active');
+                            // Get the target from the "data-target" attribute
+                            const target = el.dataset.target;
+                            const $target = document.getElementById(target);
 
-                            });
+                            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                            el.classList.toggle('is-active');
+                            $target.classList.toggle('is-active');
+
                         });
-                    }
+                    });
+                }
 
-                });
+            });
         </script>
     </body>
 </html>

@@ -61,4 +61,5 @@ public class GerenciadorEstabelecimento {
     public boolean avaliarEstabelecimento(avaliarEstabelecimento avaliacao) throws Exception{
         return avaliarDao.salvar(avaliacao);
     }
+
 }

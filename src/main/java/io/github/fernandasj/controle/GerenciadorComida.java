@@ -55,4 +55,9 @@ public class GerenciadorComida {
     public boolean avaliarComida(AvaliarComida avaliacao) throws Exception{
         return daoAvalia.salvar(avaliacao);
     }
+    
+    public List<AvaliarComida> listAvaliacoesComida(int idComida) throws SQLException{
+        return daoAvalia.listAvaliacoes(idComida);
+    }
+    
 }
