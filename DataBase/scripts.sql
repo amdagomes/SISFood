@@ -137,4 +137,60 @@ CREATE TABLE SolicitaAmizade(
     PRIMARY KEY(idSolicitacao),
     FOREIGN KEY(destinatario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(remetente) REFERENCES Usuario(idUsuario)
-);                                                                                        
+);  
+
+CREATE TABLE publicacao(
+idPublicacao serial,
+texto text,
+datahora TIMESTAMP,
+idUsuario int,
+idEstabelecimento int,
+PRIMARY KEY(idPublicacao),
+FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)
+);
+
+CREATE TABLE comentario(
+idComentario serial,
+comentario text,
+comentarista int,
+datahora TIMESTAMP,
+idPublicacao int,
+PRIMARY KEY(idComentario),
+FOREIGN KEY(idPublicacao) REFERENCES publicacao(idPublicacao) ON DELETE CASCADE,
+FOREIGN KEY(comentarista) REFERENCES Usuario(idUsuario)ON DELETE CASCADE 
+);
+
+CREATE TABLE publicacaoEstabelecimento(
+idPublicacao serial,
+texto text,
+datahora TIMESTAMP,
+idEstabelecimento int,
+PRIMARY KEY(idPublicacao),
+FOREIGN KEY(idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
+);
+                                                                                      
+
+CREATE TABLE comentarioEstabelecimento(
+idComentario serial,
+comentario text,
+comentarista int,
+datahora TIMESTAMP,
+idPublicacao int,
+PRIMARY KEY(idComentario),
+FOREIGN KEY(idPublicacao) REFERENCES publicacaoEstabelecimento(idPublicacao) ON DELETE CASCADE, 
+FOREIGN KEY(comentarista) REFERENCES Usuario(idUsuario)ON DELETE CASCADE 
+);
+
+CREATE TABLE seguirPaginas(
+idSeguir serial,
+seguidor int,
+pagina int,
+datahora TIMESTAMP,
+situacao varchar(10),
+PRIMARY KEY(idSeguir),
+FOREIGN KEY(pagina) REFERENCES Estabelecimento(idEstabelecimento),
+FOREIGN KEY(seguidor) REFERENCES usuario(idUsuario)
+
+)
+
+

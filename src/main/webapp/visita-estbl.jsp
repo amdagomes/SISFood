@@ -99,7 +99,7 @@
                                 <div class="media">
                                     <div class="media-left">
                                         <figure class="image is-64x64">
-                                            <img class="is-rounded" src="${estab.foto}" alt="Placeholder image">
+                                            <img class="is-rounded" src="${estab.foto}"/>
                                         </figure>
                                     </div>
                                     <div class="media-content">

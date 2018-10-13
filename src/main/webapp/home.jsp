@@ -47,7 +47,7 @@
 
                                 <ul>
                                     <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
-                                    <a href="FeedPaginas.jsp"><li class="link-ativo">Feed páginas</li></a>
+                                    <a href="FeedPaginas.jsp"><li>Feed páginas</li></a>
                                     <a href="amigos.jsp"><li>Amigos</li></a>
                                     <a href=""><li>Mensagens</li></a>
                                     <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
@@ -119,9 +119,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>   
+                                </div>  
+                            </div>
                         </form>
-                    </div>
+                    
                     <!-- Publicação -->
                     <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/> 
                     <jsp:useBean id="dao" class="io.github.fernandasj.dao.PublicacaoDao"/>
@@ -134,7 +135,9 @@
                                 <div class="media">
                                     <div class="media-left">
                                         <figure class="image is-64x64">
-                                            <img class="is-rounded" src="${user.fotoPerfil}" alt="Placeholder image">
+                                            <div class="is-rounded">
+                                                <img src="${user.fotoPerfil}"/>
+                                            </div>
                                         </figure>
                                     </div>
                                     <div class="media-content">
@@ -158,12 +161,12 @@
 
                                 <div class="card-image" >
                                     <p>
-                                        ${publicacao.texto}
+
                                     </p>
                                 </div>
 
                                 <div class="content">
-
+                                    ${publicacao.texto}
                                 </div>
                             </div>
 
@@ -173,10 +176,10 @@
                                 <c:set var="userComentario" value="${daoU.buscarPorId(comentario.comentarista)}"/>
                                 <div class="comentario">
                                     <article class="media">
-                                        <figure class="media-left">
-                                            <p class="image is-48x48">
+                                        <figure class="media-left image is-48x48">
+                                            <div class='is-rounded'>
                                                 <img class="is-rounded" src="${userComentario.fotoPerfil}">
-                                            </p>
+                                            </div>
                                         </figure>
                                         <div class="media-content">
                                             <div class="content">
@@ -196,10 +199,10 @@
                             <!-- Escrever comentario-->
                             <form  method="post" action="front?action=Comentar">
                                 <article class="media comentario">
-                                    <figure class="media-left">
-                                        <p class="image is-48x48">
-                                            <img class="is-rounded" src="${sessionScope.usuario.fotoPerfil}">
-                                        </p>
+                                    <figure class="media-left image is-48x48">
+                                        <div class='is-rounded'>
+                                            <img class="" src="${sessionScope.usuario.fotoPerfil}">
+                                        </div>
                                     </figure>
                                     <div class="media-content">
                                         <div class="field">
@@ -208,94 +211,92 @@
                                             </p>
                                         </div>
                                         <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
-                                         <input type="hidden" name ="pagina" value="home">
+                                        <input type="hidden" name ="pagina" value="home">
                                     </div>
-                                    <button type="submit">
+                                    <button type="submit" class="button">
                                         <span class="icon is-large">
                                             <span class="fa-stack fa-lg">
-                                                <i class="fas fa-circle fa-stack-2x has-text-green"></i>
                                                 <i class="fas fa-paper-plane fa-stack-1x"></i>
-
                                             </span>
                                         </span>
                                     </button>
-                            </article>
-                           </form>
+                                </article>
+                            </form>
 
-                                    </div>
+                        </div>
 
-                        </c:forEach>    
-                    </div>
-
+                    </c:forEach>    
                 </div>
 
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
 
-        <%@ include file="cadastrar-estabelecimento.jsp"%>
+    <%@ include file="cadastrar-estabelecimento.jsp"%>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-        <script>
-            const dropdown = document.querySelector('.dropdown');
-            dropdown.addEventListener('click', () => {
-                dropdown.classList.toggle('is-active');
-            });
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+    <script>
+        const dropdown = document.querySelector('.dropdown');
+        dropdown.addEventListener('click', () => {
+            dropdown.classList.toggle('is-active');
+        });
 
-            const drop = document.querySelector('.drop');
-            drop.addEventListener('click', () => {
-                drop.classList.toggle('is-active');
-            });
+        const drop = document.querySelector('.drop');
+        drop.addEventListener('click', () => {
+            drop.classList.toggle('is-active');
+        });
 
-            //exibe o src da imagem
-            var file = document.getElementById("arquivo");
-            file.onchange = function () {
-                if (file.files.length > 0)
-                {
-                    document.getElementById('nomearquivo').innerHTML = file.files[0].name;
+        //exibe o src da imagem
+        var file = document.getElementById("arquivo");
+        file.onchange = function () {
+            if (file.files.length > 0)
+            {
+                document.getElementById('nomearquivo').innerHTML = file.files[0].name;
+            }
+        };
+
+        //altera a foto de exibição do perfil
+        $("#arquivo").on('change', function () {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#foto').attr("src", e.target.result).fadeIn();
                 }
-            };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
 
-            //altera a foto de exibição do perfil
-            $("#arquivo").on('change', function () {
-                if (this.files && this.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $('#foto').attr("src", e.target.result).fadeIn();
-                    }
-                    reader.readAsDataURL(this.files[0]);
-                }
-            });
+        document.addEventListener('DOMContentLoaded', () => {
 
-            document.addEventListener('DOMContentLoaded', () => {
+            // Get all "navbar-burger" elements
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-                // Get all "navbar-burger" elements
-                const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            // Check if there are any navbar burgers
+            if ($navbarBurgers.length > 0) {
 
-                // Check if there are any navbar burgers
-                if ($navbarBurgers.length > 0) {
+                // Add a click event on each of them
+                $navbarBurgers.forEach(el => {
+                    el.addEventListener('click', () => {
 
-                    // Add a click event on each of them
-                    $navbarBurgers.forEach(el => {
-                        el.addEventListener('click', () => {
+                        // Get the target from the "data-target" attribute
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
 
-                            // Get the target from the "data-target" attribute
-                            const target = el.dataset.target;
-                            const $target = document.getElementById(target);
+                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
 
-                            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                            el.classList.toggle('is-active');
-                            $target.classList.toggle('is-active');
-
-                        });
                     });
-                }
+                });
+            }
 
-            });
+        });
 
-        </script>
-    </body>
+    </script>
+</body>
 </html>

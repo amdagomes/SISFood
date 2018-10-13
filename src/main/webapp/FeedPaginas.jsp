@@ -44,10 +44,21 @@
                             <aside class="menu">
 
                                 <ul>
-                                    <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
-                                    <a href="perfil-usuario.jsp"><li>Perfil</li></a>
+                                    <a href="front?action=Inicio"><li>Feed</li></a>
+                                    <a href="FeedPaginas.jsp"><li class="link-ativo">Feed páginas</li></a>
+                                    <a href="amigos.jsp"><li>Amigos</li></a>
+                                    <a href=""><li>Mensagens</li></a>
+                                    <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
+                                    <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
+                                    <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
-                                        <a href="front?action=Inicio"<p class="menu-label">voltar</p></a>
+                                        <p class="menu-label">Minhas páginas</p>
+                                        <ul>
+                                            <jsp:useBean id="control" class="io.github.fernandasj.controle.GerenciadorEstabelecimento"/>
+                                            <c:forEach var="pagina" items="${control.meusEstabelecimentos(sessionScope.usuario.id)}">
+                                                <a href="front?action=PaginaEstabelecimento&id=${pagina.id}"><li>${pagina.nome}</li></a>
+                                                    </c:forEach>     
+                                        </ul>
                                     </li>
                                     <a href="front?action=Logout">
                                         <li class="menu-label">
@@ -68,7 +79,6 @@
                         <!-- Publicação -->
                         <jsp:useBean id="daoE" class="io.github.fernandasj.dao.EstabelecimentoDao"/> 
                         <jsp:useBean id="dao" class="io.github.fernandasj.dao.PublicacaoEstabelecimentoDao"/>
-
                         <c:forEach var="publicacao" items="${dao.listarFeed(sessionScope.usuario.id)}">
                             <c:set var="estab" value="${daoE.buscarPorId(publicacao.idEstabelecimento)}"/>  
                             <div class="card media-box">
@@ -79,7 +89,7 @@
                                                 <img class="is-rounded" src="${estab.foto}" alt="Placeholder image">
                                             </figure>
                                         </div>
-                                        
+
                                         <div class="media-content">
                                             <p class="title is-5">${estab.nome}</p>
                                             <p class="subtitle is-7">${publicacao.datahora}</p>
@@ -91,7 +101,7 @@
                                                         <i class="fas fa-ellipsis-h"></i>
                                                     </span>
                                                 </div>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -130,35 +140,35 @@
 
                                 <!-- Escrever comentario-->
                                 <form  method="post" action="front?action=ComentarPubliEstabelecimento">
-                                <article class="media comentario">
-                                    <figure class="media-left">
-                                        <p class="image is-48x48">
-                                            <img class="is-rounded" src="${sessionScope.usuario.fotoPerfil}">
-                                        </p>
-                                    </figure>
-                                    <div class="media-content">
-                                        <div class="field">
-                                            <p class="control">
-                                                <textarea class="textarea" placeholder="Escreva um comentario..." rows="1" name="comentario"></textarea>
-                                           <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
-                                           <input type="hidden" name ="pagina" value="FeedPaginas">
+                                    <article class="media comentario">
+                                        <figure class="media-left">
+                                            <p class="image is-48x48">
+                                                <img class="is-rounded" src="${sessionScope.usuario.fotoPerfil}">
                                             </p>
+                                        </figure>
+                                        <div class="media-content">
+                                            <div class="field">
+                                                <p class="control">
+                                                    <textarea class="textarea" placeholder="Escreva um comentario..." rows="1" name="comentario"></textarea>
+                                                    <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
+                                                    <input type="hidden" name ="pagina" value="FeedPaginas">
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <button type="submit">
-                                        <span class="icon is-large">
-                                            <span class="fa-stack fa-lg">
-                                                <i class="fas fa-circle fa-stack-2x has-text-green"></i>
-                                                <i class="fas fa-paper-plane fa-stack-1x"></i>
+                                        <button type="submit">
+                                            <span class="icon is-large">
+                                                <span class="fa-stack fa-lg">
+                                                    <i class="fas fa-circle fa-stack-2x has-text-green"></i>
+                                                    <i class="fas fa-paper-plane fa-stack-1x"></i>
+                                                </span>
+
                                             </span>
-                                           
-                                        </span>
-                                    </button>
-                                           </article>
+                                        </button>
+                                    </article>
                                 </form>
                             </div> 
                         </c:forEach>
-                        
+
                     </div>
                 </div>
             </div>

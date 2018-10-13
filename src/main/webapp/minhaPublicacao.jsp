@@ -46,10 +46,10 @@
                             <aside class="menu">
 
                                 <ul>
-                                    <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
-                                    <a href="FeedPaginas.jsp"><li class="link-ativo">Feed páginas</li></a>
+                                    <a href="front?action=Inicio"><li>Feed</li></a>
+                                    <a href="FeedPaginas.jsp"><li>Feed páginas</li></a>
                                     <a href=""><li>Menssagens</li></a>
-                                     <a href="MinhaPublicacao.jsp"><li>Minhas publicações</li></a>
+                                    <a href="minhaPublicacao.jsp"><li class="link-ativo">Minhas publicações</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
                                     <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
@@ -58,7 +58,7 @@
                                             <jsp:useBean id="control" class="io.github.fernandasj.controle.GerenciadorEstabelecimento"/>
                                             <c:forEach var="pagina" items="${control.meusEstabelecimentos(sessionScope.usuario.id)}">
                                                 <a href="front?action=PaginaEstabelecimento&id=${pagina.id}"><li>${pagina.nome}</li></a>
-                                            </c:forEach>     
+                                                    </c:forEach>     
                                         </ul>
                                     </li>
                                     <a href="front?action=Logout">
@@ -123,7 +123,7 @@
                     </div>
 
                     <!-- Publicação -->
-                   <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/> 
+                    <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/> 
                     <jsp:useBean id="dao" class="io.github.fernandasj.dao.PublicacaoDao"/>
 
                     <c:forEach var="publicacao" items="${dao.listar(sessionScope.usuario.id)}">
@@ -134,7 +134,9 @@
                                 <div class="media">
                                     <div class="media-left">
                                         <figure class="image is-64x64">
-                                            <img class="is-rounded" src="${user.fotoPerfil}" alt="Placeholder image">
+                                            <div class="is-rounded">
+                                                <img src="${user.fotoPerfil}">
+                                            </div>                                  
                                         </figure>
                                     </div>
                                     <div class="media-content">
@@ -153,41 +155,41 @@
                                                     <a href="#" class="dropdown-item">
                                                         Compartilhar
                                                     </a>
-                                                  
-                                                        
+
+
                                                     <a title="excluir"href="front?action=DeletarPublicacao&idPublicacao=${publicacao.idPublicacao}" class="dropdown-item">
                                                         Deletar
                                                     </a>
-                                                    
-        
-                                                        
+
+
+
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                               
+
                                 <div class="card-image" >
-                                 <p>
-                                    ${publicacao.texto}
-                                 </p>
+                                    <p>
+                                        ${publicacao.texto}
+                                    </p>
                                 </div>
-                               
+
                                 <div class="content">
 
                                 </div>
                             </div>
 
-                        <!-- Comentatio da publicação-->
-                         <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioDao"/>
+                            <!-- Comentatio da publicação-->
+                            <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioDao"/>
                             <c:forEach var="comentario" items="${daoC.listar(publicacao.idPublicacao)}">
                                 <c:set var="userComentario" value="${daoU.buscarPorId(comentario.comentarista)}"/>
                                 <div class="comentario">
                                     <article class="media">
-                                        <figure class="media-left">
-                                            <p class="image is-48x48">
-                                                <img class="is-rounded" src="${userComentario.fotoPerfil}">
-                                            </p>
+                                        <figure class="media-left image is-48x48">
+                                            <div class="is-rounded">
+                                                <img src="${userComentario.fotoPerfil}">
+                                            </div>
                                         </figure>
                                         <div class="media-content">
                                             <div class="content">
@@ -203,13 +205,13 @@
                                 </div>
                             </c:forEach>
 
-                        <!-- Escrever comentario-->
-                       <form  method="post" action="front?action=Comentar">
+                            <!-- Escrever comentario-->
+                            <form  method="post" action="front?action=Comentar">
                                 <article class="media comentario">
-                                    <figure class="media-left">
-                                        <p class="image is-48x48">
-                                            <img class="is-rounded" src="${sessionScope.usuario.fotoPerfil}">
-                                        </p>
+                                    <figure class="media-left image is-48x48">
+                                        <div class="is-rounded">
+                                            <img src="${sessionScope.usuario.fotoPerfil}">
+                                        </div>
                                     </figure>
                                     <div class="media-content">
                                         <div class="field">
@@ -218,35 +220,31 @@
                                             </p>
                                         </div>
                                         <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
-                                         <input type="hidden" name ="pagina" value="minhaPublicacao">
-                                      
+                                        <input type="hidden" name ="pagina" value="minhaPublicacao">
+
                                     </div>
-                                    <button type="submit">
-
-
+                                    <button type="submit" class="button">
                                         <span class="icon is-large">
                                             <span class="fa-stack fa-lg">
-                                                <i class="fas fa-circle fa-stack-2x has-text-green"></i>
                                                 <i class="fas fa-paper-plane fa-stack-1x"></i>
-
                                             </span>
                                         </span>
                                     </button>
-                                                                  </article>
-                                                                    </form>
+                                </article>
+                            </form>
 
 
-                                    </div>
-</c:forEach>
-
-                    </div>
-                            
+                        </div>
+                    </c:forEach>
 
                 </div>
 
+
             </div>
 
-        </section>
+        </div>
+
+    </section>
 
 
     <%@ include file="cadastrar-estabelecimento.jsp"%>
