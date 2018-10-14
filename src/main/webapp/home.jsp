@@ -49,6 +49,7 @@
                                     <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
                                     <a href="FeedPaginas.jsp"><li>Feed páginas</li></a>
                                     <a href="amigos.jsp"><li>Amigos</li></a>
+                                    <a href="seguindo.jsp"><li>Seguindo</li></a>
                                     <a href=""><li>Mensagens</li></a>
                                     <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>

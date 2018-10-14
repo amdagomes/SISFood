@@ -117,7 +117,7 @@
                                                     <div class="media-right">
                                                         <ct:verificaSituacaoUsuario remetente="${sessionScope.usuario.id}" destinatario="${usuarios.id}"/>
                                                         <mTag:situacaoAmizade situacao="${situacaoAmizade}" usuario="${usuarios}" pagina="resultado-busca"/>
-                                                       
+
                                                     </div>
                                                 </article>
                                             </c:if>
@@ -154,14 +154,25 @@
                                                 </div>
 
                                                 <div class="media-right">
-                                                    <div class="level">
-                                                        <a class="level-item" title="Editar" href="#${comida.idComida}" rel="modal:open">
-                                                            <span class="icon is-small"><i class="fas fa-pencil-alt"></i></span>
-                                                        </a>
-                                                        <a class="level-item has-text-danger" title="Deletar" href="front?action=DeletarComida&idComida=${comida.idComida}">
-                                                            <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>
-                                                        </a>
-                                                    </div>
+                                                    <ct:verificaSeguePagina seguidor="${sessionScope.usuario.id}" pagina="${estbl.id}"/>
+                                                    <c:choose>
+                                                        <c:when test="${seguePagina == true}">
+                                                            <a href="front?action=SeguirEstabelecimento&estbl=${estbl.id}&met=u&pag=resultado-busca" class="button is-small is-danger">
+                                                                <span class="icon is-small">
+                                                                    <i class="fas fa-check"></i>
+                                                                </span>
+                                                                <span>unfollow</span>
+                                                            </a>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <a  href="front?action=SeguirEstabelecimento&estbl=${estbl.id}&met=follow&pag=resultado-busca" class="button is-small is-link">
+                                                                <span class="icon is-small">
+                                                                    <i class="fas fa-check"></i>
+                                                                </span>
+                                                                <span>follow</span>
+                                                            </a>
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </div>
                                             </article>
                                         </c:forEach>

@@ -99,7 +99,9 @@
                                     <div class="media">
                                         <div class="media-left">
                                             <figure class="image is-64x64">
-                                                <img class="is-rounded" src="${estab.foto}"/>
+                                                <div class="is-rounded">
+                                                    <img src="${estab.foto}">
+                                                </div>
                                             </figure>
                                         </div>
                                         <div class="media-content">
@@ -135,65 +137,62 @@
                                     </div>
                                 </div>
 
-                            </div>
-
-                            <!-- Comentatio da publicação-->
-                            <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioEstabelecimentoDao"/>
-                            <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/>
+                                <!-- Comentatio da publicação-->
+                                <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioEstabelecimentoDao"/>
+                                <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/>
 
 
-                            <c:forEach var="comentario" items="${daoC.listar(publicacao.idPublicacao)}">
-                                <c:set var="userComentario" value="${daoU.buscarPorId(comentario.comentarista)}"/>
-                                <div class="comentario">
-                                    <article class="media">
-                                        <figure class="media-left">
-                                            <p class="image is-48x48">
-                                                <img class="is-rounded" src="${userComentario.fotoPerfil}">
-                                            </p>
+                                <c:forEach var="comentario" items="${daoC.listar(publicacao.idPublicacao)}">
+                                    <c:set var="userComentario" value="${daoU.buscarPorId(comentario.comentarista)}"/>
+
+                                    <div class="comentario">
+                                        <article class="media">
+                                            <figure class="media-left image is-48x48">
+                                                <p class="is-rounded">
+                                                    <img src="${userComentario.fotoPerfil}">
+                                                </p>
+                                            </figure>
+                                            <div class="media-content">
+                                                <div class="content">
+                                                    <p>
+                                                        <span class="title-comentario">${userComentario.nome}</span> <small>${comentario.datahora}</small>
+                                                        <br>
+                                                        ${comentario.comentario}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </c:forEach>
+
+                                <!-- Escrever comentario-->
+                                <form  method="post" action="front?action=ComentarPubliEstabelecimento">
+                                    <article class="media comentario">
+                                        <figure class="media-left image is-48x48">
+                                            <div class="is-rounded">
+                                                <img src="${sessionScope.usuario.fotoPerfil}">
+                                            </div>
                                         </figure>
                                         <div class="media-content">
-                                            <div class="content">
-                                                <p>
-                                                    <span class="title-comentario">${userComentario.nome}</span> <small>${comentario.datahora}</small>
-                                                    <br>
-                                                    ${comentario.comentario}
+                                            <div class="field">
+                                                <p class="control">
+                                                    <textarea class="textarea" placeholder="Escreva um comentario..." rows="1" name="comentario"></textarea>
                                                 </p>
+                                                <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
+                                                <input type="hidden" name ="pagina" value="visita-estbl">
                                             </div>
                                         </div>
-                                    </article>
-                                </div>
-                            </c:forEach>
-
-                            <!-- Escrever comentario-->
-                            <form  method="post" action="front?action=ComentarPubliEstabelecimento">
-                                <article class="media comentario">
-                                    <figure class="media-left">
-                                        <p class="image is-48x48">
-                                            <img class="is-rounded" src="">
-                                        </p>
-                                    </figure>
-                                    <div class="media-content">
-                                        <div class="field">
-                                            <p class="control">
-                                                <textarea class="textarea" placeholder="Escreva um comentario..." rows="1" name="comentario"></textarea>
-                                            </p>
-                                        </div>
-                                    </div>            
-                                    <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
-                                    <input type="hidden" name ="pagina" value="visita-estbl">
-
-                                    <button type="submit" class="button">
-                                        <span class="icon is-large">
-                                            <span class="fa-stack fa-lg">
-                                                <i class="fas fa-paper-plane fa-stack-1x"></i>
+                                        <button type="submit" class="button">
+                                            <span class="icon is-large">
+                                                <span class="fa-stack fa-lg">
+                                                    <i class="fas fa-paper-plane fa-stack-1x"></i>
+                                                </span>
                                             </span>
-                                        </span>
-                                    </button>
-                                </article>
-                            </form>
-
+                                        </button>
+                                    </article>
+                                </form>
+                            </div>
                         </c:forEach>
-
                     </div>
                 </div>
             </div>

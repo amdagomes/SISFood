@@ -1,7 +1,7 @@
 package io.github.fernandasj.dao;
 
 import io.github.fernandasj.modelo.Usuario;
-import io.github.fernandasj.repository.ConnectionFactory;
+import io.github.fernandasj.connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -108,11 +108,15 @@ public class UsuarioDao implements Dao<Usuario> {
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, email);
         stmt.setString(2, senha);
+        
         if (stmt.executeQuery().next()) {
             stmt.close();
             con.close();
             return true;
         }
+        
+        stmt.close();
+        con.close();
         return false;
     }
 
@@ -134,8 +138,8 @@ public class UsuarioDao implements Dao<Usuario> {
                     + "sexo = ?, dataNascimento = ?, rua = ?, cidade = ?, cep = ?,"
                     + "numeroCasa = ?, estado = ?, telefone = ?, profissao = ?, descricao = ? WHERE idUsuario = ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-             
-            stmt.setString(1, obj.getNome());         
+
+            stmt.setString(1, obj.getNome());
             stmt.setString(2, obj.getEmail());
             stmt.setString(3, obj.getSenha());
             stmt.setString(4, obj.getSexo());
@@ -149,7 +153,7 @@ public class UsuarioDao implements Dao<Usuario> {
             stmt.setString(12, obj.getProfissao());
             stmt.setString(13, obj.getDescricao());
             stmt.setInt(14, obj.getId());
-            
+
             stmt.execute();
 
             stmt.close();
@@ -240,33 +244,33 @@ public class UsuarioDao implements Dao<Usuario> {
 
         return true;
     }
-    
-    public List<Usuario> listarPorNome(String nome) throws SQLException{
-        
+
+    public List<Usuario> listarPorNome(String nome) throws SQLException {
+
         try {
             con = ConnectionFactory.getConnection();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        
+        }
+
         String sql = "SELECT idusuario, nome, descricao, fotoPerfil FROM usuario WHERE nome ilike ?";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setString(1, "%"+nome+"%");
-        
+        stmt.setString(1, "%" + nome + "%");
+
         ResultSet rs = stmt.executeQuery();
-        
+
         List<Usuario> lista = new ArrayList<>();
         Usuario u = new Usuario();
-        
-        while(rs.next()){
+
+        while (rs.next()) {
             u.setId(rs.getInt("idusuario"));
             u.setNome(rs.getString("nome"));
             u.setDescricao(rs.getString("descricao"));
             u.setFotoPerfil(rs.getString("fotoPerfil"));
-            
+
             lista.add(u);
         }
-        
+
         con.close();
         return lista;
     }

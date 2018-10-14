@@ -2,8 +2,8 @@ package io.github.fernandasj.controle;
 
 import io.github.fernandasj.dao.UsuarioDao;
 import io.github.fernandasj.modelo.Usuario;
-import io.github.fernandasj.repository.DaoFactory;
-import io.github.fernandasj.repository.DaoFactoryIF;
+import io.github.fernandasj.connection.DaoFactory;
+import io.github.fernandasj.connection.DaoFactoryIF;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;

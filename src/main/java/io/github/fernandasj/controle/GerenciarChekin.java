@@ -9,7 +9,7 @@ import io.github.fernandasj.dao.ChekinDao;
 import io.github.fernandasj.dao.UsuarioDao;
 import io.github.fernandasj.modelo.Chekin;
 import io.github.fernandasj.modelo.Usuario;
-import io.github.fernandasj.repository.DaoFactoryIF;
+import io.github.fernandasj.connection.DaoFactoryIF;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 

@@ -6,7 +6,7 @@
 package io.github.fernandasj.dao;
 
 import io.github.fernandasj.modelo.Comentario;
-import io.github.fernandasj.repository.ConnectionFactory;
+import io.github.fernandasj.connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

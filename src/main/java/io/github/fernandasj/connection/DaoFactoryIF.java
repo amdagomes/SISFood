@@ -1,10 +1,11 @@
-package io.github.fernandasj.repository;
+package io.github.fernandasj.connection;
 
 import io.github.fernandasj.dao.AmizadeDao;
 import io.github.fernandasj.dao.AvaliarComidaDao;
 import io.github.fernandasj.dao.AvaliarEstabelecimentoDao;
 import io.github.fernandasj.dao.ComidaDao;
 import io.github.fernandasj.dao.EstabelecimentoDao;
+import io.github.fernandasj.dao.SeguirPaginaDao;
 import io.github.fernandasj.dao.UsuarioDao;
 import java.sql.SQLException;
 
@@ -25,5 +26,7 @@ public interface DaoFactoryIF {
     public AvaliarEstabelecimentoDao criaAvaliaEstabelecimentoDao() throws SQLException, ClassNotFoundException;
     
     public AmizadeDao criaAmizadeDao() throws SQLException, ClassNotFoundException;
+    
+    public SeguirPaginaDao criaSeguirPaginaDao() throws SQLException, ClassNotFoundException;
     
 }

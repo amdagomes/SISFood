@@ -8,7 +8,7 @@ package io.github.fernandasj.dao;
 import io.github.fernandasj.modelo.Chekin;
 
 import io.github.fernandasj.modelo.Usuario;
-import io.github.fernandasj.repository.ConnectionFactory;
+import io.github.fernandasj.connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;

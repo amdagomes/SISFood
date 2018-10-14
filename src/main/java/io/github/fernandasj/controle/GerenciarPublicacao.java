@@ -8,7 +8,7 @@ package io.github.fernandasj.controle;
 import io.github.fernandasj.dao.PublicacaoDao;
 import io.github.fernandasj.dao.PublicacaoEstabelecimentoDao;
 import io.github.fernandasj.modelo.Publicacao;
-import io.github.fernandasj.repository.DaoFactoryIF;
+import io.github.fernandasj.connection.DaoFactoryIF;
 import java.sql.SQLException;
 import java.util.List;
 

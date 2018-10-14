@@ -29,18 +29,42 @@
     </attribute>
   </tag>
   <tag>
-    <name>verificaSituacaoUsuario</name>
-    <description>Verifica a situação da amizade dos usuários</description>
+    <name>buscaUsuario</name>
+    <description>Busca usuário pelo id</description>
     <body-content>empty</body-content>
-    <tag-class>io.github.fernandasj.tags.VerificaSituacaoUsuario</tag-class>
+    <tag-class>io.github.fernandasj.tags.BuscaUsuario</tag-class>
     <attribute>
-      <name>remetente</name>
+      <name>user</name>
+      <type>int</type>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  <tag>
+    <name>buscaEstabelecimento</name>
+    <description>Busca estabelecimento pelo id</description>
+    <body-content>empty</body-content>
+    <tag-class>io.github.fernandasj.tags.BuscaEstabelecimento</tag-class>
+    <attribute>
+      <name>id</name>
+      <type>int</type>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  <tag>
+    <name>verificaSeguePagina</name>
+    <description>Verifica se o usúario segue a página de estabelecimento</description>
+    <body-content>empty</body-content>
+    <tag-class>io.github.fernandasj.tags.VerificaSeguePagina</tag-class>
+    <attribute>
+      <name>seguidor</name>
       <type>int</type>
       <required>true</required>
       <rtexprvalue>true</rtexprvalue>
     </attribute>
     <attribute>
-      <name>destinatario</name>
+      <name>pagina</name>
       <type>int</type>
       <required>true</required>
       <rtexprvalue>true</rtexprvalue>
@@ -65,6 +89,18 @@
     <tag-class>io.github.fernandasj.tags.ListAvaliacoesComida</tag-class>
     <attribute>
       <name>idComida</name>
+      <type>int</type>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  <tag>
+    <name>listFollowing</name>
+    <description>Lista todas as páginas de estabelecimento que o usuário segue</description>
+    <body-content>empty</body-content>
+    <tag-class>io.github.fernandasj.tags.ListFollowing</tag-class>
+    <attribute>
+      <name>usuario</name>
       <type>int</type>
       <required>true</required>
       <rtexprvalue>true</rtexprvalue>

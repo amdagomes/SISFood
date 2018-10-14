@@ -1,4 +1,4 @@
-package io.github.fernandasj.repository;
+package io.github.fernandasj.connection;
 
 public class DaoFactory {
 

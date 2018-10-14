@@ -10,8 +10,8 @@ import io.github.fernandasj.dao.AvaliarComidaDao;
 import io.github.fernandasj.dao.ComidaDao;
 import io.github.fernandasj.modelo.AvaliarComida;
 import io.github.fernandasj.modelo.Comida;
-import io.github.fernandasj.repository.DaoFactory;
-import io.github.fernandasj.repository.DaoFactoryIF;
+import io.github.fernandasj.connection.DaoFactory;
+import io.github.fernandasj.connection.DaoFactoryIF;
 import java.sql.SQLException;
 import java.util.List;
 

@@ -7,8 +7,8 @@ package io.github.fernandasj.controle;
 
 import io.github.fernandasj.dao.AmizadeDao;
 import io.github.fernandasj.modelo.SolicitaAmizade;
-import io.github.fernandasj.repository.DaoFactory;
-import io.github.fernandasj.repository.DaoFactoryIF;
+import io.github.fernandasj.connection.DaoFactory;
+import io.github.fernandasj.connection.DaoFactoryIF;
 import java.sql.SQLException;
 import java.util.List;
 

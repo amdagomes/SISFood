@@ -2,7 +2,7 @@ package io.github.fernandasj.dao;
 
 import io.github.fernandasj.modelo.SolicitaAmizade;
 import io.github.fernandasj.modelo.StatusAmizade;
-import io.github.fernandasj.repository.ConnectionFactory;
+import io.github.fernandasj.connection.ConnectionFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
