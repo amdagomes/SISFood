@@ -1,112 +1,130 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
-  <tlib-version>1.0</tlib-version>
-  <short-name>ct</short-name>
-  <uri>/WEB-INF/tlds/CustomTags</uri>
+    <tlib-version>1.0</tlib-version>
+    <short-name>ct</short-name>
+    <uri>/WEB-INF/tlds/CustomTags</uri>
   
-  <tag>
-    <name>buscaNotificacao</name>
-    <description>Busca as notificações do usuário</description>
-    <body-content>empty</body-content>
-    <tag-class>io.github.fernandasj.tags.BuscaNotificacao</tag-class>
-    <attribute>
-      <name>user</name>
-      <type>int</type>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
-  </tag>
-  <tag>
-    <name>buscaUsuario</name>
-    <description>Busca usuário pelo id</description>
-    <body-content>empty</body-content>
-    <tag-class>io.github.fernandasj.tags.BuscaUsuario</tag-class>
-    <attribute>
-      <name>user</name>
-      <type>int</type>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
-  </tag>
-  <tag>
-    <name>buscaUsuario</name>
-    <description>Busca usuário pelo id</description>
-    <body-content>empty</body-content>
-    <tag-class>io.github.fernandasj.tags.BuscaUsuario</tag-class>
-    <attribute>
-      <name>user</name>
-      <type>int</type>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
-  </tag>
-  <tag>
-    <name>buscaEstabelecimento</name>
-    <description>Busca estabelecimento pelo id</description>
-    <body-content>empty</body-content>
-    <tag-class>io.github.fernandasj.tags.BuscaEstabelecimento</tag-class>
-    <attribute>
-      <name>id</name>
-      <type>int</type>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
-  </tag>
-  <tag>
-    <name>verificaSeguePagina</name>
-    <description>Verifica se o usúario segue a página de estabelecimento</description>
-    <body-content>empty</body-content>
-    <tag-class>io.github.fernandasj.tags.VerificaSeguePagina</tag-class>
-    <attribute>
-      <name>seguidor</name>
-      <type>int</type>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
-    <attribute>
-      <name>pagina</name>
-      <type>int</type>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
-  </tag>
-  <tag>
-    <name>listaAmigos</name>
-    <description>Lista os amigos de um usuário</description>
-    <body-content>empty</body-content>
-    <tag-class>io.github.fernandasj.tags.ListaAmigos</tag-class>
-    <attribute>
-      <name>user</name>
-      <type>int</type>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
-  </tag>
-  <tag>
-    <name>listAvaliacoesComida</name>
-    <description>Lista as avaliações de comida</description>
-    <body-content>empty</body-content>
-    <tag-class>io.github.fernandasj.tags.ListAvaliacoesComida</tag-class>
-    <attribute>
-      <name>idComida</name>
-      <type>int</type>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
-  </tag>
-  <tag>
-    <name>listFollowing</name>
-    <description>Lista todas as páginas de estabelecimento que o usuário segue</description>
-    <body-content>empty</body-content>
-    <tag-class>io.github.fernandasj.tags.ListFollowing</tag-class>
-    <attribute>
-      <name>usuario</name>
-      <type>int</type>
-      <required>true</required>
-      <rtexprvalue>true</rtexprvalue>
-    </attribute>
-  </tag>
-  <!-- A validator verifies that the tags are used correctly at JSP
+    <tag>
+        <name>buscaNotificacao</name>
+        <description>Busca as notificações do usuário</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.BuscaNotificacao</tag-class>
+        <attribute>
+            <name>user</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>buscaUsuario</name>
+        <description>Busca usuário pelo id</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.BuscaUsuario</tag-class>
+        <attribute>
+            <name>user</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>buscaUsuario</name>
+        <description>Busca usuário pelo id</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.BuscaUsuario</tag-class>
+        <attribute>
+            <name>user</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>buscaEstabelecimento</name>
+        <description>Busca estabelecimento pelo id</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.BuscaEstabelecimento</tag-class>
+        <attribute>
+            <name>id</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>verificaSituacaoUsuario</name>
+        <description>Verifica a situação da amizade dos usuários</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.VerificaSituacaoUsuario</tag-class>
+        <attribute>
+            <name>remetente</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>destinatario</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>verificaSeguePagina</name>
+        <description>Verifica se o usúario segue a página de estabelecimento</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.VerificaSeguePagina</tag-class>
+        <attribute>
+            <name>seguidor</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>pagina</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>listaAmigos</name>
+        <description>Lista os amigos de um usuário</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.ListaAmigos</tag-class>
+        <attribute>
+            <name>user</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>listAvaliacoesComida</name>
+        <description>Lista as avaliações de comida</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.ListAvaliacoesComida</tag-class>
+        <attribute>
+            <name>idComida</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>listFollowing</name>
+        <description>Lista todas as páginas de estabelecimento que o usuário segue</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.ListFollowing</tag-class>
+        <attribute>
+            <name>usuario</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <!-- A validator verifies that the tags are used correctly at JSP
           translation time. Validator entries look like this: 
        <validator>
            <validator-class>com.mycompany.TagLibValidator</validator-class>
@@ -116,7 +134,7 @@
            </init-param>
        </validator>
     -->
-  <!-- A tag library can register Servlet Context event listeners in
+    <!-- A tag library can register Servlet Context event listeners in
          case it needs to react to such events. Listener entries look
          like this: 
       <listener>
