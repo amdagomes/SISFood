@@ -5,9 +5,6 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="ct" uri="/WEB-INF/tlds/CustomTags"%>
-<%@taglib prefix="mTags" tagdir="/WEB-INF/tags/" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -32,30 +29,36 @@
                         <div class="media-box">
                             <div class="fotoperfil">
                                 <figure class="image">
-                                    <img class="is-rounded" src="${sessionScope.visita.fotoPerfil}">
+                                    <img class="is-rounded" src="${sessionScope.usuario.fotoPerfil}">
                                 </figure>
                                 <div>
                                     <p class="has-text-dark has-text-centered has-text-weight-semibold is-size-5">
-                                        ${sessionScope.visita.nome}
+                                        ${sessionScope.usuario.nome}
                                     </p>
                                     <p class="has-text-grey-light has-text-centered">
-                                        ${sessionScope.visita.descricao}
+                                        ${sessionScope.usuario.descricao}
                                     </p>
-                                    <br>
-                                    <ct:verificaSituacaoUsuario remetente="${sessionScope.usuario.id}" destinatario="${sessionScope.visita.id}"/>
-                                    <p class="has-text-centered">
-                                        <mTags:situacaoAmizade situacao="${situacaoAmizade}" usuario="${visita}" pagina="visita-user"/>                                   
-                                    </p>    
                                 </div>
                             </div>
 
                             <aside class="menu">
 
                                 <ul>
-                                    <a href="front?action=VisitarPag&id=${sessionScope.visita.id}&pag=user&t=u"><li class="link-ativo">Feed</li></a>
-                                    <a href="perfil-user-visitante.jsp"><li>Perfil</li></a>
+                                    <a href="front?action=Inicio"><li>Feed</li></a>
+                                    <a href="FeedPaginas.jsp"><li class="link-ativo">Feed páginas</li></a>
+                                    <a href="amigos.jsp"><li>Amigos</li></a>
+                                    <a href=""><li>Mensagens</li></a>
+                                    <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
+                                    <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
+                                    <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
-                                        <a href="front?action=Inicio"><p class="menu-label">voltar</p></a>
+                                        <p class="menu-label">Minhas páginas</p>
+                                        <ul>
+                                            <jsp:useBean id="control" class="io.github.fernandasj.controle.GerenciadorEstabelecimento"/>
+                                            <c:forEach var="pagina" items="${control.meusEstabelecimentos(sessionScope.usuario.id)}">
+                                                <a href="front?action=PaginaEstabelecimento&id=${pagina.id}"><li>${pagina.nome}</li></a>
+                                                    </c:forEach>     
+                                        </ul>
                                     </li>
                                     <a href="front?action=Logout">
                                         <li class="menu-label">
@@ -74,25 +77,24 @@
                     <div class="column">
 
                         <!-- Publicação -->
-                        <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/> 
-                        <jsp:useBean id="dao" class="io.github.fernandasj.dao.PublicacaoDao"/>
-                        <c:set var="listPublicacoes" scope="page" value="${dao.listar(visita.id)}"/>
+                        <jsp:useBean id="daoE" class="io.github.fernandasj.dao.EstabelecimentoDao"/> 
+                        <jsp:useBean id="dao" class="io.github.fernandasj.dao.PublicacaoEstabelecimentoDao"/>
+                        <c:set var="listPublicacoes" scope="page" value="${dao.listarFeed(sessionScope.usuario.id)}"/>
                         <c:choose>
                             <c:when test="${not empty listPublicacoes}">
-                                <c:forEach var="publicacao" items="${listPublicacoes}">
-                                    <c:set var="user" value="${daoU.buscarPorId(publicacao.idUsuario)}"/>  
+                                <c:forEach var="publicacao" items="${dao.listarFeed(sessionScope.usuario.id)}">                         
+                                    <c:set var="estab" value="${daoE.buscarPorId(publicacao.idEstabelecimento)}"/>  
                                     <div class="card media-box">
                                         <div class="card-content">
                                             <div class="media">
                                                 <div class="media-left">
                                                     <figure class="image is-64x64">
-                                                        <div class="is-rounded">
-                                                            <img src="${user.fotoPerfil}" alt="Placeholder image">
-                                                        </div>                                           
+                                                        <img class="is-rounded" src="${estab.foto}" alt="Placeholder image">
                                                     </figure>
                                                 </div>
+
                                                 <div class="media-content">
-                                                    <p class="title is-5">${user.nome}</p>
+                                                    <p class="title is-5">${estab.nome}</p>
                                                     <p class="subtitle is-7">${publicacao.datahora}</p>
                                                 </div>
                                                 <div class="media-right">
@@ -102,38 +104,29 @@
                                                                 <i class="fas fa-ellipsis-h"></i>
                                                             </span>
                                                         </div>
-                                                        <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-                                                            <div class="dropdown-content">
-                                                                <a href="#" class="dropdown-item">
-                                                                    Compartilhar
-                                                                </a>
-                                                                <a href="#" class="dropdown-item">
-                                                                    Deletar
-                                                                </a>
-                                                            </div>
-                                                        </div>
+
                                                     </div>
-                                                </div>                                        
+                                                </div>
                                             </div>
                                             <div class="card-image">
-
+                                                ${publicacao.texto}
                                             </div>
                                             <div class="content">
-                                                ${publicacao.texto}
+
                                             </div>
                                         </div>
 
-
                                         <!-- Comentatio da publicação-->
-                                        <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioDao"/>
+                                        <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioEstabelecimentoDao"/>
+                                        <jsp:useBean id="daou" class="io.github.fernandasj.dao.UsuarioDao"/>
                                         <c:forEach var="comentario" items="${daoC.listar(publicacao.idPublicacao)}">
-                                            <c:set var="userComentario" value="${daoU.buscarPorId(comentario.comentarista)}"/>
+                                            <c:set var="userComentario" value="${daou.buscarPorId(comentario.comentarista)}"/>
                                             <div class="comentario">
                                                 <article class="media">
-                                                    <figure class="media-left image is-48x48">
-                                                        <div class="is-rounded">
-                                                            <img src="${userComentario.fotoPerfil}">
-                                                        </div>
+                                                    <figure class="media-left">
+                                                        <p class="image is-48x48">
+                                                            <img class="is-rounded" src="${userComentario.fotoPerfil}">
+                                                        </p>
                                                     </figure>
                                                     <div class="media-content">
                                                         <div class="content">
@@ -147,35 +140,37 @@
                                                 </article>
                                             </div>
                                         </c:forEach>
+
                                         <!-- Escrever comentario-->
-                                        <form  method="post" action="front?action=Comentar">
+                                        <form  method="post" action="front?action=ComentarPubliEstabelecimento">
                                             <article class="media comentario">
-                                                <figure class="media-left image is-48x48">
-                                                    <div class="is-rounded">
-                                                        <img src="${sessionScope.usuario.fotoPerfil}">
-                                                    </div>
+                                                <figure class="media-left">
+                                                    <p class="image is-48x48">
+                                                        <img class="is-rounded" src="${sessionScope.usuario.fotoPerfil}">
+                                                    </p>
                                                 </figure>
                                                 <div class="media-content">
                                                     <div class="field">
                                                         <p class="control">
-                                                            <textarea class="textarea" placeholder="Escreva um comentario..." rows="1" name ="comentario"></textarea>
+                                                            <textarea class="textarea" placeholder="Escreva um comentario..." rows="1" name="comentario"></textarea>
+                                                            <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
+                                                            <input type="hidden" name ="pagina" value="FeedPaginas">
                                                         </p>
                                                     </div>
-                                                    <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
-                                                    <input type="hidden" name ="pagina" value="visita-user"/>
                                                 </div>
-
-                                                <button type="submit" class="button">
+                                                <button type="submit">
                                                     <span class="icon is-large">
                                                         <span class="fa-stack fa-lg">
+                                                            <i class="fas fa-circle fa-stack-2x has-text-green"></i>
                                                             <i class="fas fa-paper-plane fa-stack-1x"></i>
                                                         </span>
+
                                                     </span>
                                                 </button>
                                             </article>
                                         </form>
-                                    </div>
-                                </c:forEach> 
+                                    </div> 
+                                </c:forEach>
                             </c:when>
                             <c:otherwise>
                                 <div class="card media-box">
@@ -186,14 +181,15 @@
                                     </div>
                                 </div>
                             </c:otherwise>
-                        </c:choose> 
+                        </c:choose>
+
+
                     </div>
                 </div>
             </div>
         </section>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>                            
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>                            
         <script>
             const dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', () => {

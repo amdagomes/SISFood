@@ -24,7 +24,7 @@ public class GerenciadorEstabelecimento {
     private DaoFactoryIF fabrica = null;
     private EstabelecimentoDao estabelecimentoDao = null;
     private AvaliarEstabelecimentoDao avaliarDao = null;
-    
+
     public GerenciadorEstabelecimento() throws SQLException, ClassNotFoundException{
         fabrica = DaoFactory.createFactory();
         estabelecimentoDao = fabrica.criaEstabelecimentoDao();

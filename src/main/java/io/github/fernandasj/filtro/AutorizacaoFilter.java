@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
  */
 @WebFilter(filterName = "filtroAutorizacao",
         urlPatterns = {"/home.jsp"})
+
 public class AutorizacaoFilter implements Filter {
 
     @Override

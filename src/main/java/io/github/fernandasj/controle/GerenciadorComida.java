@@ -28,7 +28,6 @@ public class GerenciadorComida {
         fabrica = DaoFactory.createFactory();
         dao = fabrica.criaComidaDao();
         daoAvalia = fabrica.criaAvaliarComidaDao();
-        
     }
     
     public boolean Adicionar (int idEstabelecimento, String descricao,float preco, String nome, String foto) throws Exception{

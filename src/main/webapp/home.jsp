@@ -47,8 +47,10 @@
 
                                 <ul>
                                     <a href="front?action=Inicio"><li class="link-ativo">Feed</li></a>
+                                    <a href="FeedPaginas.jsp"><li>Feed páginas</li></a>
                                     <a href="amigos.jsp"><li>Amigos</li></a>
-                                    <a href=""><li>Menssagens</li></a>
+                                    <a href=""><li>Mensagens</li></a>
+                                    <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
                                     <li>
                                         <p class="menu-label">Minhas páginas</p>
@@ -56,7 +58,7 @@
                                             <jsp:useBean id="control" class="io.github.fernandasj.controle.GerenciadorEstabelecimento"/>
                                             <c:forEach var="pagina" items="${control.meusEstabelecimentos(sessionScope.usuario.id)}">
                                                 <a href="front?action=PaginaEstabelecimento&id=${pagina.id}"><li>${pagina.nome}</li></a>
-                                            </c:forEach>     
+                                                    </c:forEach>     
                                         </ul>
                                     </li>
                                     <a href="front?action=Logout">
@@ -75,7 +77,7 @@
 
                     <div class="column">
                         <!-- Criar publicação-->
-                        <form action="">
+                        <form  method="post" action="front?action=Publicar">
                             <div class="media-box">
                                 <nav class="breadcrumb has-bullet-separator" aria-label="breadcrumbs">
                                     <ul>
@@ -102,7 +104,7 @@
                                 <div class="criar-publicacao">
                                     <div class="field">
                                         <p class="control">
-                                            <textarea class="textarea" placeholder="Faça uma publicação..." rows="2"></textarea>
+                                            <textarea class="textarea" placeholder="Faça uma publicação..." rows="2" name="texto" required="required"></textarea>
                                         </p>
                                     </div>
                                     <div class="level">
@@ -116,163 +118,194 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>   
-                        </form>
-                    </div>
+                                </div>  
+                            </div>
+                        </form>                    
 
-                    <!-- Publicação -->
-                    <div class="card media-box">
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-left">
-                                    <figure class="image is-64x64">
-                                        <img class="is-rounded" src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
-                                    </figure>
-                                </div>
-                                <div class="media-content">
-                                    <p class="title is-5">John Smith</p>
-                                    <p class="subtitle is-7">15 de setembro às 23:30</p>
-                                </div>
-                                <div class="media-right">
-                                    <div class="dropdown drop is-right is-pointer">
-                                        <div class="dropdown-trigger">
-                                            <span class="icon is-small">
-                                                <i class="fas fa-ellipsis-h"></i>
-                                            </span>
+                        <!-- Publicação -->
+                        <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/> 
+                        <jsp:useBean id="dao" class="io.github.fernandasj.dao.PublicacaoDao"/>
+
+                        <c:forEach var="publicacao" items="${dao.listarFeed(sessionScope.usuario.id)}">
+                            <c:set var="user" value="${daoU.buscarPorId(publicacao.idUsuario)}"/>  
+
+                            <div class="card media-box">
+                                <div class="card-content">
+                                    <div class="media">
+                                        <div class="media-left">
+                                            <figure class="image is-64x64">
+                                                <div class="is-rounded">
+                                                    <img src="${user.fotoPerfil}"/>
+                                                </div>
+                                            </figure>
                                         </div>
-                                        <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-                                            <div class="dropdown-content">
-                                                <a href="#" class="dropdown-item">
-                                                    Compartilhar
-                                                </a>
-                                                <a href="#" class="dropdown-item">
-                                                    Deletar
-                                                </a>
+                                        <div class="media-content">
+                                            <c:choose>
+                                                <c:when test="${sessionScope.usuario.id == user.id}">
+                                                    <p class="title is-5">${user.nome}</p>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <a class="" href="front?action=VisitarPag&id=${user.id}&pag=user&t=u">
+                                                        <p class="title has-text-link is-5">${user.nome}</p>
+                                                    </a>
+                                                </c:otherwise>
+                                            </c:choose>                                           
+                                            <p class="subtitle is-7">${publicacao.datahora}</p>
+                                        </div>
+                                        <div class="media-right">
+                                            <div class="dropdown drop is-right is-pointer">
+                                                <div class="dropdown-trigger">
+                                                    <span class="icon is-small">
+                                                        <i class="fas fa-ellipsis-h"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+                                                    <div class="dropdown-content">
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="card-image">
-                                <figure class="image is-16by9">
-                                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                                </figure>
-                            </div>
-                            <div class="content">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
-                            </div>
-                        </div>
 
-                        <!-- Comentatio da publicação-->
-                        <div class="comentario">
-                            <article class="media">
-                                <figure class="media-left">
-                                    <p class="image is-48x48">
-                                        <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-                                    </p>
-                                </figure>
-                                <div class="media-content">
-                                    <div class="content">
+                                    <div class="card-image" >
                                         <p>
-                                            <span class="title-comentario">John Smith</span> <small>data/hora</small>
-                                            <br>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+
                                         </p>
                                     </div>
-                                </div>
-                            </article>
-                        </div>
 
-                        <!-- Escrever comentario-->
-                        <article class="media comentario">
-                            <figure class="media-left">
-                                <p class="image is-48x48">
-                                    <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-                                </p>
-                            </figure>
-                            <div class="media-content">
-                                <div class="field">
-                                    <p class="control">
-                                        <textarea class="textarea" placeholder="Escreva um comentario..." rows="1"></textarea>
-                                    </p>
+                                    <div class="content">
+                                        ${publicacao.texto}
+                                    </div>
                                 </div>
+
+                                <!-- Comentatio da publicação-->
+                                <jsp:useBean id="daoC" class="io.github.fernandasj.dao.ComentarioDao"/>
+                                <c:forEach var="comentario" items="${daoC.listar(publicacao.idPublicacao)}">
+                                    <c:set var="userComentario" value="${daoU.buscarPorId(comentario.comentarista)}"/>
+                                    <div class="comentario">
+                                        <article class="media">
+                                            <figure class="media-left image is-48x48">
+                                                <div class='is-rounded'>
+                                                    <img class="is-rounded" src="${userComentario.fotoPerfil}">
+                                                </div>
+                                            </figure>
+                                            <div class="media-content">
+                                                <div class="content">
+                                                    <p>
+                                                        <c:choose>
+                                                            <c:when test="${sessionScope.usuario.id == userComentario.id}">
+                                                                <span class="title-comentario">${userComentario.nome}</span> <small>${comentario.datahora}</small>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <a href="front?action=VisitarPag&id=${userComentario.id}&pag=user&t=u">
+                                                                    <span class="title-comentario">${userComentario.nome}</span> 
+                                                                </a>
+                                                                <small>${comentario.datahora}</small>
+                                                            </c:otherwise>
+                                                        </c:choose> 
+                                                        <br>
+                                                        ${comentario.comentario}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                        </article>
+                                    </div>
+                                </c:forEach>
+
+
+                                <!-- Escrever comentario-->
+                                <form  method="post" action="front?action=Comentar">
+                                    <article class="media comentario">
+                                        <figure class="media-left image is-48x48">
+                                            <div class='is-rounded'>
+                                                <img class="" src="${sessionScope.usuario.fotoPerfil}">
+                                            </div>
+                                        </figure>
+                                        <div class="media-content">
+                                            <div class="field">
+                                                <p class="control">
+                                                    <textarea class="textarea" placeholder="Escreva um comentario..." rows="1" required="required" name="comentario"></textarea>
+                                                </p>
+                                            </div>
+                                            <input type ="hidden" name="idPublicacao" value= ${publicacao.idPublicacao}>
+                                            <input type="hidden" name ="pagina" value="home">
+                                        </div>
+                                        <button type="submit" class="button">
+                                            <span class="icon is-large">
+                                                <span class="fa-stack fa-lg">
+                                                    <i class="fas fa-paper-plane fa-stack-1x"></i>
+                                                </span>
+                                            </span>
+                                        </button>
+                                    </article>
+                                </form>
                             </div>
-                            <a href="#" class="button-send">
-                                <span class="icon is-large">
-                                    <span class="fa-stack fa-lg">
-                                        <i class="fas fa-circle fa-stack-2x has-text-green"></i>
-                                        <i class="fas fa-paper-plane fa-stack-1x"></i>
-                                    </span>
-                                </span>
-                            </a>
+                        </c:forEach>    
                     </div>
-                    </article>
                 </div>
             </div>
+        </section>
 
-        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        <script>
+            const dropdown = document.querySelector('.dropdown');
+            dropdown.addEventListener('click', () => {
+                dropdown.classList.toggle('is-active');
+            });
 
-    </section>
+            const drop = document.querySelector('.drop');
+            drop.addEventListener('click', () => {
+                drop.classList.toggle('is-active');
+            });
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-    <script>
-        const dropdown = document.querySelector('.dropdown');
-        dropdown.addEventListener('click', () => {
-            dropdown.classList.toggle('is-active');
-        });
-
-        const drop = document.querySelector('.drop');
-        drop.addEventListener('click', () => {
-            drop.classList.toggle('is-active');
-        });
-
-        //exibe o src da imagem
-        var file = document.getElementById("arquivo");
-        file.onchange = function () {
-            if (file.files.length > 0)
-            {
-                document.getElementById('nomearquivo').innerHTML = file.files[0].name;
-            }
-        };
-
-        //altera a foto de exibição do perfil
-        $("#arquivo").on('change', function () {
-            if (this.files && this.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#foto').attr("src", e.target.result).fadeIn();
+            //exibe o src da imagem
+            var file = document.getElementById("arquivo");
+            file.onchange = function () {
+                if (file.files.length > 0)
+                {
+                    document.getElementById('nomearquivo').innerHTML = file.files[0].name;
                 }
-                reader.readAsDataURL(this.files[0]);
-            }
-        });
+            };
 
-        document.addEventListener('DOMContentLoaded', () => {
+            //altera a foto de exibição do perfil
+            $("#arquivo").on('change', function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#foto').attr("src", e.target.result).fadeIn();
+                    }
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
 
-            // Get all "navbar-burger" elements
-            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+            document.addEventListener('DOMContentLoaded', () => {
 
-            // Check if there are any navbar burgers
-            if ($navbarBurgers.length > 0) {
+                // Get all "navbar-burger" elements
+                const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
 
-                // Add a click event on each of them
-                $navbarBurgers.forEach(el => {
-                    el.addEventListener('click', () => {
+                // Check if there are any navbar burgers
+                if ($navbarBurgers.length > 0) {
 
-                        // Get the target from the "data-target" attribute
-                        const target = el.dataset.target;
-                        const $target = document.getElementById(target);
+                    // Add a click event on each of them
+                    $navbarBurgers.forEach(el => {
+                        el.addEventListener('click', () => {
 
-                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                        el.classList.toggle('is-active');
-                        $target.classList.toggle('is-active');
+                            // Get the target from the "data-target" attribute
+                            const target = el.dataset.target;
+                            const $target = document.getElementById(target);
 
+                            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                            el.classList.toggle('is-active');
+                            $target.classList.toggle('is-active');
+
+                        });
                     });
-                });
-            }
+                }
 
-        });
+            });
 
-    </script>
-</body>
+        </script>
+    </body>
 </html>

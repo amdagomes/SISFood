@@ -44,7 +44,11 @@ CREATE TABLE Comida(
     preco float NOT NULL,
     nome varchar(200) NOT NULL,
     idEstabelecimento int,
+<<<<<<< HEAD
     foto varchar(255),
+=======
+    foto varchar(255),	
+>>>>>>> testes
     PRIMARY KEY(idComida),
     FOREIGN KEY(idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento) ON UPDATE CASCADE ON DELETE CASCADE
 );
@@ -87,7 +91,11 @@ CREATE TABLE RecomendarEstabelecimento(
 CREATE TABLE AvaliarComida(
     idAvaliacao serial,
     consumidor int NOT NULL,
+<<<<<<< HEAD
     comentario VARCHAR(300),
+=======
+    estabelecimento int NOT NULL,
+>>>>>>> testes
     nota numeric(5,2) NOT NULL,
     comida int,
     PRIMARY KEY(idAvaliacao),
@@ -96,7 +104,19 @@ CREATE TABLE AvaliarComida(
     FOREIGN KEY(comida) REFERENCES Comida(idComida) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+<<<<<<< HEAD
 
+=======
+CREATE TABLE ComentarComida(
+    idComentario serial,
+    usuario int,
+    comida int,
+    comentario varchar(255),
+    PRIMARY KEY(idComentario),
+    FOREIGN KEY(usuario) REFERENCES Usuario(idUsuario)
+);
+                                                                                           
+>>>>>>> testes
 CREATE TABLE RecomendarComida(
     idRecomendacao serial,
     comida int NOT NULL,
@@ -129,4 +149,60 @@ CREATE TABLE SolicitaAmizade(
     PRIMARY KEY(idSolicitacao),
     FOREIGN KEY(destinatario) REFERENCES Usuario(idUsuario),
     FOREIGN KEY(remetente) REFERENCES Usuario(idUsuario)
+);  
+
+CREATE TABLE publicacao(
+idPublicacao serial,
+texto text,
+datahora TIMESTAMP,
+idUsuario int,
+idEstabelecimento int,
+PRIMARY KEY(idPublicacao),
+FOREIGN KEY(idUsuario) REFERENCES Usuario(idUsuario)
 );
+
+CREATE TABLE comentario(
+idComentario serial,
+comentario text,
+comentarista int,
+datahora TIMESTAMP,
+idPublicacao int,
+PRIMARY KEY(idComentario),
+FOREIGN KEY(idPublicacao) REFERENCES publicacao(idPublicacao) ON DELETE CASCADE,
+FOREIGN KEY(comentarista) REFERENCES Usuario(idUsuario)ON DELETE CASCADE 
+);
+
+CREATE TABLE publicacaoEstabelecimento(
+idPublicacao serial,
+texto text,
+datahora TIMESTAMP,
+idEstabelecimento int,
+PRIMARY KEY(idPublicacao),
+FOREIGN KEY(idEstabelecimento) REFERENCES Estabelecimento(idEstabelecimento)
+);
+                                                                                      
+
+CREATE TABLE comentarioEstabelecimento(
+idComentario serial,
+comentario text,
+comentarista int,
+datahora TIMESTAMP,
+idPublicacao int,
+PRIMARY KEY(idComentario),
+FOREIGN KEY(idPublicacao) REFERENCES publicacaoEstabelecimento(idPublicacao) ON DELETE CASCADE, 
+FOREIGN KEY(comentarista) REFERENCES Usuario(idUsuario)ON DELETE CASCADE 
+);
+
+CREATE TABLE seguirPaginas(
+idSeguir serial,
+seguidor int,
+pagina int,
+datahora TIMESTAMP,
+situacao varchar(10),
+PRIMARY KEY(idSeguir),
+FOREIGN KEY(pagina) REFERENCES Estabelecimento(idEstabelecimento),
+FOREIGN KEY(seguidor) REFERENCES usuario(idUsuario)
+
+)
+
+

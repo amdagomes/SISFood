@@ -53,7 +53,6 @@
                                     </span>
                                 </c:otherwise>
                             </c:choose>
-
                         </div>
                         <div class="dropdown-menu" id="dropdown-menu" role="menu">
                             <div class="dropdown-content">

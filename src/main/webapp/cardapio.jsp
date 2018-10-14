@@ -1,4 +1,3 @@
-
 <%-- 
     Document   : cardapio
     Created on : 18/09/2018, 11:12:19
@@ -213,12 +212,14 @@
             dropdown.addEventListener('click', () => {
                 dropdown.classList.toggle('is-active');
             });
+
             $("#showModal").click(function () {
                 $(".modal").addClass("is-active");
             });
             $(".modal-close").click(function () {
                 $(".modal").removeClass("is-active");
             });
+            
             var file = document.getElementById("file");
             file.onchange = function () {
                 if (file.files.length > 0)

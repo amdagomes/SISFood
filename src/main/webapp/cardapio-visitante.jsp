@@ -125,19 +125,19 @@
                                                 <a href="#${comida.idComida}" rel="modal:open">
                                                     <p>Dê sua nota</p>
                                                 </a>
-                                            </div>
+                                            </div>  
                                         </nav>
-                                    </div>
 
-                                    <div class="media-right">
-                                        <div class="level">
-                                            <a class="level-item" title="Compartilhar">
-                                                <span class="icon is-small"><i class="fas fa-share-alt"></i></span>
-                                            </a>
+                                        <div class="media-right">
+                                            <div class="level">
+                                                <a class="level-item" title="Compartilhar">
+                                                    <span class="icon is-small"><i class="fas fa-share-alt"></i></span>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-
                                 </article>
+
                                 <section class="accordions">
                                     <article class="accordion">
                                         <div class="accordion-header">
@@ -179,6 +179,7 @@
                                         </div>
                                     </article>
                                 </section>    
+                                            
                                 <!--MODAL AVALIAR COMIDA-->
                                 <form id="${comida.idComida}" class="form-cardapio modal" method="post" action="front?action=AvaliacaoComida">
                                     <p class="title is-size-5">Avalie e deixe seu comentario</p>
@@ -285,6 +286,7 @@
             $(function () {
                 $('.estrelas input').click(function () {
                     var valor = $(this).attr('value');
+
                     for (var i = 0; i <= 5; i++) {
                         if (i <= valor) {
                             $('#star' + i).addClass("gold");

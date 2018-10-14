@@ -117,6 +117,7 @@
                                                     <div class="media-right">
                                                         <ct:verificaSituacaoUsuario remetente="${sessionScope.usuario.id}" destinatario="${usuarios.id}"/>
                                                         <mTag:situacaoAmizade situacao="${situacaoAmizade}" usuario="${usuarios}" pagina="resultado-busca"/>
+                                                       
                                                     </div>
                                                 </article>
                                             </c:if>
