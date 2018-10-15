@@ -6,12 +6,15 @@
 package io.github.fernandasj.dao;
 
 
-import io.github.fernandasj.modelo.avaliarEstabelecimento;
+import io.github.fernandasj.modelo.AvaliarEstabelecimento;
 import io.github.fernandasj.connection.ConnectionFactory;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,10 +22,10 @@ import java.util.logging.Logger;
  *
  * @author Cliente
  */
-public class AvaliarEstabelecimentoDao {
+public class AvaliarEstabelecimentoDao{
     private Connection con;
 
-    public boolean salvar(avaliarEstabelecimento obj) throws SQLException, Exception {
+    public boolean salvar(AvaliarEstabelecimento obj) throws SQLException, Exception {
         con = ConnectionFactory.getConnection();
         String sql = "INSERT INTO AvaliarEstabelecimento(consumidor,estabelecimento,nota,comentario)"
                 + " VALUES(?,?,?,?)";
@@ -41,7 +44,7 @@ public class AvaliarEstabelecimentoDao {
         return true;
     }
 
-    public avaliarEstabelecimento buscar(int IdAvaliacao) throws SQLException {
+    public AvaliarEstabelecimento buscar(int IdAvaliacao) throws SQLException {
 
         try {
             con = ConnectionFactory.getConnection();
@@ -55,7 +58,7 @@ public class AvaliarEstabelecimentoDao {
         ResultSet resultado = stmt.executeQuery();
 
         if (resultado.next()) {
-            avaliarEstabelecimento Av = new avaliarEstabelecimento(resultado.getInt("consumidor"), resultado.getInt("estabelecimento"),
+            AvaliarEstabelecimento Av = new AvaliarEstabelecimento(resultado.getInt("consumidor"), resultado.getInt("estabelecimento"),
                     resultado.getFloat("nota"), resultado.getString("Comentario"));
 
             resultado.close();
@@ -70,9 +73,9 @@ public class AvaliarEstabelecimentoDao {
         return null;
     }
 
-    public boolean atualizar(avaliarEstabelecimento obj) throws SQLException {
+    public boolean atualizar(AvaliarEstabelecimento obj) throws SQLException {
 
-    avaliarEstabelecimento av = buscar(obj.getIdAvaliacao());
+    AvaliarEstabelecimento av = buscar(obj.getIdAvaliacao());
         if (av == null) {
             return false;
         } else {
@@ -97,6 +100,32 @@ public class AvaliarEstabelecimentoDao {
         }
     }
 
+    public List<AvaliarEstabelecimento> listAvaliacoes(int idEstabelecimento) throws SQLException{
+        try {
+            con = ConnectionFactory.getConnection();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+
+        String sql = "SELECT * FROM AvaliarEstabelecimento WHERE estabelecimento = ?";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        stmt.setInt(1, idEstabelecimento);
+        ResultSet rs = stmt.executeQuery();
+
+        List<AvaliarEstabelecimento> avaliacoes = new ArrayList<>();
+
+        while(rs.next()){
+             AvaliarEstabelecimento avl = new AvaliarEstabelecimento();
+             avl.setConsumidor(rs.getInt("consumidor"));
+             avl.setNota(rs.getFloat("nota"));
+             avl.setComentario(rs.getString("comentario"));
+             avaliacoes.add(avl);
+        }
+
+        con.close();
+        return avaliacoes;
+    }
+    
     public boolean deletar(int idAvaliacao) throws SQLException {
         if (buscar(idAvaliacao) != null) {
 

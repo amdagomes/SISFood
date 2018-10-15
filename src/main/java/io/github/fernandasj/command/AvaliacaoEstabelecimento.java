@@ -3,7 +3,7 @@ package io.github.fernandasj.command;
 import io.github.fernandasj.controle.GerenciadorEstabelecimento;
 import io.github.fernandasj.modelo.Estabelecimento;
 import io.github.fernandasj.modelo.Usuario;
-import io.github.fernandasj.modelo.avaliarEstabelecimento;
+import io.github.fernandasj.modelo.AvaliarEstabelecimento;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.ServletException;
@@ -30,7 +30,7 @@ public class AvaliacaoEstabelecimento implements Command {
         String comentario = request.getParameter("comentario");
         String pagina = request.getParameter("pagina");
 
-        avaliarEstabelecimento avaliacao = new avaliarEstabelecimento(consumidor, estabelecimento, nota, comentario);
+        AvaliarEstabelecimento avaliacao = new AvaliarEstabelecimento(consumidor, estabelecimento, nota, comentario);
 
         try {
             GerenciadorEstabelecimento g = new GerenciadorEstabelecimento();            

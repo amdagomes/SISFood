@@ -113,6 +113,18 @@
         </attribute>
     </tag>
     <tag>
+        <name>listAvaliacoesEstabelecimento</name>
+        <description>Lista as avaliações de estabelecimento</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.ListAvaliacoesEstabelecimento</tag-class>
+        <attribute>
+            <name>idEstabelecimento</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
         <name>listFollowing</name>
         <description>Lista todas as páginas de estabelecimento que o usuário segue</description>
         <body-content>empty</body-content>
