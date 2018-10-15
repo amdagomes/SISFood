@@ -92,34 +92,13 @@
                                                     </figure>
                                                 </div>
                                                 <div class="media-content">
-                                                    <p class="title is-5">${user.nome}</p>
-                                                    <p class="subtitle is-7">${publicacao.datahora}</p>
-                                                </div>
-                                                <div class="media-right">
-                                                    <div class="dropdown drop is-right is-pointer">
-                                                        <div class="dropdown-trigger">
-                                                            <span class="icon is-small">
-                                                                <i class="fas fa-ellipsis-h"></i>
-                                                            </span>
-                                                        </div>
-                                                        <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-                                                            <div class="dropdown-content">
-                                                                <a href="#" class="dropdown-item">
-                                                                    Compartilhar
-                                                                </a>
-                                                                <a href="#" class="dropdown-item">
-                                                                    Deletar
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>                                        
-                                            </div>
-                                            <div class="card-image">
-
-                                            </div>
-                                            <div class="content">
-                                                ${publicacao.texto}
+                                                    <p>
+                                                        <span class="title is-5">${user.nome}</span>
+                                                        <span class="subtitle is-7">${publicacao.datahora}</span>
+                                                        <br>
+                                                        ${publicacao.texto}
+                                                    </p>                                                    
+                                                </div>                                  
                                             </div>
                                         </div>
 

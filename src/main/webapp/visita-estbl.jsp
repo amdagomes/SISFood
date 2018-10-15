@@ -39,6 +39,27 @@
                                     <p class="has-text-grey-light has-text-centered">
                                         ${sessionScope.visita.descricao}
                                     </p>
+                                    <p class="has-text-centered" style="margin-top: .5rem; margin-bottom: .5rem;">
+                                        <ct:verificaSeguePagina seguidor="${sessionScope.usuario.id}" pagina="${sessionScope.visita.id}"/>
+                                        <c:choose>
+                                            <c:when test="${seguePagina == true}">
+                                                <a href="front?action=SeguirEstabelecimento&estbl=${sessionScope.visita.descricao}&met=u&pag=resultado-busca" class="button is-small is-danger">
+                                                    <span class="icon is-small">
+                                                        <i class="fas fa-check"></i>
+                                                    </span>
+                                                    <span>unfollow</span>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a  href="front?action=SeguirEstabelecimento&estbl=${sessionScope.visita.descricao}&met=follow&pag=resultado-busca" class="button is-small is-link">
+                                                    <span class="icon is-small">
+                                                        <i class="fas fa-check"></i>
+                                                    </span>
+                                                    <span>follow</span>
+                                                </a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </p>
                                     <p class="has-text-centered">
                                         <a href="#avaliar" rel="modal:open">Avalie!</a>
                                     </p>
@@ -148,9 +169,9 @@
                                     <div class="comentario">
                                         <article class="media">
                                             <figure class="media-left image is-48x48">
-                                                <p class="is-rounded">
+                                                <div class="is-rounded">
                                                     <img src="${userComentario.fotoPerfil}">
-                                                </p>
+                                                </div>
                                             </figure>
                                             <div class="media-content">
                                                 <div class="content">

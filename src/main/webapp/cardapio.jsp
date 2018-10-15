@@ -15,6 +15,7 @@
         <meta name="keywords" content="social, media, rede, social, food, alimento">
         <link rel="stylesheet" href="css/bulma.css">
         <link rel="stylesheet" href="css/bulma-badge.min.css">
+        <link rel="stylesheet" href="css/bulma-accordion.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
         <link rel="stylesheet" href="css/style.css">
         <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
@@ -124,6 +125,38 @@
                                         </div>
                                     </div>
                                 </article>
+                                <section class="accordions">
+                                    <article class="accordion">
+                                        <div class="accordion-header">
+                                            <p>Comentários</p>
+                                            <button class="toggle" aria-label="toggle"></button>
+                                        </div>
+                                        <div class="accordion-body">
+                                            <!-- COMENTARIOS -->        
+                                            <ct:listAvaliacoesComida idComida="${comida.idComida}"/>
+                                            <c:forEach var="avaliacao" items="${avaliacoes}">
+                                                <ct:buscaUsuario user="${avaliacao.consumidor}"/>
+                                                <article class="media">
+                                                    <figure class="media-left image is-48x48">
+                                                        <div class="is-rounded">
+                                                            <img src="${userBuscado.fotoPerfil}">
+                                                        </div>
+                                                    </figure>
+                                                    <div class="media-content">
+                                                        <div class="content">
+                                                            <p>
+                                                                <span class="title-comentario">${userBuscado.nome}</span>
+                                                                <br>
+                                                                ${avaliacao.comentario}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </c:forEach>
+                                        </div>
+                                    </article>
+                                </section>
+
                                 <!--EDITAR PRATO NO CARDAPIO-->
 
                                 <form id="${comida.idComida}" class="form-cardapio modal" method="post" action="front?action=AtualizarComida" enctype="multipart/form-data">
@@ -167,7 +200,7 @@
                     </div>                           
                 </div>
         </section>
-        
+
         <!--MODAL CADASTRAR COMIDA-->
         <form id="adc-prato" class="form-cardapio modal" method="post" action="front?action=CadastroComida" enctype="multipart/form-data">
             <p class="title is-size-5">Adicionar prato ao cardapio</p>
@@ -204,10 +237,13 @@
                 </div>
             </div>    
         </form> 
-                    
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        <script src="js/bulma-accordion.min.js"></script>
         <script>
+            var accordions = bulmaAccordion.attach();
+
             const dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', () => {
                 dropdown.classList.toggle('is-active');
@@ -219,7 +255,7 @@
             $(".modal-close").click(function () {
                 $(".modal").removeClass("is-active");
             });
-            
+
             var file = document.getElementById("file");
             file.onchange = function () {
                 if (file.files.length > 0)

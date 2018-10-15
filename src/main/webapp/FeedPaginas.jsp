@@ -47,10 +47,10 @@
                                     <a href="front?action=Inicio"><li>Feed</li></a>
                                     <a href="FeedPaginas.jsp"><li class="link-ativo">Feed páginas</li></a>
                                     <a href="amigos.jsp"><li>Amigos</li></a>
+                                    <a href="seguindo.jsp"><li>Seguindo</li></a>
                                     <a href=""><li>Mensagens</li></a>
                                     <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
-                                    <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
                                         <p class="menu-label">Minhas páginas</p>
                                         <ul>
@@ -94,25 +94,15 @@
                                                 </div>
 
                                                 <div class="media-content">
-                                                    <p class="title is-5">${estab.nome}</p>
-                                                    <p class="subtitle is-7">${publicacao.datahora}</p>
-                                                </div>
-                                                <div class="media-right">
-                                                    <div class="dropdown drop is-right is-pointer">
-                                                        <div class="dropdown-trigger">
-                                                            <span class="icon is-small">
-                                                                <i class="fas fa-ellipsis-h"></i>
-                                                            </span>
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card-image">
-                                                ${publicacao.texto}
-                                            </div>
-                                            <div class="content">
-
+                                                    <p>
+                                                        <a href="front?action=VisitarPag&id=${estab.id}&pag=estbl&t=e">
+                                                            <span class="title is-5 has-text-link">${estab.nome}</span>
+                                                        </a>
+                                                        <span class="subtitle is-7">${publicacao.datahora}</span>
+                                                        <br/>
+                                                        ${publicacao.texto}
+                                                    </p>
+                                                </div>                                               
                                             </div>
                                         </div>
 
@@ -123,15 +113,25 @@
                                             <c:set var="userComentario" value="${daou.buscarPorId(comentario.comentarista)}"/>
                                             <div class="comentario">
                                                 <article class="media">
-                                                    <figure class="media-left">
-                                                        <p class="image is-48x48">
-                                                            <img class="is-rounded" src="${userComentario.fotoPerfil}">
-                                                        </p>
+                                                    <figure class="media-left image is-48x48">
+                                                        <div class="is-rounded">
+                                                            <img src="${userComentario.fotoPerfil}">
+                                                        </div>
                                                     </figure>
                                                     <div class="media-content">
                                                         <div class="content">
                                                             <p>
-                                                                <span class="title-comentario">${userComentario.nome}</span> <small>${comentario.datahora}</small>
+                                                                <c:choose>
+                                                                    <c:when test="${sessionScope.usuario.id == userComentario.id}">
+                                                                        <span class="title-comentario">${userComentario.nome}</span> <small>${comentario.datahora}</small>                                            
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <a class="has-text-link" href="front?action=VisitarPag&id=${userComentario.id}&pag=user&t=u">
+                                                                            <span class="title-comentario">${userComentario.nome}</span> 
+                                                                        </a>
+                                                                        <small>${comentario.datahora}</small>
+                                                                    </c:otherwise>
+                                                                </c:choose>                                                   
                                                                 <br>
                                                                 ${comentario.comentario}
                                                             </p>
@@ -144,10 +144,10 @@
                                         <!-- Escrever comentario-->
                                         <form  method="post" action="front?action=ComentarPubliEstabelecimento">
                                             <article class="media comentario">
-                                                <figure class="media-left">
-                                                    <p class="image is-48x48">
-                                                        <img class="is-rounded" src="${sessionScope.usuario.fotoPerfil}">
-                                                    </p>
+                                                <figure class="media-left image is-48x48">
+                                                    <div class="is-rounded">
+                                                        <img src="${sessionScope.usuario.fotoPerfil}">
+                                                    </div>
                                                 </figure>
                                                 <div class="media-content">
                                                     <div class="field">
@@ -158,13 +158,11 @@
                                                         </p>
                                                     </div>
                                                 </div>
-                                                <button type="submit">
+                                                <button type="submit" class="button">
                                                     <span class="icon is-large">
                                                         <span class="fa-stack fa-lg">
-                                                            <i class="fas fa-circle fa-stack-2x has-text-green"></i>
                                                             <i class="fas fa-paper-plane fa-stack-1x"></i>
                                                         </span>
-
                                                     </span>
                                                 </button>
                                             </article>
@@ -189,7 +187,8 @@
             </div>
         </section>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>                            
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>     
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
         <script>
             const dropdown = document.querySelector('.dropdown');
             dropdown.addEventListener('click', () => {

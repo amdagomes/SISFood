@@ -47,10 +47,12 @@
 
                                 <ul>
                                     <a href="front?action=Inicio"><li>Feed</li></a>
+                                    <a href="FeedPaginas.jsp"><li>Feed páginas</li></a>
                                     <a href="amigos.jsp"><li>Amigos</li></a>
-                                    <a href=""><li>Menssagens</li></a>
+                                    <a href="seguindo.jsp"><li>Seguindo</li></a>
+                                    <a href=""><li>Mensagens</li></a>
+                                    <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
                                     <a href="perfil-usuario.jsp"><li class="link-ativo">Editar Perfil</li></a>
-                                    <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
                                         <p class="menu-label">Minhas páginas</p>
                                         <ul>
@@ -60,13 +62,14 @@
                                                     </c:forEach>     
                                         </ul>
                                     </li>
-                                    <a href="front?action=Logout"><li class="menu-label">
+                                    <a href="front?action=Logout">
+                                        <li class="menu-label">
                                             <span class="icon">
                                                 <i class="fas fa-power-off"></i>
                                             </span>
                                             Sair
-
-                                        </li></a>
+                                        </li>
+                                    </a>
                                 </ul>
 
                             </aside>

@@ -110,6 +110,7 @@ public class SeguirPaginaDao {
             listPaginas.add(sp);
         }
         
+        con.close();
         return listPaginas;
     }
 }

@@ -39,6 +39,27 @@
                                     <p class="has-text-grey-light has-text-centered">
                                         ${sessionScope.visita.descricao}
                                     </p>
+                                    <p class="has-text-centered" style="margin-top: .5rem; margin-bottom: .5rem;">
+                                        <ct:verificaSeguePagina seguidor="${sessionScope.usuario.id}" pagina="${sessionScope.visita.id}"/>
+                                        <c:choose>
+                                            <c:when test="${seguePagina == true}">
+                                                <a href="front?action=SeguirEstabelecimento&estbl=${sessionScope.visita.descricao}&met=u&pag=resultado-busca" class="button is-small is-danger">
+                                                    <span class="icon is-small">
+                                                        <i class="fas fa-check"></i>
+                                                    </span>
+                                                    <span>unfollow</span>
+                                                </a>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <a  href="front?action=SeguirEstabelecimento&estbl=${sessionScope.visita.descricao}&met=follow&pag=resultado-busca" class="button is-small is-link">
+                                                    <span class="icon is-small">
+                                                        <i class="fas fa-check"></i>
+                                                    </span>
+                                                    <span>follow</span>
+                                                </a>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </p>
                                     <p class="has-text-centered">
                                         <a href="#avaliar" rel="modal:open">Avalie!</a>
                                     </p>
@@ -127,13 +148,12 @@
                                                 </a>
                                             </div>  
                                         </nav>
-
-                                        <div class="media-right">
-                                            <div class="level">
-                                                <a class="level-item" title="Compartilhar">
-                                                    <span class="icon is-small"><i class="fas fa-share-alt"></i></span>
-                                                </a>
-                                            </div>
+                                    </div>
+                                    <div class="media-right">
+                                        <div class="level">
+                                            <a class="level-item" title="Compartilhar">
+                                                <span class="icon is-small"><i class="fas fa-share-alt"></i></span>
+                                            </a>
                                         </div>
                                     </div>
                                 </article>
@@ -150,25 +170,15 @@
                                             <c:forEach var="avaliacao" items="${avaliacoes}">
                                                 <ct:buscaUsuario user="${avaliacao.consumidor}"/>
                                                 <article class="media">
-                                                    <figure class="media-left">
-                                                        <p class="image is-48x48">
-                                                            <img class="is-rounded" src="${userBuscado.fotoPerfil}">
-                                                        </p>
+                                                    <figure class="media-left image is-48x48">
+                                                        <div class="is-rounded">
+                                                            <img src="${userBuscado.fotoPerfil}">
+                                                        </div>
                                                     </figure>
                                                     <div class="media-content">
                                                         <div class="content">
                                                             <p>
-                                                                <c:choose>
-                                                                    <c:when test="${avaliacao.consumidor != sessionScope.usuario.id}">
-                                                                        <a href="front?action=VisitarPag&id=${userBuscado.id}&pag=user&t=u">
-                                                                            <span class="title-comentario">${userBuscado.nome}</span>
-                                                                        </a>
-                                                                        <small>nota: ${avaliacao.nota}</small>  
-                                                                    </c:when>
-                                                                    <c:otherwise>
-                                                                        <span class="title-comentario">${userBuscado.nome}</span> <small>nota: ${avaliacao.nota}</small>
-                                                                    </c:otherwise>
-                                                                </c:choose>        
+                                                                <span class="title-comentario">${userBuscado.nome}</span>        
                                                                 <br>
                                                                 ${avaliacao.comentario}
                                                             </p>
@@ -179,7 +189,7 @@
                                         </div>
                                     </article>
                                 </section>    
-                                            
+
                                 <!--MODAL AVALIAR COMIDA-->
                                 <form id="${comida.idComida}" class="form-cardapio modal" method="post" action="front?action=AvaliacaoComida">
                                     <p class="title is-size-5">Avalie e deixe seu comentario</p>
@@ -216,7 +226,7 @@
             </div>
 
             <!-- MODAL AVALIAR ESTABELECIMENTO-->
-            <form id="avaliar" class="form-cardapio modal" method="post" action="front?action=AvaliacaoComida">
+            <form id="avaliar" class="form-cardapio modal" method="post" action="front?action=AvaliacaoEstabelecimento">
                 <p class="title is-size-5">Avalie e deixe seu comentario</p>
                 <input type="hidden" name="idEstabelecimento" value="${sessionScope.visita.id}">
                 <input type="hidden" name="pagina" value="visita-estbl">

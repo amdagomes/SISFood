@@ -48,10 +48,11 @@
                                 <ul>
                                     <a href="front?action=Inicio"><li>Feed</li></a>
                                     <a href="FeedPaginas.jsp"><li>Feed páginas</li></a>
-                                    <a href=""><li>Menssagens</li></a>
+                                    <a href="amigos.jsp"><li>Amigos</li></a>
+                                    <a href="seguindo.jsp"><li>Seguindo</li></a>
+                                    <a href=""><li>Mensagens</li></a>
                                     <a href="minhaPublicacao.jsp"><li class="link-ativo">Minhas publicações</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
-                                    <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
                                         <p class="menu-label">Minhas páginas</p>
                                         <ul>
@@ -142,8 +143,12 @@
                                                 </figure>
                                             </div>
                                             <div class="media-content">
-                                                <p class="title is-5">${user.nome}</p>
-                                                <p class="subtitle is-7">${publicacao.datahora}</p>
+                                                <p>
+                                                    <span class="title is-5">${user.nome}</span>
+                                                    <span class="subtitle is-7">${publicacao.datahora}</span>
+                                                    <br>
+                                                    ${publicacao.texto}
+                                                </p>                                               
                                             </div>
                                             <div class="media-right">
                                                 <div class="dropdown drop is-right is-pointer">
@@ -157,28 +162,13 @@
                                                             <a href="#" class="dropdown-item">
                                                                 Compartilhar
                                                             </a>
-
-
                                                             <a title="excluir"href="front?action=DeletarPublicacao&idPublicacao=${publicacao.idPublicacao}" class="dropdown-item">
                                                                 Deletar
                                                             </a>
-
-
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="card-image" >
-                                            <p>
-                                                ${publicacao.texto}
-                                            </p>
-                                        </div>
-
-                                        <div class="content">
-
                                         </div>
                                     </div>
 
@@ -241,12 +231,12 @@
                         </c:when>
                         <c:otherwise>
                             <div class="card media-box">
-                                    <div class="card-content">
-                                        <div class="media">
-                                            <p>Você não possui publicações</p>
-                                        </div>
+                                <div class="card-content">
+                                    <div class="media">
+                                        <p>Você não possui publicações</p>
                                     </div>
                                 </div>
+                            </div>
                         </c:otherwise>
                     </c:choose>
 

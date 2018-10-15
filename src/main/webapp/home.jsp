@@ -86,20 +86,7 @@
                                             <p class="has-text-weight-semibold">
                                                 <a>Criar publicação</a>
                                             </p>
-                                        </li>
-                                        <li><a>
-                                                <div class="file has-name">
-                                                    <label class="file-label">
-                                                        <input id="file" class="file-input" type="file" accept="image/*" name="foto">
-                                                        <span class="file-cta">
-                                                            <span class="file-icon">
-                                                                <i class="fas fa-camera"></i>
-                                                            </span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                            </a>
-                                        </li>
+                                        </li>                                        
                                     </ul>
                                 </nav>
                                 <div class="criar-publicacao">
@@ -141,41 +128,22 @@
                                             </figure>
                                         </div>
                                         <div class="media-content">
-                                            <c:choose>
-                                                <c:when test="${sessionScope.usuario.id == user.id}">
-                                                    <p class="title is-5">${user.nome}</p>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <a class="" href="front?action=VisitarPag&id=${user.id}&pag=user&t=u">
-                                                        <p class="title has-text-link is-5">${user.nome}</p>
-                                                    </a>
-                                                </c:otherwise>
-                                            </c:choose>                                           
-                                            <p class="subtitle is-7">${publicacao.datahora}</p>
-                                        </div>
-                                        <div class="media-right">
-                                            <div class="dropdown drop is-right is-pointer">
-                                                <div class="dropdown-trigger">
-                                                    <span class="icon is-small">
-                                                        <i class="fas fa-ellipsis-h"></i>
-                                                    </span>
-                                                </div>
-                                                <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-                                                    <div class="dropdown-content">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="card-image" >
-                                        <p>
-
-                                        </p>
-                                    </div>
-
-                                    <div class="content">
-                                        ${publicacao.texto}
+                                            <p>
+                                                <c:choose>
+                                                    <c:when test="${sessionScope.usuario.id == user.id}">
+                                                        <span class="title is-5">${user.nome} </span>                                             
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <a class="" href="front?action=VisitarPag&id=${user.id}&pag=user&t=u">
+                                                            <span class="title has-text-link is-5">${user.nome}</span>
+                                                        </a>
+                                                    </c:otherwise>
+                                                </c:choose>  
+                                                <span class="subtitle is-7">${publicacao.datahora}</span>
+                                                <br/>
+                                                ${publicacao.texto}
+                                            </p>
+                                        </div>                                        
                                     </div>
                                 </div>
 

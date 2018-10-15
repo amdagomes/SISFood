@@ -29,7 +29,10 @@
                         <div class="media-box">
                             <div class="fotoperfil">
                                 <figure class="image">
-                                    <img class="is-rounded" src="${sessionScope.estabelecimento.foto}">
+                                    <div class="is-rounded">
+                                        <img src="${sessionScope.estabelecimento.foto}">
+                                    </div>
+                                   
                                 </figure>
                                 <div>
                                     <p class="has-text-dark has-text-centered has-text-weight-semibold is-size-5">
@@ -76,20 +79,7 @@
                                             <p class="has-text-weight-semibold">
                                                 <a>Criar publicação</a>
                                             </p>
-                                        </li>
-                                        <li><a>
-                                                <div class="file has-name">
-                                                    <label class="file-label">
-                                                        <input id="file" class="file-input" type="file" accept="image/*" name="foto">
-                                                        <span class="file-cta">
-                                                            <span class="file-icon">
-                                                                <i class="fas fa-camera"></i>
-                                                            </span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                            </a>
-                                        </li>
+                                        </li>                                       
                                     </ul>
                                 </nav>
                                 <div class="criar-publicacao">
@@ -127,12 +117,18 @@
                                     <div class="media">
                                         <div class="media-left">
                                             <figure class="image is-64x64">
-                                                <img class="is-rounded" src="${estab.foto}" alt="Placeholder image">
+                                                <div class="is-rounded">
+                                                    <img src="${estab.foto}" alt="Placeholder image">
+                                                </div>                                               
                                             </figure>
                                         </div>
                                         <div class="media-content">
-                                            <p class="title is-5">${estab.nome}</p>
-                                            <p class="subtitle is-7">${publicacao.datahora}</p>
+                                            <p>
+                                                <span class="title is-5">${estab.nome}</span>
+                                                <span class="subtitle is-7">${publicacao.datahora}</span>
+                                                <br>
+                                                ${publicacao.texto}
+                                            </p>                                 
                                         </div>
                                         <div class="media-right">
                                             <div class="dropdown drop is-right is-pointer">
@@ -154,10 +150,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="content">
-                                        ${publicacao.texto}
-                                    </div>
                                 </div> 
 
                                 <!-- Comentatio da publicação-->
@@ -171,10 +163,10 @@
 
                                     <div class="comentario">
                                         <article class="media">
-                                            <figure class="media-left">
-                                                <p class="image is-48x48">
-                                                    <img class="is-rounded" src="${userComentario.fotoPerfil}">
-                                                </p>
+                                            <figure class="media-left image is-48x48">
+                                                <div class="is-rounded">
+                                                    <img src="${userComentario.fotoPerfil}">
+                                                </div>
                                             </figure>
                                             <div class="media-content">
                                                 <div class="content">
@@ -187,17 +179,17 @@
                                             </div>
                                         </article>
                                     </div>
-
+                                                    
                                 </c:forEach>
 
 
                                 <!-- Escrever comentario-->
                                 <form  method="post" action="front?action=ComentarPubliEstabelecimento">
                                     <article class="media comentario">
-                                        <figure class="media-left">
-                                            <p class="image is-48x48">
-                                                <img class="is-rounded" src="${sessionScope.estabelecimento.foto}">
-                                            </p>
+                                        <figure class="media-left image is-48x48">
+                                            <div class="is-rounded">
+                                                <img src="${sessionScope.estabelecimento.foto}">
+                                            </div>
                                         </figure>
                                         <div class="media-content">
                                             <div class="field">
@@ -210,10 +202,9 @@
                                             </div>
 
                                         </div>
-                                        <button type="submit">
+                                        <button type="submit" class="button">
                                             <span class="icon is-large">
                                                 <span class="fa-stack fa-lg">
-                                                    <i class="fas fa-circle fa-stack-2x has-text-green"></i>
                                                     <i class="fas fa-paper-plane fa-stack-1x"></i>
                                                 </span>
                                             </span>
