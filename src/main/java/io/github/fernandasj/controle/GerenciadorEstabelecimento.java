@@ -8,7 +8,7 @@ package io.github.fernandasj.controle;
 import io.github.fernandasj.dao.AvaliarEstabelecimentoDao;
 import io.github.fernandasj.dao.EstabelecimentoDao;
 import io.github.fernandasj.modelo.Estabelecimento;
-import io.github.fernandasj.modelo.avaliarEstabelecimento;
+import io.github.fernandasj.modelo.AvaliarEstabelecimento;
 import io.github.fernandasj.connection.DaoFactory;
 import io.github.fernandasj.connection.DaoFactoryIF;
 import java.sql.SQLException;
@@ -58,8 +58,11 @@ public class GerenciadorEstabelecimento {
         return estabelecimentoDao.deletar(id);
     }
     
-    public boolean avaliarEstabelecimento(avaliarEstabelecimento avaliacao) throws Exception{
+    public boolean avaliarEstabelecimento(AvaliarEstabelecimento avaliacao) throws Exception{
         return avaliarDao.salvar(avaliacao);
     }
 
+    public List<AvaliarEstabelecimento> listAvaliacoesEstabelecimento(int idEstabelecimento) throws Exception{
+        return avaliarDao.listAvaliacoes(idEstabelecimento);
+    }
 }

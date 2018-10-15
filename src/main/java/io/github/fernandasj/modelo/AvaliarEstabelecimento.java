@@ -5,24 +5,29 @@
  */
 package io.github.fernandasj.modelo;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Cliente
  */
-public class avaliarEstabelecimento {
+public class AvaliarEstabelecimento{
     private int idAvaliacao;
     private int consumidor;
     private int estabelecimento;
     private float nota;
     private String comentario;
 
-    public avaliarEstabelecimento(int consumidor, int estabelecimento, float nota, String comentario) {
+    public AvaliarEstabelecimento(int consumidor, int estabelecimento, float nota, String comentario) {
         this.consumidor = consumidor;
         this.estabelecimento = estabelecimento;
         this.nota = nota;
         this.comentario = comentario;
+    }
+
+    public AvaliarEstabelecimento() {
+        
     }
 
     public int getIdAvaliacao() {
@@ -87,7 +92,7 @@ public class avaliarEstabelecimento {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final avaliarEstabelecimento other = (avaliarEstabelecimento) obj;
+        final AvaliarEstabelecimento other = (AvaliarEstabelecimento) obj;
         if (this.idAvaliacao != other.idAvaliacao) {
             return false;
         }

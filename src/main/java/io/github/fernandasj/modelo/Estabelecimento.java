@@ -5,15 +5,15 @@
  */
 package io.github.fernandasj.modelo;
 
+import java.io.Serializable;
 import java.sql.Time;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
  *
  * @author Cliente
  */
-public class Estabelecimento {
+public class Estabelecimento implements Serializable {
 
     private int id;
     private int idUsuario;
