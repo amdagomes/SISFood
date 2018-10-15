@@ -142,51 +142,50 @@
                                     </div>
                                 </div>
                             </div>
+                            <section class="section">
+                                <article class="">
+                                    <div class="subtitle">
+                                        <p>Comentários</p>
+                                    </div>
+                                    <div class="accordion-body">
+                                        <!-- COMENTARIOS -->
+                                        <ct:listAvaliacoesEstabelecimento idEstabelecimento="${sessionScope.visita.id}"/>
+                                        <c:forEach var="avaliacao" items="${avaliacoes}">
+                                            <ct:buscaUsuario user="${avaliacao.consumidor}"/>
+                                            <article class="media">
+                                                <figure class="media-left image is-48x48">
+                                                    <div class="is-rounded">
+                                                        <img src="${userBuscado.fotoPerfil}">
+                                                    </div>
+                                                </figure>
+                                                <div class="media-content">
+                                                    <div class="content">
+                                                        <p>
+                                                            <c:choose>
+                                                                <c:when test="${avaliacao.consumidor != sessionScope.usuario.id}">
+                                                                    <a href="front?action=VisitarPag&id=${userBuscado.id}&pag=user&t=u">
+                                                                        <span class="title-comentario">${userBuscado.nome}</span>
+                                                                    </a>
+                                                                    <small>nota: ${avaliacao.nota}</small>  
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <span class="title-comentario">${userBuscado.nome}</span> <small>nota: ${avaliacao.nota}</small>
+                                                                </c:otherwise>
+                                                            </c:choose>        
+                                                            <br>
+                                                            ${avaliacao.comentario}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                        </c:forEach>
+                                    </div>
+                                </article>
+                            </section>  
                         </div>
                     </div>
                 </div>
-            </div>
-            <section class="accordions">
-                <article class="accordion">
-                    <div class="accordion-header">
-                        <p>Comentários</p>
-                        <button class="toggle" aria-label="toggle"></button>
-                    </div>
-                    <div class="accordion-body">
-                        <!-- COMENTARIOS -->
-                        <ct:listAvaliacoesEstabelecimento idEstabelecimento="${sessionScope.visita.id}"/>
-                        <c:forEach var="avaliacao" items="${avaliacoes}">
-                            <ct:buscaUsuario user="${avaliacao.consumidor}"/>
-                            <article class="media">
-                                <figure class="media-left">
-                                    <p class="image is-48x48">
-                                        <img class="is-rounded" src="${userBuscado.fotoPerfil}">
-                                    </p>
-                                </figure>
-                                <div class="media-content">
-                                    <div class="content">
-                                        <p>
-                                            <c:choose>
-                                                <c:when test="${avaliacao.consumidor != sessionScope.usuario.id}">
-                                                    <a href="front?action=VisitarPag&id=${userBuscado.id}&pag=user&t=u">
-                                                        <span class="title-comentario">${userBuscado.nome}</span>
-                                                    </a>
-                                                    <small>nota: ${avaliacao.nota}</small>  
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <span class="title-comentario">${userBuscado.nome}</span> <small>nota: ${avaliacao.nota}</small>
-                                                </c:otherwise>
-                                            </c:choose>        
-                                            <br>
-                                            ${avaliacao.comentario}
-                                        </p>
-                                    </div>
-                                </div>
-                            </article>
-                        </c:forEach>
-                    </div>
-                </article>
-            </section>  
+            </div>           
 
             <!-- MODAL AVALIAR ESTABELECIMENTO-->
             <form id="avaliar" class="form-cardapio modal" method="post" action="front?action=AvaliacaoComida">
