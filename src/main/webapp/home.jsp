@@ -53,6 +53,7 @@
                                     <a href=""><li>Mensagens</li></a>
                                     <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
                                     <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
+                                    <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
                                     <li>
                                         <p class="menu-label">Minhas páginas</p>
                                         <ul>
