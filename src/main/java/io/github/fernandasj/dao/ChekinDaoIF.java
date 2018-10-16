@@ -17,8 +17,8 @@ import java.util.List;
 public interface ChekinDaoIF <T> {
      boolean salvar(Chekin obj) throws SQLException, Exception;
      Chekin buscar(int obj) throws SQLException;
-    boolean atualizar(Chekin obj) throws SQLException;
+    
     boolean deletar( int obj) throws SQLException;
-    List<T> listar(LocalDate obj) throws SQLException;
+    List<T> listar(int obj) throws SQLException;
 }
 

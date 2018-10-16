@@ -87,6 +87,7 @@
                                     <div class="field">
                                         <p class="control">
                                             <textarea class="textarea" placeholder="Faça uma publicação..." rows="2" name="texto" required="required"></textarea>
+                                             <input type="hidden" name ="pagina" value="estabelecimento">
                                         </p>
                                     </div>
                                     <div class="level">
@@ -142,7 +143,7 @@
                                                         <a href="#" class="dropdown-item">
                                                             Compartilhar
                                                         </a>
-                                                        <a title="excluir"href="front?action=DeletarPublicacao&idPublicacao=${publicacao.idPublicacao}" class="dropdown-item">
+                                                        <a title="excluir"href="front?action=DeletarPublicacaoEstbl&idPublicacao=${publicacao.idPublicacao}" class="dropdown-item">
                                                             Deletar
                                                         </a>
                                                     </div>

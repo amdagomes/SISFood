@@ -39,5 +39,8 @@ public class GerenciarPublicacao {
     public boolean Deletar(int idPublicacao) throws Exception {
         return Dao.deletar(idPublicacao);
     }
+     public boolean DeletarEstbl(int idPublicacao) throws Exception {
+        return dao.deletar(idPublicacao);
+    }
 
 }

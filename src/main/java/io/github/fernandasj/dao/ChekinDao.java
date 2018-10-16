@@ -14,9 +14,12 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,46 +35,21 @@ public class ChekinDao implements ChekinDaoIF {
     @Override
     public boolean salvar(Chekin obj) throws SQLException, Exception {
         con = ConnectionFactory.getConnection();
-        String sql = " INSERT INTO chekin (Consumidor,establecimento,horario,dia)"
-                + "VALUES(?,?,?,?)";
+        String sql = " INSERT INTO chekin (consumidor,estabelecimento,datahora)"
+                + "VALUES(?,?,CURRENT_TIMESTAMP)";
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, obj.getConsumidor());
             stmt.setInt(2, obj.getEstabelecimento());
-            stmt.setTimestamp(3, obj.getHorario());
-            stmt.setDate(4, Date.valueOf(obj.getDia()));
+              stmt.execute();
+            stmt.close();
 
         }
         con.close();
         return true;
     }
 
-    @Override
-    public boolean atualizar(Chekin obj) throws SQLException {
-
-        Chekin chekin = buscar(obj.getChekin());
-        if (chekin == null) {
-            return false;
-        } else {
-
-            try {
-                con = ConnectionFactory.getConnection();
-            } catch (ClassNotFoundException ex) { 
-                Logger.getLogger(ChekinDao.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            String sql = "UPDATE CHEKIN SET dia =?,horario = ?";
-            PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setDate(1, Date.valueOf(obj.getDia()));
-            stmt.setTimestamp(15, obj.getHorario());
-
-            stmt.execute();
-
-            stmt.close();
-            con.close();
-
-            return true;
-        }
-
-    }
+   
+    
 
     @Override
     public Chekin buscar(int idChekin) throws SQLException {
@@ -87,7 +65,10 @@ public class ChekinDao implements ChekinDaoIF {
         ResultSet resultado = stmt.executeQuery();
 
         if (resultado.next()) {
-            Chekin c = new Chekin(resultado.getTimestamp("horario"), resultado.getDate("dia").toLocalDate());
+             Timestamp datahora = resultado.getTimestamp("datahora");
+
+            String dataHora = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(datahora.getTime());
+            Chekin c = new Chekin(resultado.getInt(idChekin),dataHora,resultado.getInt("consumidor"),resultado.getInt("estabelecimento"));
             resultado.close();
             stmt.close();
             con.close();
@@ -121,33 +102,37 @@ public class ChekinDao implements ChekinDaoIF {
         return false;
     }
 
-    @Override
-    public List<Chekin> listar(LocalDate data) throws SQLException {
+   @Override 
+    public List<Chekin> listar(int estabelecimento) throws SQLException {
         try {
             con = ConnectionFactory.getConnection();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ChekinDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT nome,horario, from Usuario u ,Chekin c where c.consumidor=u.idUsuario and c.dia = ?";
+        String sql = "SELECT idChekin from estabelecimento =?";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setDate(1, Date.valueOf(data));
-        List<Chekin> lista = new ArrayList<>();
+        stmt.setInt(1,estabelecimento );
+        List<Chekin> c = new ArrayList<>();
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
-
-            Usuario u = new Usuario();
-            Chekin c = new Chekin();
-            u.setNome(rs.getString("nome"));
-            c.setHorario(rs.getTimestamp("horario"));
-            lista.addAll((Collection<? extends Chekin>) u);
-            lista.add(c);
+        Chekin chekin = buscar(rs.getInt("estabelecimento"));
+        c.add(chekin);
+       
+            
 
         }
-        rs.close();
+          rs.close();
         stmt.close();
-        return lista;
+        con.close();
+        Collections.sort(c);
+        return null;
     }
 
+    
+
+    
+    
+   
 }

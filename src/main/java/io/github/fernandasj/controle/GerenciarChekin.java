@@ -22,8 +22,8 @@ public class GerenciarChekin {
     private DaoFactoryIF fabrica = null;
     private ChekinDao userDao = new ChekinDao();
     
-    public boolean adiciona(Timestamp horario, LocalDate dia, int consumidor, int estabelecimento)throws Exception{
-        Chekin chekin = new Chekin(horario,dia,consumidor,estabelecimento);
+    public boolean adiciona( int consumidor, int estabelecimento)throws Exception{
+        Chekin chekin = new Chekin(consumidor,estabelecimento);
         return userDao.salvar(chekin);     
     }
 }

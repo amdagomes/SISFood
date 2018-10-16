@@ -24,13 +24,15 @@ public class Publicar implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         HttpSession session = request.getSession();
+        String pagina = request.getParameter("pagina");
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         String texto = request.getParameter("texto");
         GerenciarPublicacao gp = new GerenciarPublicacao();
 
         try {
             if(gp.adiciona(usuario.getId(), texto)){
-               request.getRequestDispatcher("home.jsp").forward(request, response);
+              // request.getRequestDispatcher("home.jsp").forward(request, response);
+                 request.getRequestDispatcher(pagina + ".jsp").forward(request, response);
             }
             else{
                  response.sendRedirect("index.jsp");
