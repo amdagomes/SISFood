@@ -60,9 +60,18 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </p>
-                                    <p class="has-text-centered">
-                                        <a href="#avaliar" rel="modal:open">Avalie!</a>
-                                    </p>
+                                    <div class="level">
+                                        <div class="level-item">
+                                            <p class="has-text-centered">
+                                                <a href="#avaliar" rel="modal:open">Avalie!</a>
+                                            </p>
+                                        </div>
+                                        <div class="level-item">
+                                            <p class="has-text-centered">
+                                                <a href="#recomendar" rel="modal:open">Recomende</a>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="level is-small">
@@ -264,7 +273,25 @@
                         <input class="button is-success is-fullwidth" type="submit" value="Avaliar">
                     </div>
                 </div>    
-            </form>                              
+            </form>   
+                
+            <!-- MODAL RECOMENDAR ESTABELECIMENTO-->
+            <form id="recomendar" class="form-cardapio modal" method="post" action="front?action=AvaliacaoEstabelecimento">
+                <p class="title is-size-5">Recomendar ${sessionScope.visita.nome}</p>
+                <input type="hidden" name="idEstabelecimento" value="${sessionScope.visita.id}">
+                <div class="field">
+                    <div class="control">
+                        <input class="input" type="text" placeholder="Nome" name="destinatario">
+                    </div>
+                </div>
+                <textarea class="textarea"  rows="2" name="comentario" placeholder="Comente..."></textarea>
+
+                <div class="field bt-margin-top">
+                    <div class="control">
+                        <input class="button is-success is-fullwidth" type="submit" value="Recomendar">
+                    </div>
+                </div>    
+            </form> 
         </section>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>

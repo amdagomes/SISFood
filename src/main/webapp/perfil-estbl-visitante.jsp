@@ -55,9 +55,18 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </p>
-                                    <p class="has-text-centered">
-                                        <a href="#avaliar" rel="modal:open">Avalie!</a>
-                                    </p>
+                                    <div class="level">
+                                        <div class="level-item">
+                                            <p class="has-text-centered">
+                                                <a href="#avaliar" rel="modal:open">Avalie!</a>
+                                            </p>
+                                        </div>
+                                        <div class="level-item">
+                                            <p class="has-text-centered">
+                                                <a href="#recomendar" rel="modal:open">Recomende</a>
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="level is-small">
@@ -148,93 +157,112 @@
                                         <p class="subtitle is-5">
                                             <strong>O que andam falando sobre nós...</strong>
                                         </p>
-                                            <div class="accordion-body">
-                                                <!-- COMENTARIOS -->
-                                                <ct:listAvaliacoesEstabelecimento idEstabelecimento="${sessionScope.visita.id}"/>
-                                                <c:forEach var="avaliacao" items="${avaliacoes}">
-                                                    <ct:buscaUsuario user="${avaliacao.consumidor}"/>
-                                                    <article class="media">
-                                                        <figure class="media-left image is-48x48">
-                                                            <div class="is-rounded">
-                                                                <img src="${userBuscado.fotoPerfil}">
-                                                            </div>
-                                                        </figure>
-                                                        <div class="media-content">
-                                                            <div class="content">
-                                                                <p>
-                                                                    <c:choose>
-                                                                        <c:when test="${avaliacao.consumidor != sessionScope.usuario.id}">
-                                                                            <a href="front?action=VisitarPag&id=${userBuscado.id}&pag=user&t=u">
-                                                                                <span class="title-comentario">${userBuscado.nome}</span>
-                                                                            </a>
-                                                                            <small>nota: ${avaliacao.nota}</small>  
-                                                                        </c:when>
-                                                                        <c:otherwise>
-                                                                            <span class="title-comentario">${userBuscado.nome}</span> <small>nota: ${avaliacao.nota}</small>
-                                                                        </c:otherwise>
-                                                                    </c:choose>        
-                                                                    <br>
-                                                                    ${avaliacao.comentario}
-                                                                </p>
-                                                            </div>
+                                        <div class="accordion-body">
+                                            <!-- COMENTARIOS -->
+                                            <ct:listAvaliacoesEstabelecimento idEstabelecimento="${sessionScope.visita.id}"/>
+                                            <c:forEach var="avaliacao" items="${avaliacoes}">
+                                                <ct:buscaUsuario user="${avaliacao.consumidor}"/>
+                                                <article class="media">
+                                                    <figure class="media-left image is-48x48">
+                                                        <div class="is-rounded">
+                                                            <img src="${userBuscado.fotoPerfil}">
                                                         </div>
-                                                    </article>
-                                                </c:forEach>
-                                            </div>
+                                                    </figure>
+                                                    <div class="media-content">
+                                                        <div class="content">
+                                                            <p>
+                                                                <c:choose>
+                                                                    <c:when test="${avaliacao.consumidor != sessionScope.usuario.id}">
+                                                                        <a href="front?action=VisitarPag&id=${userBuscado.id}&pag=user&t=u">
+                                                                            <span class="title-comentario">${userBuscado.nome}</span>
+                                                                        </a>
+                                                                        <small>nota: ${avaliacao.nota}</small>  
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <span class="title-comentario">${userBuscado.nome}</span> <small>nota: ${avaliacao.nota}</small>
+                                                                    </c:otherwise>
+                                                                </c:choose>        
+                                                                <br>
+                                                                ${avaliacao.comentario}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </article>
+                                            </c:forEach>
+                                        </div>
                                     </div>
                                 </div>  
                             </div>
-                    </div>
-                </div>
-            </div>           
-
-            <!-- MODAL AVALIAR ESTABELECIMENTO-->
-            <form id="avaliar" class="form-cardapio modal" method="post" action="front?action=AvaliacaoComida">
-                <p class="title is-size-5">Avalie e deixe seu comentario</p>
-                <input type="hidden" name="idEstabelecimento" value="${sessionScope.visita.id}">
-                <input type="hidden" name="pagina" value="visita-estbl">
-                <div class="field is-grouped">
-                    <div class="level is-mobile">
-                        <div class="level-left">
-                            <p>Dê sua nota: </p>
                         </div>
-                        <div class="level-right">
-                            <div class="estrelas">
-                                <input type="radio" id="cm_star-empty" name="nota" value="" checked/>
-                                <label id="star1" for="cm_star-1">
-                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                </label>
-                                <input type="radio" id="cm_star-1" name="nota" value="1"/>
-                                <label id="star2" for="cm_star-2">
-                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                </label>
-                                <input type="radio" id="cm_star-2" name="nota" value="2"/>
-                                <label id="star3" for="cm_star-3">
-                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                </label>
-                                <input type="radio" id="cm_star-3" name="nota" value="3"/>
-                                <label id="star4" for="cm_star-4">
-                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                </label>
-                                <input type="radio" id="cm_star-4" name="nota" value="4"/>
-                                <label id="star5" for="cm_star-5">
-                                    <span class="icon is-small"><i class="fas fa-star"></i></span>
-                                </label>
-                                <input type="radio" id="cm_star-5" name="nota" value="5"/>
+                    </div>
+                </div>           
+
+                <!-- MODAL AVALIAR ESTABELECIMENTO-->
+                <form id="avaliar" class="form-cardapio modal" method="post" action="front?action=AvaliacaoComida">
+                    <p class="title is-size-5">Avalie e deixe seu comentario</p>
+                    <input type="hidden" name="idEstabelecimento" value="${sessionScope.visita.id}">
+                    <input type="hidden" name="pagina" value="perfil-estbl-visitante">
+                    <div class="field is-grouped">
+                        <div class="level is-mobile">
+                            <div class="level-left">
+                                <p>Dê sua nota: </p>
+                            </div>
+                            <div class="level-right">
+                                <div class="estrelas">
+                                    <input type="radio" id="cm_star-empty" name="nota" value="" checked/>
+                                    <label id="star1" for="cm_star-1">
+                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                    </label>
+                                    <input type="radio" id="cm_star-1" name="nota" value="1"/>
+                                    <label id="star2" for="cm_star-2">
+                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                    </label>
+                                    <input type="radio" id="cm_star-2" name="nota" value="2"/>
+                                    <label id="star3" for="cm_star-3">
+                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                    </label>
+                                    <input type="radio" id="cm_star-3" name="nota" value="3"/>
+                                    <label id="star4" for="cm_star-4">
+                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                    </label>
+                                    <input type="radio" id="cm_star-4" name="nota" value="4"/>
+                                    <label id="star5" for="cm_star-5">
+                                        <span class="icon is-small"><i class="fas fa-star"></i></span>
+                                    </label>
+                                    <input type="radio" id="cm_star-5" name="nota" value="5"/>
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
-                </div>
+                    <textarea class="textarea"  rows="2" name="comentario" placeholder="Comente..."></textarea>
 
-                <textarea class="textarea"  rows="2" name="comentario" placeholder="Comente..."></textarea>
+                    <div class="field bt-margin-top">
+                        <div class="control">
+                            <input class="button is-success is-fullwidth" type="submit" value="Avaliar">
+                        </div>
+                    </div>    
+                </form>             
 
-                <div class="field bt-margin-top">
-                    <div class="control">
-                        <input class="button is-success is-fullwidth" type="submit" value="Avaliar">
+                <!-- MODAL RECOMENDAR ESTABELECIMENTO-->
+                <form id="recomendar" class="form-cardapio modal" method="post" action="front?action=AvaliacaoEstabelecimento">
+                    <p class="title is-size-5">Recomendar ${sessionScope.visita.nome}</p>
+                    <input type="hidden" name="idEstabelecimento" value="${sessionScope.visita.id}">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input" type="text" placeholder="Nome" name="destinatario">
+                        </div>
                     </div>
-                </div>    
-            </form>                              
+                    <textarea class="textarea"  rows="2" name="comentario" placeholder="Comente..."></textarea>
+
+                    <div class="field bt-margin-top">
+                        <div class="control">
+                            <input class="button is-success is-fullwidth" type="submit" value="Recomendar">
+                        </div>
+                    </div>    
+                </form> 
+            </div>
         </section>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : seguindo
-    Created on : 14/10/2018, 13:31:23
+    Document   : recomendacoes
+    Created on : 15/10/2018, 22:08:03
     Author     : Amanda
 --%>
 
@@ -47,12 +47,11 @@
                                     <a href="front?action=Inicio"><li>Feed</li></a>
                                     <a href="FeedPaginas.jsp"><li>Feed páginas</li></a>
                                     <a href="amigos.jsp"><li>Amigos</li></a>
-                                    <a href="seguindo.jsp"><li class="link-ativo">Seguindo</li></a>
+                                    <a href="seguindo.jsp"><li>Seguindo</li></a>
                                     <a href=""><li>Mensagens</li></a>
-                                    <a href="recomendacoes.jsp"><li>Recomendações</li></a>
+                                    <a href="recomendacoes.jsp"><li class="link-ativo">Recomendações</li></a>
                                     <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
-                                    <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>
-                                    <a href="#cria-estbl" rel="modal:open"><li>Criar Página</li></a>
+                                    <a href="perfil-usuario.jsp"><li>Editar Perfil</li></a>                                  
                                     <li>
                                         <p class="menu-label">Minhas páginas</p>
                                         <ul>
@@ -80,87 +79,29 @@
                         <div class="media-box">
                             <div class="header-pag">
                                 <p class="subtitle is-5">
-                                    <strong>Seguindo</strong>
+                                    <strong>Recomendações</strong>
                                 </p>
                             </div>
 
-                            <ct:listFollowing usuario="${sessionScope.usuario.id}"/>
-                            <c:set var="lista" scope="page" value="${seguindo}"/>
-                            <c:choose>
-                                <c:when test="${not empty lista}">
-                                    <c:forEach var="segue" items="${lista}">
-                                        <ct:buscaEstabelecimento id="${segue.pagina}"/>
-                                        <article class="media amigos-item">
-                                            <figure class="media-left image is-98x98">
-                                                <div>
-                                                    <img src="${estblBuscado.foto}">
-                                                </div>
-                                            </figure>
-                                            <div class="media-content">
-                                                <div class="content">
-                                                    <p>
-                                                        <a href="front?action=VisitarPag&id=${estblBuscado.id}&pag=estbl&t=e">
-                                                            <strong>${estblBuscado.nome}</strong> 
-                                                        </a>
-                                                        <br>
-                                                        ${estblBuscado.descricao}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </c:forEach>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="card-content">
-                                        <div class="media">
-                                            <p>Você não segue nenhuma página no momento.</p>
+                            <section class="section">
+                                <div class="media">
+                                    <figure class="media-left image is-48x48">
+                                        <div class="is-rounded">
+                                            <img src="upload_images/user-5.jpg">
+                                        </div>
+                                    </figure>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p class="is-vcentered">
+                                                <strong>Nome</strong> - recomendou Estabelecimento/Comida
+                                                Nome
+                                            </p>
                                         </div>
                                     </div>
-                                </c:otherwise>
-                            </c:choose>
+                                </div>
+                            </section>
                         </div>
                     </div>
                 </div>
-
-            </div>
-
         </section>
-
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
-        <script>
-            const dropdown = document.querySelector('.dropdown');
-            dropdown.addEventListener('click', () => {
-                dropdown.classList.toggle('is-active');
-            });
-
-            document.addEventListener('DOMContentLoaded', () => {
-
-                // Get all "navbar-burger" elements
-                const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-
-                // Check if there are any navbar burgers
-                if ($navbarBurgers.length > 0) {
-
-                    // Add a click event on each of them
-                    $navbarBurgers.forEach(el => {
-                        el.addEventListener('click', () => {
-
-                            // Get the target from the "data-target" attribute
-                            const target = el.dataset.target;
-                            const $target = document.getElementById(target);
-
-                            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
-                            el.classList.toggle('is-active');
-                            $target.classList.toggle('is-active');
-
-                        });
-                    });
-                }
-
-            });
-
-        </script>
-    </body>
 </html>
-

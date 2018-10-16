@@ -51,6 +51,7 @@
                                     <a href="amigos.jsp"><li>Amigos</li></a>
                                     <a href="seguindo.jsp"><li>Seguindo</li></a>
                                     <a href=""><li>Mensagens</li></a>
+                                    <a href="recomendacoes.jsp"><li>Recomendações</li></a>
                                     <a href="minhaPublicacao.jsp"><li>Minhas publicações</li></a>
                                     <a href="perfil-usuario.jsp"><li class="link-ativo">Editar Perfil</li></a>
                                     <li>
