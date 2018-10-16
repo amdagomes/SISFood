@@ -102,7 +102,7 @@ public class RecomendacaoDao {
         } catch (ClassNotFoundException ex) { 
             Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-        String sql = "SELECT estabelecimento from RecomendarEstabelecimento WHERE destinatario = ?";
+        String sql = "SELECT * from RecomendarEstabelecimento WHERE destinatario = ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();

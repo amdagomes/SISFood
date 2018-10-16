@@ -86,7 +86,7 @@
                                                 <span>Comida</span>
                                             </a>
                                         </li>
-                                        <li id="usuario" class="">
+                                        <li id="estbl" class="">
                                             <a>
                                                 <span class="icon is-small"><i class="fas fa-store" aria-hidden="true"></i></span>
                                                 <span>Estabelecimentos</span>
@@ -148,9 +148,108 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </div>
+
+                                <!-- RECOMENDAÇÕES DE ESTABELECIMENTO -->
+                                <div class="r-estabelecimentos none">
+                                    <ct:listRecomendacaoEstabelecimento destinatario="${sessionScope.usuario.id}"/>
+                                    <c:set var="listEstbl" value="${recEstbl}" scope="page"/>
+                                    <c:choose>
+                                        <c:when test="${not empty listEstbl}">
+                                            <c:forEach var="recomendacao" items="${listEstbl}">
+                                                <ct:buscaUsuario user="${recomendacao.remetente}"/>
+                                                <ct:buscaEstabelecimento id="${recomendacao.recomendacao}"/>
+                                                <div class="media">
+                                                    <figure class="media-left image is-48x48">
+                                                        <div class="is-rounded">
+                                                            <img src="${userBuscado.fotoPerfil}">
+                                                        </div>
+                                                    </figure>
+                                                    <div class="media-content">
+                                                        <div class="content">
+                                                            <p class="is-vcentered">
+                                                                <a class="has-text-weight-semibold" href="front?action=VisitarPag&id=${userBuscado.id}&pag=user&t=u">
+                                                                    ${userBuscado.nome}
+                                                                </a>
+                                                                - recomendou o
+                                                                <a class="has-text-link" href="front?action=VisitarPag&id=${estblBuscado.id}&pag=estbl&t=e">
+                                                                    ${estblBuscado.nome}
+                                                                </a>
+                                                            </p>
+                                                            <div class="media">
+                                                                <div class="media-left image is-64x64">
+                                                                    <div class="imagem">
+                                                                        <img src="${estblBuscado.foto}"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="media-content">
+                                                                    <div class="content">
+                                                                        <p>${estblBuscado.descricao}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <p>Você não possui recomendações no momento</p>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
                             </section>
                         </div>
                     </div>
                 </div>
         </section>
+                                    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        <script>
+            var tabComida = document.getElementById("comida");
+            var tabEstbl = document.getElementById("estbl");
+
+            tabComida.onclick = function () {
+                $('#comida').addClass('is-active');
+                $('#estbl').removeClass('is-active');
+
+                $('.r-comida').addClass('block').removeClass('none');
+                $('.r-estabelecimentos').removeClass('block').addClass('none');
+            };
+
+            tabEstbl.onclick = function () {
+                $('#comida').removeClass('is-active');
+                $('#estbl').addClass('is-active');
+
+                $('.r-comida').removeClass('block').addClass('none');
+                $('.r-estabelecimentos').addClass('block').removeClass('none');
+            };
+
+            document.addEventListener('DOMContentLoaded', () => {
+
+                // Get all "navbar-burger" elements
+                const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+                // Check if there are any navbar burgers
+                if ($navbarBurgers.length > 0) {
+
+                    // Add a click event on each of them
+                    $navbarBurgers.forEach(el => {
+                        el.addEventListener('click', () => {
+
+                            // Get the target from the "data-target" attribute
+                            const target = el.dataset.target;
+                            const $target = document.getElementById(target);
+
+                            // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                            el.classList.toggle('is-active');
+                            $target.classList.toggle('is-active');
+
+                        });
+                    });
+                }
+
+            });
+        </script>
+    </body>
 </html>
