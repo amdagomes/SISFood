@@ -226,7 +226,7 @@
                                     <input type="hidden" name="idComida" value="${comida.idComida}"/>
                                     <div class="field">
                                         <div class="control">
-                                            <input class="input" type="text" placeholder="Nome" name="destinatario">
+                                            <input class="input" type="text" placeholder="Email" name="destinatario">
                                         </div>
                                     </div>
                                     <textarea class="textarea"  rows="2" name="comentario" placeholder="Comente..."></textarea>
