@@ -142,7 +142,7 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
         return false;
     }
     
-     public void recomendaEstabelecimento(int remetente, int destinatario, String comentario)
+     public void recomendaEstabelecimento(int estabelecimento, int remetente, int destinatario, String comentario)
             throws SQLException {
 
         try {
@@ -151,12 +151,13 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
             Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "INSERT INTO RecomendarEstabelecimento (remetente,destinatario,comentario) "
-                + "values (?,?,?)";
+        String sql = "INSERT INTO RecomendarEstabelecimento (estabelecimento, remetente,destinatario,comentario) "
+                + "values (?,?,?,?)";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setInt(1, remetente);
-        stmt.setInt(2, destinatario);
-        stmt.setString(3, comentario);
+        stmt.setInt(1, estabelecimento);
+        stmt.setInt(2, remetente);
+        stmt.setInt(3, destinatario);
+        stmt.setString(4, comentario);
         stmt.execute();
 
         stmt.close();
