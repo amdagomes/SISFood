@@ -22,10 +22,10 @@ public class Chekin  implements Command {
 
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-         String dia = request.getParameter("dia");
+        String dia = request.getParameter("dia");
         String horario = request.getParameter("horario");
-        String consumidor = request.getParameter("consumidor");
-        String estabelecimento = request.getParameter("estabelecimento");
+        String consumidor = request.getParameter("user");
+        String estabelecimento = request.getParameter("estbl");
         
         GerenciarChekin gerenciador = new GerenciarChekin();
         try {

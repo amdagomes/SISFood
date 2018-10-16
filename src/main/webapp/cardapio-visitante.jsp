@@ -60,18 +60,13 @@
                                             </c:otherwise>
                                         </c:choose>
                                     </p>
-                                    <div class="level">
-                                        <div class="level-item">
-                                            <p class="has-text-centered">
-                                                <a href="#avaliar" rel="modal:open">Avalie!</a>
-                                            </p>
-                                        </div>
-                                        <div class="level-item">
-                                            <p class="has-text-centered">
-                                                <a href="#recomendar" rel="modal:open">Recomende</a>
-                                            </p>
-                                        </div>
-                                    </div>
+                                    <p class="has-text-centered">
+                                        <a href="#avaliar" rel="modal:open">Avalie!</a>
+                                        <br>
+                                        <a href="#recomendar" rel="modal:open">Recomende</a>
+                                        <br>
+                                        <a href="front?action=Chekin&user=${sessionScope.usuario.id}&estbl=${sessionScope.visita.id}">Marcar Presença</a>
+                                    </p>  
 
                                 </div>
                             </div>
@@ -302,12 +297,12 @@
             </form> 
 
             <!-- MODAL RECOMENDAR ESTABELECIMENTO-->
-            <form id="recomendar" class="form-cardapio modal" method="post" action="front?action=AvaliacaoEstabelecimento">
+            <form id="recomendar" class="form-cardapio modal" method="post" action="front?action=RecomendarEstabelecimento">
                 <p class="title is-size-5">Recomendar ${sessionScope.visita.nome}</p>
                 <input type="hidden" name="idEstabelecimento" value="${sessionScope.visita.id}">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="text" placeholder="Nome" name="destinatario">
+                        <input class="input" type="text" placeholder="Email" name="destinatario">
                     </div>
                 </div>
                 <textarea class="textarea"  rows="2" name="comentario" placeholder="Comente..."></textarea>
