@@ -52,6 +52,7 @@
 
                                 <ul>
                                     <a href="front?action=VisitarPag&id=${sessionScope.visita.id}&pag=user&t=u"><li>Feed</li></a>
+                                    <a href="checkin.jsp"><li>Esteve em...</li></a>
                                     <a href="perfil-user-visitante.jsp"><li class="link-ativo">Perfil</li></a>
                                     <li>
                                         <a href="front?action=Inicio"><p class="menu-label">voltar</p></a>
