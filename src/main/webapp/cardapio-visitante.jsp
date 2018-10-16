@@ -151,7 +151,7 @@
                                     </div>
                                     <div class="media-right">
                                         <div class="level">
-                                            <a class="level-item" title="Compartilhar">
+                                            <a href="#rec-${comida.idComida}" rel="modal:open" class="level-item" title="Recomendar">
                                                 <span class="icon is-small"><i class="fas fa-share-alt"></i></span>
                                             </a>
                                         </div>
@@ -219,6 +219,24 @@
                                         </div>
                                     </div>    
                                 </form> 
+
+                                <!--MODAL RECOMENDAR COMIDA-->
+                                <form id="rec-${comida.idComida}" class="form-cardapio modal" method="post" action="front?action=RecomendarComida">
+                                    <p class="title is-size-5">Recomendar ${comida.nome} para: </p>
+                                    <input type="hidden" name="idComida" value="${comida.idComida}"/>
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input" type="text" placeholder="Nome" name="destinatario">
+                                        </div>
+                                    </div>
+                                    <textarea class="textarea"  rows="2" name="comentario" placeholder="Comente..."></textarea>
+
+                                    <div class="field bt-margin-top">
+                                        <div class="control">
+                                            <input class="button is-success is-fullwidth" type="submit" value="Recomendar">
+                                        </div>
+                                    </div>    
+                                </form>
                             </c:forEach>
                         </div>
                     </div>  
