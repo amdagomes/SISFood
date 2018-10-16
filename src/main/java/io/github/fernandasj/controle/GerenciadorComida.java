@@ -59,9 +59,4 @@ public class GerenciadorComida {
         return daoAvalia.listAvaliacoes(idComida);
     }
     
-    public void recomendarComida(int comida, int remetente, int destinatario, 
-            String comentario)throws SQLException{
-        
-        dao.recomendaComida(remetente, destinatario, comida, comentario);
-    }
 }

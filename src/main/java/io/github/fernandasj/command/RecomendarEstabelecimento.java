@@ -1,6 +1,6 @@
 package io.github.fernandasj.command;
 
-import io.github.fernandasj.controle.GerenciadorEstabelecimento;
+import io.github.fernandasj.controle.GerenciadorRecomendacao;
 import io.github.fernandasj.controle.GerenciadorUsuario;
 import io.github.fernandasj.modelo.Usuario;
 import javax.servlet.RequestDispatcher;
@@ -32,8 +32,8 @@ public class RecomendarEstabelecimento implements Command{
             Usuario user = gu.buscaUsuario(emailDestinatario);
             if(user != null){
                 idDestinatario = user.getId();
-                GerenciadorEstabelecimento g = new GerenciadorEstabelecimento();
-                g.recomendarEstabelecimento(Integer.parseInt(comida), remetente, idDestinatario, comentario);
+                GerenciadorRecomendacao g = new GerenciadorRecomendacao();
+                g.recomendaEstabelecimento(Integer.parseInt(comida), remetente, idDestinatario, comentario);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("visita-estbl.jsp");
                 dispatcher.forward(request, response);
             }            

@@ -1,6 +1,6 @@
 package io.github.fernandasj.command;
 
-import io.github.fernandasj.controle.GerenciadorComida;
+import io.github.fernandasj.controle.GerenciadorRecomendacao;
 import io.github.fernandasj.controle.GerenciadorUsuario;
 import io.github.fernandasj.modelo.Usuario;
 import javax.servlet.RequestDispatcher;
@@ -21,7 +21,6 @@ public class RecomendarComida implements Command{
         
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         
-        int idDestinatario;
         int remetente = usuario.getId();
         String emailDestinatario = request.getParameter("destinatario");
         String comida = request.getParameter("idComida");
@@ -31,9 +30,9 @@ public class RecomendarComida implements Command{
             GerenciadorUsuario gu = new GerenciadorUsuario();
             Usuario user = gu.buscaUsuario(emailDestinatario);
             if(user != null){
-                idDestinatario = user.getId();
-                GerenciadorComida g = new GerenciadorComida();
-                g.recomendarComida(Integer.parseInt(comida), remetente, idDestinatario, comentario);
+                int idDestinatario = user.getId();
+                GerenciadorRecomendacao g = new GerenciadorRecomendacao();
+                g.recomendaComida(remetente, idDestinatario, Integer.parseInt(comida), comentario);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("cardapio-visitante.jsp");
                 dispatcher.forward(request, response);
             }            

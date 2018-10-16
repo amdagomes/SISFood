@@ -77,27 +77,76 @@
 
                     <div class="column">
                         <div class="media-box">
-                            <div class="header-pag">
-                                <p class="subtitle is-5">
-                                    <strong>Recomendações</strong>
-                                </p>
+                            <div class="header-busca">
+                                <div class="tabs is-centered is-boxed is-medium">
+                                    <ul>
+                                        <li id="comida" class="is-active">
+                                            <a>
+                                                <span class="icon is-small"><i class="fas fa-utensils" aria-hidden="true"></i></span>
+                                                <span>Comida</span>
+                                            </a>
+                                        </li>
+                                        <li id="usuario" class="">
+                                            <a>
+                                                <span class="icon is-small"><i class="fas fa-store" aria-hidden="true"></i></span>
+                                                <span>Estabelecimentos</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
 
                             <section class="section">
-                                <div class="media">
-                                    <figure class="media-left image is-48x48">
-                                        <div class="is-rounded">
-                                            <img src="upload_images/user-5.jpg">
-                                        </div>
-                                    </figure>
-                                    <div class="media-content">
-                                        <div class="content">
-                                            <p class="is-vcentered">
-                                                <strong>Nome</strong> - recomendou Estabelecimento/Comida
-                                                Nome
-                                            </p>
-                                        </div>
-                                    </div>
+
+                                <!-- RECOMENDAÇÕES DE COMIDA -->
+                                <div class="r-comida block">
+                                    <ct:listRecomendacaoComida destinatario="${sessionScope.usuario.id}"/>
+                                    <c:set var="listComida" value="${recComida}" scope="page"/>
+                                    <c:choose>
+                                        <c:when test="${not empty listComida}">
+                                            <c:forEach var="recomendacao" items="${listComida}">
+                                                <ct:buscaUsuario user="${recomendacao.remetente}"/>
+                                                <ct:buscaComida comida="${recomendacao.recomendacao}"/>
+                                                <ct:buscaEstabelecimento id="${comidaBuscada.idEstabelecimento}"/>
+                                                <div class="media">
+                                                    <figure class="media-left image is-48x48">
+                                                        <div class="is-rounded">
+                                                            <img src="${userBuscado.fotoPerfil}">
+                                                        </div>
+                                                    </figure>
+                                                    <div class="media-content">
+                                                        <div class="content">
+                                                            <p class="is-vcentered">
+                                                                <a class="has-text-weight-semibold" href="front?action=VisitarPag&id=${userBuscado.id}&pag=user&t=u">
+                                                                    ${userBuscado.nome}
+                                                                </a>
+                                                                - recomendou 
+                                                                <span class="has-text-weight-semibold">${comidaBuscada.nome}</span> do
+                                                                <a class="has-text-link" href="front?action=VisitarPag&id=${estblBuscado.id}&pag=estbl&t=e">
+                                                                    ${estblBuscado.nome}
+                                                                </a>
+                                                            </p>
+                                                            <div class="media">
+                                                                <div class="media-left image is-64x64">
+                                                                    <div class="imagem">
+                                                                        <img src="${comidaBuscada.foto}"/>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="media-content">
+                                                                    <div class="content">
+                                                                        <p>${comidaBuscada.descricao}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <p>Você não possui recomendações no momento</p>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </section>
                         </div>

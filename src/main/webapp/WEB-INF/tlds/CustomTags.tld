@@ -41,6 +41,18 @@
         </attribute>
     </tag>
     <tag>
+        <name>buscaComida</name>
+        <description>Busca comida pelo id</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.BuscaComida</tag-class>
+        <attribute>
+            <name>comida</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
         <name>buscaEstabelecimento</name>
         <description>Busca estabelecimento pelo id</description>
         <body-content>empty</body-content>
@@ -131,6 +143,30 @@
         <tag-class>io.github.fernandasj.tags.ListFollowing</tag-class>
         <attribute>
             <name>usuario</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>listRecomendacaoComida</name>
+        <description>Lista todas as recomendaçõs de comida</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.ListRecomendacaoComida</tag-class>
+        <attribute>
+            <name>destinatario</name>
+            <type>int</type>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>listRecomendacaoEstabelecimento</name>
+        <description>Lista todas as recomendações de estabelecimento</description>
+        <body-content>empty</body-content>
+        <tag-class>io.github.fernandasj.tags.ListRecomendacaoEstabelecimento</tag-class>
+        <attribute>
+            <name>destinatario</name>
             <type>int</type>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>

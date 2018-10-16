@@ -142,28 +142,6 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
         return false;
     }
     
-     public void recomendaEstabelecimento(int estabelecimento, int remetente, int destinatario, String comentario)
-            throws SQLException {
-
-        try {
-            con = ConnectionFactory.getConnection();
-        } catch (ClassNotFoundException ex) { 
-            Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        String sql = "INSERT INTO RecomendarEstabelecimento (estabelecimento, remetente,destinatario,comentario) "
-                + "values (?,?,?,?)";
-        PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setInt(1, estabelecimento);
-        stmt.setInt(2, remetente);
-        stmt.setInt(3, destinatario);
-        stmt.setString(4, comentario);
-        stmt.execute();
-
-        stmt.close();
-        con.close();
-    }
-
      public List listarPorNome(String nome) throws SQLException{
          
         try {
@@ -192,31 +170,6 @@ public class EstabelecimentoDao implements Dao<Estabelecimento> {
         }
          return estbls;
      }
-   
-    public List<Estabelecimento> ListarRecomendados(int id) throws SQLException {
-
-        try {
-            con = ConnectionFactory.getConnection();
-        } catch (ClassNotFoundException ex) { 
-            Logger.getLogger(EstabelecimentoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String sql = "SELECT estabelecimento from RecomendarEstabelecimento WHERE remetente = ?";
-        PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setInt(1, id);
-        ResultSet rs = stmt.executeQuery();
-
-        List<Estabelecimento> rc = new ArrayList<>();
-
-        while (rs.next()) {
-            Estabelecimento e = buscarPorId(rs.getInt("estabelecimento"));
-            rc.add(e);
-        }
-        rs.close();
-        stmt.close();
-        con.close();
-
-        return rc;
-    }
     
     public List<Estabelecimento> listMeusEstabelecimentos(int id) throws SQLException{
         Statement stmt;

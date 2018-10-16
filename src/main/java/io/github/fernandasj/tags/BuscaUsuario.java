@@ -5,7 +5,6 @@
  */
 package io.github.fernandasj.tags;
 
-import io.github.fernandasj.controle.GerenciadorAmizade;
 import io.github.fernandasj.controle.GerenciadorUsuario;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 

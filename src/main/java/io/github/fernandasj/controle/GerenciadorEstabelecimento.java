@@ -66,8 +66,4 @@ public class GerenciadorEstabelecimento {
         return avaliarDao.listAvaliacoes(idEstabelecimento);
     }
     
-    public void recomendarEstabelecimento(int estabelecimento, int remetente, 
-            int destinatario, String comentario)throws Exception{
-        estabelecimentoDao.recomendaEstabelecimento(estabelecimento, remetente, destinatario, comentario);
-    }
 }

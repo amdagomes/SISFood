@@ -5,6 +5,7 @@ import io.github.fernandasj.dao.AvaliarComidaDao;
 import io.github.fernandasj.dao.AvaliarEstabelecimentoDao;
 import io.github.fernandasj.dao.ComidaDao;
 import io.github.fernandasj.dao.EstabelecimentoDao;
+import io.github.fernandasj.dao.RecomendacaoDao;
 import io.github.fernandasj.dao.SeguirPaginaDao;
 import io.github.fernandasj.dao.UsuarioDao;
 import java.sql.SQLException;
@@ -49,4 +50,10 @@ public class DaoFactoryBD implements DaoFactoryIF {
     public SeguirPaginaDao criaSeguirPaginaDao() throws SQLException, ClassNotFoundException {
         return new SeguirPaginaDao();
     }
+    
+    @Override
+    public RecomendacaoDao criaRecomendacaoDao() throws SQLException, ClassNotFoundException {
+        return new RecomendacaoDao();
+    }
+    
 }

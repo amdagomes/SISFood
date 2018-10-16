@@ -127,56 +127,6 @@ public class ComidaDao implements ComidaDaoIF {
         }
         return false;
     }
-
-    @Override
-    public void recomendaComida(int remetente, int destinatario, int comida, String comentario)
-            throws SQLException {
-
-        try {
-            con = ConnectionFactory.getConnection();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ComidaDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        String sql = "INSERT INTO RecomendarComida (remetente,destinatario,comida,comentario) "
-                + "values (?,?,?,?)";
-        PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setInt(1, remetente);
-        stmt.setInt(2, destinatario);
-        stmt.setInt(3, comida);
-        stmt.setString(4, comentario);
-        stmt.execute();
-
-        stmt.close();
-        con.close();
-    }
-
-    @Override
-    public List<Comida> ListarRecomendados(int id) throws SQLException {
-
-        try {
-            con = ConnectionFactory.getConnection();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ComidaDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String sql = "SELECT comida from RecomendarComida WHERE remetente = ?";
-        PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setInt(1, id);
-        ResultSet rs = stmt.executeQuery();
-
-        List<Comida> rc = new ArrayList<>();
-
-        while (rs.next()) {
-            Comida comida = buscar(rs.getInt("comida"));
-            rc.add(comida);
-
-        }
-        rs.close();
-        stmt.close();
-        con.close();
-
-        return rc;
-    }
     
     public List<Comida> buscarPorEstabelecimento(int idEstabelecimento) throws SQLException, ClassNotFoundException {
         Statement stmt;

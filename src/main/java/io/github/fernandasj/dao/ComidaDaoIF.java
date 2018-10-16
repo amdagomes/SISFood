@@ -24,7 +24,4 @@ public interface ComidaDaoIF {
 
     public boolean deletar(int obj) throws SQLException;
 
-    public void recomendaComida(int remetente, int destinatario, int comida, String comentario) throws SQLException;
-     public List<Comida>  ListarRecomendados(int id) throws SQLException;
-
 }

@@ -18,7 +18,11 @@ div.is-rounded{
     height: 100%;
     overflow: hidden;
 }
-
+figure.image div.imagem{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 .block{display:block}
 .none{display:none}
 
