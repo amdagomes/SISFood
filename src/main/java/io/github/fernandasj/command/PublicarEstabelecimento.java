@@ -23,13 +23,15 @@ public class PublicarEstabelecimento implements Command {
     @Override
     public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         HttpSession session = request.getSession();
+        String pagina = request.getParameter("pagina");
         int idEstabelecimento = Integer.parseInt(request.getParameter("idEstabelecimento"));
         String texto = request.getParameter("texto");
         GerenciarPublicacao gp = new GerenciarPublicacao();
 
         try {
             if (gp.adicionaEst(texto, idEstabelecimento)) {
-                request.getRequestDispatcher("estabelecimento.jsp").forward(request, response);
+                //request.getRequestDispatcher("estabelecimento.jsp").forward(request, response);
+                   request.getRequestDispatcher(pagina + ".jsp").forward(request, response);
 
             } else {
                 response.sendRedirect("home.jsp");

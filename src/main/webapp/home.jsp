@@ -94,6 +94,7 @@
                                     <div class="field">
                                         <p class="control">
                                             <textarea class="textarea" placeholder="Faça uma publicação..." rows="2" name="texto" required="required"></textarea>
+                                            <input type="hidden" name ="pagina" value="home">
                                         </p>
                                     </div>
                                     <div class="level">

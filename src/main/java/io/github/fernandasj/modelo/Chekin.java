@@ -5,74 +5,73 @@
  */
 package io.github.fernandasj.modelo;
 
-
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.Objects;
 
+public class Chekin implements Comparable<Chekin> {
 
-public class Chekin {
-   private int chekin;
-   private Timestamp horario;
-   private LocalDate dia;
-   private int consumidor;
-   private int estabelecimento;
+    private int chekin;
+    private String datahora;
+    private int consumidor;
+    private int estabelecimento;
 
-    public Chekin(int chekin, Timestamp horario) {
-        this.chekin = chekin;
-        this.horario = horario;
+     public Chekin(int consumidor, int estabelecimento) {
+        this.consumidor = consumidor;
+        this.estabelecimento = estabelecimento;
     }
-
-    public Chekin(){}
-    
-    public Chekin(Timestamp horario, LocalDate dia, int consumidor, int estabelecimento) {
-        this.horario = horario;
-        this.dia = dia;
+    public Chekin(int chekin, String datahora, int consumidor, int estabelecimento) {
+        this.chekin = chekin;
+        this.datahora = datahora;
         this.consumidor = consumidor;
         this.estabelecimento = estabelecimento;
     }
 
-    public Chekin (Timestamp horario, LocalDate dia){
-        this.horario = horario;
-        this.dia = dia;
+    public Chekin() {
     }
-    
+
+   
+   
 
     public int getChekin() {
         return chekin;
-    }
-
-    public Timestamp getHorario() {
-        return horario;
-    }
-
-    public int getConsumidor() {
-        return consumidor;
-    }
-
-    public int getEstabelecimento() {
-        return estabelecimento;
     }
 
     public void setChekin(int chekin) {
         this.chekin = chekin;
     }
 
-    public void setHorario(Timestamp horario) {
-        this.horario = horario;
+    public String getDatahora() {
+        return datahora;
     }
 
-    public LocalDate getDia() {
-        return dia;
+    public void setDatahora(String datahora) {
+        this.datahora = datahora;
+    }
+
+    public int getConsumidor() {
+        return consumidor;
+    }
+
+    public void setConsumidor(int consumidor) {
+        this.consumidor = consumidor;
+    }
+
+    public int getEstabelecimento() {
+        return estabelecimento;
+    }
+
+    public void setEstabelecimento(int estabelecimento) {
+        this.estabelecimento = estabelecimento;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 11 * hash + this.chekin;
-        hash = 11 * hash + Objects.hashCode(this.horario);
-        hash = 11 * hash + this.consumidor;
-        hash = 11 * hash + this.estabelecimento;
+        int hash = 3;
+        hash = 71 * hash + this.chekin;
+        hash = 71 * hash + Objects.hashCode(this.datahora);
+        hash = 71 * hash + this.consumidor;
+        hash = 71 * hash + this.estabelecimento;
         return hash;
     }
 
@@ -97,7 +96,7 @@ public class Chekin {
         if (this.estabelecimento != other.estabelecimento) {
             return false;
         }
-        if (!Objects.equals(this.horario, other.horario)) {
+        if (!Objects.equals(this.datahora, other.datahora)) {
             return false;
         }
         return true;
@@ -105,7 +104,19 @@ public class Chekin {
 
     @Override
     public String toString() {
-        return "chekin{" + "chekin=" + chekin + ", horario=" + horario + ", consumidor=" + consumidor + ", estabelecimento=" + estabelecimento + '}';
+        return "Chekin{" + "chekin=" + chekin + ", datahora=" + datahora + ", consumidor=" + consumidor + ", estabelecimento="
+                + estabelecimento + '}';
     }
-   
+
+    @Override
+    public int compareTo(Chekin c) {
+        if (this.chekin > c.chekin) {
+            return -1;
+        }
+        if (this.chekin < c.chekin) {
+            return 1;
+        }
+        return 0;
+    }
+
 }
