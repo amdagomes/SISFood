@@ -59,7 +59,7 @@ public class ChekinDao implements ChekinDaoIF {
             Logger.getLogger(ChekinDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT * from Chekin c where c.idChekin =  ?";
+        String sql = "SELECT * from Chekin  where idChekin =  ?";
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setInt(1, idChekin);
         ResultSet resultado = stmt.executeQuery();
@@ -68,7 +68,8 @@ public class ChekinDao implements ChekinDaoIF {
              Timestamp datahora = resultado.getTimestamp("datahora");
 
             String dataHora = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(datahora.getTime());
-            Chekin c = new Chekin(resultado.getInt(idChekin),dataHora,resultado.getInt("consumidor"),resultado.getInt("estabelecimento"));
+            
+            Chekin c = new Chekin(resultado.getInt("idChekin"),resultado.getInt("consumidor"),resultado.getInt("estabelecimento"),dataHora);
             resultado.close();
             stmt.close();
             con.close();
@@ -82,9 +83,9 @@ public class ChekinDao implements ChekinDaoIF {
     }
 
     @Override
-    public boolean deletar(int idChekin) throws SQLException {
+    public boolean deletar(int idchekin) throws SQLException {
 
-        if (buscar(idChekin) != null) {
+        if (buscar(idchekin) != null) {
 
             try {
                 con = ConnectionFactory.getConnection();
@@ -93,7 +94,7 @@ public class ChekinDao implements ChekinDaoIF {
             }
             String sql = "DELETE FROM Chekin WHERE idChekin= ?";
             PreparedStatement stmt = con.prepareStatement(sql);
-            stmt.setInt(1, idChekin);
+            stmt.setInt(1, idchekin);
             stmt.execute();
             stmt.close();
             con.close();
@@ -103,21 +104,21 @@ public class ChekinDao implements ChekinDaoIF {
     }
 
    @Override 
-    public List<Chekin> listar(int estabelecimento) throws SQLException {
+    public List<Chekin> listar(int idUsuario) throws SQLException {
         try {
             con = ConnectionFactory.getConnection();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ChekinDao.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        String sql = "SELECT idChekin from estabelecimento =?";
+        String sql = "SELECT idChekin from Chekin where consumidor =?";
         PreparedStatement stmt = con.prepareStatement(sql);
-        stmt.setInt(1,estabelecimento );
+        stmt.setInt(1,idUsuario );
         List<Chekin> c = new ArrayList<>();
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
-        Chekin chekin = buscar(rs.getInt("estabelecimento"));
+        Chekin chekin = buscar(rs.getInt("idChekin"));
         c.add(chekin);
        
             
@@ -127,7 +128,7 @@ public class ChekinDao implements ChekinDaoIF {
         stmt.close();
         con.close();
         Collections.sort(c);
-        return null;
+        return c;
     }
 
     

@@ -70,43 +70,66 @@
                     </div>
 
                     <div class="column">
+                         
+                                 
+                                    
+                         <section class="section">
+                               
+                              <jsp:useBean id="dao" class="io.github.fernandasj.dao.ChekinDao"/>
+                                <jsp:useBean id="daoU" class="io.github.fernandasj.dao.UsuarioDao"/> 
+                                <jsp:useBean id="daoE" class="io.github.fernandasj.dao.EstabelecimentoDao"/> 
+                                <c:forEach var="c" items="${dao.listar(sessionScope.visita.id)}">
+                                <c:set var="u" value="${daoU.buscarPorId(c.consumidor)}"/>  
+                                <c:set var="e" value="${daoE.buscarPorId(c.estabelecimento)}"/>  
                         <div class="media-box">
-                        <section class="section">
-                            <div class="media">
-                                <figure class="media-left image is-48x48">
-                                    <div class="is-rounded">
-                                        <img src="FOTO USUARIO">
-                                    </div>
-                                </figure>
-                                <div class="media-content">
-                                    <div class="content">
-                                        <p class="is-vcentered">
-                                            <span class="has-text-weight-semibold">NOME USUARIO</span>
-                                            - esteve no  
-                                            <a class="has-text-link" href="front?action=VisitarPag&id=IDESTABELECIMENTO&pag=estbl&t=e">
-                                                NOME DO ESTABELECIMENTO
-                                            </a>
-                                            no dia DATA
-                                        </p>
-                                        <div class="media">
-                                            <div class="media-left image is-64x64">
-                                                <div class="imagem">
-                                                    <img src="FOTO ESTABELECIMENTO"/>
-                                                </div>
+                                
+
+ 
+                                    <div class="media">
+                                  
+                                        <figure class="media-left image is-48x48">
+                                            <div class="is-rounded">
+                                                <img src="${u.fotoPerfil}">
                                             </div>
-                                            <div class="media-content">
-                                                <div class="content">
-                                                    <p>DESCRIÇÃO DO ESTABELECIMENTO</p>
+                                        </figure>
+                                        <div class="media-content">
+                                            <div class="content">
+                                                <p class="is-vcentered">
+                                                    <span class="has-text-weight-semibold">${u.nome}</span>
+                                                    - esteve no  
+                                                    <a class="has-text-link" href="front?action=VisitarPag&id=${e.id}&pag=estbl&t=e">
+                                                        ${e.nome}
+                                                    </a>
+                                                    ${c.datahora}
+                                                </p>
+                                                <div class="media">
+                                                    <div class="media-left image is-64x64">
+                                                        <div class="imagem">
+                                                            <img src="${e.foto}"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="media-content">
+                                                        <div class="content">
+                                                            <p>${e.descricao}</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                                      
+                                                      
                                     </div>
-                                </div>
-                            </div>
-                        </section>
+                             
+                        </div>
+                                </c:forEach>
+                                                          
+                            </section>
+ 
+                        </div>
+  
                     </div>
+
                 </div>
-            </div>
         </section>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>

@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Chekin implements Comparable<Chekin> {
 
-    private int chekin;
+    private int idchekin;
     private String datahora;
     private int consumidor;
     private int estabelecimento;
@@ -20,25 +20,28 @@ public class Chekin implements Comparable<Chekin> {
         this.consumidor = consumidor;
         this.estabelecimento = estabelecimento;
     }
-    public Chekin(int chekin, String datahora, int consumidor, int estabelecimento) {
-        this.chekin = chekin;
-        this.datahora = datahora;
+    public Chekin(int idchekin,  int consumidor, int estabelecimento,String datahora) {
+        this.idchekin = idchekin;
         this.consumidor = consumidor;
         this.estabelecimento = estabelecimento;
+        this.datahora = datahora;
     }
 
     public Chekin() {
     }
 
    
+    public Chekin(int idchekin) {
+        this.idchekin=idchekin;
+    }
    
 
-    public int getChekin() {
-        return chekin;
+    public int getIdChekin() {
+        return idchekin;
     }
 
     public void setChekin(int chekin) {
-        this.chekin = chekin;
+        this.idchekin = chekin;
     }
 
     public String getDatahora() {
@@ -68,7 +71,7 @@ public class Chekin implements Comparable<Chekin> {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 71 * hash + this.chekin;
+        hash = 71 * hash + this.idchekin;
         hash = 71 * hash + Objects.hashCode(this.datahora);
         hash = 71 * hash + this.consumidor;
         hash = 71 * hash + this.estabelecimento;
@@ -87,7 +90,7 @@ public class Chekin implements Comparable<Chekin> {
             return false;
         }
         final Chekin other = (Chekin) obj;
-        if (this.chekin != other.chekin) {
+        if (this.idchekin != other.idchekin) {
             return false;
         }
         if (this.consumidor != other.consumidor) {
@@ -104,16 +107,16 @@ public class Chekin implements Comparable<Chekin> {
 
     @Override
     public String toString() {
-        return "Chekin{" + "chekin=" + chekin + ", datahora=" + datahora + ", consumidor=" + consumidor + ", estabelecimento="
+        return "Chekin{" + "chekin=" + idchekin + ", datahora=" + datahora + ", consumidor=" + consumidor + ", estabelecimento="
                 + estabelecimento + '}';
     }
 
     @Override
     public int compareTo(Chekin c) {
-        if (this.chekin > c.chekin) {
+        if (this.idchekin > c.idchekin) {
             return -1;
         }
-        if (this.chekin < c.chekin) {
+        if (this.idchekin < c.idchekin) {
             return 1;
         }
         return 0;

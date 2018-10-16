@@ -10,6 +10,7 @@ import io.github.fernandasj.dao.UsuarioDao;
 import io.github.fernandasj.modelo.Chekin;
 import io.github.fernandasj.modelo.Usuario;
 import io.github.fernandasj.connection.DaoFactoryIF;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 
@@ -20,10 +21,16 @@ import java.time.LocalDate;
 public class GerenciarChekin {
     
     private DaoFactoryIF fabrica = null;
-    private ChekinDao userDao = new ChekinDao();
+    private ChekinDao chekindao = new ChekinDao();
     
     public boolean adiciona( int consumidor, int estabelecimento)throws Exception{
         Chekin chekin = new Chekin(consumidor,estabelecimento);
-        return userDao.salvar(chekin);     
+        return chekindao.salvar(chekin);     
+    }
+      public boolean Deletar(int chekin) throws Exception {
+        return chekindao.deletar(chekin);
+    }
+   public Chekin Buscar(int chekin) throws SQLException {
+        return chekindao.buscar(chekin);
     }
 }
